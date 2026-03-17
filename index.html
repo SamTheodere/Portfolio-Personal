@@ -93,9 +93,35 @@ nav.scrolled{padding:13px 48px}
 .bg-f{background:linear-gradient(135deg,#0A0C08,#141A10)}
 .bg-g{background:linear-gradient(135deg,#0C0A08,#1E1810)}
 .bg-h{background:linear-gradient(135deg,#08080C,#14141E)}
-.video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--edge);align-items:stretch}
-.video-grid .wi{aspect-ratio:16/9;width:100%}
-.video-grid .wi:nth-child(1){grid-column:span 2;aspect-ratio:16/9}
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--edge);overflow:visible}
+/* All video cards: uniform 16:9, identical size — zero variation */
+.video-grid .vi{aspect-ratio:16/9;width:100%;position:relative;overflow:hidden;background:var(--lift);cursor:crosshair;display:block;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s cubic-bezier(.25,.46,.45,.94), z-index 0s .35s}
+.video-grid .vi:hover{
+  transform:scale(1.045);
+  box-shadow:0 8px 40px rgba(0,255,135,.18),0 2px 12px rgba(0,0,0,.7);
+  z-index:10;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s cubic-bezier(.25,.46,.45,.94), z-index 0s 0s}
+/* thumbnail fill */
+.vi-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .45s cubic-bezier(.25,.46,.45,.94)}
+.vi:hover .vi-bg{transform:scale(1.0)}
+/* dark overlay */
+.vi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.88) 0%,rgba(6,6,8,.1) 60%,transparent 100%);opacity:0;transition:opacity .3s;z-index:2}
+.vi:hover .vi-ov{opacity:1}
+/* electric top bar */
+.vi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .35s;z-index:6}
+.vi:hover::before{transform:scaleX(1)}
+/* play button */
+.vi-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.75);z-index:5;opacity:0;transition:opacity .25s,transform .3s;pointer-events:none}
+.vi:hover .vi-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.vi-ring{width:54px;height:54px;border-radius:50%;border:1.5px solid var(--elec);display:flex;align-items:center;justify-content:center;background:rgba(6,6,8,.72);backdrop-filter:blur(6px)}
+.vi-tri{width:0;height:0;border-style:solid;border-width:9px 0 9px 16px;border-color:transparent transparent transparent var(--elec);margin-left:3px}
+/* info block */
+.vi-info{position:absolute;bottom:0;left:0;right:0;padding:16px 14px;z-index:4;transform:translateY(8px);opacity:0;transition:opacity .3s,transform .3s}
+.vi:hover .vi-info{opacity:1;transform:translateY(0)}
+.vi-cat{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:5px}
+.vi-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:13px;letter-spacing:-.2px;color:var(--white);line-height:1.25}
+.vi-sub{font-family:'Space Mono',monospace;font-size:8px;color:rgba(240,238,232,.55);margin-top:4px;letter-spacing:.5px}
 .poster-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--edge);align-items:stretch}
 .poster-grid .wi{aspect-ratio:1/1;width:100%}
 .social-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--edge);margin-top:2px;align-items:stretch}
@@ -181,8 +207,8 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
 .reels-track{display:flex;gap:2px;padding:0 80px;overflow-x:auto;scroll-behavior:smooth;cursor:grab;-webkit-overflow-scrolling:touch;scrollbar-width:none;align-items:flex-end}
 .reels-track::-webkit-scrollbar{display:none}
 .reels-track.dragging{cursor:grabbing;scroll-behavior:auto}
-.reel-card{flex-shrink:0;position:relative;overflow:hidden;cursor:crosshair;background:var(--lift);width:180px;aspect-ratio:9/16;transition:width .45s cubic-bezier(.25,.46,.45,.94),opacity .45s;opacity:.5;border:1px solid transparent}
-.reel-card.active{width:280px;opacity:1;border-color:var(--elec)}
+.reel-card{flex-shrink:0;position:relative;overflow:hidden;cursor:crosshair;background:var(--lift);width:180px;aspect-ratio:9/16;transition:width .45s cubic-bezier(.25,.46,.45,.94),opacity .45s,box-shadow .3s;opacity:.5;border:1px solid transparent}
+.reel-card.active{width:280px;opacity:1;border-color:var(--elec);box-shadow:0 8px 32px rgba(0,255,135,.15),0 2px 12px rgba(0,0,0,.6)}
 .reel-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .35s;z-index:5}
 .reel-card.active::before,.reel-card:hover::before{transform:scaleX(1)}
 .reel-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
@@ -213,10 +239,31 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
    uniform card heights, no filler negative space.
 ═══════════════════════════════════════════════════════════ */
 
+/* ── Shared pop-lift mixin ── */
+/* Applied to .cc, .sf-card, .reel-card, .vi — consistent everywhere */
+.pop{
+  transition:
+    transform .32s cubic-bezier(.25,.46,.45,.94),
+    box-shadow .32s cubic-bezier(.25,.46,.45,.94),
+    z-index 0s .32s;
+  z-index:1;
+}
+.pop:hover{
+  transform:scale(1.048) translateY(-3px);
+  box-shadow:
+    0 12px 40px rgba(0,255,135,.16),
+    0 4px 16px rgba(0,0,0,.65);
+  z-index:10;
+  transition:
+    transform .32s cubic-bezier(.25,.46,.45,.94),
+    box-shadow .32s cubic-bezier(.25,.46,.45,.94),
+    z-index 0s 0s;
+}
+
 /* ── Shared creative card base ── */
 .cc{position:relative;overflow:hidden;background:var(--lift);cursor:crosshair;display:block}
-.cc-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
-.cc:hover .cc-bg{transform:scale(1.05)}
+.cc-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+.cc:hover .cc-bg{transform:scale(1.04)}
 .cc-ov{position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,6,8,0) 30%,rgba(6,6,8,.88) 100%);opacity:0;transition:opacity .3s;z-index:2}
 .cc:hover .cc-ov{opacity:1}
 /* Top accent sweep */
@@ -252,47 +299,45 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
    POSTER GRID — 5 col, 1:1 uniform
    Cards are compact: 180px height max
 ═══════════════════════════════════ */
-.poster-wall{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:var(--edge)}
+.poster-wall{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:var(--edge);overflow:visible}
 /* Force exact 1:1 on every card */
 .poster-wall .cc{aspect-ratio:1/1;width:100%}
 /* First card is 2-wide, still 1:1 relative to its width */
 .poster-wall .cc.wide2{grid-column:span 2;aspect-ratio:2/1}
 
 /* ═══════════════════════════════════
-   SOCIAL STRIP — 4:5 portrait feed
-   Horizontal drag scroll, fixed height
+   SOCIAL — 4-col static grid, 4:5
+   Cards stack in rows, no scrolling
 ═══════════════════════════════════ */
-.social-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--lift);border-top:1px solid var(--edge);border-left:1px solid var(--edge);border-right:1px solid var(--edge)}
+.social-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--lift);border-top:1px solid var(--edge);border-bottom:1px solid var(--edge)}
 .sb-left{display:flex;align-items:center;gap:8px}
 .sb-avatar{width:22px;height:22px;border-radius:50%;background:var(--elec-dim);border:1px solid var(--elec);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:6px;color:var(--elec);font-weight:700;flex-shrink:0}
 .sb-handle{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--white);text-transform:uppercase}
 .sb-live{width:5px;height:5px;border-radius:50%;background:var(--elec);animation:blink 2s infinite;flex-shrink:0}
 .sb-right{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
-.social-feed{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;cursor:grab;background:var(--edge);border-left:1px solid var(--edge);border-right:1px solid var(--edge);border-bottom:1px solid var(--edge)}
-.social-feed::-webkit-scrollbar{display:none}
-.social-feed.dragging{cursor:grabbing}
-/* Each card: 4:5, fixed width so all are uniform */
-.sf-card{flex-shrink:0;width:180px;aspect-ratio:4/5;position:relative;overflow:hidden;background:var(--lift);cursor:crosshair}
+/* 4-col grid — cards sit in rows, all 4:5 */
+.social-grid-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--edge);overflow:visible}
+.sf-card{aspect-ratio:4/5;width:100%;position:relative;overflow:hidden;background:var(--lift);cursor:crosshair;display:block}
 .sf-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
-.sf-card:hover .sf-card-bg{transform:scale(1.05)}
+.sf-card:hover .sf-card-bg{transform:scale(1.04)}
 .sf-card-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.9) 0%,transparent 55%);opacity:0;transition:opacity .3s;z-index:2}
 .sf-card:hover .sf-card-ov{opacity:1}
-.sf-card-info{position:absolute;bottom:0;left:0;right:0;padding:12px 12px;z-index:3;transform:translateY(6px);opacity:0;transition:all .3s}
+.sf-card-info{position:absolute;bottom:0;left:0;right:0;padding:14px;z-index:3;transform:translateY(6px);opacity:0;transition:all .3s}
 .sf-card:hover .sf-card-info{opacity:1;transform:translateY(0)}
-.sf-card-tag{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:3px}
-.sf-card-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:10px;color:var(--white);line-height:1.3}
-.sf-card-dim{font-family:'Space Mono',monospace;font-size:7px;color:var(--mid);margin-top:3px;letter-spacing:.5px}
+.sf-card-tag{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:4px}
+.sf-card-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:11px;color:var(--white);line-height:1.3}
+.sf-card-dim{font-family:'Space Mono',monospace;font-size:7px;color:rgba(240,238,232,.5);margin-top:3px;letter-spacing:.5px}
 .sf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:5}
 .sf-card:hover::before{transform:scaleX(1)}
-/* Scroll progress */
-.social-progress{height:2px;background:var(--edge);border-left:1px solid var(--edge);border-right:1px solid var(--edge)}
-.social-progress-fill{height:100%;background:var(--elec);width:0%;transition:width .08s linear}
+/* index badge on social cards too */
+.sf-card-idx{position:absolute;top:10px;right:10px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--elec);background:rgba(6,6,8,.85);padding:3px 7px;border:1px solid rgba(0,255,135,.25);z-index:6;opacity:0;transition:opacity .25s}
+.sf-card:hover .sf-card-idx{opacity:1}
 
 /* ═══════════════════════════════════
    BROCHURE GRID — 16:9 landscape,
    tight 3-col grid, zero internal gap
 ═══════════════════════════════════ */
-.bro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--edge)}
+.bro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--edge);overflow:visible}
 /* All brochure cards are 16:9 */
 .bro-grid .cc{aspect-ratio:16/9;width:100%}
 /* First card spans 2 cols — still 16:9 of that wider block */
@@ -319,10 +364,10 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
   .hero-big{font-size:clamp(52px,14vw,92px);letter-spacing:-2px}
   .hero-row{flex-direction:column;gap:24px}.stat-block{padding:0 16px}
   .about-grid,.contact-grid{grid-template-columns:1fr}
-  .video-grid{grid-template-columns:1fr 1fr}.video-grid .wi{grid-column:span 1!important;aspect-ratio:16/9}
+  .video-grid{grid-template-columns:1fr 1fr}.video-grid .vi{aspect-ratio:16/9}
   .poster-wall{grid-template-columns:repeat(3,1fr)}
   .poster-wall .cc.wide2{grid-column:span 2;aspect-ratio:2/1}
-  .sf-card{width:150px}
+  .social-grid-wrap{grid-template-columns:repeat(2,1fr)}
   .bro-grid{grid-template-columns:1fr 1fr}
   .bro-grid .cc.wide2{grid-column:span 2;aspect-ratio:32/9}
   .services-grid,.cameras-grid{grid-template-columns:1fr}
@@ -427,42 +472,42 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
 
   <!-- 5-col 1:1 poster wall — first card is 2-wide -->
   <div class="poster-wall reveal" id="posterWall">
-    <div class="cc wide2" data-cat="poster">
+    <div class="cc pop wide2 pop" data-cat="poster">
       <div class="cc-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/19_ATXvF-Ax2MeRb7M5NmGjrZqQaCdPpz')"></div>
       <div class="cc-ov"></div><span class="cc-idx">01</span>
       <div class="cc-info"><span class="cc-chip">Event Poster</span><p class="cc-name">Birla Estates — Kolkata Expo</p><p class="cc-sub">Photoshop · Illustrator · Print-Ready</p></div>
     </div>
-    <div class="cc" data-cat="poster">
+    <div class="cc pop" data-cat="poster">
       <div class="cc-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1fidLtdVEmnxr_knOIytPJ8iOuUmhFMfR')"></div>
       <div class="cc-ov"></div><span class="cc-idx">02</span>
       <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Birla Taranya Ad Creative</p><p class="cc-sub">A3 · Brand Aligned</p></div>
     </div>
-    <div class="cc" data-cat="poster">
+    <div class="cc pop" data-cat="poster">
       <div class="cc-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/12DCHbao4ng5RL9GIWyUR8yb1qjMdzfDd')"></div>
       <div class="cc-ov"></div><span class="cc-idx">03</span>
       <div class="cc-info"><span class="cc-chip">Brand Asset</span><p class="cc-name">Godrej Aveline Creative</p><p class="cc-sub">Print-Ready</p></div>
     </div>
-    <div class="cc" data-cat="poster">
+    <div class="cc pop" data-cat="poster">
       <div class="cc-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/11zwf9R4KnSkmp6o8NyYCVXwluCgl6Hzj')"></div>
       <div class="cc-ov"></div><span class="cc-idx">04</span>
       <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Sobha Launch Poster</p><p class="cc-sub">Print + Digital</p></div>
     </div>
-    <div class="cc" data-cat="poster">
+    <div class="cc pop" data-cat="poster">
       <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1JR1virB2t67kVWsi7SrL_dy2RnjlkhrC')"></div>
       <div class="cc-ov"></div><span class="cc-idx">05</span>
       <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Numacity Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
     </div>
-    <div class="cc" data-cat="brand">
+    <div class="cc pop" data-cat="brand">
       <div class="cc-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1p0fBDf-6kPo6Mu4G4ZlVfo90r4QgXjp_')"></div>
       <div class="cc-ov"></div><span class="cc-idx">06</span>
       <div class="cc-info"><span class="cc-chip">Brand Identity</span><p class="cc-name">Insync — Logo</p><p class="cc-sub">Stationery · Signage</p></div>
     </div>
-    <div class="cc" data-cat="brand">
+    <div class="cc pop" data-cat="brand">
       <div class="cc-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1ae00tdtfBxdTE-7mCFKiUvo7noANoEDS')"></div>
       <div class="cc-ov"></div><span class="cc-idx">07</span>
       <div class="cc-info"><span class="cc-chip">Brand Pack</span><p class="cc-name">Green City — Brand Pack</p><p class="cc-sub">Full Identity System</p></div>
     </div>
-    <div class="cc" data-cat="brand">
+    <div class="cc pop" data-cat="brand">
       <div class="cc-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1-4BIbqsXaqgWrvNXO1NRXRPtl9LdEgAP')"></div>
       <div class="cc-ov"></div><span class="cc-idx">08</span>
       <div class="cc-info"><span class="cc-chip">Brand Identity</span><p class="cc-name">Nasagiri — Logo &amp; Identity</p><p class="cc-sub">Guidelines · Print + Digital</p></div>
@@ -484,16 +529,15 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
     </div>
     <span class="sb-right">07 Creatives · Meta · Instagram · Facebook</span>
   </div>
-  <div class="social-feed reveal" id="socialFeed">
-    <div class="sf-card"><div class="sf-card-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1QbL5tQN4Rv2pyF9j0Xpcy6XJ9z7uiysU')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Instagram Feed</p><p class="sf-card-title">Birla Expo Post</p><p class="sf-card-dim">1080×1350</p></div></div>
-    <div class="sf-card"><div class="sf-card-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1rq-yU1pXbNS3-CbuTB_e_aECO1w5dE4G')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Social Post</p><p class="sf-card-title">Campaign Creative</p><p class="sf-card-dim">Meta · Feed</p></div></div>
-    <div class="sf-card"><div class="sf-card-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1cdMVjiRgUX64VL61NPK8dOSaxEbECTCe')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Story Format</p><p class="sf-card-title">Story Ad Set</p><p class="sf-card-dim">1080×1350</p></div></div>
-    <div class="sf-card"><div class="sf-card-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1EpWmvpiZcV18u98fesEc4QJw2J-Snja_')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Ad Creative</p><p class="sf-card-title">Godrej Aveline</p><p class="sf-card-dim">Meta Ads</p></div></div>
-    <div class="sf-card"><div class="sf-card-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1Rd_XpG5A4R_778r4906yT0vebIIVduGY')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Carousel</p><p class="sf-card-title">Sobha Campaign</p><p class="sf-card-dim">10 Slides · IG</p></div></div>
-    <div class="sf-card"><div class="sf-card-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/1ECYs-sNg012YeMV305nQC4KvQJOb-J_3')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Performance Ad</p><p class="sf-card-title">Real Estate Set</p><p class="sf-card-dim">A/B Variants</p></div></div>
-    <div class="sf-card"><div class="sf-card-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1DIEqvmlSNrN2ZSKPx_s5HO9qDCQ6Mbvv')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Digital Ad</p><p class="sf-card-title">Property Launch</p><p class="sf-card-dim">Multi-Size</p></div></div>
+  <div class="social-grid-wrap reveal">
+    <div class="sf-card pop"><div class="sf-card-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1QbL5tQN4Rv2pyF9j0Xpcy6XJ9z7uiysU')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">01</span><div class="sf-card-info"><p class="sf-card-tag">Instagram Feed</p><p class="sf-card-title">Birla Expo Post</p><p class="sf-card-dim">1080×1350</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1rq-yU1pXbNS3-CbuTB_e_aECO1w5dE4G')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">02</span><div class="sf-card-info"><p class="sf-card-tag">Social Post</p><p class="sf-card-title">Campaign Creative</p><p class="sf-card-dim">Meta · Feed</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1cdMVjiRgUX64VL61NPK8dOSaxEbECTCe')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">03</span><div class="sf-card-info"><p class="sf-card-tag">Story Format</p><p class="sf-card-title">Story Ad Set</p><p class="sf-card-dim">1080×1350</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1EpWmvpiZcV18u98fesEc4QJw2J-Snja_')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">04</span><div class="sf-card-info"><p class="sf-card-tag">Ad Creative</p><p class="sf-card-title">Godrej Aveline</p><p class="sf-card-dim">Meta Ads</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1Rd_XpG5A4R_778r4906yT0vebIIVduGY')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">05</span><div class="sf-card-info"><p class="sf-card-tag">Carousel</p><p class="sf-card-title">Sobha Campaign</p><p class="sf-card-dim">10 Slides · IG</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/1ECYs-sNg012YeMV305nQC4KvQJOb-J_3')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">06</span><div class="sf-card-info"><p class="sf-card-tag">Performance Ad</p><p class="sf-card-title">Real Estate Set</p><p class="sf-card-dim">A/B Variants</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1DIEqvmlSNrN2ZSKPx_s5HO9qDCQ6Mbvv')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">07</span><div class="sf-card-info"><p class="sf-card-tag">Digital Ad</p><p class="sf-card-title">Property Launch</p><p class="sf-card-dim">Multi-Size</p></div></div>
   </div>
-  <div class="social-progress reveal"><div class="social-progress-fill" id="socialProgressFill"></div></div>
 
 </section>
 
@@ -517,37 +561,37 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
 
   <!-- 3-col 16:9 grid — first card 2-wide = 32:9 aspect -->
   <div class="bro-grid reveal" id="brochureGrid">
-    <div class="cc wide2" data-cat="brochure">
+    <div class="cc pop wide2 pop" data-cat="brochure">
       <div class="cc-bg bg-g"></div>
       <div class="cc-ov"></div>
       <span class="bro-pg-num">01 / Brochure</span>
       <div class="cc-info"><span class="cc-chip">Property Brochure</span><p class="cc-name">Tata Housing — Premium Sales Brochure</p><p class="cc-sub">40 Pages · A4 · Illustrator + Photoshop</p></div>
     </div>
-    <div class="cc" data-cat="kit">
+    <div class="cc pop" data-cat="kit">
       <div class="cc-bg bg-h"></div>
       <div class="cc-ov"></div>
       <span class="bro-pg-num">02 / Sales Kit</span>
       <div class="cc-info"><span class="cc-chip">Sales Kit</span><p class="cc-name">Birla Estates — Investor Kit</p><p class="cc-sub">Pan-India Launch Pack</p></div>
     </div>
-    <div class="cc" data-cat="brochure">
+    <div class="cc pop" data-cat="brochure">
       <div class="cc-bg bg-a"></div>
       <div class="cc-ov"></div>
       <span class="bro-pg-num">03 / Brochure</span>
       <div class="cc-info"><span class="cc-chip">Property Brochure</span><p class="cc-name">Godrej Properties — Project Brochure</p><p class="cc-sub">32 Pages · Spot UV</p></div>
     </div>
-    <div class="cc" data-cat="flyer">
+    <div class="cc pop" data-cat="flyer">
       <div class="cc-bg bg-b"></div>
       <div class="cc-ov"></div>
       <span class="bro-pg-num">04 / Flyer</span>
       <div class="cc-info"><span class="cc-chip">Event Flyer</span><p class="cc-name">Embassy Group — Site Launch</p><p class="cc-sub">A5 · Double-Sided</p></div>
     </div>
-    <div class="cc" data-cat="kit">
+    <div class="cc pop" data-cat="kit">
       <div class="cc-bg bg-c"></div>
       <div class="cc-ov"></div>
       <span class="bro-pg-num">05 / Sales Kit</span>
       <div class="cc-info"><span class="cc-chip">Sales Kit</span><p class="cc-name">DAMAC — International Investor Deck</p><p class="cc-sub">Dubai · Luxury Finish</p></div>
     </div>
-    <div class="cc" data-cat="brochure">
+    <div class="cc pop" data-cat="brochure">
       <div class="cc-bg bg-d"></div>
       <div class="cc-ov"></div>
       <span class="bro-pg-num">06 / Brochure</span>
@@ -606,15 +650,60 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
     <button class="filter-btn" data-section="videos" data-filter="animation">Animation</button>
   </div>
   <div class="video-grid reveal" id="videoGrid">
-    <div class="wi" data-cat="brand" data-youtube="iqcHb1rq160"><div class="wi-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1UHyARL-DRnali43qcnEcX3xxpQrHaDck')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Aranyakaa Farms Testimonial Video</p><p class="wi-sub">Sony FX9 · DJI Inspire 3 · DaVinci Resolve</p></div></div>
-    <div class="wi" data-cat="drone" data-youtube="zUbFkBYw9yo"><div class="wi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1wmjHqhpL2ig4dvIMMUUDcXa6KwvdtOMV')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Drone / Aerial</p><p class="wi-title">H2O Farms — Aerial Survey Film</p><p class="wi-sub">DJI Mini 4 Pro · Zenmuse X9-8K</p></div></div>
-    <div class="wi" data-cat="animation" data-youtube="kufk4yb5FFo"><div class="wi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1-xrtxUYL-TO_bSknGamGHqJ9yNHOhmuI')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Motion / Animation</p><p class="wi-title">4BHK Interior Design — Animated Film</p><p class="wi-sub">After Effects · Sketchup · DaVinci</p></div></div>
-    <div class="wi" data-cat="brand" data-youtube="nIFsy7y-Pck"><div class="wi-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/12Db-alOE04LP0V4WIbys4YZI0LhIjhZk')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Godrej — Lakeside Orchard Property Film</p><p class="wi-sub">Sony FX9 · Premiere Pro · DaVinci</p></div></div>
-    <div class="wi" data-cat="drone" data-youtube="aSJwXjpMLHs"><div class="wi-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1ybPtg5XvotoBg8J9-S-SWfewzjPfeecj')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Drone / Aerial</p><p class="wi-title">Vrindhavan Farms — Site Aerial Walkthrough</p><p class="wi-sub">DJI Mini 4 Pro · 4K · Colour Graded</p></div></div>
-    <div class="wi" data-cat="animation" data-youtube="vCUZUXZf1Q8"><div class="wi-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1qVsr4QVHtmaJ6RJXPwu4KmyE7IV-c2Oq')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Animation</p><p class="wi-title">13th Anniversary — Animated Introduction</p><p class="wi-sub">After Effects · 2D Animation · Motion Design</p></div></div>
-    <div class="wi" data-cat="brand" data-youtube="6lQlgtrb7mI"><div class="wi-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1K_X9Izrx91n_eH21lgDGGZ7agYW8EL5e')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Birla Trimaya — Corporate Brand Film</p><p class="wi-sub">Full Production · RED KOMODO 6K · DaVinci</p></div></div>
-    <div class="wi" data-cat="brand" data-youtube="eLw_Q7udNxE"><div class="wi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1GO75uyHIhIegRyLsdve8-bD0bcba-J3m')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Project Launch Video</p><p class="wi-sub">DJI Inspire 3 · Cinematic Grading · 8K</p></div></div>
-    <div class="wi" data-cat="animation" data-youtube="zU26EokHKHc"><div class="wi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1ueWF6LWnyfM7_3hLTmXdYN57_rVz9dDc')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Motion Graphics</p><p class="wi-title">Motion Video For Game Server</p><p class="wi-sub">After Effects · Blender · Logo Stings</p></div></div>
+    <div class="vi pop" data-cat="brand" data-youtube="iqcHb1rq160">
+      <div class="vi-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1UHyARL-DRnali43qcnEcX3xxpQrHaDck')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Brand Film</p><p class="vi-title">Aranyakaa Farms Testimonial</p><p class="vi-sub">Sony FX9 · DJI Inspire 3 · DaVinci</p></div>
+    </div>
+    <div class="vi pop" data-cat="drone" data-youtube="zUbFkBYw9yo">
+      <div class="vi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1wmjHqhpL2ig4dvIMMUUDcXa6KwvdtOMV')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Drone / Aerial</p><p class="vi-title">H2O Farms — Aerial Survey Film</p><p class="vi-sub">DJI Mini 4 Pro · Zenmuse X9-8K</p></div>
+    </div>
+    <div class="vi pop" data-cat="animation" data-youtube="kufk4yb5FFo">
+      <div class="vi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1-xrtxUYL-TO_bSknGamGHqJ9yNHOhmuI')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Motion / Animation</p><p class="vi-title">4BHK Interior — Animated Film</p><p class="vi-sub">After Effects · Sketchup · DaVinci</p></div>
+    </div>
+    <div class="vi pop" data-cat="brand" data-youtube="nIFsy7y-Pck">
+      <div class="vi-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/12Db-alOE04LP0V4WIbys4YZI0LhIjhZk')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Brand Film</p><p class="vi-title">Godrej — Lakeside Orchard</p><p class="vi-sub">Sony FX9 · Premiere Pro · DaVinci</p></div>
+    </div>
+    <div class="vi pop" data-cat="drone" data-youtube="aSJwXjpMLHs">
+      <div class="vi-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1ybPtg5XvotoBg8J9-S-SWfewzjPfeecj')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Drone / Aerial</p><p class="vi-title">Vrindhavan Farms — Aerial Walkthrough</p><p class="vi-sub">DJI Mini 4 Pro · 4K · Colour Graded</p></div>
+    </div>
+    <div class="vi pop" data-cat="animation" data-youtube="vCUZUXZf1Q8">
+      <div class="vi-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1qVsr4QVHtmaJ6RJXPwu4KmyE7IV-c2Oq')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Animation</p><p class="vi-title">13th Anniversary — Animated Intro</p><p class="vi-sub">After Effects · 2D Animation</p></div>
+    </div>
+    <div class="vi pop" data-cat="brand" data-youtube="6lQlgtrb7mI">
+      <div class="vi-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1K_X9Izrx91n_eH21lgDGGZ7agYW8EL5e')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Brand Film</p><p class="vi-title">Birla Trimaya — Corporate Film</p><p class="vi-sub">RED KOMODO 6K · DaVinci</p></div>
+    </div>
+    <div class="vi pop" data-cat="brand" data-youtube="eLw_Q7udNxE">
+      <div class="vi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1GO75uyHIhIegRyLsdve8-bD0bcba-J3m')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Brand Film</p><p class="vi-title">Project Launch Video</p><p class="vi-sub">DJI Inspire 3 · Cinematic 8K</p></div>
+    </div>
+    <div class="vi pop" data-cat="animation" data-youtube="zU26EokHKHc">
+      <div class="vi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1ueWF6LWnyfM7_3hLTmXdYN57_rVz9dDc')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Motion Graphics</p><p class="vi-title">Motion Video — Game Server</p><p class="vi-sub">After Effects · Blender · Broadcast</p></div>
+    </div>
   </div>
 </section>
 
@@ -770,21 +859,7 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
     });
   }
 
-  /* ── SOCIAL FEED drag + progress bar ── */
-  var socialFeed=document.getElementById('socialFeed');
-  var socialFill=document.getElementById('socialProgressFill');
-  if(socialFeed){
-    var sX,sL,sDrag=false;
-    function updSocProg(){if(!socialFill)return;var max=socialFeed.scrollWidth-socialFeed.clientWidth;socialFill.style.width=(max>0?socialFeed.scrollLeft/max*100:0)+'%'}
-    socialFeed.addEventListener('scroll',updSocProg);
-    socialFeed.addEventListener('mousedown',function(e){sDrag=true;sX=e.pageX-socialFeed.offsetLeft;sL=socialFeed.scrollLeft;socialFeed.classList.add('dragging')});
-    socialFeed.addEventListener('mousemove',function(e){if(!sDrag)return;socialFeed.scrollLeft=sL-(e.pageX-socialFeed.offsetLeft-sX)*1.2});
-    function stopSD(){sDrag=false;socialFeed.classList.remove('dragging')}
-    socialFeed.addEventListener('mouseup',stopSD);socialFeed.addEventListener('mouseleave',stopSD);
-    var stX,stL;
-    socialFeed.addEventListener('touchstart',function(e){stX=e.touches[0].pageX;stL=socialFeed.scrollLeft},{passive:true});
-    socialFeed.addEventListener('touchmove',function(e){socialFeed.scrollLeft=stL+(stX-e.touches[0].pageX)},{passive:true});
-  }
+  /* social grid — static, no drag needed */
 
   /* ── VIDEO FILTER ── */
   document.querySelectorAll('.filter-btn').forEach(function(btn){
@@ -794,7 +869,7 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
       this.classList.add('active');
       if(sec==='videos'){
         var g=document.getElementById('videoGrid');
-        if(g)g.querySelectorAll('.wi').forEach(function(i){if(flt==='all'||i.dataset.cat===flt){i.classList.remove('hidden')}else{i.classList.add('hidden')}});
+        if(g)g.querySelectorAll('.vi').forEach(function(i){if(flt==='all'||i.dataset.cat===flt){i.style.opacity='';i.style.pointerEvents=''}else{i.style.opacity='.1';i.style.pointerEvents='none'}});
       }
     });
   });
@@ -803,7 +878,7 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
   var modal=document.getElementById('ytModal'),ytFrame=document.getElementById('ytFrame'),ytClose=document.getElementById('ytClose'),ytTitle=document.getElementById('ytModalTitle');
   function openVideo(id,title){ytFrame.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';if(ytTitle)ytTitle.textContent=title||'';modal.classList.add('open');document.body.style.overflow='hidden'}
   function closeVideo(){modal.classList.remove('open');ytFrame.src='';document.body.style.overflow=''}
-  function attachYT(el){if(!el)return;el.addEventListener('click',function(e){var n=e.target;while(n&&n!==el){if(n.classList&&n.classList.contains('wi')&&n.dataset.youtube){var t=n.querySelector('.wi-title');openVideo(n.dataset.youtube,t?t.textContent:'');return}n=n.parentElement}})}
+  function attachYT(el){if(!el)return;el.addEventListener('click',function(e){var n=e.target;while(n&&n!==el){if(n.classList&&(n.classList.contains('vi')||n.classList.contains('wi'))&&n.dataset.youtube){var t=n.querySelector('.vi-title,.wi-title');openVideo(n.dataset.youtube,t?t.textContent:'');return}n=n.parentElement}})}
   attachYT(document.getElementById('videoGrid'));
   if(ytClose)ytClose.addEventListener('click',closeVideo);
   if(modal)modal.addEventListener('click',function(e){if(e.target===modal)closeVideo()});
