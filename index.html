@@ -6,26 +6,11 @@
 <title>SAM THEODERE — Senior Video Editor & Cinematographer</title>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
-  --ink:      #060608;
-  --surface:  #0C0C10;
-  --lift:     #121218;
-  --edge:     #1C1C24;
-  --fence:    #242430;
-  --elec:     #00FF87;
-  --elec-dim: rgba(0,255,135,0.08);
-  --elec-mid: rgba(0,255,135,0.15);
-  --white:    #F0EEE8;
-  --mid:      #888;
-  --dim:      #444;
-  --danger:   #FF3B30;
-}
+:root{--ink:#060608;--surface:#0C0C10;--lift:#121218;--edge:#1C1C24;--fence:#242430;--elec:#00FF87;--elec-dim:rgba(0,255,135,0.08);--elec-mid:rgba(0,255,135,0.15);--white:#F0EEE8;--mid:#888;--dim:#444;--danger:#FF3B30}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:'Space Grotesk',sans-serif;background:var(--ink);color:var(--white);overflow-x:hidden;cursor:crosshair}
-::-webkit-scrollbar{width:2px}
-::-webkit-scrollbar-track{background:var(--ink)}
-::-webkit-scrollbar-thumb{background:var(--elec)}
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--elec)}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 48px;background:rgba(6,6,8,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--edge);transition:padding .3s}
 nav.scrolled{padding:13px 48px}
 .nav-brand{font-family:'Unbounded',sans-serif;font-weight:900;font-size:16px;letter-spacing:2px;color:var(--white);text-decoration:none}
@@ -68,7 +53,6 @@ nav.scrolled{padding:13px 48px}
 .s-num{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:5px;color:var(--elec);text-transform:uppercase;display:block;margin-bottom:16px}
 .s-title{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(32px,5vw,72px);line-height:1;letter-spacing:-1.5px;margin-bottom:60px}
 .s-title .elec{color:var(--elec)}
-.s-title .outline{color:transparent;-webkit-text-stroke:1px var(--fence)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
 .about-text{font-size:15px;line-height:1.9;color:var(--mid);font-weight:300}
 .about-text p+p{margin-top:20px}
@@ -84,12 +68,12 @@ nav.scrolled{padding:13px 48px}
 .section-filter{display:flex;gap:1px;flex-wrap:wrap;margin-bottom:40px;background:var(--edge)}
 .filter-btn{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:12px 22px;background:var(--lift);border:none;color:var(--dim);cursor:crosshair;transition:color .2s,background .2s}
 .filter-btn.active,.filter-btn:hover{background:var(--surface);color:var(--elec)}
-.wi{position:relative;overflow:hidden;background:var(--lift);cursor:crosshair}
+.wi{position:relative;overflow:hidden;background:var(--lift);cursor:crosshair;display:block}
 .wi.hidden{display:none}
-/* wi-bg rule moved to grid fill section */
-/* wi-bg hover moved to grid fill section */
 .wi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:3}
 .wi:hover::before{transform:scaleX(1)}
+.wi-bg{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.wi:hover .wi-bg{transform:scale(1.04)}
 .wi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.93) 0%,transparent 55%);opacity:0;transition:opacity .3s;z-index:2}
 .wi:hover .wi-ov{opacity:1}
 .wi-info{position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:3;transform:translateY(6px);opacity:0;transition:all .3s}
@@ -97,7 +81,6 @@ nav.scrolled{padding:13px 48px}
 .wi-cat{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:6px}
 .wi-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.3px;color:var(--white);line-height:1.2}
 .wi-sub{font-family:'Space Mono',monospace;font-size:9px;color:var(--mid);margin-top:6px;letter-spacing:1px}
-.wi-ph{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;text-align:center;pointer-events:none;line-height:2}
 .wi-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:4;opacity:0;transition:opacity .3s;pointer-events:none}
 .wi:hover .wi-play{opacity:1}
 .wi-play-ring{width:56px;height:56px;border-radius:50%;border:1px solid var(--elec);display:flex;align-items:center;justify-content:center;background:rgba(6,6,8,.7)}
@@ -110,22 +93,13 @@ nav.scrolled{padding:13px 48px}
 .bg-f{background:linear-gradient(135deg,#0A0C08,#141A10)}
 .bg-g{background:linear-gradient(135deg,#0C0A08,#1E1810)}
 .bg-h{background:linear-gradient(135deg,#08080C,#14141E)}
-/* VIDEO — landscape 16:9, 3-col, first card spans 2 */
 .video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--edge);align-items:stretch}
 .video-grid .wi{aspect-ratio:16/9;width:100%}
 .video-grid .wi:nth-child(1){grid-column:span 2;aspect-ratio:16/9}
-
-/* REEL — vertical 9:16, separate grid, 4-col so they sit side by side */
-.reel-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--edge);margin-top:2px;align-items:stretch}
-.reel-grid .wi{aspect-ratio:9/16;width:100%}
-/* POSTER — 1:1 square, 4-col uniform */
 .poster-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--edge);align-items:stretch}
 .poster-grid .wi{aspect-ratio:1/1;width:100%}
-
-/* SOCIAL/AD — 4:5 portrait, separate 4-col grid */
 .social-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--edge);margin-top:2px;align-items:stretch}
 .social-grid .wi{aspect-ratio:4/5;width:100%}
-/* BROCHURE — 16:9 landscape, 3-col, first spans 2 */
 .brochure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--edge);align-items:stretch}
 .brochure-grid .wi{aspect-ratio:16/9;width:100%}
 .brochure-grid .wi:nth-child(1){grid-column:span 2;aspect-ratio:16/9}
@@ -181,7 +155,6 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
 .footer-meta-line.em{color:var(--elec)}
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-/* ── YOUTUBE MODAL ── */
 .yt-modal-wrap{display:none;position:fixed;inset:0;z-index:9999;background:rgba(6,6,8,.96);align-items:center;justify-content:center;padding:24px}
 .yt-modal-wrap.open{display:flex}
 .yt-modal-inner{position:relative;width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border:1px solid var(--edge)}
@@ -189,64 +162,192 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
 .yt-close{position:absolute;top:-44px;right:0;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--mid);text-transform:uppercase;background:var(--ink);border:1px solid var(--edge);cursor:crosshair;padding:8px 18px;transition:color .2s,border-color .2s}
 .yt-close:hover{color:var(--elec);border-color:var(--elec)}
 .yt-modal-title{position:absolute;bottom:-32px;left:0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+
+/* ═══════════════════════════════════════
+   REELS SECTION
+═══════════════════════════════════════ */
+#reels{padding:120px 0 0;border-bottom:1px solid var(--edge);position:relative;background:var(--surface);overflow:hidden}
+.reels-header{padding:0 80px;margin-bottom:60px}
+.reels-header-row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.reels-nav-controls{display:flex;align-items:center;gap:0}
+.reel-nav-btn{font-family:'Space Mono',monospace;font-size:16px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--lift);border:1px solid var(--edge);color:var(--dim);cursor:crosshair;transition:color .2s,border-color .2s,background .2s;user-select:none}
+.reel-nav-btn:hover{color:var(--elec);border-color:var(--elec);background:var(--elec-dim)}
+.reels-count{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;padding:0 20px;height:48px;display:flex;align-items:center;background:var(--lift);border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);white-space:nowrap}
+.reels-count .current{color:var(--elec)}
+.reels-track-wrap{position:relative;overflow:hidden}
+.reels-track-wrap::before,.reels-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:10;pointer-events:none}
+.reels-track-wrap::before{left:0;background:linear-gradient(to right,var(--surface),transparent)}
+.reels-track-wrap::after{right:0;background:linear-gradient(to left,var(--surface),transparent)}
+.reels-track{display:flex;gap:2px;padding:0 80px;overflow-x:auto;scroll-behavior:smooth;cursor:grab;-webkit-overflow-scrolling:touch;scrollbar-width:none;align-items:flex-end}
+.reels-track::-webkit-scrollbar{display:none}
+.reels-track.dragging{cursor:grabbing;scroll-behavior:auto}
+.reel-card{flex-shrink:0;position:relative;overflow:hidden;cursor:crosshair;background:var(--lift);width:180px;aspect-ratio:9/16;transition:width .45s cubic-bezier(.25,.46,.45,.94),opacity .45s;opacity:.5;border:1px solid transparent}
+.reel-card.active{width:280px;opacity:1;border-color:var(--elec)}
+.reel-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .35s;z-index:5}
+.reel-card.active::before,.reel-card:hover::before{transform:scaleX(1)}
+.reel-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.reel-card:hover .reel-card-bg{transform:scale(1.04)}
+.reel-card-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.95) 0%,rgba(6,6,8,.3) 40%,transparent 70%);opacity:0;transition:opacity .35s;z-index:2}
+.reel-card.active .reel-card-ov,.reel-card:hover .reel-card-ov{opacity:1}
+.reel-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);z-index:4;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none}
+.reel-card.active .reel-play,.reel-card:hover .reel-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.reel-play-ring{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--elec);display:flex;align-items:center;justify-content:center;background:rgba(6,6,8,.75);backdrop-filter:blur(4px)}
+.reel-play-tri{width:0;height:0;border-style:solid;border-width:8px 0 8px 14px;border-color:transparent transparent transparent var(--elec);margin-left:3px}
+.reel-num{position:absolute;top:12px;right:12px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--elec);background:rgba(6,6,8,.8);padding:4px 8px;z-index:5;border:1px solid rgba(0,255,135,.2);opacity:0;transition:opacity .3s}
+.reel-card.active .reel-num,.reel-card:hover .reel-num{opacity:1}
+.reel-info{position:absolute;bottom:0;left:0;right:0;padding:20px 16px;z-index:4;transform:translateY(8px);opacity:0;transition:opacity .35s,transform .35s}
+.reel-card.active .reel-info,.reel-card:hover .reel-info{opacity:1;transform:translateY(0)}
+.reel-info-cat{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:5px}
+.reel-info-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:12px;letter-spacing:-.2px;color:var(--white);line-height:1.3}
+.reel-info-sub{font-family:'Space Mono',monospace;font-size:8px;color:var(--mid);margin-top:5px;letter-spacing:1px}
+.reels-dots{display:flex;align-items:center;justify-content:center;gap:6px;padding:28px 80px 40px}
+.reels-dot{width:24px;height:2px;background:var(--edge);cursor:crosshair;transition:background .3s,width .3s}
+.reels-dot.active{background:var(--elec);width:40px}
+.reels-drag-hint{display:flex;align-items:center;gap:8px;padding:0 80px 0;margin-top:-12px;margin-bottom:40px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;transition:opacity .4s}
+.reels-drag-hint.hidden{opacity:0}
+.drag-arrow{color:var(--elec)}
+
+/* ═══════════════════════════════════════════════════════════
+   CREATIVES SECTION — Precision Dashboard Layout
+   Rules: zero gaps inside grids, correct aspect ratios,
+   uniform card heights, no filler negative space.
+═══════════════════════════════════════════════════════════ */
+
+/* ── Shared creative card base ── */
+.cc{position:relative;overflow:hidden;background:var(--lift);cursor:crosshair;display:block}
+.cc-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .55s cubic-bezier(.25,.46,.45,.94)}
+.cc:hover .cc-bg{transform:scale(1.05)}
+.cc-ov{position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,6,8,0) 30%,rgba(6,6,8,.88) 100%);opacity:0;transition:opacity .3s;z-index:2}
+.cc:hover .cc-ov{opacity:1}
+/* Top accent sweep */
+.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .35s;z-index:6}
+.cc:hover::before{transform:scaleX(1)}
+/* Info block */
+.cc-info{position:absolute;bottom:0;left:0;right:0;padding:16px 14px;z-index:5;transform:translateY(8px);opacity:0;transition:opacity .3s,transform .3s}
+.cc:hover .cc-info{opacity:1;transform:translateY(0)}
+.cc-chip{display:inline-block;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;background:var(--elec);color:var(--ink);font-weight:700;margin-bottom:6px}
+.cc-name{font-family:'Unbounded',sans-serif;font-weight:700;font-size:12px;letter-spacing:-.2px;color:var(--white);line-height:1.25}
+.cc-sub{font-family:'Space Mono',monospace;font-size:7px;color:rgba(240,238,232,.5);margin-top:4px;letter-spacing:.5px}
+/* Corner index badge */
+.cc-idx{position:absolute;top:10px;right:10px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--elec);background:rgba(6,6,8,.85);padding:3px 7px;border:1px solid rgba(0,255,135,.25);z-index:6;opacity:0;transition:opacity .25s}
+.cc:hover .cc-idx{opacity:1}
+
+/* ── Section header strip (compact, dashboard-style) ── */
+.cr-header{display:flex;align-items:center;justify-content:space-between;padding:0 0 0 0;margin-bottom:0;border-bottom:1px solid var(--edge)}
+.cr-header-left{display:flex;align-items:center;gap:0}
+.cr-section-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:4px;color:var(--elec);text-transform:uppercase;padding:14px 20px;border-right:1px solid var(--edge)}
+.cr-title-inline{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(18px,2.2vw,28px);letter-spacing:-.5px;color:var(--white);padding:0 24px}
+.cr-title-inline .elec{color:var(--elec)}
+.cr-count{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;padding:14px 20px;border-left:1px solid var(--edge)}
+.cr-count span{color:var(--elec)}
+
+/* ── Filter tabs ── */
+.cr-tabs{display:flex;gap:0;border-bottom:1px solid var(--edge)}
+.cr-tab{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;padding:12px 20px;background:transparent;border:none;border-right:1px solid var(--edge);color:var(--dim);cursor:crosshair;transition:color .2s,background .2s;position:relative}
+.cr-tab::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transition:transform .25s}
+.cr-tab.active,.cr-tab:hover{color:var(--elec);background:var(--elec-dim)}
+.cr-tab.active::after,.cr-tab:hover::after{transform:scaleX(1)}
+
+/* ═══════════════════════════════════
+   POSTER GRID — 5 col, 1:1 uniform
+   Cards are compact: 180px height max
+═══════════════════════════════════ */
+.poster-wall{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:var(--edge)}
+/* Force exact 1:1 on every card */
+.poster-wall .cc{aspect-ratio:1/1;width:100%}
+/* First card is 2-wide, still 1:1 relative to its width */
+.poster-wall .cc.wide2{grid-column:span 2;aspect-ratio:2/1}
+
+/* ═══════════════════════════════════
+   SOCIAL STRIP — 4:5 portrait feed
+   Horizontal drag scroll, fixed height
+═══════════════════════════════════ */
+.social-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--lift);border-top:1px solid var(--edge);border-left:1px solid var(--edge);border-right:1px solid var(--edge)}
+.sb-left{display:flex;align-items:center;gap:8px}
+.sb-avatar{width:22px;height:22px;border-radius:50%;background:var(--elec-dim);border:1px solid var(--elec);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:6px;color:var(--elec);font-weight:700;flex-shrink:0}
+.sb-handle{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--white);text-transform:uppercase}
+.sb-live{width:5px;height:5px;border-radius:50%;background:var(--elec);animation:blink 2s infinite;flex-shrink:0}
+.sb-right{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
+.social-feed{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;cursor:grab;background:var(--edge);border-left:1px solid var(--edge);border-right:1px solid var(--edge);border-bottom:1px solid var(--edge)}
+.social-feed::-webkit-scrollbar{display:none}
+.social-feed.dragging{cursor:grabbing}
+/* Each card: 4:5, fixed width so all are uniform */
+.sf-card{flex-shrink:0;width:180px;aspect-ratio:4/5;position:relative;overflow:hidden;background:var(--lift);cursor:crosshair}
+.sf-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+.sf-card:hover .sf-card-bg{transform:scale(1.05)}
+.sf-card-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.9) 0%,transparent 55%);opacity:0;transition:opacity .3s;z-index:2}
+.sf-card:hover .sf-card-ov{opacity:1}
+.sf-card-info{position:absolute;bottom:0;left:0;right:0;padding:12px 12px;z-index:3;transform:translateY(6px);opacity:0;transition:all .3s}
+.sf-card:hover .sf-card-info{opacity:1;transform:translateY(0)}
+.sf-card-tag{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:3px}
+.sf-card-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:10px;color:var(--white);line-height:1.3}
+.sf-card-dim{font-family:'Space Mono',monospace;font-size:7px;color:var(--mid);margin-top:3px;letter-spacing:.5px}
+.sf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:5}
+.sf-card:hover::before{transform:scaleX(1)}
+/* Scroll progress */
+.social-progress{height:2px;background:var(--edge);border-left:1px solid var(--edge);border-right:1px solid var(--edge)}
+.social-progress-fill{height:100%;background:var(--elec);width:0%;transition:width .08s linear}
+
+/* ═══════════════════════════════════
+   BROCHURE GRID — 16:9 landscape,
+   tight 3-col grid, zero internal gap
+═══════════════════════════════════ */
+.bro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--edge)}
+/* All brochure cards are 16:9 */
+.bro-grid .cc{aspect-ratio:16/9;width:100%}
+/* First card spans 2 cols — still 16:9 of that wider block */
+.bro-grid .cc.wide2{grid-column:span 2;aspect-ratio:32/9}
+/* Info for brochure cards: left-aligned with page-style number */
+.bro-pg-num{position:absolute;bottom:14px;left:14px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);z-index:6;opacity:0;transition:opacity .3s}
+.cc:hover .bro-pg-num{opacity:1}
+
+/* ── Section sub-divider label ── */
+.sub-label{display:flex;align-items:center;border-top:1px solid var(--edge)}
+.sub-label-text{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:4px;color:var(--elec);text-transform:uppercase;padding:10px 20px;border-right:1px solid var(--edge);white-space:nowrap;background:var(--lift)}
+.sub-label-line{flex:1;height:1px;background:var(--edge)}
+
+/* ── Faded filter state ── */
+.cc.faded{opacity:.1;pointer-events:none}
+.bro-grid .cc.faded{opacity:.1;pointer-events:none}
+
+/* ═══════════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════════ */
 @media(max-width:900px){
-  nav{padding:16px 24px}
-  .nav-links{display:none}
-  #hero,.s{padding:80px 24px}
-  #hero{padding-top:120px}
+  nav{padding:16px 24px}.nav-links{display:none}
+  #hero,.s{padding:80px 24px}#hero{padding-top:120px}
   .hero-big{font-size:clamp(52px,14vw,92px);letter-spacing:-2px}
-  .hero-row{flex-direction:column;gap:24px}
-  .stat-block{padding:0 16px}
+  .hero-row{flex-direction:column;gap:24px}.stat-block{padding:0 16px}
   .about-grid,.contact-grid{grid-template-columns:1fr}
-  .video-grid,.poster-grid,.brochure-grid{grid-template-columns:1fr 1fr}
-  .video-grid .wi,.poster-grid .wi,.brochure-grid .wi{grid-column:span 1!important;grid-row:span 1!important}
+  .video-grid{grid-template-columns:1fr 1fr}.video-grid .wi{grid-column:span 1!important;aspect-ratio:16/9}
+  .poster-wall{grid-template-columns:repeat(3,1fr)}
+  .poster-wall .cc.wide2{grid-column:span 2;aspect-ratio:2/1}
+  .sf-card{width:150px}
+  .bro-grid{grid-template-columns:1fr 1fr}
+  .bro-grid .cc.wide2{grid-column:span 2;aspect-ratio:32/9}
   .services-grid,.cameras-grid{grid-template-columns:1fr}
   .clients-grid{grid-template-columns:repeat(2,1fr)}
-  footer{padding:40px 24px}
-  .footer-big{font-size:32px}
+  footer{padding:40px 24px}.footer-big{font-size:32px}
   .mission-block{padding:48px 24px}
   .contact-left,.contact-right{padding:40px 24px}
   .yt-modal-wrap{padding:16px}
+  #reels{padding:80px 0 0}
+  .reels-header{padding:0 24px;margin-bottom:40px}
+  .reels-track{padding:0 24px}
+  .reels-dots{padding:24px 24px 32px}
+  .reels-drag-hint{padding:0 24px;margin-bottom:32px}
+  .reel-card{width:140px}.reel-card.active{width:210px}
 }
-
-
-/* ── GRID IMAGE FILL — zero gaps, perfect fit ── */
-.wi { position:relative; overflow:hidden; display:block; }
-.wi-bg {
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  background-size:cover;
-  background-position:center center;
-  background-repeat:no-repeat;
-  transition:transform .6s cubic-bezier(.25,.46,.45,.94);
-}
-.wi:hover .wi-bg { transform:scale(1.04); }
-/* Mobile: all cards 16:9 */
-@media(max-width:900px){
-  .video-grid { grid-template-columns:repeat(2,1fr); }
-  .video-grid .wi { aspect-ratio:16/9; grid-column:span 1 !important; }
-  .reel-grid { grid-template-columns:repeat(2,1fr); }
-  .reel-grid .wi { aspect-ratio:9/16; }
-  .poster-grid { grid-template-columns:repeat(2,1fr); }
-  .poster-grid .wi { aspect-ratio:1/1; }
-  .social-grid { grid-template-columns:repeat(2,1fr); }
-  .social-grid .wi { aspect-ratio:4/5; }
-  .brochure-grid { grid-template-columns:repeat(2,1fr); }
-  .brochure-grid .wi { aspect-ratio:16/9; grid-column:span 1 !important; }
-}
-
-</style>
+</style>>
 </head><body>
 
-<!-- NAV -->
 <nav id="mainNav">
   <a href="#hero" class="nav-brand">SAM<span>.</span>T</a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#posters">Creatives</a></li>
     <li><a href="#brochures">Brochures</a></li>
+    <li><a href="#reels">Reels</a></li>
     <li><a href="#videos">Videos</a></li>
     <li><a href="#cameras">Cameras</a></li>
     <li><a href="#clients">Clients</a></li>
@@ -254,46 +355,20 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
   <a href="#contact" class="nav-hire">Hire Me →</a>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-scanlines"></div>
   <div class="hero-grid-bg"></div>
   <div class="hero-glow"></div>
   <div class="hero-ticker">
     <div class="ticker-inner">
-      <span class="ticker-item hot">Brand Films</span>
-      <span class="ticker-item">Cinematographer</span>
-      <span class="ticker-item hot">Motion Graphics</span>
-      <span class="ticker-item">Drone Pilot</span>
-      <span class="ticker-item hot">Reels</span>
-      <span class="ticker-item">Color Grading</span>
-      <span class="ticker-item hot">Static Posters</span>
-      <span class="ticker-item">Brochure Design</span>
-      <span class="ticker-item hot">Aerial 8K</span>
-      <span class="ticker-item">Animation</span>
-      <span class="ticker-item hot">Real Estate</span>
-      <span class="ticker-item">Bengaluru · India</span>
-      <span class="ticker-item hot">Brand Films</span>
-      <span class="ticker-item">Cinematographer</span>
-      <span class="ticker-item hot">Motion Graphics</span>
-      <span class="ticker-item">Drone Pilot</span>
-      <span class="ticker-item hot">Reels</span>
-      <span class="ticker-item">Color Grading</span>
-      <span class="ticker-item hot">Static Posters</span>
-      <span class="ticker-item">Brochure Design</span>
-      <span class="ticker-item hot">Aerial 8K</span>
-      <span class="ticker-item">Animation</span>
-      <span class="ticker-item hot">Real Estate</span>
-      <span class="ticker-item">Bengaluru · India</span>
+      <span class="ticker-item hot">Brand Films</span><span class="ticker-item">Cinematographer</span><span class="ticker-item hot">Motion Graphics</span><span class="ticker-item">Drone Pilot</span><span class="ticker-item hot">Reels</span><span class="ticker-item">Color Grading</span><span class="ticker-item hot">Static Posters</span><span class="ticker-item">Brochure Design</span><span class="ticker-item hot">Aerial 8K</span><span class="ticker-item">Animation</span><span class="ticker-item hot">Real Estate</span><span class="ticker-item">Bengaluru · India</span>
+      <span class="ticker-item hot">Brand Films</span><span class="ticker-item">Cinematographer</span><span class="ticker-item hot">Motion Graphics</span><span class="ticker-item">Drone Pilot</span><span class="ticker-item hot">Reels</span><span class="ticker-item">Color Grading</span><span class="ticker-item hot">Static Posters</span><span class="ticker-item">Brochure Design</span><span class="ticker-item hot">Aerial 8K</span><span class="ticker-item">Animation</span><span class="ticker-item hot">Real Estate</span><span class="ticker-item">Bengaluru · India</span>
     </div>
   </div>
   <span class="hero-eyebrow">00 — Bengaluru, India · Available for Projects</span>
   <div class="hero-big">SAM<br>TH<span class="e">Ë</span><span class="ghost">O</span><br>DERE</div>
   <div class="hero-row">
-    <p class="hero-desc">
-      <strong>Senior Video Editor. Cinematographer. Motion Lead. Drone Pilot.</strong><br>
-      End-to-end creative ownership — brand films, aerial footage, motion graphics, static campaigns, and brochures. Every frame. Every pixel. Intentional.
-    </p>
+    <p class="hero-desc"><strong>Senior Video Editor. Cinematographer. Motion Lead. Drone Pilot.</strong><br>End-to-end creative ownership — brand films, aerial footage, motion graphics, static campaigns, and brochures. Every frame. Every pixel. Intentional.</p>
     <div class="hero-stats">
       <div class="stat-block"><span class="stat-num">3<span>+</span></span><span class="stat-label">Years Exp.</span></div>
       <div class="stat-block"><span class="stat-num">15<span>+</span></span><span class="stat-label">Major Brands</span></div>
@@ -303,14 +378,13 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
   </div>
   <div class="hero-actions">
     <a href="#posters" class="btn-elec">See Creatives →</a>
-    <a href="#videos" class="btn-ghost">View Videos</a>
+    <a href="#reels" class="btn-ghost">Watch Reels</a>
     <a href="#contact" class="btn-ghost">Get in Touch</a>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section class="s s-lift" id="about">
-  <span class="s-num">About</span>
+  <span class="s-num">01 — About</span>
   <h2 class="s-title">The Eye<br>Behind the<br><span class="elec">Lens</span></h2>
   <div class="about-grid">
     <div class="about-text reveal">
@@ -319,245 +393,233 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
       <p>Not just an editor. A <strong>creative director with a camera</strong>. I don't cut footage — I build the visual language that makes brands impossible to ignore.</p>
     </div>
     <div class="reveal">
-      <div class="skills-block">
-        <span class="skills-label">Video Production</span>
-        <div class="skills-tags"><span class="s-tag">Brand Films</span><span class="s-tag">Reels</span><span class="s-tag">Drone / Aerial</span><span class="s-tag">Animation</span><span class="s-tag">Color Grading</span><span class="s-tag">Directing</span></div>
-      </div>
-      <div class="skills-block">
-        <span class="skills-label">Post-Production</span>
-        <div class="skills-tags"><span class="s-tag">Premiere Pro</span><span class="s-tag">After Effects</span><span class="s-tag">DaVinci Resolve</span><span class="s-tag">Blender</span><span class="s-tag">Maya 3D</span><span class="s-tag">Unreal Engine</span></div>
-      </div>
-      <div class="skills-block">
-        <span class="skills-label">Graphic Design</span>
-        <div class="skills-tags"><span class="s-tag">Static Posters</span><span class="s-tag">Social Banners</span><span class="s-tag">Brochures</span><span class="s-tag">Brand Identity</span><span class="s-tag">Photoshop</span><span class="s-tag">Illustrator</span><span class="s-tag">Figma</span></div>
-      </div>
-      <div class="skills-block">
-        <span class="skills-label">Website Design</span>
-        <div class="skills-tags"><span class="s-tag">HTML</span><span class="s-tag">CSS</span><span class="s-tag">Responsive Design</span><span class="s-tag">UI/UX Design</span><span class="s-tag">Visual Studio</span><span class="s-tag">Adobe XD</span></div>
-      </div>
+      <div class="skills-block"><span class="skills-label">Video Production</span><div class="skills-tags"><span class="s-tag">Brand Films</span><span class="s-tag">Reels</span><span class="s-tag">Drone / Aerial</span><span class="s-tag">Animation</span><span class="s-tag">Color Grading</span><span class="s-tag">Directing</span></div></div>
+      <div class="skills-block"><span class="skills-label">Post-Production</span><div class="skills-tags"><span class="s-tag">Premiere Pro</span><span class="s-tag">After Effects</span><span class="s-tag">DaVinci Resolve</span><span class="s-tag">Blender</span><span class="s-tag">Maya 3D</span><span class="s-tag">Unreal Engine</span></div></div>
+      <div class="skills-block"><span class="skills-label">Graphic Design</span><div class="skills-tags"><span class="s-tag">Static Posters</span><span class="s-tag">Social Banners</span><span class="s-tag">Brochures</span><span class="s-tag">Brand Identity</span><span class="s-tag">Photoshop</span><span class="s-tag">Illustrator</span><span class="s-tag">Figma</span></div></div>
+      <div class="skills-block"><span class="skills-label">Website Design</span><div class="skills-tags"><span class="s-tag">HTML</span><span class="s-tag">CSS</span><span class="s-tag">Responsive Design</span><span class="s-tag">UI/UX Design</span><span class="s-tag">Visual Studio</span><span class="s-tag">Adobe XD</span></div></div>
     </div>
   </div>
 </section>
 
-<!-- MISSION -->
 <div class="mission-block">
   <p class="mission-text">"Every frame is a decision. Every pixel is intentional. Every brand deserves to look its best."</p>
   <span class="mission-sub">Sam Theodere · Bengaluru · Design · Film · Drone · Brand</span>
 </div>
 
-<!-- POSTERS -->
 <section class="s s-alt" id="posters">
-  <span class="s-num">03 — Graphic Design</span>
-  <h2 class="s-title reveal">Posters &amp;<br><span class="elec">Creatives</span></h2>
-  <div class="section-filter reveal">
-    <button class="filter-btn active" data-section="posters" data-filter="all">All Creatives</button>
-    <button class="filter-btn" data-section="posters" data-filter="poster">Posters</button>
-    <button class="filter-btn" data-section="posters" data-filter="social">Social Banners</button>
-    <button class="filter-btn" data-section="posters" data-filter="ad">Ad Creatives</button>
-    <button class="filter-btn" data-section="posters" data-filter="brand">Brand Assets</button>
-  </div>
-  <!-- POSTERS & BRAND — 1:1 square grid -->
-  <div class="poster-grid reveal" id="posterGrid">
-    <div class="wi" data-cat="poster"><div class="wi-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/19_ATXvF-Ax2MeRb7M5NmGjrZqQaCdPpz');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Event Poster</p><p class="wi-title">Birla Estates — Kolkata Expo Poster</p><p class="wi-sub">Photoshop · Illustrator · Print-Ready</p></div></div>
-    <div class="wi" data-cat="poster"><div class="wi-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1fidLtdVEmnxr_knOIytPJ8iOuUmhFMfR');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Poster</p><p class="wi-title">Birla Taranya Ad Creative</p><p class="wi-sub">A3 Print · Photoshop · Brand Aligned</p></div></div>
-    <div class="wi" data-cat="poster"><div class="wi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/12DCHbao4ng5RL9GIWyUR8yb1qjMdzfDd');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Asset</p><p class="wi-title">Godrej Aveline Creative</p><p class="wi-sub">Photoshop · Illustrator · Print-Ready</p></div></div>
-    <div class="wi" data-cat="poster"><div class="wi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/11zwf9R4KnSkmp6o8NyYCVXwluCgl6Hzj');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Poster</p><p class="wi-title">Sobha — Launch Poster Design</p><p class="wi-sub">Photoshop · Illustrator · Print + Digital</p></div></div>
-    <div class="wi" data-cat="poster"><div class="wi-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1JR1virB2t67kVWsi7SrL_dy2RnjlkhrC');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Poster</p><p class="wi-title">Numacity Poster</p><p class="wi-sub">Illustrator · Photoshop · Print-Ready</p></div></div>
-    <div class="wi" data-cat="brand"><div class="wi-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1p0fBDf-6kPo6Mu4G4ZlVfo90r4QgXjp_');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Asset</p><p class="wi-title">Insync — Logo</p><p class="wi-sub">Stationery · Signage · Digital Templates</p></div></div>
-    <div class="wi" data-cat="brand"><div class="wi-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1ae00tdtfBxdTE-7mCFKiUvo7noANoEDS');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Poster</p><p class="wi-title">Green City — Brand Creation Pack</p><p class="wi-sub">Photoshop · Illustrator · Print-Ready</p></div></div>
-    <div class="wi" data-cat="brand"><div class="wi-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1-4BIbqsXaqgWrvNXO1NRXRPtl9LdEgAP');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Asset</p><p class="wi-title">Nasagiri — Logo &amp; Identity</p><p class="wi-sub">Logo Design · Brand Guidelines · Digital + Print</p></div></div>
+  <span class="s-num">02 — Graphic Design</span>
+
+  <!-- Compact dashboard header -->
+  <div class="cr-header reveal">
+    <div class="cr-header-left">
+      <span class="cr-section-label">Posters &amp; Brand</span>
+      <h2 class="cr-title-inline" style="margin-bottom:0">Static <span class="elec">Creatives</span></h2>
+    </div>
+    <span class="cr-count"><span>08</span> Works</span>
   </div>
 
-  <!-- SOCIAL & ADS — 4:5 portrait grid -->                                                                     
-  <div style="margin-top:24px">
-    <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--elec);text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--edge)">Social Creatives &amp; Ad Banners</p>
+  <!-- Filter tabs flush to grid -->
+  <div class="cr-tabs reveal" id="posterTabs">
+    <button class="cr-tab active" data-filter="all">All</button>
+    <button class="cr-tab" data-filter="poster">Posters</button>
+    <button class="cr-tab" data-filter="brand">Brand Identity</button>
   </div>
-  <div class="social-grid reveal" id="socialGrid">
-    <div class="wi" data-cat="social"><div class="wi-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1QbL5tQN4Rv2pyF9j0Xpcy6XJ9z7uiysU');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Social Banner</p><p class="wi-title">Birla Expo — Instagram Post</p><p class="wi-sub">1080 × 1350 · Instagram Feed</p></div></div>
-    <div class="wi" data-cat="social"><div class="wi-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1rq-yU1pXbNS3-CbuTB_e_aECO1w5dE4G');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Social Banner</p><p class="wi-title">Social Media Post</p><p class="wi-sub">Facebook · Instagram · Meta Ads</p></div></div>
-    <div class="wi" data-cat="social"><div class="wi-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1cdMVjiRgUX64VL61NPK8dOSaxEbECTCe');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Social Banner</p><p class="wi-title">Story Ad Set</p><p class="wi-sub">1080 × 1350 · Portrait Format</p></div></div>
-    <div class="wi" data-cat="ad"><div class="wi-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1EpWmvpiZcV18u98fesEc4QJw2J-Snja_');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Ad Creative</p><p class="wi-title">Godrej Aveline — Digital Ad Banner</p><p class="wi-sub">Meta Ads · Multiple Sizes</p></div></div>
-    <div class="wi" data-cat="social"><div class="wi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1Rd_XpG5A4R_778r4906yT0vebIIVduGY');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Social Banner</p><p class="wi-title">Sobha Developers— Carousel Campaign</p><p class="wi-sub">10-Slide Carousel · Instagram</p></div></div>
-    <div class="wi" data-cat="ad"><div class="wi-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/1ECYs-sNg012YeMV305nQC4KvQJOb-J_3');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Ad Creative</p><p class="wi-title">Real Estate — Performance Ad Set</p><p class="wi-sub">Meta · A/B Variants · Static + Animated</p></div></div>
-    <div class="wi" data-cat="ad"><div class="wi-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1DIEqvmlSNrN2ZSKPx_s5HO9qDCQ6Mbvv');background-size:cover;background-position:center;"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Ad Creative</p><p class="wi-title">Property Launch — Digital Ad Set</p><p class="wi-sub">Meta Ads · Multiple Sizes</p></div></div>
+
+  <!-- 5-col 1:1 poster wall — first card is 2-wide -->
+  <div class="poster-wall reveal" id="posterWall">
+    <div class="cc wide2" data-cat="poster">
+      <div class="cc-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/19_ATXvF-Ax2MeRb7M5NmGjrZqQaCdPpz')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">01</span>
+      <div class="cc-info"><span class="cc-chip">Event Poster</span><p class="cc-name">Birla Estates — Kolkata Expo</p><p class="cc-sub">Photoshop · Illustrator · Print-Ready</p></div>
+    </div>
+    <div class="cc" data-cat="poster">
+      <div class="cc-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1fidLtdVEmnxr_knOIytPJ8iOuUmhFMfR')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">02</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Birla Taranya Ad Creative</p><p class="cc-sub">A3 · Brand Aligned</p></div>
+    </div>
+    <div class="cc" data-cat="poster">
+      <div class="cc-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/12DCHbao4ng5RL9GIWyUR8yb1qjMdzfDd')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">03</span>
+      <div class="cc-info"><span class="cc-chip">Brand Asset</span><p class="cc-name">Godrej Aveline Creative</p><p class="cc-sub">Print-Ready</p></div>
+    </div>
+    <div class="cc" data-cat="poster">
+      <div class="cc-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/11zwf9R4KnSkmp6o8NyYCVXwluCgl6Hzj')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">04</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Sobha Launch Poster</p><p class="cc-sub">Print + Digital</p></div>
+    </div>
+    <div class="cc" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1JR1virB2t67kVWsi7SrL_dy2RnjlkhrC')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">05</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Numacity Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc" data-cat="brand">
+      <div class="cc-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1p0fBDf-6kPo6Mu4G4ZlVfo90r4QgXjp_')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Brand Identity</span><p class="cc-name">Insync — Logo</p><p class="cc-sub">Stationery · Signage</p></div>
+    </div>
+    <div class="cc" data-cat="brand">
+      <div class="cc-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1ae00tdtfBxdTE-7mCFKiUvo7noANoEDS')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">07</span>
+      <div class="cc-info"><span class="cc-chip">Brand Pack</span><p class="cc-name">Green City — Brand Pack</p><p class="cc-sub">Full Identity System</p></div>
+    </div>
+    <div class="cc" data-cat="brand">
+      <div class="cc-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1-4BIbqsXaqgWrvNXO1NRXRPtl9LdEgAP')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">08</span>
+      <div class="cc-info"><span class="cc-chip">Brand Identity</span><p class="cc-name">Nasagiri — Logo &amp; Identity</p><p class="cc-sub">Guidelines · Print + Digital</p></div>
+    </div>
+  </div>
+
+  <!-- Social / Ad sub-section -->
+  <div class="sub-label reveal">
+    <span class="sub-label-text">Social &amp; Ad Creatives</span>
+    <span class="sub-label-line"></span>
+  </div>
+
+  <!-- Instagram bar + horizontal scroll feed -->
+  <div class="social-bar reveal">
+    <div class="sb-left">
+      <div class="sb-avatar">ST</div>
+      <span class="sb-handle">@samtheodere</span>
+      <div class="sb-live"></div>
+    </div>
+    <span class="sb-right">07 Creatives · Meta · Instagram · Facebook</span>
+  </div>
+  <div class="social-feed reveal" id="socialFeed">
+    <div class="sf-card"><div class="sf-card-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1QbL5tQN4Rv2pyF9j0Xpcy6XJ9z7uiysU')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Instagram Feed</p><p class="sf-card-title">Birla Expo Post</p><p class="sf-card-dim">1080×1350</p></div></div>
+    <div class="sf-card"><div class="sf-card-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1rq-yU1pXbNS3-CbuTB_e_aECO1w5dE4G')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Social Post</p><p class="sf-card-title">Campaign Creative</p><p class="sf-card-dim">Meta · Feed</p></div></div>
+    <div class="sf-card"><div class="sf-card-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1cdMVjiRgUX64VL61NPK8dOSaxEbECTCe')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Story Format</p><p class="sf-card-title">Story Ad Set</p><p class="sf-card-dim">1080×1350</p></div></div>
+    <div class="sf-card"><div class="sf-card-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1EpWmvpiZcV18u98fesEc4QJw2J-Snja_')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Ad Creative</p><p class="sf-card-title">Godrej Aveline</p><p class="sf-card-dim">Meta Ads</p></div></div>
+    <div class="sf-card"><div class="sf-card-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1Rd_XpG5A4R_778r4906yT0vebIIVduGY')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Carousel</p><p class="sf-card-title">Sobha Campaign</p><p class="sf-card-dim">10 Slides · IG</p></div></div>
+    <div class="sf-card"><div class="sf-card-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/1ECYs-sNg012YeMV305nQC4KvQJOb-J_3')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Performance Ad</p><p class="sf-card-title">Real Estate Set</p><p class="sf-card-dim">A/B Variants</p></div></div>
+    <div class="sf-card"><div class="sf-card-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1DIEqvmlSNrN2ZSKPx_s5HO9qDCQ6Mbvv')"></div><div class="sf-card-ov"></div><div class="sf-card-info"><p class="sf-card-tag">Digital Ad</p><p class="sf-card-title">Property Launch</p><p class="sf-card-dim">Multi-Size</p></div></div>
+  </div>
+  <div class="social-progress reveal"><div class="social-progress-fill" id="socialProgressFill"></div></div>
+
+</section>
+
+<section class="s s-lift" id="brochures">
+  <span class="s-num">03 — Print &amp; Collateral</span>
+
+  <div class="cr-header reveal">
+    <div class="cr-header-left">
+      <span class="cr-section-label">Print &amp; Collateral</span>
+      <h2 class="cr-title-inline" style="margin-bottom:0">Brochures &amp; <span class="elec">Print</span></h2>
+    </div>
+    <span class="cr-count"><span>06</span> Projects</span>
+  </div>
+
+  <div class="cr-tabs reveal" id="brochureTabs">
+    <button class="cr-tab active" data-filter="all">All Print</button>
+    <button class="cr-tab" data-filter="brochure">Brochures</button>
+    <button class="cr-tab" data-filter="flyer">Flyers</button>
+    <button class="cr-tab" data-filter="kit">Sales Kits</button>
+  </div>
+
+  <!-- 3-col 16:9 grid — first card 2-wide = 32:9 aspect -->
+  <div class="bro-grid reveal" id="brochureGrid">
+    <div class="cc wide2" data-cat="brochure">
+      <div class="cc-bg bg-g"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">01 / Brochure</span>
+      <div class="cc-info"><span class="cc-chip">Property Brochure</span><p class="cc-name">Tata Housing — Premium Sales Brochure</p><p class="cc-sub">40 Pages · A4 · Illustrator + Photoshop</p></div>
+    </div>
+    <div class="cc" data-cat="kit">
+      <div class="cc-bg bg-h"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">02 / Sales Kit</span>
+      <div class="cc-info"><span class="cc-chip">Sales Kit</span><p class="cc-name">Birla Estates — Investor Kit</p><p class="cc-sub">Pan-India Launch Pack</p></div>
+    </div>
+    <div class="cc" data-cat="brochure">
+      <div class="cc-bg bg-a"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">03 / Brochure</span>
+      <div class="cc-info"><span class="cc-chip">Property Brochure</span><p class="cc-name">Godrej Properties — Project Brochure</p><p class="cc-sub">32 Pages · Spot UV</p></div>
+    </div>
+    <div class="cc" data-cat="flyer">
+      <div class="cc-bg bg-b"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">04 / Flyer</span>
+      <div class="cc-info"><span class="cc-chip">Event Flyer</span><p class="cc-name">Embassy Group — Site Launch</p><p class="cc-sub">A5 · Double-Sided</p></div>
+    </div>
+    <div class="cc" data-cat="kit">
+      <div class="cc-bg bg-c"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">05 / Sales Kit</span>
+      <div class="cc-info"><span class="cc-chip">Sales Kit</span><p class="cc-name">DAMAC — International Investor Deck</p><p class="cc-sub">Dubai · Luxury Finish</p></div>
+    </div>
+    <div class="cc" data-cat="brochure">
+      <div class="cc-bg bg-d"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">06 / Brochure</span>
+      <div class="cc-info"><span class="cc-chip">Property Brochure</span><p class="cc-name">Brigade Group — Township</p><p class="cc-sub">48 Pages · Full Bleed</p></div>
+    </div>
   </div>
 </section>
 
-<!-- BROCHURES -->
-<section class="s s-lift" id="brochures">                                                                               
-  <span class="s-num">04 — Print &amp; Collateral</span>
-  <h2 class="s-title reveal">Brochures &amp;<br><span class="elec">Print</span></h2>
-  <div class="section-filter reveal">
-    <button class="filter-btn active" data-section="brochures" data-filter="all">All Print</button>
-    <button class="filter-btn" data-section="brochures" data-filter="brochure">Brochures</button>
-    <button class="filter-btn" data-section="brochures" data-filter="flyer">Flyers</button>
-    <button class="filter-btn" data-section="brochures" data-filter="kit">Sales Kits</button>
+<!-- ══ REELS ══ -->
+<section id="reels">
+  <div class="reels-header reveal">
+    <div class="reels-header-row">
+      <div>
+        <span class="s-num" style="margin-bottom:12px">04 — Reels &amp; Short-Form</span>
+        <h2 class="s-title" style="margin-bottom:0">Short-Form<br><span class="elec">Reels</span></h2>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:16px">
+        <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--mid);max-width:280px;text-align:right;line-height:1.8">
+          Instagram-native reels, campaign cuts &amp; social videos.<br>
+          <span style="color:var(--elec)">Drag or use arrows to browse</span>
+        </p>
+        <div class="reels-nav-controls">
+          <button class="reel-nav-btn" id="reelPrev">&#8592;</button>
+          <div class="reels-count"><span class="current" id="reelCurrent">01</span>&nbsp;/&nbsp;<span id="reelTotal">09</span></div>
+          <button class="reel-nav-btn" id="reelNext">&#8594;</button>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="brochure-grid reveal" id="brochureGrid">
-    <div class="wi" data-cat="brochure"><div class="wi-bg bg-g"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Property Brochure</p><p class="wi-title">Tata Housing — Premium Sales Brochure</p><p class="wi-sub">40 Pages · A4 · Illustrator + Photoshop</p></div></div>
-    <div class="wi" data-cat="kit"><div class="wi-bg bg-h"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Sales Kit</p><p class="wi-title">Birla Estates — Investor Sales Kit</p><p class="wi-sub">Multi-City Properties · Pan-India Launch Pack</p></div></div>
-    <div class="wi" data-cat="brochure"><div class="wi-bg bg-a"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Property Brochure</p><p class="wi-title">Godrej Properties — Project Brochure</p><p class="wi-sub">32 Pages · Premium Finish · Spot UV Covers</p></div></div>
-    <div class="wi" data-cat="flyer"><div class="wi-bg bg-b"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Event Flyer</p><p class="wi-title">Embassy Group — Site Launch Flyer</p><p class="wi-sub">A5 · Double-Sided · Digital + Print</p></div></div>
-    <div class="wi" data-cat="kit"><div class="wi-bg bg-c"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Sales Kit</p><p class="wi-title">DAMAC — International Sales Presentation</p><p class="wi-sub">Dubai Properties · Luxury Finish · Investor Deck</p></div></div>
-    <div class="wi" data-cat="brochure"><div class="wi-bg bg-d"></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Property Brochure</p><p class="wi-title">Brigade Group — Township Brochure</p><p class="wi-sub">48 Pages · Full Bleed Photography</p></div></div>
+
+  <div class="reels-track-wrap">
+    <div class="reels-track" id="reelsTrack">
+      <div class="reel-card active" data-youtube="1ix1_H0Py3g"><div class="reel-card-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1AXj1f9SgvD86iwXk0E6sUcf7eEouEDfs')"></div><div class="reel-card-ov"></div><div class="reel-num">01/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Instagram Reel</p><p class="reel-info-title">Birla Estates — Kolkata Campaign</p><p class="reel-info-sub">Meta Ads · Kolkata Expo</p></div></div>
+      <div class="reel-card" data-youtube="Kn15Glc_OBA"><div class="reel-card-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/1vDlkf8gEulkcsRJA24AFFuPIIUMkJJ_H')"></div><div class="reel-card-ov"></div><div class="reel-num">02/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Campaign Reel</p><p class="reel-info-title">Expo Reel Creative</p><p class="reel-info-sub">2M+ Organic Reach</p></div></div>
+      <div class="reel-card" data-youtube="sBM2hgCH9EQ"><div class="reel-card-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1zQ87mFaDSh-oo51RVJ2-Yoizkh4rMBjG')"></div><div class="reel-card-ov"></div><div class="reel-num">03/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Ad Creative</p><p class="reel-info-title">Reliable Ad Creative</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="w-gNY-73IIw"><div class="reel-card-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1BlWmDAumCoJ5ucGmw2FJxW6LgWipGOLE')"></div><div class="reel-card-ov"></div><div class="reel-num">04/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Testimonial</p><p class="reel-info-title">Client Testimonial</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="4IvPIIxNfzQ"><div class="reel-card-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1IZzY4Lh1yZe2FjuuOscARyuaC82FAhFl')"></div><div class="reel-card-ov"></div><div class="reel-num">05/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Event Invite</p><p class="reel-info-title">Property Expo Invite Reel</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="43YkDrTA2Fw"><div class="reel-card-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1iqvRynKhpJn1H6zUoEjX47xhwGEQLqUH')"></div><div class="reel-card-ov"></div><div class="reel-num">06/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Testimonial</p><p class="reel-info-title">Crafts Client Testimonial</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="otA67Qx44Yc"><div class="reel-card-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1fOiDBUzAYWsf2AGIr1Odp6ynUTd88wlD')"></div><div class="reel-card-ov"></div><div class="reel-num">07/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Brand Reel</p><p class="reel-info-title">Coffea — Testimonial Reel</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="BgaiCN3u-e4"><div class="reel-card-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1p8kaJS3VucTo0zAS-PZ1jLHCoskOt5rZ')"></div><div class="reel-card-ov"></div><div class="reel-num">08/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Campaign Reel</p><p class="reel-info-title">Sobha — Launch Campaign</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="-Mn6zJivHJE"><div class="reel-card-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1yhMUvcfavZBIs8SYUpqe6G1El3BIFerw')"></div><div class="reel-card-ov"></div><div class="reel-num">09/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Ad Creative</p><p class="reel-info-title">Shivalik Hills Ad Creative</p><p class="reel-info-sub">Instagram Stories · Reels</p></div></div>
+    </div>
   </div>
+
+  <div class="reels-dots" id="reelsDots"></div>
+  <div class="reels-drag-hint" id="reelsDragHint"><span class="drag-arrow">&#8592;</span>&nbsp;Drag to browse&nbsp;<span class="drag-arrow">&#8594;</span></div>
 </section>
 
-  <!-- REELS — 9:16 vertical grid -->
-  <div style="margin-top:24px">
-    <p style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--elec);text-transform:uppercase;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--edge)">Reels</p>
-  </div>
-  <div class="reel-grid reveal" id="reelGrid">
-
-    <div class="wi" data-cat="reel" data-youtube="1ix1_H0Py3g">
-      <div class="wi-bg bg-b" style="background-image:url(https://lh3.googleusercontent.com/d/1AXj1f9SgvD86iwXk0E6sUcf7eEouEDfs); background-size: cover; background-position: center;"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Reel</p><p class="wi-title">Birla Estates — Instagram Campaign Reel</p><p class="wi-sub">Instagram · Meta Ads · Kolkata</p></div>
-    </div>
-
-    <div class="wi" data-cat="reel" data-youtube="Kn15Glc_OBA">
-      <div class="wi-bg bg-e"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Reel</p><p class="wi-title">Expo Reel Creative</p><p class="wi-sub">Instagram Reel · 2M+ Organic Reach</p></div>
-    </div>
-
-    <div class="wi" data-cat="reel" data-youtube="sBM2hgCH9EQ">
-      <div class="wi-bg bg-c"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Reel</p><p class="wi-title">Reliable Ad Creative</p><p class="wi-sub">Instagram · Facebook Reels</p></div>
-    </div>
-
-    <div class="wi" data-cat="reel" data-youtube="w-gNY-73IIw">
-      <div class="wi-bg bg-d"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Reel</p><p class="wi-title">Client Testimonial</p><p class="wi-sub">Instagram · Facebook Reels</p></div>
-    </div>
-
-    <div class="wi" data-cat="reel" data-youtube="4IvPIIxNfzQ">
-      <div class="wi-bg bg-g"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Reel</p><p class="wi-title">Property Expo Invite Reel</p><p class="wi-sub">Instagram · Facebook Reels</p></div>
-    </div>
-
-    <div class="wi" data-cat="reel" data-youtube="43YkDrTA2Fw">
-      <div class="wi-bg bg-h"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Reel</p><p class="wi-title">Crafts Client Testimonial Video</p><p class="wi-sub">Instagram · Facebook Reels</p></div>
-    </div>
-
-    <div class="wi" data-cat="reel" data-youtube="otA67Qx44Yc">
-      <div class="wi-bg bg-b"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Reel</p><p class="wi-title">Coffea — Testimonial Reel</p><p class="wi-sub">Instagram · Facebook Reels</p></div>
-    </div>
-
-
-    <div class="wi" data-cat="reel" data-youtube="BgaiCN3u-e4">
-      <div class="wi-bg bg-a"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Reel</p><p class="wi-title">Sobha Developers — Launch Campaign Reel</p><p class="wi-sub">Instagram · Facebook Reels</p></div>
-    </div>
-
-    <div class="wi" data-cat="reel" data-youtube="-Mn6zJivHJE">
-      <div class="wi-bg bg-f"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Reel</p><p class="wi-title">Shivalik Hills Ad Creative</p><p class="wi-sub">Instagram Stories · Reels</p></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- VIDEOS -->
 <section class="s" id="videos">
-  <span class="s-num">02 — Video Work</span>
-  <h2 class="s-title reveal">Films, Reels<br>&amp; <span class="elec">Aerial</span></h2>
+  <span class="s-num">05 — Video Work</span>
+  <h2 class="s-title reveal">Films &amp;<br><span class="elec">Aerial</span></h2>
   <div class="section-filter reveal">
     <button class="filter-btn active" data-section="videos" data-filter="all">All Videos</button>
     <button class="filter-btn" data-section="videos" data-filter="brand">Brand Films</button>
-    <button class="filter-btn" data-section="videos" data-filter="reel">Reels</button>
     <button class="filter-btn" data-section="videos" data-filter="drone">Drone / Aerial</button>
     <button class="filter-btn" data-section="videos" data-filter="animation">Animation</button>
   </div>
-  <!-- LANDSCAPE VIDEOS — 16:9 grid -->
   <div class="video-grid reveal" id="videoGrid">
-
-    <div class="wi" data-cat="brand" data-youtube="iqcHb1rq160">
-      <div class="wi-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1UHyARL-DRnali43qcnEcX3xxpQrHaDck');background-size:cover;background-position:center;"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Aranyakaa Farms Testimonial Video</p><p class="wi-sub">Sony FX9 · DJI Inspire 3 · DaVinci Resolve · Bengaluru</p></div>
-    </div>
-
-    <div class="wi" data-cat="drone" data-youtube="zUbFkBYw9yo">
-      <div class="wi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1wmjHqhpL2ig4dvIMMUUDcXa6KwvdtOMV');background-size:cover;background-position:center;"></div>
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Drone / Aerial</p><p class="wi-title">H2O Farms — Aerial Survey Film</p><p class="wi-sub">DJI Mini 4 Pro · Zenmuse X9-8K · DaVinci Grade</p></div>
-    </div>
-
-    <div class="wi" data-cat="animation" data-youtube="kufk4yb5FFo">
-      <div class="wi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1-xrtxUYL-TO_bSknGamGHqJ9yNHOhmuI');background-size:cover;background-position:center;"></div>     
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Motion / Animation</p><p class="wi-title">4BHK Interior Design — Animated Film</p><p class="wi-sub">After Effects · Sketchup · DaVinci Resolve</p></div>
-    </div>
-
-    <div class="wi" data-cat="brand" data-youtube="nIFsy7y-Pck">
-      <div class="wi-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/12Db-alOE04LP0V4WIbys4YZI0LhIjhZk');background-size:cover;background-position:center;"></div>    
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Godrej — Lakeside Orchard Property Film</p><p class="wi-sub">Sony FX9 · Premiere Pro · DaVinci</p></div>
-    </div>
-
-    <div class="wi" data-cat="drone" data-youtube="aSJwXjpMLHs">
-      <div class="wi-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1ybPtg5XvotoBg8J9-S-SWfewzjPfeecj');background-size:cover;background-position:center;"></div>      
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Drone / Aerial</p><p class="wi-title">Vrindhavan Farms — Site Aerial Walkthrough</p><p class="wi-sub">DJI Mini 4 Pro · 4K · Colour Graded</p></div>
-    </div>
-
-    <div class="wi" data-cat="animation" data-youtube="vCUZUXZf1Q8">
-      <div class="wi-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1qVsr4QVHtmaJ6RJXPwu4KmyE7IV-c2Oq');background-size:cover;background-position:center;"></div>      
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Animation</p><p class="wi-title">13th Anniversary — Animated Introduction</p><p class="wi-sub">After Effects · 2D Animation · Motion Design</p></div>
-    </div>
-
-    <div class="wi" data-cat="brand" data-youtube="6lQlgtrb7mI">
-      <div class="wi-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1K_X9Izrx91n_eH21lgDGGZ7agYW8EL5e');background-size:cover;background-position:center;" ></div>      
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Birla Trimaya — Corporate Brand Film</p><p class="wi-sub">Full Production · RED KOMODO 6K · DaVinci</p></div>
-    </div>
-
-    <div class="wi" data-cat="brand" data-youtube="eLw_Q7udNxE">
-      <div class="wi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1GO75uyHIhIegRyLsdve8-bD0bcba-J3m');background-size:cover;background-position:center;"></div>      
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Project Launch Video</p><p class="wi-sub">DJI Inspire 3 · Cinematic Grading · 8K</p></div>
-    </div>
-
-    <div class="wi" data-cat="animation" data-youtube="zU26EokHKHc">
-      <div class="wi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1ueWF6LWnyfM7_3hLTmXdYN57_rVz9dDc');background-size:cover;background-position:center;"></div>     
-      <div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div>
-      <div class="wi-ov"></div>
-      <div class="wi-info"><p class="wi-cat">Motion Graphics · Featured</p><p class="wi-title">Motion Video For Game Server</p><p class="wi-sub">After Effects · Blender · Logo Stings · Broadcast Graphics</p></div>
-    </div>
-
+    <div class="wi" data-cat="brand" data-youtube="iqcHb1rq160"><div class="wi-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1UHyARL-DRnali43qcnEcX3xxpQrHaDck')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Aranyakaa Farms Testimonial Video</p><p class="wi-sub">Sony FX9 · DJI Inspire 3 · DaVinci Resolve</p></div></div>
+    <div class="wi" data-cat="drone" data-youtube="zUbFkBYw9yo"><div class="wi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1wmjHqhpL2ig4dvIMMUUDcXa6KwvdtOMV')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Drone / Aerial</p><p class="wi-title">H2O Farms — Aerial Survey Film</p><p class="wi-sub">DJI Mini 4 Pro · Zenmuse X9-8K</p></div></div>
+    <div class="wi" data-cat="animation" data-youtube="kufk4yb5FFo"><div class="wi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1-xrtxUYL-TO_bSknGamGHqJ9yNHOhmuI')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Motion / Animation</p><p class="wi-title">4BHK Interior Design — Animated Film</p><p class="wi-sub">After Effects · Sketchup · DaVinci</p></div></div>
+    <div class="wi" data-cat="brand" data-youtube="nIFsy7y-Pck"><div class="wi-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/12Db-alOE04LP0V4WIbys4YZI0LhIjhZk')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Godrej — Lakeside Orchard Property Film</p><p class="wi-sub">Sony FX9 · Premiere Pro · DaVinci</p></div></div>
+    <div class="wi" data-cat="drone" data-youtube="aSJwXjpMLHs"><div class="wi-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1ybPtg5XvotoBg8J9-S-SWfewzjPfeecj')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Drone / Aerial</p><p class="wi-title">Vrindhavan Farms — Site Aerial Walkthrough</p><p class="wi-sub">DJI Mini 4 Pro · 4K · Colour Graded</p></div></div>
+    <div class="wi" data-cat="animation" data-youtube="vCUZUXZf1Q8"><div class="wi-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1qVsr4QVHtmaJ6RJXPwu4KmyE7IV-c2Oq')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Animation</p><p class="wi-title">13th Anniversary — Animated Introduction</p><p class="wi-sub">After Effects · 2D Animation · Motion Design</p></div></div>
+    <div class="wi" data-cat="brand" data-youtube="6lQlgtrb7mI"><div class="wi-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1K_X9Izrx91n_eH21lgDGGZ7agYW8EL5e')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Birla Trimaya — Corporate Brand Film</p><p class="wi-sub">Full Production · RED KOMODO 6K · DaVinci</p></div></div>
+    <div class="wi" data-cat="brand" data-youtube="eLw_Q7udNxE"><div class="wi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1GO75uyHIhIegRyLsdve8-bD0bcba-J3m')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Brand Film</p><p class="wi-title">Project Launch Video</p><p class="wi-sub">DJI Inspire 3 · Cinematic Grading · 8K</p></div></div>
+    <div class="wi" data-cat="animation" data-youtube="zU26EokHKHc"><div class="wi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1ueWF6LWnyfM7_3hLTmXdYN57_rVz9dDc')"></div><div class="wi-play"><div class="wi-play-ring"><div class="wi-play-tri"></div></div></div><div class="wi-ov"></div><div class="wi-info"><p class="wi-cat">Motion Graphics</p><p class="wi-title">Motion Video For Game Server</p><p class="wi-sub">After Effects · Blender · Logo Stings</p></div></div>
   </div>
+</section>
 
-<!-- SERVICES -->
-<section class="s" id="services">
-  <span class="s-num">05 — Services</span>
+<section class="s s-alt" id="services">
+  <span class="s-num">06 — Services</span>
   <h2 class="s-title reveal">What I<br><span class="elec">Deliver</span></h2>
   <div class="services-grid reveal">
     <div class="svc-card"><span class="svc-num">01 —</span><div class="svc-title">Brand Films & Video Production</div><div class="svc-body">Full-cycle production from concept and storyboard through principal photography, edit, colour grade, and final delivery.</div><div class="svc-tools"><span class="svc-tool">Premiere Pro</span><span class="svc-tool">DaVinci Resolve</span><span class="svc-tool">Sony FX9</span><span class="svc-tool">ARRI</span></div></div>
@@ -569,36 +631,31 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
   </div>
 </section>
 
-<!-- CAMERAS -->
-<section class="s s-alt" id="cameras">
-  <span class="s-num">06 — Equipment</span>
-  <h2 class="s-title reveal">Camera &<br><span class="elec">Production</span><br>Arsenal</h2>
+<section class="s s-lift" id="cameras">
+  <span class="s-num">07 — Equipment</span>
+  <h2 class="s-title reveal">Camera &amp;<br><span class="elec">Production</span><br>Arsenal</h2>
   <div class="cameras-grid reveal">
-    <div class="cam-group">
-      <span class="cam-group-label">Cinema & Broadcast</span>
+    <div class="cam-group"><span class="cam-group-label">Cinema & Broadcast</span>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">ARRI Alexa Mini LF / Mini 4K</span><span class="cam-badge">Cinema</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">RED KOMODO 6K / DSMC2</span><span class="cam-badge">Cinema</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Sony FX9 / FX6 / Venice 2</span><span class="cam-badge">Broadcast</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Blackmagic URSA Mini Pro 12K</span><span class="cam-badge">Cinema</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Canon EOS C70 / C300 Mark III</span><span class="cam-badge">Cinema</span></div>
     </div>
-    <div class="cam-group">
-      <span class="cam-group-label">Mirrorless & Hybrid</span>
+    <div class="cam-group"><span class="cam-group-label">Mirrorless & Hybrid</span>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Sony A7S III / A7R V</span><span class="cam-badge">Low-Light Spec</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Sony FX3 / FX30</span><span class="cam-badge">Run & Gun</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Canon EOS R5C / R6 Mark II</span><span class="cam-badge">Hybrid</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Nikon Z8 / Z9</span><span class="cam-badge">Stills + Video</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Fujifilm X-H2S</span><span class="cam-badge">APS-C</span></div>
     </div>
-    <div class="cam-group">
-      <span class="cam-group-label">Drone & Aerial</span>
+    <div class="cam-group"><span class="cam-group-label">Drone & Aerial</span>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">DJI Inspire 3 — Zenmuse X9-8K</span><span class="cam-badge">8K · Licensed</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">DJI Mavic 3 Pro / Cine Premium</span><span class="cam-badge">Aerial</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">DJI Air 3</span><span class="cam-badge">Licensed Pilot</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Autel Evo II Pro 6K</span><span class="cam-badge">6K Aerial</span></div>
     </div>
-    <div class="cam-group">
-      <span class="cam-group-label">Stabilisation & Support</span>
+    <div class="cam-group"><span class="cam-group-label">Stabilisation & Support</span>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">DJI RS 3 Pro / Ronin 4D</span><span class="cam-badge">Gimbal</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Tiffen / Steadicam M-1</span><span class="cam-badge">Steadicam</span></div>
       <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Dana Dolly & Slider Systems</span><span class="cam-badge">Motion</span></div>
@@ -607,9 +664,8 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
   </div>
 </section>
 
-<!-- CLIENTS -->
 <section class="s" id="clients">
-  <span class="s-num">07 — Trusted By</span>
+  <span class="s-num">08 — Trusted By</span>
   <h2 class="s-title reveal">India's<br><span class="elec">Leading</span><br>Brands</h2>
   <div class="clients-marquee-wrap reveal">
     <div class="clients-marquee">
@@ -632,9 +688,8 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="s s-lift" id="contact">
-  <span class="s-num">08 — Let's Work</span>
+  <span class="s-num">09 — Let's Work</span>
   <h2 class="s-title reveal">Let's Make<br>Something<br><span class="elec">Stellar</span></h2>
   <div class="contact-grid reveal">
     <div class="contact-left">
@@ -644,20 +699,17 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
     </div>
     <div class="contact-right">
       <div class="contact-links">
-        <a href="/cdn-cgi/l/email-protection#3340525e475b565c5756415673545e525a5f1d505c5e" class="contact-link"><div><div class="cl-type">Email</div><div class="cl-val"><span class="__cf_email__" data-cfemail="7d0e1c100915181219180f183d1a101c1411531e1210">[email&#160;protected]</span></div></div><span class="cl-arrow">↗</span></a>
-        <a href="tel:+918124144127" class="contact-link"><div><div class="cl-type">Phone / WhatsApp</div><div class="cl-val">+91 81241 44127</div></div><span class="cl-arrow">↗</span></a>
-        <a href="https://www.linkedin.com/in/samtheodere/" target="_blank" class="contact-link"><div><div class="cl-type">LinkedIn</div><div class="cl-val">linkedin.com/in/samtheodere</div></div><span class="cl-arrow">↗</span></a>
-        <a href="YOUR_BEHANCE_LINK" target="_blank" class="contact-link"><div><div class="cl-type">Behance Portfolio</div><div class="cl-val">behance.net/samtheodere</div></div><span class="cl-arrow">↗</span></a>
-        <a href="YOUR_YOUTUBE_LINK" target="_blank" class="contact-link"><div><div class="cl-type">YouTube</div><div class="cl-val">youtube.com/@samtheodere</div></div><span class="cl-arrow">↗</span></a>
-        <a href="YOUR_INSTAGRAM_LINK" target="_blank" class="contact-link"><div><div class="cl-type">Instagram</div><div class="cl-val">@samtheodere</div></div><span class="cl-arrow">↗</span></a>
+        <a href="mailto:samtheodere@gmail.com" class="contact-link"><div><div class="cl-type">Email</div><div class="cl-val">samtheodere@gmail.com</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="tel:+918124144127" class="contact-link"><div><div class="cl-type">Phone / WhatsApp</div><div class="cl-val">+91 81241 44127</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="https://www.linkedin.com/in/samtheodere/" target="_blank" class="contact-link"><div><div class="cl-type">LinkedIn</div><div class="cl-val">linkedin.com/in/samtheodere</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="YOUR_BEHANCE_LINK" target="_blank" class="contact-link"><div><div class="cl-type">Behance Portfolio</div><div class="cl-val">behance.net/samtheodere</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="YOUR_YOUTUBE_LINK" target="_blank" class="contact-link"><div><div class="cl-type">YouTube</div><div class="cl-val">youtube.com/@samtheodere</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="YOUR_INSTAGRAM_LINK" target="_blank" class="contact-link"><div><div class="cl-type">Instagram</div><div class="cl-val">@samtheodere</div></div><span class="cl-arrow">&#8599;</span></a>
       </div>
     </div>
   </div>
 </section>
 
-
-
-<!-- FOOTER -->
 <footer>
   <div>
     <div class="footer-big">SAM<span>.</span>T</div>
@@ -672,136 +724,174 @@ footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space
 </footer>
 
 <div class="yt-modal-wrap" id="ytModal">
-<div class="yt-modal-inner">
+  <div class="yt-modal-inner">
     <button class="yt-close" id="ytClose">&#10005; &nbsp;Close</button>
     <iframe id="ytFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <div class="yt-modal-title" id="ytModalTitle"></div>
   </div>
 </div>
-</div>
 
 <script>
-(function () {
+(function(){
+  var nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60)});
+  var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}})},{threshold:.07});
+  document.querySelectorAll('.reveal').forEach(function(r){ro.observe(r)});
 
-  /* Nav scroll */
-  var nav = document.getElementById('mainNav');
-  window.addEventListener('scroll', function () {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  /* Scroll reveal */
-  var revealObs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
-    });
-  }, { threshold: 0.07 });
-  document.querySelectorAll('.reveal').forEach(function (r) { revealObs.observe(r); });
-
-  /* Section filters */
-  document.querySelectorAll('.filter-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var section = this.dataset.section;
-      var filter  = this.dataset.filter;
-      document.querySelectorAll('.filter-btn[data-section="' + section + '"]')
-        .forEach(function (b) { b.classList.remove('active'); });
-      this.classList.add('active');
-      var gridMap = { videos: 'videoGrid', posters: 'posterGrid', brochures: 'brochureGrid' };
-      /* Also filter reel and social sub-grids */
-      var reelGrid   = document.getElementById('reelGrid');
-      var socialGrid = document.getElementById('socialGrid');
-      if (section === 'videos' && reelGrid) {
-        reelGrid.querySelectorAll('.wi').forEach(function(item) {
-          if (filter === 'all' || filter === 'reel') { item.classList.remove('hidden'); }
-          else { item.classList.add('hidden'); }
-        });
-      }
-      if (section === 'posters' && socialGrid) {
-        socialGrid.querySelectorAll('.wi').forEach(function(item) {
-          if (filter === 'all' || item.dataset.cat === filter) { item.classList.remove('hidden'); }
-          else { item.classList.add('hidden'); }
-        });
-      }
-      var grid = document.getElementById(gridMap[section]);
-      if (!grid) return;
-      grid.querySelectorAll('.wi').forEach(function (item) {
-        if (filter === 'all' || item.dataset.cat === filter) {
-          item.classList.remove('hidden');
-        } else {
-          item.classList.add('hidden');
-        }
+  /* ── POSTER TABS filter ── */
+  var posterTabs = document.getElementById('posterTabs');
+  if(posterTabs){
+    posterTabs.addEventListener('click',function(e){
+      var btn=e.target.closest('.cr-tab');
+      if(!btn)return;
+      posterTabs.querySelectorAll('.cr-tab').forEach(function(b){b.classList.remove('active')});
+      btn.classList.add('active');
+      var flt=btn.dataset.filter;
+      document.querySelectorAll('#posterWall .cc').forEach(function(c){
+        if(flt==='all'||c.dataset.cat===flt){c.classList.remove('faded')}
+        else{c.classList.add('faded')}
       });
     });
-  });
-
-  /* YouTube modal */
-  var modal   = document.getElementById('ytModal');
-  var ytFrame = document.getElementById('ytFrame');
-  var ytClose = document.getElementById('ytClose');
-  var ytTitle = document.getElementById('ytModalTitle');
-
-  function openVideo(videoId, title) {
-    ytFrame.src = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1&rel=0&modestbranding=1';
-    if (ytTitle) ytTitle.textContent = title || '';
-    modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
   }
 
-  function closeVideo() {
-    modal.classList.remove('open');
-    ytFrame.src = '';
-    document.body.style.overflow = '';
+  /* ── BROCHURE TABS filter ── */
+  var brochureTabs = document.getElementById('brochureTabs');
+  if(brochureTabs){
+    brochureTabs.addEventListener('click',function(e){
+      var btn=e.target.closest('.cr-tab');
+      if(!btn)return;
+      brochureTabs.querySelectorAll('.cr-tab').forEach(function(b){b.classList.remove('active')});
+      btn.classList.add('active');
+      var flt=btn.dataset.filter;
+      document.querySelectorAll('#brochureGrid .cc').forEach(function(c){
+        if(flt==='all'||c.dataset.cat===flt){c.classList.remove('faded')}
+        else{c.classList.add('faded')}
+      });
+    });
   }
 
-  /* Click anywhere on a video card that has data-youtube */
-  /* Listen on both landscape + reel grids for YouTube play */
-  function attachYTListener(gridEl) {
-    if (!gridEl) return;
-    gridEl.addEventListener('click', function (e) {
-      var el = e.target;
-      while (el && el !== gridEl) {
-        if (el.classList && el.classList.contains('wi') && el.dataset.youtube) {
-          var titleEl = el.querySelector('.wi-title');
-          openVideo(el.dataset.youtube, titleEl ? titleEl.textContent : '');
-          return;
-        }
-        el = el.parentElement;
+  /* ── SOCIAL FEED drag + progress bar ── */
+  var socialFeed=document.getElementById('socialFeed');
+  var socialFill=document.getElementById('socialProgressFill');
+  if(socialFeed){
+    var sX,sL,sDrag=false;
+    function updSocProg(){if(!socialFill)return;var max=socialFeed.scrollWidth-socialFeed.clientWidth;socialFill.style.width=(max>0?socialFeed.scrollLeft/max*100:0)+'%'}
+    socialFeed.addEventListener('scroll',updSocProg);
+    socialFeed.addEventListener('mousedown',function(e){sDrag=true;sX=e.pageX-socialFeed.offsetLeft;sL=socialFeed.scrollLeft;socialFeed.classList.add('dragging')});
+    socialFeed.addEventListener('mousemove',function(e){if(!sDrag)return;socialFeed.scrollLeft=sL-(e.pageX-socialFeed.offsetLeft-sX)*1.2});
+    function stopSD(){sDrag=false;socialFeed.classList.remove('dragging')}
+    socialFeed.addEventListener('mouseup',stopSD);socialFeed.addEventListener('mouseleave',stopSD);
+    var stX,stL;
+    socialFeed.addEventListener('touchstart',function(e){stX=e.touches[0].pageX;stL=socialFeed.scrollLeft},{passive:true});
+    socialFeed.addEventListener('touchmove',function(e){socialFeed.scrollLeft=stL+(stX-e.touches[0].pageX)},{passive:true});
+  }
+
+  /* ── VIDEO FILTER ── */
+  document.querySelectorAll('.filter-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var sec=this.dataset.section,flt=this.dataset.filter;
+      document.querySelectorAll('.filter-btn[data-section="'+sec+'"]').forEach(function(b){b.classList.remove('active')});
+      this.classList.add('active');
+      if(sec==='videos'){
+        var g=document.getElementById('videoGrid');
+        if(g)g.querySelectorAll('.wi').forEach(function(i){if(flt==='all'||i.dataset.cat===flt){i.classList.remove('hidden')}else{i.classList.add('hidden')}});
       }
     });
-  }
-  var videoGrid = document.getElementById('videoGrid');
-  attachYTListener(videoGrid);
-  attachYTListener(document.getElementById('reelGrid'));
-  if (videoGrid) {
-    videoGrid.addEventListener('click', function (e) {
-    }); /* old listener kept for compat */
+  });
+
+  /* yt modal */
+  var modal=document.getElementById('ytModal'),ytFrame=document.getElementById('ytFrame'),ytClose=document.getElementById('ytClose'),ytTitle=document.getElementById('ytModalTitle');
+  function openVideo(id,title){ytFrame.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';if(ytTitle)ytTitle.textContent=title||'';modal.classList.add('open');document.body.style.overflow='hidden'}
+  function closeVideo(){modal.classList.remove('open');ytFrame.src='';document.body.style.overflow=''}
+  function attachYT(el){if(!el)return;el.addEventListener('click',function(e){var n=e.target;while(n&&n!==el){if(n.classList&&n.classList.contains('wi')&&n.dataset.youtube){var t=n.querySelector('.wi-title');openVideo(n.dataset.youtube,t?t.textContent:'');return}n=n.parentElement}})}
+  attachYT(document.getElementById('videoGrid'));
+  if(ytClose)ytClose.addEventListener('click',closeVideo);
+  if(modal)modal.addEventListener('click',function(e){if(e.target===modal)closeVideo()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo()});
+
+  /* ═══ REELS CAROUSEL ═══ */
+  var track=document.getElementById('reelsTrack');
+  var dotsWrap=document.getElementById('reelsDots');
+  var prevBtn=document.getElementById('reelPrev');
+  var nextBtn=document.getElementById('reelNext');
+  var countEl=document.getElementById('reelCurrent');
+  var dragHint=document.getElementById('reelsDragHint');
+  if(!track)return;
+  var cards=Array.from(track.querySelectorAll('.reel-card'));
+  var total=cards.length;
+  var activeIdx=0;
+  function pad(n){return n<10?'0'+n:''+n}
+
+  cards.forEach(function(_,i){
+    var d=document.createElement('div');
+    d.className='reels-dot'+(i===0?' active':'');
+    d.addEventListener('click',function(){goTo(i)});
+    dotsWrap.appendChild(d);
+  });
+  var dots=Array.from(dotsWrap.querySelectorAll('.reels-dot'));
+
+  function goTo(idx){
+    idx=Math.max(0,Math.min(total-1,idx));
+    cards[activeIdx].classList.remove('active');
+    dots[activeIdx].classList.remove('active');
+    activeIdx=idx;
+    cards[activeIdx].classList.add('active');
+    dots[activeIdx].classList.add('active');
+    if(countEl)countEl.textContent=pad(activeIdx+1);
+    var offset=cards[activeIdx].offsetLeft-(track.offsetWidth/2)+(cards[activeIdx].offsetWidth/2);
+    track.scrollTo({left:offset,behavior:'smooth'});
   }
 
+  if(prevBtn)prevBtn.addEventListener('click',function(){goTo(activeIdx-1)});
+  if(nextBtn)nextBtn.addEventListener('click',function(){goTo(activeIdx+1)});
 
-  /* Instagram auto-thumbnail + click-to-open */
-  function fetchInstagramThumb(card) {
-    var url = card.dataset.instagram;
-    if (!url) return;
-    var bg = card.querySelector('.wi-bg');
-    if (!bg) return;
-    var match = url.match(/\/(reel|p)\/([A-Za-z0-9_-]+)/);
-    if (match) {
-      var thumbUrl = 'https://www.instagram.com/p/' + match[2] + '/media/?size=l';
-      bg.style.backgroundImage = "url('" + thumbUrl + "')";
-      bg.style.backgroundSize  = 'cover';
-      bg.style.backgroundPosition = 'center';
-    }
-  }
-  document.querySelectorAll('.wi[data-instagram]').forEach(function(card) {
-    fetchInstagramThumb(card);
-    card.addEventListener('click', function() {
-      window.open(card.dataset.instagram, '_blank');
+  var isDragging=false;
+  cards.forEach(function(card,i){
+    card.addEventListener('click',function(){
+      if(isDragging)return;
+      if(i!==activeIdx){goTo(i)}
+      else{var vid=card.dataset.youtube;if(vid){var t=card.querySelector('.reel-info-title');openVideo(vid,t?t.textContent:'')}}
     });
   });
 
-  if (ytClose) ytClose.addEventListener('click', closeVideo);
-  if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) closeVideo(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeVideo(); });
+  document.addEventListener('keydown',function(e){
+    if(modal.classList.contains('open'))return;
+    if(e.key==='ArrowLeft')goTo(activeIdx-1);
+    if(e.key==='ArrowRight')goTo(activeIdx+1);
+  });
 
+  /* drag */
+  var startX,startSL;
+  track.addEventListener('mousedown',function(e){
+    isDragging=false;startX=e.pageX-track.offsetLeft;startSL=track.scrollLeft;
+    track.classList.add('dragging');
+    if(dragHint)dragHint.classList.add('hidden');
+  });
+  track.addEventListener('mousemove',function(e){
+    if(!track.classList.contains('dragging'))return;
+    var x=e.pageX-track.offsetLeft,walk=(x-startX)*1.2;
+    if(Math.abs(walk)>4)isDragging=true;
+    track.scrollLeft=startSL-walk;
+  });
+  function stopDrag(){track.classList.remove('dragging');setTimeout(function(){isDragging=false},10)}
+  track.addEventListener('mouseup',stopDrag);
+  track.addEventListener('mouseleave',stopDrag);
+
+  var tSX,tSL;
+  track.addEventListener('touchstart',function(e){tSX=e.touches[0].pageX;tSL=track.scrollLeft;if(dragHint)dragHint.classList.add('hidden')},{passive:true});
+  track.addEventListener('touchmove',function(e){track.scrollLeft=tSL+(tSX-e.touches[0].pageX)},{passive:true});
+
+  track.addEventListener('scroll',function(){
+    var centre=track.scrollLeft+track.offsetWidth/2,best=0,bestD=Infinity;
+    cards.forEach(function(c,i){var d=Math.abs(c.offsetLeft+c.offsetWidth/2-centre);if(d<bestD){bestD=d;best=i}});
+    if(best!==activeIdx){
+      cards[activeIdx].classList.remove('active');dots[activeIdx].classList.remove('active');
+      activeIdx=best;cards[activeIdx].classList.add('active');dots[activeIdx].classList.add('active');
+      if(countEl)countEl.textContent=pad(activeIdx+1);
+    }
+  });
+
+  setTimeout(function(){goTo(0)},100);
 }());
 </script>
 </body>
