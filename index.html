@@ -1,1320 +1,1034 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Club Aranyakaa — Eco-Luxe Retreats</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SAM THEODERE — Senior Video Editor & Cinematographer</title>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Space+Grotesk:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-:root {
---gold: #B8963E;
---gold-light: #D4AF6A;
---gold-dark: #8A6D28;
---gold-glow: rgba(184,150,62,0.12);
---gold-line: rgba(184,150,62,0.25);
+:root{--ink:#060608;--surface:#0C0C10;--lift:#121218;--edge:#1C1C24;--fence:#242430;--elec:#00FF87;--elec-dim:rgba(0,255,135,0.08);--elec-mid:rgba(0,255,135,0.15);--white:#F0EEE8;--mid:#888;--dim:#444;--danger:#FF3B30}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--ink);color:var(--white);overflow-x:hidden;cursor:crosshair}
+::-webkit-scrollbar{width:2px}::-webkit-scrollbar-track{background:var(--ink)}::-webkit-scrollbar-thumb{background:var(--elec)}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 48px;background:rgba(6,6,8,0.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--edge);transition:padding .3s}
+nav.scrolled{padding:13px 48px}
+.nav-brand{font-family:'Unbounded',sans-serif;font-weight:900;font-size:16px;letter-spacing:2px;color:var(--white);text-decoration:none}
+.nav-brand span{color:var(--elec)}
+.nav-links{display:flex;gap:0;list-style:none}
+.nav-links a{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--dim);text-decoration:none;text-transform:uppercase;padding:8px 16px;border-left:1px solid var(--edge);transition:color .2s}
+.nav-links a:hover{color:var(--elec)}
+.nav-hire{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:10px 20px;border:1px solid var(--elec);color:var(--elec);text-decoration:none;transition:background .2s,color .2s}
+.nav-hire:hover{background:var(--elec);color:var(--ink)}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px;padding-top:140px;position:relative;overflow:hidden;border-bottom:1px solid var(--edge)}
+.hero-scanlines{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,135,0.012) 2px,rgba(0,255,135,0.012) 4px)}
+.hero-grid-bg{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(var(--edge) 1px,transparent 1px),linear-gradient(90deg,var(--edge) 1px,transparent 1px);background-size:80px 80px;opacity:0.4}
+.hero-glow{position:absolute;top:20%;right:10%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(0,255,135,0.06) 0%,transparent 70%);pointer-events:none}
+.hero-ticker{position:absolute;top:80px;left:0;right:0;display:flex;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);overflow:hidden;background:var(--ink)}
+.ticker-inner{display:flex;animation:ticker 25s linear infinite;white-space:nowrap}
+.ticker-item{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:10px 48px;color:var(--dim);border-right:1px solid var(--edge);flex-shrink:0}
+.ticker-item.hot{color:var(--elec)}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.hero-eyebrow{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:5px;color:var(--elec);text-transform:uppercase;display:block;margin-bottom:20px;position:relative;z-index:2;opacity:0;animation:appear .8s .2s forwards}
+.hero-big{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(72px,13vw,200px);line-height:.88;letter-spacing:-4px;position:relative;z-index:2;opacity:0;animation:appear .8s .4s forwards}
+.hero-big .e{color:var(--elec)}
+.hero-big .ghost{color:transparent;-webkit-text-stroke:1px var(--edge)}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;margin-top:48px;border-top:1px solid var(--edge);padding-top:32px;position:relative;z-index:2;opacity:0;animation:appear .6s .8s forwards;flex-wrap:wrap;gap:32px}
+.hero-desc{max-width:500px;font-size:15px;line-height:1.9;color:var(--mid);font-weight:300}
+.hero-desc strong{color:var(--white);font-weight:700}
+.hero-stats{display:flex;gap:0;flex-wrap:wrap}
+.stat-block{padding:0 36px;border-left:1px solid var(--edge);text-align:right}
+.stat-num{font-family:'Unbounded',sans-serif;font-weight:900;font-size:28px;color:var(--white);display:block}
+.stat-num span{color:var(--elec)}
+.stat-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-top:4px;display:block}
+.hero-actions{display:flex;gap:12px;margin-top:40px;flex-wrap:wrap;position:relative;z-index:2;opacity:0;animation:appear .6s 1s forwards}
+.btn-elec{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:14px 28px;background:var(--elec);color:var(--ink);border:none;text-decoration:none;font-weight:700;transition:opacity .2s,transform .2s;cursor:crosshair;display:inline-block}
+.btn-elec:hover{opacity:.85;transform:translateY(-2px)}
+.btn-ghost{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:14px 28px;background:transparent;color:var(--white);border:1px solid var(--fence);text-decoration:none;transition:border-color .2s,color .2s,transform .2s;cursor:crosshair;display:inline-block}
+.btn-ghost:hover{border-color:var(--elec);color:var(--elec);transform:translateY(-2px)}
+@keyframes appear{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.s{padding:120px 80px;border-bottom:1px solid var(--edge);position:relative}
+.s-alt{background:var(--surface)}
+.s-lift{background:var(--lift)}
+.s-num{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:5px;color:var(--elec);text-transform:uppercase;display:block;margin-bottom:16px}
+.s-title{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(32px,5vw,72px);line-height:1;letter-spacing:-1.5px;margin-bottom:60px}
+.s-title .elec{color:var(--elec)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-text{font-size:15px;line-height:1.9;color:var(--mid);font-weight:300}
+.about-text p+p{margin-top:20px}
+.about-text strong{color:var(--white);font-weight:700}
+.skills-block{margin-bottom:36px}
+.skills-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--elec);text-transform:uppercase;display:block;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--edge)}
+.skills-tags{display:flex;flex-wrap:wrap;gap:8px}
+.s-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:7px 14px;text-transform:uppercase;border:1px solid var(--edge);color:var(--dim);transition:border-color .2s,color .2s,background .2s;cursor:default}
+.s-tag:hover{border-color:var(--elec);color:var(--elec);background:var(--elec-dim)}
+.mission-block{padding:80px;background:var(--elec);position:relative;overflow:hidden}
+.mission-text{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(22px,3.5vw,48px);line-height:1.2;letter-spacing:-1px;color:var(--ink);max-width:820px}
+.mission-sub{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:3px;color:rgba(0,0,0,0.5);text-transform:uppercase;margin-top:24px;display:block}
+.section-filter{display:flex;gap:1px;flex-wrap:wrap;margin-bottom:40px;background:var(--edge)}
+.filter-btn{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;padding:12px 22px;background:var(--lift);border:none;color:var(--dim);cursor:crosshair;transition:color .2s,background .2s}
+.filter-btn.active,.filter-btn:hover{background:var(--surface);color:var(--elec)}
+.wi{position:relative;overflow:hidden;background:var(--lift);cursor:crosshair;display:block}
+.wi.hidden{display:none}
+.wi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .4s;z-index:3}
+.wi:hover::before{transform:scaleX(1)}
+.wi-bg{position:absolute;inset:0;width:100%;height:100%;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.wi:hover .wi-bg{transform:scale(1.04)}
+.wi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.93) 0%,transparent 55%);opacity:0;transition:opacity .3s;z-index:2}
+.wi:hover .wi-ov{opacity:1}
+.wi-info{position:absolute;bottom:0;left:0;right:0;padding:24px;z-index:3;transform:translateY(6px);opacity:0;transition:all .3s}
+.wi:hover .wi-info{opacity:1;transform:translateY(0)}
+.wi-cat{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:6px}
+.wi-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.3px;color:var(--white);line-height:1.2}
+.wi-sub{font-family:'Space Mono',monospace;font-size:9px;color:var(--mid);margin-top:6px;letter-spacing:1px}
+.wi-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:4;opacity:0;transition:opacity .3s;pointer-events:none}
+.wi:hover .wi-play{opacity:1}
+.wi-play-ring{width:56px;height:56px;border-radius:50%;border:1px solid var(--elec);display:flex;align-items:center;justify-content:center;background:rgba(6,6,8,.7)}
+.wi-play-tri{width:0;height:0;border-style:solid;border-width:9px 0 9px 16px;border-color:transparent transparent transparent var(--elec);margin-left:3px}
+.bg-a{background:linear-gradient(135deg,#08100A,#121E14)}
+.bg-b{background:linear-gradient(135deg,#0A0A0C,#141420)}
+.bg-c{background:linear-gradient(135deg,#0C0C10,#181828)}
+.bg-d{background:linear-gradient(135deg,#0A0C0A,#111815)}
+.bg-e{background:linear-gradient(135deg,#060810,#10121E)}
+.bg-f{background:linear-gradient(135deg,#0A0C08,#141A10)}
+.bg-g{background:linear-gradient(135deg,#0C0A08,#1E1810)}
+.bg-h{background:linear-gradient(135deg,#08080C,#14141E)}
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--edge);overflow:visible}
+/* All video cards: uniform 16:9, identical size — zero variation */
+.video-grid .vi{aspect-ratio:16/9;width:100%;position:relative;overflow:hidden;background:var(--lift);cursor:crosshair;display:block;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s cubic-bezier(.25,.46,.45,.94), z-index 0s .35s}
+.video-grid .vi:hover{
+  transform:scale(1.045);
+  box-shadow:0 8px 40px rgba(0,255,135,.18),0 2px 12px rgba(0,0,0,.7);
+  z-index:10;
+  transition:transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s cubic-bezier(.25,.46,.45,.94), z-index 0s 0s}
+/* thumbnail fill */
+.vi-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .45s cubic-bezier(.25,.46,.45,.94)}
+.vi:hover .vi-bg{transform:scale(1.0)}
+/* dark overlay */
+.vi-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.88) 0%,rgba(6,6,8,.1) 60%,transparent 100%);opacity:0;transition:opacity .3s;z-index:2}
+.vi:hover .vi-ov{opacity:1}
+/* electric top bar */
+.vi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .35s;z-index:6}
+.vi:hover::before{transform:scaleX(1)}
+/* play button */
+.vi-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.75);z-index:5;opacity:0;transition:opacity .25s,transform .3s;pointer-events:none}
+.vi:hover .vi-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.vi-ring{width:54px;height:54px;border-radius:50%;border:1.5px solid var(--elec);display:flex;align-items:center;justify-content:center;background:rgba(6,6,8,.72);backdrop-filter:blur(6px)}
+.vi-tri{width:0;height:0;border-style:solid;border-width:9px 0 9px 16px;border-color:transparent transparent transparent var(--elec);margin-left:3px}
+/* info block */
+.vi-info{position:absolute;bottom:0;left:0;right:0;padding:16px 14px;z-index:4;transform:translateY(8px);opacity:0;transition:opacity .3s,transform .3s}
+.vi:hover .vi-info{opacity:1;transform:translateY(0)}
+.vi-cat{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:5px}
+.vi-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:13px;letter-spacing:-.2px;color:var(--white);line-height:1.25}
+.vi-sub{font-family:'Space Mono',monospace;font-size:8px;color:rgba(240,238,232,.55);margin-top:4px;letter-spacing:.5px}
+.poster-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--edge);align-items:stretch}
+.poster-grid .wi{aspect-ratio:1/1;width:100%}
+.social-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;background:var(--edge);margin-top:2px;align-items:stretch}
+.social-grid .wi{aspect-ratio:4/5;width:100%}
+.brochure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--edge);align-items:stretch}
+.brochure-grid .wi{aspect-ratio:16/9;width:100%}
+.brochure-grid .wi:nth-child(1){grid-column:span 2;aspect-ratio:16/9}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--edge)}
+.svc-card{background:var(--lift);padding:48px 36px;position:relative;overflow:hidden;transition:background .3s}
+.svc-card:hover{background:var(--surface)}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-num{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--elec);display:block;margin-bottom:20px}
+.svc-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.3px;margin-bottom:14px;color:var(--white);line-height:1.2}
+.svc-body{font-size:13px;line-height:1.9;color:var(--mid)}
+.svc-tools{margin-top:20px;display:flex;flex-wrap:wrap;gap:6px}
+.svc-tool{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;padding:4px 10px;text-transform:uppercase;background:var(--elec-dim);color:var(--elec);border:1px solid rgba(0,255,135,.15)}
+.cameras-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--edge)}
+.cam-group{background:var(--lift);padding:40px 36px}
+.cam-group-label{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:4px;color:var(--elec);text-transform:uppercase;display:block;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--edge)}
+.cam-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(28,28,36,.6);gap:12px}
+.cam-dot{width:4px;height:4px;border-radius:50%;background:var(--elec);flex-shrink:0}
+.cam-name{font-size:14px;color:var(--white);font-weight:400;flex:1}
+.cam-badge{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;padding:3px 8px;text-transform:uppercase;background:var(--elec-dim);color:var(--elec);border:1px solid rgba(0,255,135,.12);white-space:nowrap}
+.clients-marquee-wrap{overflow:hidden;border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);background:var(--ink)}
+.clients-marquee{display:flex;animation:ticker 30s linear infinite;white-space:nowrap}
+.clients-marquee:hover{animation-play-state:paused}
+.client-name{font-family:'Unbounded',sans-serif;font-weight:300;font-size:13px;letter-spacing:2px;padding:20px 48px;color:var(--dim);border-right:1px solid var(--edge);white-space:nowrap;transition:color .2s;cursor:default}
+.client-name:hover{color:var(--elec)}
+.clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--edge);margin-top:40px}
+.client-cell{background:var(--lift);padding:32px 24px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.client-cell:hover{background:var(--surface)}
+.client-cell-name{font-family:'Unbounded',sans-serif;font-weight:300;font-size:12px;letter-spacing:1.5px;color:var(--dim);text-align:center;text-transform:uppercase;transition:color .2s}
+.client-cell:hover .client-cell-name{color:var(--white)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--edge)}
+.contact-left{background:var(--lift);padding:64px}
+.contact-big{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(36px,5vw,72px);line-height:1;letter-spacing:-2px;margin-top:16px}
+.contact-big .elec{color:var(--elec)}
+.contact-sub{font-size:15px;line-height:1.9;color:var(--mid);font-weight:300;margin-top:24px;max-width:420px}
+.avail-row{display:flex;align-items:center;gap:10px;margin-top:32px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--elec);text-transform:uppercase}
+.avail-dot{width:8px;height:8px;border-radius:50%;background:var(--elec);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.contact-right{background:var(--surface);padding:64px}
+.contact-links{display:flex;flex-direction:column;gap:1px;background:var(--edge)}
+.contact-link{display:flex;align-items:center;justify-content:space-between;padding:24px 28px;text-decoration:none;color:var(--white);background:var(--lift);transition:background .2s;cursor:crosshair}
+.contact-link:hover{background:var(--ink)}
+.cl-type{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:4px}
+.cl-val{font-family:'Unbounded',sans-serif;font-weight:300;font-size:16px;color:var(--white);letter-spacing:-.2px}
+.cl-arrow{font-size:18px;color:var(--fence);transition:color .2s,transform .2s}
+.contact-link:hover .cl-arrow{color:var(--elec);transform:translate(4px,-4px)}
+footer{padding:48px 80px;display:flex;align-items:flex-end;justify-content:space-between;border-top:1px solid var(--edge);flex-wrap:wrap;gap:24px}
+.footer-big{font-family:'Unbounded',sans-serif;font-weight:900;font-size:48px;letter-spacing:-1px;color:var(--dim);line-height:1}
+.footer-big span{color:var(--elec)}
+.footer-sub{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin-top:8px}
+.footer-meta{text-align:right}
+.footer-meta-line{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;line-height:2.2}
+.footer-meta-line.em{color:var(--elec)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.yt-modal-wrap{display:none;position:fixed;inset:0;z-index:9999;background:rgba(6,6,8,.96);align-items:center;justify-content:center;padding:24px}
+.yt-modal-wrap.open{display:flex}
+.yt-modal-inner{position:relative;width:100%;max-width:960px;aspect-ratio:16/9;background:#000;border:1px solid var(--edge)}
+.yt-modal-inner iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.yt-close{position:absolute;top:-44px;right:0;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--mid);text-transform:uppercase;background:var(--ink);border:1px solid var(--edge);cursor:crosshair;padding:8px 18px;transition:color .2s,border-color .2s}
+.yt-close:hover{color:var(--elec);border-color:var(--elec)}
+.yt-modal-title{position:absolute;bottom:-32px;left:0;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
 
---bg: #FDFAF5;
---bg-warm: #F7F2EA;
---bg-section: #F2EDE3;
---bg-dark-card: #1A1E1A;
+/* ═══════════════════════════════════════
+   REELS SECTION
+═══════════════════════════════════════ */
+#reels{padding:120px 0 0;border-bottom:1px solid var(--edge);position:relative;background:var(--surface);overflow:hidden}
+.reels-header{padding:0 80px;margin-bottom:60px}
+.reels-header-row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.reels-nav-controls{display:flex;align-items:center;gap:0}
+.reel-nav-btn{font-family:'Space Mono',monospace;font-size:16px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;background:var(--lift);border:1px solid var(--edge);color:var(--dim);cursor:crosshair;transition:color .2s,border-color .2s,background .2s;user-select:none}
+.reel-nav-btn:hover{color:var(--elec);border-color:var(--elec);background:var(--elec-dim)}
+.reels-count{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;padding:0 20px;height:48px;display:flex;align-items:center;background:var(--lift);border-top:1px solid var(--edge);border-bottom:1px solid var(--edge);white-space:nowrap}
+.reels-count .current{color:var(--elec)}
+.reels-track-wrap{position:relative;overflow:hidden}
+.reels-track-wrap::before,.reels-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:10;pointer-events:none}
+.reels-track-wrap::before{left:0;background:linear-gradient(to right,var(--surface),transparent)}
+.reels-track-wrap::after{right:0;background:linear-gradient(to left,var(--surface),transparent)}
+.reels-track{display:flex;gap:2px;padding:0 80px;overflow-x:auto;scroll-behavior:smooth;cursor:grab;-webkit-overflow-scrolling:touch;scrollbar-width:none;align-items:flex-end}
+.reels-track::-webkit-scrollbar{display:none}
+.reels-track.dragging{cursor:grabbing;scroll-behavior:auto}
+.reel-card{flex-shrink:0;position:relative;overflow:hidden;cursor:crosshair;background:var(--lift);width:180px;aspect-ratio:9/16;transition:width .45s cubic-bezier(.25,.46,.45,.94),opacity .45s,box-shadow .3s;opacity:.5;border:1px solid transparent}
+.reel-card.active{width:280px;opacity:1;border-color:var(--elec);box-shadow:0 8px 32px rgba(0,255,135,.15),0 2px 12px rgba(0,0,0,.6)}
+.reel-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .35s;z-index:5}
+.reel-card.active::before,.reel-card:hover::before{transform:scaleX(1)}
+.reel-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.reel-card:hover .reel-card-bg{transform:scale(1.04)}
+.reel-card-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.95) 0%,rgba(6,6,8,.3) 40%,transparent 70%);opacity:0;transition:opacity .35s;z-index:2}
+.reel-card.active .reel-card-ov,.reel-card:hover .reel-card-ov{opacity:1}
+.reel-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);z-index:4;opacity:0;transition:opacity .3s,transform .3s;pointer-events:none}
+.reel-card.active .reel-play,.reel-card:hover .reel-play{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.reel-play-ring{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--elec);display:flex;align-items:center;justify-content:center;background:rgba(6,6,8,.75);backdrop-filter:blur(4px)}
+.reel-play-tri{width:0;height:0;border-style:solid;border-width:8px 0 8px 14px;border-color:transparent transparent transparent var(--elec);margin-left:3px}
+.reel-num{position:absolute;top:12px;right:12px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--elec);background:rgba(6,6,8,.8);padding:4px 8px;z-index:5;border:1px solid rgba(0,255,135,.2);opacity:0;transition:opacity .3s}
+.reel-card.active .reel-num,.reel-card:hover .reel-num{opacity:1}
+.reel-info{position:absolute;bottom:0;left:0;right:0;padding:20px 16px;z-index:4;transform:translateY(8px);opacity:0;transition:opacity .35s,transform .35s}
+.reel-card.active .reel-info,.reel-card:hover .reel-info{opacity:1;transform:translateY(0)}
+.reel-info-cat{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:5px}
+.reel-info-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:12px;letter-spacing:-.2px;color:var(--white);line-height:1.3}
+.reel-info-sub{font-family:'Space Mono',monospace;font-size:8px;color:var(--mid);margin-top:5px;letter-spacing:1px}
+.reels-dots{display:flex;align-items:center;justify-content:center;gap:6px;padding:28px 80px 40px}
+.reels-dot{width:24px;height:2px;background:var(--edge);cursor:crosshair;transition:background .3s,width .3s}
+.reels-dot.active{background:var(--elec);width:40px}
+.reels-drag-hint{display:flex;align-items:center;gap:8px;padding:0 80px 0;margin-top:-12px;margin-bottom:40px;font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;transition:opacity .4s}
+.reels-drag-hint.hidden{opacity:0}
+.drag-arrow{color:var(--elec)}
 
---ink: #1C1C1A;
---ink-mid: #4A4840;
---ink-soft: #7A756C;
---ink-faint: #C5BFB3;
+/* ═══════════════════════════════════════════════════════════
+   CREATIVES SECTION — Precision Dashboard Layout
+   Rules: zero gaps inside grids, correct aspect ratios,
+   uniform card heights, no filler negative space.
+═══════════════════════════════════════════════════════════ */
 
---white: #FFFFFF;
---border: rgba(184,150,62,0.2);
---border-light: rgba(184,150,62,0.12);
-
---font-display: 'Cinzel', serif;
---font-body: 'Cormorant Garamond', serif;
---font-ui: 'DM Sans', sans-serif;
-
---nav-h: 88px;
---ease: cubic-bezier(0.25,0.8,0.25,1);
---transition: 0.45s cubic-bezier(0.25,0.8,0.25,1);
+/* ── Shared pop-lift mixin ── */
+/* Applied to .cc, .sf-card, .reel-card, .vi — consistent everywhere */
+.pop{
+  transition:
+    transform .32s cubic-bezier(.25,.46,.45,.94),
+    box-shadow .32s cubic-bezier(.25,.46,.45,.94),
+    z-index 0s .32s;
+  z-index:1;
 }
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body { background: var(--bg); color: var(--ink); font-family: var(--font-body); overflow-x: hidden; cursor: none; }
-a { color: inherit; text-decoration: none; }
-img { display: block; width: 100%; }
-ul { list-style: none; }
-
-/* ── CURSOR ── */
-#cursor-dot {
-width: 6px; height: 6px;
-background: var(--gold);
-border-radius: 50%;
-position: fixed; top: 0; left: 0;
-pointer-events: none; z-index: 9999;
-transform: translate(-50%,-50%);
-}
-#cursor-ring {
-width: 32px; height: 32px;
-border: 1.5px solid var(--gold);
-border-radius: 50%;
-position: fixed; top: 0; left: 0;
-pointer-events: none; z-index: 9998;
-transform: translate(-50%,-50%);
-transition: transform 0.15s ease, border-color 0.3s;
-opacity: 0.6;
-}
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 3px; }
-::-webkit-scrollbar-track { background: var(--bg-warm); }
-::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 2px; }
-
-/* ── LOADER ── */
-#loader {
-position: fixed; inset: 0;
-background: var(--bg);
-z-index: 10000;
-display: flex; flex-direction: column;
-align-items: center; justify-content: center; gap: 32px;
-transition: opacity 0.9s ease, visibility 0.9s ease;
-}
-#loader.hidden { opacity: 0; visibility: hidden; }
-.loader-logo-wrap { text-align: center; }
-.loader-logo-img {
-width: 90px; height: 90px;
-background: var(--gold-glow);
-border: 1px solid var(--border);
-border-radius: 50%;
-display: flex; align-items: center; justify-content: center;
-margin: 0 auto 18px;
-font-family: var(--font-display);
-font-size: 1.8rem; color: var(--gold);
-}
-.loader-name {
-font-family: var(--font-display);
-font-size: 1.1rem; letter-spacing: 0.35em; color: var(--gold);
-}
-.loader-sub {
-font-family: var(--font-ui);
-font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
-color: var(--ink-soft); margin-top: 6px;
-}
-.loader-bar { width: 160px; height: 1px; background: var(--bg-section); position: relative; overflow: hidden; }
-.loader-bar::after {
-content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-background: linear-gradient(90deg, transparent, var(--gold), transparent);
-animation: loadbar 1.4s ease forwards;
-}
-@keyframes loadbar { 0%{left:-100%} 100%{left:100%} }
-
-/* ── UTILITIES ── */
-.container { max-width: 1320px; margin: 0 auto; padding: 0 48px; }
-
-.label {
-font-family: var(--font-ui); font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
-color: var(--gold); display: flex; align-items: center; gap: 14px;
-}
-.label::before { content:''; display:block; width:36px; height:1px; background: var(--gold); }
-
-.headline {
-font-family: var(--font-display);
-font-size: clamp(2rem, 3.8vw, 3.4rem);
-font-weight: 500; line-height: 1.12; letter-spacing: 0.02em;
-color: var(--ink);
-}
-.headline .em { color: var(--gold); font-style: italic; }
-
-.gold-rule { width: 56px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); margin: 18px 0 28px; }
-
-.btn-gold {
-display: inline-flex; align-items: center; gap: 10px;
-font-family: var(--font-ui); font-size: 0.73rem; letter-spacing: 0.18em; text-transform: uppercase;
-color: var(--white); background: var(--gold);
-padding: 14px 36px; border: none; cursor: pointer;
-transition: background 0.3s, transform 0.3s;
-}
-.btn-gold:hover { background: var(--gold-dark); transform: translateY(-1px); }
-
-.btn-line {
-display: inline-flex; align-items: center; gap: 10px;
-font-family: var(--font-ui); font-size: 0.73rem; letter-spacing: 0.18em; text-transform: uppercase;
-color: var(--gold); background: transparent;
-padding: 13px 35px; border: 1px solid var(--gold); cursor: pointer;
-transition: background 0.3s, color 0.3s;
-}
-.btn-line:hover { background: var(--gold); color: var(--white); }
-
-/* ── REVEAL ── */
-.reveal { opacity:0; transform:translateY(30px); transition:opacity 0.85s ease,transform 0.85s ease; }
-.reveal.in { opacity:1; transform:translateY(0); }
-.reveal-l { opacity:0; transform:translateX(-40px); transition:opacity 0.85s ease,transform 0.85s ease; }
-.reveal-l.in { opacity:1; transform:translateX(0); }
-.reveal-r { opacity:0; transform:translateX(40px); transition:opacity 0.85s ease,transform 0.85s ease; }
-.reveal-r.in { opacity:1; transform:translateX(0); }
-
-/* ══════════════════════════════════════════
-NAVBAR
-══════════════════════════════════════════ */
-#nav {
-position: fixed; top:0; left:0; right:0; height: var(--nav-h);
-z-index: 1000; transition: background 0.5s, box-shadow 0.5s, height 0.4s;
-background: rgba(253,250,245,0);
-}
-#nav.scrolled {
-background: rgba(253,250,245,0.96);
-backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-height: 70px; box-shadow: 0 1px 0 var(--border-light);
-}
-.nav-inner { height:100%; display:flex; align-items:center; justify-content:space-between; }
-
-/* LOGO AREA — swap <img> src with real logo file */
-.nav-logo { display:flex; align-items:center; gap:12px; }
-.nav-logo-mark {
-width: 56px; height: 56px;
-border: 1px solid var(--border);
-border-radius: 50%;
-background: var(--bg-warm);
-display: flex; align-items: center; justify-content: center;
-overflow: hidden;
-transition: border-color 0.3s;
-}
-.nav-logo-mark:hover { border-color: var(--gold); }
-/* Replace the leaf SVG below with: <img src="your-logo.png" alt="Club Aranyakaa" /> */
-.nav-logo-mark svg { width:30px; height:30px; }
-.nav-logo-text-wrap { display:flex; flex-direction:column; line-height:1; }
-.nav-logo-text-wrap .n1 { font-family:var(--font-display); font-size:0.95rem; letter-spacing:0.2em; color:var(--gold); }
-.nav-logo-text-wrap .n2 { font-family:var(--font-ui); font-size:0.55rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--ink-soft); margin-top:4px; }
-
-.nav-links { display:flex; gap:36px; }
-.nav-links a {
-font-family:var(--font-ui); font-size:0.73rem; letter-spacing:0.12em; text-transform:uppercase;
-color:var(--ink-mid); position:relative; transition:color 0.3s;
-}
-.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--gold); transition:width 0.3s; }
-.nav-links a:hover { color:var(--gold); }
-.nav-links a:hover::after { width:100%; }
-
-.nav-right { display:flex; align-items:center; gap:20px; }
-.nav-phone { font-family:var(--font-ui); font-size:0.72rem; color:var(--ink-soft); display:flex; align-items:center; gap:7px; }
-.nav-phone svg { color:var(--gold); }
-
-.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
-.hamburger span { display:block; width:24px; height:1.5px; background:var(--ink-mid); transition:var(--transition); }
-
-/* Mobile nav */
-#mnav {
-display:none; position:fixed; inset:0;
-background:rgba(253,250,245,0.98); backdrop-filter:blur(20px);
-z-index:999; flex-direction:column; align-items:center; justify-content:center; gap:28px;
-}
-#mnav.open { display:flex; }
-#mnav a { font-family:var(--font-display); font-size:1.8rem; color:var(--ink-mid); letter-spacing:0.08em; transition:color 0.3s; }
-#mnav a:hover { color:var(--gold); }
-#mnav-close { position:absolute; top:28px; right:36px; font-size:1.8rem; cursor:pointer; color:var(--gold); font-family:var(--font-ui); }
-
-/* ══════════════════════════════════════════
-HERO
-══════════════════════════════════════════ */
-#hero {
-position: relative; height: 100vh; min-height: 680px;
-display: flex; align-items: center;
-overflow: hidden;
+.pop:hover{
+  transform:scale(1.048) translateY(-3px);
+  box-shadow:
+    0 12px 40px rgba(0,255,135,.16),
+    0 4px 16px rgba(0,0,0,.65);
+  z-index:10;
+  transition:
+    transform .32s cubic-bezier(.25,.46,.45,.94),
+    box-shadow .32s cubic-bezier(.25,.46,.45,.94),
+    z-index 0s 0s;
 }
 
-/* ── Full-bleed looping video ── */
-.hero-video-wrap {
-position: absolute; inset: 0; z-index: 0;
-overflow: hidden;
-}
-.hero-video-wrap video {
-position: absolute;
-top: 50%; left: 50%;
-transform: translate(-50%, -50%);
-min-width: 100%; min-height: 100%;
-width: auto; height: auto;
-object-fit: cover;
-/* Ken-Burns slow zoom for extra premium feel */
-animation: heroZoom 20s ease-in-out infinite alternate;
-}
-@keyframes heroZoom {
-from { transform: translate(-50%, -50%) scale(1); }
-to { transform: translate(-50%, -50%) scale(1.06); }
-}
+/* ── Shared creative card base ── */
+.cc{position:relative;overflow:hidden;background:var(--lift);cursor:crosshair;display:block}
+.cc-bg{position:absolute;inset:0;background-size:cover;background-position:center;background-repeat:no-repeat;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+.cc:hover .cc-bg{transform:scale(1.04)}
+.cc-ov{position:absolute;inset:0;background:linear-gradient(160deg,rgba(6,6,8,0) 30%,rgba(6,6,8,.88) 100%);opacity:0;transition:opacity .3s;z-index:2}
+.cc:hover .cc-ov{opacity:1}
+/* Top accent sweep */
+.cc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .35s;z-index:6}
+.cc:hover::before{transform:scaleX(1)}
+/* Info block */
+.cc-info{position:absolute;bottom:0;left:0;right:0;padding:16px 14px;z-index:5;transform:translateY(8px);opacity:0;transition:opacity .3s,transform .3s}
+.cc:hover .cc-info{opacity:1;transform:translateY(0)}
+.cc-chip{display:inline-block;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;background:var(--elec);color:var(--ink);font-weight:700;margin-bottom:6px}
+.cc-name{font-family:'Unbounded',sans-serif;font-weight:700;font-size:12px;letter-spacing:-.2px;color:var(--white);line-height:1.25}
+.cc-sub{font-family:'Space Mono',monospace;font-size:7px;color:rgba(240,238,232,.5);margin-top:4px;letter-spacing:.5px}
+/* Corner index badge */
+.cc-idx{position:absolute;top:10px;right:10px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--elec);background:rgba(6,6,8,.85);padding:3px 7px;border:1px solid rgba(0,255,135,.25);z-index:6;opacity:0;transition:opacity .25s}
+.cc:hover .cc-idx{opacity:1}
 
-/* ── Layered overlay: left heavy for text legibility, right lighter to show video ── */
-.hero-overlay {
-position: absolute; inset: 0; z-index: 1;
-background:
-/* Warm ivory fade from left — keeps text readable */
-linear-gradient(to right,
-rgba(253,250,245,0.92) 0%,
-rgba(253,250,245,0.78) 32%,
-rgba(253,250,245,0.38) 58%,
-rgba(253,250,245,0.05) 78%,
-rgba(253,250,245,0.0) 100%
-),
-/* Gentle dark vignette bottom — anchors the scene */
-linear-gradient(to top,
-rgba(20,18,14,0.45) 0%,
-rgba(20,18,14,0.0) 55%
-);
-}
+/* ── Section header strip (compact, dashboard-style) ── */
+.cr-header{display:flex;align-items:center;justify-content:space-between;padding:0 0 0 0;margin-bottom:0;border-bottom:1px solid var(--edge)}
+.cr-header-left{display:flex;align-items:center;gap:0}
+.cr-section-label{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:4px;color:var(--elec);text-transform:uppercase;padding:14px 20px;border-right:1px solid var(--edge)}
+.cr-title-inline{font-family:'Unbounded',sans-serif;font-weight:900;font-size:clamp(18px,2.2vw,28px);letter-spacing:-.5px;color:var(--white);padding:0 24px}
+.cr-title-inline .elec{color:var(--elec)}
+.cr-count{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;padding:14px 20px;border-left:1px solid var(--edge)}
+.cr-count span{color:var(--elec)}
 
-/* ── Fallback for when video hasn't loaded yet ── */
-.hero-video-placeholder {
-position: absolute; inset: 0;
-background: linear-gradient(135deg, #D4C9B0 0%, #B8AD94 50%, #9E9278 100%);
-display: flex; align-items: center; justify-content: center;
-z-index: -1;
-}
-.hero-video-placeholder p {
-font-family: var(--font-ui); font-size: 0.65rem; letter-spacing: 0.22em;
-text-transform: uppercase; color: rgba(184,150,62,0.65); text-align: center;
-}
-.hero-video-placeholder p span { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+/* ── Filter tabs ── */
+.cr-tabs{display:flex;gap:0;border-bottom:1px solid var(--edge)}
+.cr-tab{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:3px;text-transform:uppercase;padding:12px 20px;background:transparent;border:none;border-right:1px solid var(--edge);color:var(--dim);cursor:crosshair;transition:color .2s,background .2s;position:relative}
+.cr-tab::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transition:transform .25s}
+.cr-tab.active,.cr-tab:hover{color:var(--elec);background:var(--elec-dim)}
+.cr-tab.active::after,.cr-tab:hover::after{transform:scaleX(1)}
 
-/* ── Mute / unmute pill button ── */
-.hero-mute-btn {
-position: absolute; bottom: 88px; right: 48px; z-index: 4;
-display: flex; align-items: center; gap: 9px;
-font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
-color: var(--white);
-background: rgba(28,28,26,0.45);
-backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-border: 1px solid rgba(184,150,62,0.35);
-padding: 9px 18px; cursor: pointer;
-transition: background 0.3s, border-color 0.3s;
-opacity: 0; animation: fadeUp 0.8s ease 2s forwards;
-}
-.hero-mute-btn:hover { background: rgba(184,150,62,0.25); border-color: var(--gold); }
-.hero-mute-btn svg { flex-shrink: 0; }
+/* ═══════════════════════════════════
+   POSTER GRID — 5 col, 1:1 uniform
+   Cards are compact: 180px height max
+═══════════════════════════════════ */
+.poster-wall{display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:var(--edge);overflow:visible}
+/* Force exact 1:1 on every card */
+.poster-wall .cc{aspect-ratio:1/1;width:100%}
+/* First card is 2-wide, still 1:1 relative to its width */
+.poster-wall .cc.wide2{grid-column:span 2;aspect-ratio:2/1}
 
-.hero-content { position:relative; z-index:2; max-width:580px; }
-.hero-eyebrow {
-font-family:var(--font-ui); font-size:0.68rem; letter-spacing:0.35em; text-transform:uppercase;
-color:var(--gold); display:flex; align-items:center; gap:14px; margin-bottom:22px;
-opacity:0; animation: fadeUp 1s ease 0.7s forwards;
-}
-.hero-eyebrow::before { content:''; width:36px; height:1px; background:var(--gold); }
+/* ═══════════════════════════════════
+   SOCIAL — 4-col static grid, 4:5
+   Cards stack in rows, no scrolling
+═══════════════════════════════════ */
+.social-bar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--lift);border-top:1px solid var(--edge);border-bottom:1px solid var(--edge)}
+.sb-left{display:flex;align-items:center;gap:8px}
+.sb-avatar{width:22px;height:22px;border-radius:50%;background:var(--elec-dim);border:1px solid var(--elec);display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:6px;color:var(--elec);font-weight:700;flex-shrink:0}
+.sb-handle{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--white);text-transform:uppercase}
+.sb-live{width:5px;height:5px;border-radius:50%;background:var(--elec);animation:blink 2s infinite;flex-shrink:0}
+.sb-right{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--dim);text-transform:uppercase}
+/* 4-col grid — cards sit in rows, all 4:5 */
+.social-grid-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--edge);overflow:visible}
+.sf-card{aspect-ratio:4/5;width:100%;position:relative;overflow:hidden;background:var(--lift);cursor:crosshair;display:block}
+.sf-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
+.sf-card:hover .sf-card-bg{transform:scale(1.04)}
+.sf-card-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,8,.9) 0%,transparent 55%);opacity:0;transition:opacity .3s;z-index:2}
+.sf-card:hover .sf-card-ov{opacity:1}
+.sf-card-info{position:absolute;bottom:0;left:0;right:0;padding:14px;z-index:3;transform:translateY(6px);opacity:0;transition:all .3s}
+.sf-card:hover .sf-card-info{opacity:1;transform:translateY(0)}
+.sf-card-tag{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);text-transform:uppercase;margin-bottom:4px}
+.sf-card-title{font-family:'Unbounded',sans-serif;font-weight:700;font-size:11px;color:var(--white);line-height:1.3}
+.sf-card-dim{font-family:'Space Mono',monospace;font-size:7px;color:rgba(240,238,232,.5);margin-top:3px;letter-spacing:.5px}
+.sf-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--elec);transform:scaleX(0);transform-origin:left;transition:transform .3s;z-index:5}
+.sf-card:hover::before{transform:scaleX(1)}
+/* index badge on social cards too */
+.sf-card-idx{position:absolute;top:10px;right:10px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:2px;color:var(--elec);background:rgba(6,6,8,.85);padding:3px 7px;border:1px solid rgba(0,255,135,.25);z-index:6;opacity:0;transition:opacity .25s}
+.sf-card:hover .sf-card-idx{opacity:1}
 
-.hero-title {
-font-family: var(--font-display);
-font-size: clamp(2.6rem, 5.5vw, 4.8rem);
-font-weight: 400; line-height: 1.08; letter-spacing: 0.02em;
-color: var(--ink); margin-bottom: 26px;
-opacity:0; animation: fadeUp 1s ease 0.95s forwards;
-text-shadow: 0 1px 3px rgba(253,250,245,0.6);
-}
-.hero-title .italic { font-style:italic; color:var(--gold); }
+/* ═══════════════════════════════════
+   BROCHURE GRID — 16:9 landscape,
+   tight 3-col grid, zero internal gap
+═══════════════════════════════════ */
+.bro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--edge);overflow:visible}
+/* All brochure cards are 16:9 */
+.bro-grid .cc{aspect-ratio:16/9;width:100%}
+/* First card spans 2 cols — still 16:9 of that wider block */
+.bro-grid .cc.wide2{grid-column:span 2;aspect-ratio:32/9}
+/* Info for brochure cards: left-aligned with page-style number */
+.bro-pg-num{position:absolute;bottom:14px;left:14px;font-family:'Space Mono',monospace;font-size:7px;letter-spacing:3px;color:var(--elec);z-index:6;opacity:0;transition:opacity .3s}
+.cc:hover .bro-pg-num{opacity:1}
 
-.hero-desc {
-font-family:var(--font-body); font-size:1.1rem; font-weight:300; line-height:1.85;
-color:var(--ink-mid); max-width:440px; margin-bottom:44px;
-opacity:0; animation: fadeUp 1s ease 1.15s forwards;
-}
-.hero-actions { display:flex; gap:14px; flex-wrap:wrap; opacity:0; animation: fadeUp 1s ease 1.3s forwards; }
+/* ── Section sub-divider label ── */
+.sub-label{display:flex;align-items:center;border-top:1px solid var(--edge)}
+.sub-label-text{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:4px;color:var(--elec);text-transform:uppercase;padding:10px 20px;border-right:1px solid var(--edge);white-space:nowrap;background:var(--lift)}
+.sub-label-line{flex:1;height:1px;background:var(--edge)}
 
-@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+/* ── Faded filter state ── */
+.cc.faded{opacity:.1;pointer-events:none}
+.bro-grid .cc.faded{opacity:.1;pointer-events:none}
 
-/* Floating stat cards */
-.hero-stats {
-position: absolute; right: 48px; bottom: 80px; z-index: 3;
-display: flex; flex-direction: column; gap: 1px;
+/* ═══════════════════════════════════════════════
+   MOBILE
+═══════════════════════════════════════════════ */
+@media(max-width:900px){
+  nav{padding:16px 24px}.nav-links{display:none}
+  #hero,.s{padding:80px 24px}#hero{padding-top:120px}
+  .hero-big{font-size:clamp(52px,14vw,92px);letter-spacing:-2px}
+  .hero-row{flex-direction:column;gap:24px}.stat-block{padding:0 16px}
+  .about-grid,.contact-grid{grid-template-columns:1fr}
+  .video-grid{grid-template-columns:1fr 1fr}.video-grid .vi{aspect-ratio:16/9}
+  .poster-wall{grid-template-columns:repeat(3,1fr)}
+  .poster-wall .cc.wide2{grid-column:span 2;aspect-ratio:2/1}
+  .social-grid-wrap{grid-template-columns:repeat(2,1fr)}
+  .bro-grid{grid-template-columns:1fr 1fr}
+  .bro-grid .cc.wide2{grid-column:span 2;aspect-ratio:32/9}
+  .services-grid,.cameras-grid{grid-template-columns:1fr}
+  .clients-grid{grid-template-columns:repeat(2,1fr)}
+  footer{padding:40px 24px}.footer-big{font-size:32px}
+  .mission-block{padding:48px 24px}
+  .contact-left,.contact-right{padding:40px 24px}
+  .yt-modal-wrap{padding:16px}
+  #reels{padding:80px 0 0}
+  .reels-header{padding:0 24px;margin-bottom:40px}
+  .reels-track{padding:0 24px}
+  .reels-dots{padding:24px 24px 32px}
+  .reels-drag-hint{padding:0 24px;margin-bottom:32px}
+  .reel-card{width:140px}.reel-card.active{width:210px}
 }
-.hstat {
-background: rgba(253,250,245,0.9); backdrop-filter:blur(16px);
-border: 1px solid var(--border); padding: 18px 26px; text-align:center;
-opacity:0; animation: fadeUp 0.8s ease forwards;
-}
-.hstat:nth-child(1) { animation-delay:1.5s; }
-.hstat:nth-child(2) { animation-delay:1.65s; }
-.hstat:nth-child(3) { animation-delay:1.8s; }
-.hstat-num { font-family:var(--font-display); font-size:1.9rem; color:var(--gold); }
-.hstat-lbl { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-soft); margin-top:2px; }
+</style>>
+</head><body>
 
-/* Scroll indicator */
-.scroll-ind {
-position: absolute; bottom: 36px; left: 50%;
-transform: translateX(-50%);
-display: flex; flex-direction: column; align-items: center; gap: 6px;
-}
-.scroll-ind span { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--ink-soft); }
-.scroll-line { width:1px; height:44px; background:linear-gradient(to bottom,var(--gold),transparent); animation:pulse 2s ease infinite; }
-@keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
-
-/* ══════════════════════════════════════════
-BOOKING WIDGET
-══════════════════════════════════════════ */
-#booking { position:relative; z-index:10; margin-top:-2px; }
-.booking-wrap {
-background: var(--white);
-border: 1px solid var(--border-light);
-border-top: 3px solid var(--gold);
-box-shadow: 0 4px 48px rgba(0,0,0,0.06);
-padding: 36px 48px;
-display: grid;
-grid-template-columns: repeat(5,1fr) auto;
-gap: 0; align-items: end;
-}
-.b-field { padding: 0 24px; border-right: 1px solid var(--bg-section); }
-.b-field:first-child { padding-left: 0; }
-.b-field:last-of-type { border-right: none; }
-.b-field label {
-display: block; font-family:var(--font-ui); font-size:0.58rem;
-letter-spacing:0.28em; text-transform:uppercase; color:var(--gold); margin-bottom:10px;
-}
-.b-field select, .b-field input {
-width:100%; background:transparent; border:none; border-bottom:1px solid var(--ink-faint);
-color:var(--ink); font-family:var(--font-body); font-size:1rem;
-padding:8px 0; outline:none; cursor:pointer; appearance:none; -webkit-appearance:none;
-transition:border-color 0.3s;
-}
-.b-field select:focus, .b-field input:focus { border-bottom-color:var(--gold); }
-.b-field select option { background:var(--bg); }
-.b-btn {
-background: var(--gold); color:var(--white); border:none;
-font-family:var(--font-ui); font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
-padding:18px 32px; cursor:pointer; display:flex; align-items:center; gap:10px;
-transition:background 0.3s;
-}
-.b-btn:hover { background: var(--gold-dark); }
-
-/* ══════════════════════════════════════════
-TICKER
-══════════════════════════════════════════ */
-#ticker {
-padding: 22px 0;
-border-top: 1px solid var(--border-light);
-border-bottom: 1px solid var(--border-light);
-background: var(--bg-warm); overflow:hidden;
-}
-.ticker-track {
-display: flex; gap: 0; width: max-content;
-animation: tick 28s linear infinite;
-}
-.ticker-track:hover { animation-play-state:paused; }
-@keyframes tick { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-.tick-item {
-display:flex; align-items:center; gap:18px; padding:0 36px;
-font-family:var(--font-display); font-size:0.95rem; letter-spacing:0.08em;
-color:var(--ink-soft); white-space:nowrap; transition:color 0.3s;
-}
-.tick-item:hover { color:var(--gold); }
-.tick-dot { width:4px; height:4px; background:var(--gold); border-radius:50%; flex-shrink:0; }
-
-/* ══════════════════════════════════════════
-ABOUT
-══════════════════════════════════════════ */
-#about { padding:130px 0; background:var(--bg); position:relative; overflow:hidden; }
-#about::after {
-content:'ARANYAKAA';
-position:absolute; right:-80px; top:50%; transform:translateY(-50%) rotate(90deg);
-font-family:var(--font-display); font-size:9rem; font-weight:600;
-color:rgba(184,150,62,0.04); pointer-events:none; white-space:nowrap; letter-spacing:0.2em;
-}
-.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:88px; align-items:center; }
-
-.about-imgs { position:relative; }
-.about-main {
-aspect-ratio: 3/4;
-background: linear-gradient(135deg, #DDD4C0 0%, #C4B89A 100%);
-border: 1px dashed var(--gold-line);
-display:flex; align-items:center; justify-content:center; overflow:hidden;
-/* REPLACE with: background-image:url('about.jpg'); background-size:cover; */
-}
-.about-sec {
-position:absolute; right:-56px; bottom:-56px; width:52%;
-aspect-ratio:4/3;
-background:linear-gradient(135deg, #E8E0CE 0%, #D0C4AC 100%);
-border:1px solid var(--border); display:flex; align-items:center; justify-content:center;
-/* REPLACE with: background-image:url('about-sec.jpg'); background-size:cover; */
-}
-.about-badge {
-position:absolute; left:-36px; top:56px; width:108px; height:108px;
-border-radius:50%; background:var(--gold);
-display:flex; flex-direction:column; align-items:center; justify-content:center;
-box-shadow: 0 8px 32px rgba(184,150,62,0.35);
-}
-.about-badge .b-num { font-family:var(--font-display); font-size:1.7rem; color:var(--white); line-height:1; }
-.about-badge .b-txt { font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.8); margin-top:4px; text-align:center; padding:0 6px; }
-
-.img-ph { font-family:var(--font-ui); font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(184,150,62,0.5); text-align:center; padding:24px; }
-.img-ph span { font-size:2rem; display:block; margin-bottom:8px; }
-
-.about-features { margin-top:36px; display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-.af { display:flex; gap:14px; align-items:flex-start; }
-.af-icon { width:42px; height:42px; flex-shrink:0; border:1px solid var(--border); background:var(--bg-warm); display:flex; align-items:center; justify-content:center; font-size:1rem; }
-.af-text h4 { font-family:var(--font-display); font-size:1rem; font-weight:500; margin-bottom:4px; color:var(--ink); }
-.af-text p { font-family:var(--font-ui); font-size:0.72rem; color:var(--ink-soft); line-height:1.6; }
-
-/* ══════════════════════════════════════════
-RESORTS
-══════════════════════════════════════════ */
-#resorts { padding:130px 0; background:var(--bg-warm); }
-.resorts-hd { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; }
-.resorts-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; grid-template-rows:auto auto; gap:16px; }
-.rc { position:relative; overflow:hidden; cursor:pointer; }
-.rc:first-child { grid-row:1/3; }
-.rc-img {
-width:100%; height:100%; min-height:280px;
-background:linear-gradient(135deg, #D4C9B0 0%, #B8AD94 100%);
-/* REPLACE with: background-image:url('resort.jpg'); background-size:cover; background-position:center; */
-position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;
-}
-.rc:first-child .rc-img { min-height:580px; }
-.rc-img::after {
-content:''; position:absolute; inset:0;
-background:linear-gradient(to top,rgba(26,30,26,0.82) 0%,rgba(26,30,26,0) 55%);
-transition:var(--transition);
-}
-.rc:hover .rc-img::after { background:linear-gradient(to top,rgba(26,30,26,0.92) 0%,rgba(26,30,26,0.2) 100%); }
-.rc-ph { font-family:var(--font-ui); font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(184,150,62,0.4); text-align:center; }
-.rc-info { position:absolute; bottom:0; left:0; right:0; padding:26px; z-index:2; }
-.rc-loc { font-family:var(--font-ui); font-size:0.62rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold-light); display:flex; align-items:center; gap:8px; margin-bottom:7px; }
-.rc-loc::before { content:''; width:16px; height:1px; background:var(--gold-light); }
-.rc-name { font-family:var(--font-display); font-size:1.35rem; font-weight:500; color:var(--white); margin-bottom:10px; }
-.rc:first-child .rc-name { font-size:1.8rem; }
-.rc-meta { font-family:var(--font-ui); font-size:0.65rem; color:rgba(255,255,255,0.65); display:flex; gap:14px; margin-bottom:18px; }
-.rc-cta { display:inline-flex; align-items:center; gap:8px; font-family:var(--font-ui); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold-light); opacity:0; transform:translateY(8px); transition:var(--transition); }
-.rc:hover .rc-cta { opacity:1; transform:translateY(0); }
-.rc-cta svg { transition:transform 0.3s; }
-.rc:hover .rc-cta svg { transform:translateX(5px); }
-
-/* ══════════════════════════════════════════
-GALLERY STRIP
-══════════════════════════════════════════ */
-#gallery { overflow:hidden; }
-.g-track { display:flex; gap:3px; height:300px; }
-.g-item {
-flex:1; min-width:180px;
-background:linear-gradient(135deg, #D4C9B0 0%, #B8AD94 100%);
-position:relative; overflow:hidden; transition:flex 0.55s ease; cursor:pointer;
-display:flex; align-items:center; justify-content:center;
-}
-.g-item:hover { flex:2.5; }
-.g-label { position:absolute; bottom:0; left:0; right:0; padding:20px; background:linear-gradient(to top,rgba(26,30,26,0.85),transparent); font-family:var(--font-display); font-size:1rem; color:var(--white); opacity:0; transition:opacity 0.35s; }
-.g-item:hover .g-label { opacity:1; }
-.g-ph { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(184,150,62,0.4); text-align:center; padding:16px; }
-
-/* ══════════════════════════════════════════
-EXPERIENCES / TABS
-══════════════════════════════════════════ */
-#experiences { padding:130px 0; background:var(--bg); position:relative; }
-.exp-hd { margin-bottom:52px; }
-.exp-tabs { display:flex; border-bottom:1px solid var(--border-light); margin-bottom:48px; }
-.etab {
-font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase;
-color:var(--ink-soft); padding:13px 26px; cursor:pointer; background:none; border:none;
-position:relative; transition:color 0.3s;
-}
-.etab::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:1px; background:var(--gold); transform:scaleX(0); transition:transform 0.35s; }
-.etab.active { color:var(--gold); }
-.etab.active::after { transform:scaleX(1); }
-.etab:hover { color:var(--ink); }
-.epanel { display:none; }
-.epanel.active { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-.ecard {
-background:var(--white); border:1px solid var(--border-light);
-overflow:hidden; transition:border-color 0.3s, transform 0.3s, box-shadow 0.3s; cursor:pointer;
-}
-.ecard:hover { border-color:var(--gold); transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.07); }
-.ecard-img {
-aspect-ratio:4/3;
-background:linear-gradient(135deg, #DDD4C0 0%, #C4B89A 100%);
-display:flex; align-items:center; justify-content:center; font-size:2rem; color:rgba(184,150,62,0.4);
-}
-.ecard-body { padding:24px; }
-.ecard-tag { font-family:var(--font-ui); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:9px; }
-.ecard-title { font-family:var(--font-display); font-size:1.2rem; font-weight:500; color:var(--ink); margin-bottom:10px; }
-.ecard-desc { font-family:var(--font-ui); font-size:0.76rem; color:var(--ink-soft); line-height:1.7; margin-bottom:18px; }
-.ecard-footer { display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-light); padding-top:16px; }
-.eprice { font-family:var(--font-display); font-size:1.25rem; color:var(--gold); }
-.eprice span { font-family:var(--font-ui); font-size:0.58rem; color:var(--ink-soft); display:block; }
-.ebook { font-family:var(--font-ui); font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); background:var(--gold); padding:9px 16px; transition:background 0.3s; }
-.ebook:hover { background:var(--gold-dark); }
-
-/* ══════════════════════════════════════════
-MEMBERSHIP
-══════════════════════════════════════════ */
-#membership { padding:130px 0; background:var(--bg-section); }
-.mem-grid { display:grid; grid-template-columns:1fr 1.15fr; gap:80px; align-items:center; }
-.mem-img {
-aspect-ratio:4/5;
-background:linear-gradient(135deg, #D4C9B0 0%, #B8AD94 100%);
-border:1px dashed var(--gold-line);
-display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;
-/* REPLACE: background-image:url('membership.jpg'); background-size:cover; */
-}
-.mem-float {
-position:absolute; bottom:28px; right:-28px;
-background:var(--white); border:1px solid var(--border);
-padding:18px 26px; text-align:center;
-box-shadow:0 8px 32px rgba(0,0,0,0.1);
-}
-.mem-float .mf-n { font-family:var(--font-display); font-size:1.8rem; color:var(--gold); }
-.mem-float .mf-l { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--ink-soft); }
-.mem-cards { margin-top:32px; display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-.mc {
-background:var(--white); border:1px solid var(--border-light); padding:22px;
-transition:border-color 0.3s, box-shadow 0.3s;
-}
-.mc:hover { border-color:var(--gold); box-shadow:0 4px 24px rgba(184,150,62,0.1); }
-.mc-icon { font-size:1.4rem; margin-bottom:10px; }
-.mc-title { font-family:var(--font-display); font-size:1rem; font-weight:500; color:var(--ink); margin-bottom:6px; }
-.mc-text { font-family:var(--font-ui); font-size:0.72rem; color:var(--ink-soft); line-height:1.65; }
-.mem-price {
-margin-top:32px;
-background:var(--white); border:1px solid var(--border);
-border-left:3px solid var(--gold);
-padding:26px 28px; display:flex; justify-content:space-between; align-items:center;
-}
-.mem-price h3 { font-family:var(--font-display); font-size:2rem; color:var(--gold); }
-.mem-price p { font-family:var(--font-ui); font-size:0.68rem; color:var(--ink-soft); margin-top:4px; }
-
-/* ══════════════════════════════════════════
-TESTIMONIALS
-══════════════════════════════════════════ */
-#testimonials { padding:130px 0; background:var(--bg); }
-.testi-hd { text-align:center; margin-bottom:60px; }
-.testi-hd .label { justify-content:center; }
-.testi-hd .label::before { display:none; }
-.testi-hd .label::after { content:''; display:block; width:36px; height:1px; background:var(--gold); }
-.tgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-.tc {
-background:var(--bg-warm); border:1px solid var(--border-light);
-padding:34px; position:relative; transition:border-color 0.35s, box-shadow 0.35s;
-}
-.tc:hover { border-color:var(--gold); box-shadow:0 8px 32px rgba(184,150,62,0.08); }
-.tc-qm { font-family:var(--font-display); font-size:4.5rem; line-height:0.5; color:var(--gold); opacity:0.18; position:absolute; top:26px; right:26px; }
-.tc-stars { display:flex; gap:3px; margin-bottom:18px; color:var(--gold); font-size:0.75rem; }
-.tc-text { font-family:var(--font-body); font-size:1.05rem; font-weight:300; font-style:italic; line-height:1.8; color:var(--ink-mid); margin-bottom:26px; }
-.tc-author { display:flex; align-items:center; gap:12px; }
-.tc-av { width:44px; height:44px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.1rem; color:var(--white); flex-shrink:0; }
-.tc-name { font-family:var(--font-display); font-size:0.95rem; font-weight:500; color:var(--ink); }
-.tc-role { font-family:var(--font-ui); font-size:0.62rem; color:var(--gold); letter-spacing:0.1em; margin-top:2px; }
-
-/* ══════════════════════════════════════════
-CTA
-══════════════════════════════════════════ */
-#cta { padding:130px 0; background:var(--bg-section); }
-.cta-inner { text-align:center; max-width:680px; margin:0 auto; }
-.cta-ornament { width:1px; height:64px; background:linear-gradient(to bottom,transparent,var(--gold),transparent); margin:0 auto 32px; }
-.cta-inner p.body { font-family:var(--font-body); font-size:1.1rem; font-weight:300; color:var(--ink-mid); line-height:1.8; margin:22px 0 40px; }
-.cta-btns { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
-.cta-contact {
-margin-top:56px;
-background:var(--white); border:1px solid var(--border-light);
-padding:28px 40px; display:flex; justify-content:space-around; align-items:center; flex-wrap:wrap; gap:24px;
-}
-.cc-item { text-align:center; }
-.cc-lbl { font-family:var(--font-display); font-size:0.8rem; letter-spacing:0.14em; color:var(--gold); margin-bottom:6px; }
-.cc-val { font-family:var(--font-body); font-size:1.05rem; color:var(--ink); }
-.cc-div { width:1px; height:40px; background:var(--border-light); }
-
-/* ══════════════════════════════════════════
-FOOTER
-══════════════════════════════════════════ */
-footer { background:var(--bg-dark-card); padding:80px 0 40px; }
-.ft { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:56px; margin-bottom:56px; }
-.fb-logo { font-family:var(--font-display); font-size:1.2rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:6px; }
-.fb-tag { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.32em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:18px; }
-.fb-desc { font-family:var(--font-body); font-size:0.95rem; color:rgba(255,255,255,0.5); line-height:1.8; }
-.fb-socials { display:flex; gap:10px; margin-top:22px; }
-.fsoc {
-width:36px; height:36px; border:1px solid rgba(184,150,62,0.25);
-display:flex; align-items:center; justify-content:center;
-font-family:var(--font-ui); font-size:0.75rem; color:var(--gold);
-cursor:pointer; transition:var(--transition);
-}
-.fsoc:hover { background:var(--gold); color:var(--bg-dark-card); border-color:var(--gold); }
-.fc h4 { font-family:var(--font-display); font-size:0.95rem; font-weight:500; color:rgba(255,255,255,0.9); margin-bottom:22px; position:relative; padding-bottom:12px; }
-.fc h4::after { content:''; position:absolute; bottom:0; left:0; width:28px; height:1px; background:var(--gold); }
-.fc ul { display:flex; flex-direction:column; gap:10px; }
-.fc ul li a { font-family:var(--font-ui); font-size:0.75rem; color:rgba(255,255,255,0.45); display:flex; align-items:center; gap:8px; transition:color 0.3s; }
-.fc ul li a:hover { color:var(--gold); }
-.fc ul li a::before { content:'—'; color:rgba(184,150,62,0.3); font-size:0.6rem; }
-.fco { display:flex; flex-direction:column; gap:13px; }
-.fco-item { display:flex; gap:12px; }
-.fco-icon { width:32px; height:32px; border:1px solid rgba(184,150,62,0.2); display:flex; align-items:center; justify-content:center; font-size:0.78rem; color:var(--gold); flex-shrink:0; }
-.fco-text { font-family:var(--font-ui); font-size:0.73rem; color:rgba(255,255,255,0.45); line-height:1.6; }
-.fbot { border-top:1px solid rgba(255,255,255,0.06); padding-top:28px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
-.fbot p { font-family:var(--font-ui); font-size:0.68rem; color:rgba(255,255,255,0.25); letter-spacing:0.08em; }
-.flegal { display:flex; gap:22px; }
-.flegal a { font-family:var(--font-ui); font-size:0.68rem; color:rgba(255,255,255,0.25); transition:color 0.3s; }
-.flegal a:hover { color:var(--gold); }
-
-/* ══════════════════════════════════════════
-RESPONSIVE
-══════════════════════════════════════════ */
-@media(max-width:1100px) {
-.resorts-grid { grid-template-columns:1fr 1fr; }
-.rc:first-child { grid-row:auto; }
-.booking-wrap { grid-template-columns:repeat(3,1fr); padding:28px 32px; }
-.ft { grid-template-columns:1fr 1fr; }
-.mem-grid { grid-template-columns:1fr; }
-.mem-img { aspect-ratio:16/7; }
-}
-@media(max-width:900px) {
-:root { --nav-h:70px; }
-.nav-links, .nav-phone { display:none; }
-.hamburger { display:flex; }
-.hero-stats { display:none; }
-.about-grid { grid-template-columns:1fr; }
-.about-sec { display:none; }
-.about-badge { left:16px; }
-.tgrid { grid-template-columns:1fr 1fr; }
-.epanel.active { grid-template-columns:1fr 1fr; }
-.booking-wrap { grid-template-columns:repeat(2,1fr); row-gap:22px; }
-.b-field { border-right:none; }
-}
-@media(max-width:600px) {
-.container { padding:0 20px; }
-.hero-title { font-size:2.3rem; }
-.resorts-grid { grid-template-columns:1fr; }
-.tgrid { grid-template-columns:1fr; }
-.epanel.active { grid-template-columns:1fr; }
-.booking-wrap { grid-template-columns:1fr; }
-.about-features { grid-template-columns:1fr; }
-.ft { grid-template-columns:1fr; gap:36px; }
-.mem-cards { grid-template-columns:1fr; }
-.g-track { height:200px; }
-.hero-img-hint { width:0; display:none; }
-.hero-bg { background: linear-gradient(135deg, #e8e0d0 0%, #c8c0a8 100%); }
-}
-</style>
-</head>
-<body>
-
-<!-- CURSOR -->
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
-
-<!-- LOADER -->
-<div id="loader">
-<div class="loader-logo-wrap">
-<div class="loader-logo-img">
-<!-- LOGO MARK — swap for your actual logo -->
-<svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M30 8 C30 8, 14 20, 14 36 C14 44.8 21.2 52 30 52 C38.8 52 46 44.8 46 36 C46 20, 30 8, 30 8Z" stroke="#B8963E" stroke-width="1.5" fill="none"/>
-<path d="M30 18 L30 44" stroke="#B8963E" stroke-width="1" stroke-dasharray="2 3"/>
-<path d="M22 28 C22 28, 30 24, 38 28" stroke="#B8963E" stroke-width="1" fill="none"/>
-<path d="M20 36 C20 36, 30 30, 40 36" stroke="#B8963E" stroke-width="1" fill="none"/>
-<circle cx="30" cy="36" r="2" fill="#B8963E"/>
-</svg>
-</div>
-<div class="loader-name">CLUB ARANYAKAA</div>
-<div class="loader-sub">Eco-Luxe Retreats · Est. 2019</div>
-</div>
-<div class="loader-bar"></div>
-</div>
-
-<!-- MOBILE NAV -->
-<div id="mnav">
-<span id="mnav-close">✕</span>
-<a href="#about">About</a>
-<a href="#resorts">Resorts</a>
-<a href="#experiences">Experiences</a>
-<a href="#membership">Membership</a>
-<a href="#testimonials">Stories</a>
-<a href="#cta" class="btn-gold" style="margin-top:16px; font-size:0.73rem; padding:14px 36px;">Join the Club</a>
-</div>
-
-<!-- NAVBAR -->
-<nav id="nav">
-<div class="container">
-<div class="nav-inner">
-<a href="/" class="nav-logo">
-<div class="nav-logo-mark">
-<!--
-LOGO: Replace the SVG with:
-<img src="your-logo.png" alt="Club Aranyakaa" style="width:100%;height:100%;object-fit:contain;" />
-Or use:
-<img src="your-logo.svg" alt="Club Aranyakaa" style="width:32px;height:32px;" />
--->
-<svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M30 8 C30 8, 14 20, 14 36 C14 44.8 21.2 52 30 52 C38.8 52 46 44.8 46 36 C46 20, 30 8, 30 8Z" stroke="#B8963E" stroke-width="1.5" fill="none"/>
-<path d="M30 18 L30 44" stroke="#B8963E" stroke-width="1" stroke-dasharray="2 3"/>
-<path d="M22 28 C22 28, 30 24, 38 28" stroke="#B8963E" stroke-width="1" fill="none"/>
-<path d="M20 36 C20 36, 30 30, 40 36" stroke="#B8963E" stroke-width="1" fill="none"/>
-<circle cx="30" cy="36" r="2" fill="#B8963E"/>
-</svg>
-</div>
-<div class="nav-logo-text-wrap">
-<span class="n1">CLUB ARANYAKAA</span>
-<span class="n2">Eco-Luxe Retreats</span>
-</div>
-</a>
-
-<div class="nav-links">
-<a href="#about">About</a>
-<a href="#resorts">Resorts</a>
-<a href="#experiences">Experiences</a>
-<a href="#membership">Membership</a>
-<a href="#testimonials">Stories</a>
-</div>
-
-<div class="nav-right">
-<div class="nav-phone">
-<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.09 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.59 2.91.72a2 2 0 011.72 2.03z"/></svg>
-+91 8050 873 002
-</div>
-<a href="#membership" class="btn-gold" style="font-size:0.68rem; padding:10px 22px;">Join the Club</a>
-</div>
-
-<div class="hamburger" id="ham">
-<span></span><span></span><span></span>
-</div>
-</div>
-</div>
+<nav id="mainNav">
+  <a href="#hero" class="nav-brand">SAM<span>.</span>T</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#posters">Creatives</a></li>
+    <li><a href="#brochures">Brochures</a></li>
+    <li><a href="#reels">Reels</a></li>
+    <li><a href="#videos">Videos</a></li>
+    <li><a href="#cameras">Cameras</a></li>
+    <li><a href="#clients">Clients</a></li>
+  </ul>
+  <a href="#contact" class="nav-hire">Hire Me →</a>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
-
-<!-- ═══ BACKGROUND VIDEO ═══
-HOW TO ADD YOUR VIDEO:
-1. Upload your video file (MP4 recommended, H.264 codec, max ~15MB for fast load)
-2. Replace the src in the <source> tag below with your file path:
-<source src="your-video.mp4" type="video/mp4" />
-3. For best performance also provide a WebM version:
-<source src="your-video.webm" type="video/webm" />
-4. The video will loop silently, fullscreen, behind all content.
-5. Remove the .hero-video-placeholder div once your video is working.
-═══════════════════════════════ -->
-<div class="hero-video-wrap">
-<!-- PLACEHOLDER shown while no video src is set -->
-<div class="hero-video-placeholder">
-<p>
-<span>🎬</span>
-Add your video file here<br>
-<span style="font-size:0.54rem;opacity:0.7;display:block;margin-top:6px;">
-<source src="src/yourvideo.webm" type="video/webm"/>
-</span>
-</p>
-</div>
-
-
-UNCOMMENT and fill src once you have your video file:
-
-<video
-id="hero-vid"
-autoplay
-muted
-loop
-playsinline
-preload="auto"
-poster="your-poster-frame.jpg"
->
-<source src="src/yourvideo.webm" type="video/webm" />
-<source src="src/yourvideo.webm" type="video/webm" />
-</video>
-
-
-<!-- LIVE DEMO — uses a free royalty-free nature video via CDN so you can see it working -->
-<video
-id="hero-vid"
-autoplay
-muted
-loop
-playsinline
-preload="auto"
->
-<source src="https://videos.pexels.com/video-files/1448735/1448735-uhd_2560_1440_24fps.mp4" type="video/mp4" />
-</video>
-</div>
-
-<!-- Overlay gradients -->
-<div class="hero-overlay"></div>
-
-<!-- Content -->
-<div class="container" style="position:relative;z-index:2;width:100%;">
-<div class="hero-content">
-<p class="hero-eyebrow">Eco-Luxe Retreats Since 2019</p>
-<h1 class="hero-title">
-Discover the Art<br>of <span class="italic">Nature & Luxury</span><br>In Perfect Harmony
-</h1>
-<p class="hero-desc">
-Immerse yourself in Club Aranyakaa — where wilderness meets curated opulence across Karnataka's most breathtaking landscapes.
-</p>
-<div class="hero-actions">
-<a href="#resorts" class="btn-gold">
-Explore Retreats
-<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-</a>
-<a href="#membership" class="btn-line">Join The Club</a>
-</div>
-</div>
-</div>
-
-<!-- Stat cards -->
-<div class="hero-stats">
-<div class="hstat">
-<div class="hstat-num">5+</div>
-<div class="hstat-lbl">Locations</div>
-</div>
-<div class="hstat">
-<div class="hstat-num">10K+</div>
-<div class="hstat-lbl">Happy Guests</div>
-</div>
-<div class="hstat">
-<div class="hstat-num">100%</div>
-<div class="hstat-lbl">Eco Certified</div>
-</div>
-</div>
-
-<!-- Mute / Unmute toggle -->
-<button class="hero-mute-btn" id="muteBtn" onclick="toggleMute()" aria-label="Toggle sound">
-<!-- Muted icon (default) -->
-<svg id="icon-muted" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-<line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
-</svg>
-<!-- Unmuted icon (hidden initially) -->
-<svg id="icon-sound" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" style="display:none;">
-<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-<path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
-</svg>
-<span id="mute-label">Sound Off</span>
-</button>
-
-<!-- Scroll indicator -->
-<div class="scroll-ind">
-<div class="scroll-line"></div>
-<span>Scroll</span>
-</div>
+  <div class="hero-scanlines"></div>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-ticker">
+    <div class="ticker-inner">
+      <span class="ticker-item hot">Brand Films</span><span class="ticker-item">Cinematographer</span><span class="ticker-item hot">Motion Graphics</span><span class="ticker-item">Drone Pilot</span><span class="ticker-item hot">Reels</span><span class="ticker-item">Color Grading</span><span class="ticker-item hot">Static Posters</span><span class="ticker-item">Brochure Design</span><span class="ticker-item hot">Aerial 8K</span><span class="ticker-item">Animation</span><span class="ticker-item hot">Real Estate</span><span class="ticker-item">Bengaluru · India</span>
+      <span class="ticker-item hot">Brand Films</span><span class="ticker-item">Cinematographer</span><span class="ticker-item hot">Motion Graphics</span><span class="ticker-item">Drone Pilot</span><span class="ticker-item hot">Reels</span><span class="ticker-item">Color Grading</span><span class="ticker-item hot">Static Posters</span><span class="ticker-item">Brochure Design</span><span class="ticker-item hot">Aerial 8K</span><span class="ticker-item">Animation</span><span class="ticker-item hot">Real Estate</span><span class="ticker-item">Bengaluru · India</span>
+    </div>
+  </div>
+  <span class="hero-eyebrow">00 — Bengaluru, India · Available for Projects</span>
+  <div class="hero-big">SAM<br>TH<span class="e">Ë</span><span class="ghost">O</span><br>DERE</div>
+  <div class="hero-row">
+    <p class="hero-desc"><strong>Senior Video Editor. Cinematographer. Motion Lead. Drone Pilot.</strong><br>End-to-end creative ownership — brand films, aerial footage, motion graphics, static campaigns, and brochures. Every frame. Every pixel. Intentional.</p>
+    <div class="hero-stats">
+      <div class="stat-block"><span class="stat-num">3<span>+</span></span><span class="stat-label">Years Exp.</span></div>
+      <div class="stat-block"><span class="stat-num">15<span>+</span></span><span class="stat-label">Major Brands</span></div>
+      <div class="stat-block"><span class="stat-num">50<span>+</span></span><span class="stat-label">Projects</span></div>
+      <div class="stat-block"><span class="stat-num">8<span>K</span></span><span class="stat-label">Max Resolution</span></div>
+    </div>
+  </div>
+  <div class="hero-actions">
+    <a href="#posters" class="btn-elec">See Creatives →</a>
+    <a href="#reels" class="btn-ghost">Watch Reels</a>
+    <a href="#contact" class="btn-ghost">Get in Touch</a>
+  </div>
 </section>
 
-<!-- BOOKING -->
-<section id="booking">
-<div class="container">
-<div class="booking-wrap reveal">
-<div class="b-field">
-<label>Destination</label>
-<select>
-<option value="">Select Resort</option>
-<option>Club Aranyakaa Bangalore</option>
-<option>Club Aranyakaa Chennai</option>
-<option>Club Aranyakaa Mysore</option>
-<option>Club Aranyakaa Mandya</option>
-<option>Club Aranyakaa Goa</option>
-</select>
-</div>
-<div class="b-field">
-<label>Experience Type</label>
-<select>
-<option value="">Select Type</option>
-<option>Family Retreat</option>
-<option>Couples Retreat</option>
-<option>Solo Wellness</option>
-<option>Corporate Outing</option>
-<option>Friends Getaway</option>
-</select>
-</div>
-<div class="b-field">
-<label>Check In</label>
-<input type="date" />
-</div>
-<div class="b-field">
-<label>Duration</label>
-<select>
-<option value="">Select Duration</option>
-<option>Day Visit</option>
-<option>2 Days</option>
-<option>3 Days</option>
-<option>5 Days</option>
-<option>7 Days</option>
-</select>
-</div>
-<div class="b-field">
-<label>Guests</label>
-<input type="number" min="1" max="50" placeholder="No. of Guests" />
-</div>
-<button class="b-btn">
-<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-Search
-</button>
-</div>
-</div>
+<section class="s s-lift" id="about">
+  <span class="s-num">01 — About</span>
+  <h2 class="s-title">The Eye<br>Behind the<br><span class="elec">Lens</span></h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>I'm a <strong>Senior Video Editor, Cinematographer, and Motion Graphics Lead</strong> based in Bengaluru. A rare arc from graphic design → motion graphics → full-scale production gives me <strong>360° visual ownership</strong> that most editors can't offer.</p>
+      <p>My work has shaped the visual identity of India's most recognised developers — <strong>Birla Estates, Godrej Properties, Tata Housing, Embassy Group, Sobha, Purvankara, BNW Developments, Danube Properties, Binghatti, DAMAC, and Brigade Group.</strong> From aerial 8K shoots to Instagram-native creatives, I deliver broadcast-grade precision at every scale.</p>
+      <p>Not just an editor. A <strong>creative director with a camera</strong>. I don't cut footage — I build the visual language that makes brands impossible to ignore.</p>
+    </div>
+    <div class="reveal">
+      <div class="skills-block"><span class="skills-label">Video Production</span><div class="skills-tags"><span class="s-tag">Brand Films</span><span class="s-tag">Reels</span><span class="s-tag">Drone / Aerial</span><span class="s-tag">Animation</span><span class="s-tag">Color Grading</span><span class="s-tag">Directing</span></div></div>
+      <div class="skills-block"><span class="skills-label">Post-Production</span><div class="skills-tags"><span class="s-tag">Premiere Pro</span><span class="s-tag">After Effects</span><span class="s-tag">DaVinci Resolve</span><span class="s-tag">Blender</span><span class="s-tag">Maya 3D</span><span class="s-tag">Unreal Engine</span></div></div>
+      <div class="skills-block"><span class="skills-label">Graphic Design</span><div class="skills-tags"><span class="s-tag">Static Posters</span><span class="s-tag">Social Banners</span><span class="s-tag">Brochures</span><span class="s-tag">Brand Identity</span><span class="s-tag">Photoshop</span><span class="s-tag">Illustrator</span><span class="s-tag">Figma</span></div></div>
+      <div class="skills-block"><span class="skills-label">Website Design</span><div class="skills-tags"><span class="s-tag">HTML</span><span class="s-tag">CSS</span><span class="s-tag">Responsive Design</span><span class="s-tag">UI/UX Design</span><span class="s-tag">Visual Studio</span><span class="s-tag">Adobe XD</span></div></div>
+    </div>
+  </div>
 </section>
 
-<!-- TICKER -->
-<div id="ticker">
-<div class="ticker-track">
-<div class="tick-item"><span class="tick-dot"></span>Bangalore</div>
-<div class="tick-item"><span class="tick-dot"></span>Chennai</div>
-<div class="tick-item"><span class="tick-dot"></span>Mysore</div>
-<div class="tick-item"><span class="tick-dot"></span>Mandya</div>
-<div class="tick-item"><span class="tick-dot"></span>Goa</div>
-<div class="tick-item"><span class="tick-dot"></span>Ramanagara</div>
-<div class="tick-item"><span class="tick-dot"></span>Coorg</div>
-<div class="tick-item"><span class="tick-dot"></span>Chikmagalur</div>
-<div class="tick-item"><span class="tick-dot"></span>Bangalore</div>
-<div class="tick-item"><span class="tick-dot"></span>Chennai</div>
-<div class="tick-item"><span class="tick-dot"></span>Mysore</div>
-<div class="tick-item"><span class="tick-dot"></span>Mandya</div>
-<div class="tick-item"><span class="tick-dot"></span>Goa</div>
-<div class="tick-item"><span class="tick-dot"></span>Ramanagara</div>
-<div class="tick-item"><span class="tick-dot"></span>Coorg</div>
-<div class="tick-item"><span class="tick-dot"></span>Chikmagalur</div>
-</div>
+<div class="mission-block">
+  <p class="mission-text">"Every frame is a decision. Every pixel is intentional. Every brand deserves to look its best."</p>
+  <span class="mission-sub">Sam Theodere · Bengaluru · Design · Film · Drone · Brand</span>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-<div class="container">
-<div class="about-grid">
-<div class="about-imgs reveal-l">
-<div class="about-main">
-<!-- REPLACE: <img src="about.jpg" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;" /> -->
-<div class="img-ph"><span>🏞️</span>Upload your about image here</div>
-</div>
-<div class="about-sec">
-<!-- REPLACE: <img src="about-sec.jpg" style="object-fit:cover;width:100%;height:100%;" /> -->
-<div class="img-ph" style="font-size:0.58rem;"><span>🌿</span>Secondary</div>
-</div>
-<div class="about-badge">
-<span class="b-num">5★</span>
-<span class="b-txt">Eco-Luxe Certified</span>
-</div>
-</div>
+<section class="s s-alt" id="posters">
+  <span class="s-num">02 — Graphic Design</span>
 
-<div class="reveal-r">
-<p class="label">Our Philosophy</p>
-<div class="gold-rule"></div>
-<h2 class="headline">Where Wilderness<br>Becomes <span class="em">Your Sanctuary</span></h2>
-<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);line-height:1.85;margin:24px 0;">
-Club Aranyakaa is more than a resort — it's a living philosophy. We believe luxury and ecology are not opposites; they are partners. Each property is crafted to preserve its natural ecosystem while offering you every comfort your soul deserves.
-</p>
-<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);line-height:1.85;margin-bottom:32px;">
-From organic farm-to-table dining to sunrise yoga decks and candlelit wilderness dinners — every experience is intentionally designed to reconnect you with the earth and with yourself.
-</p>
-<div class="about-features">
-<div class="af"><div class="af-icon">🌿</div><div class="af-text"><h4>100% Organic</h4><p>Farm-to-table dining grown on our certified organic land.</p></div></div>
-<div class="af"><div class="af-icon">♻️</div><div class="af-text"><h4>Zero Waste</h4><p>Solar power, rainwater harvesting, sustainable ops.</p></div></div>
-<div class="af"><div class="af-icon">🧘</div><div class="af-text"><h4>Wellness First</h4><p>Certified spa therapists and guided meditation daily.</p></div></div>
-<div class="af"><div class="af-icon">🏆</div><div class="af-text"><h4>Award Winning</h4><p>South India's top eco-luxury destination 2024.</p></div></div>
-</div>
-<div style="margin-top:40px;">
-<a href="#resorts" class="btn-gold">Discover Our Resorts</a>
-</div>
-</div>
-</div>
-</div>
+  <!-- Compact dashboard header -->
+  <div class="cr-header reveal">
+    <div class="cr-header-left">
+      <span class="cr-section-label">Posters &amp; Brand</span>
+      <h2 class="cr-title-inline" style="margin-bottom:0">Static <span class="elec">Creatives</span></h2>
+    </div>
+    <span class="cr-count"><span>08</span> Works</span>
+  </div>
+
+  <!-- Filter tabs flush to grid -->
+  <div class="cr-tabs reveal" id="posterTabs">
+    <button class="cr-tab active" data-filter="all">All</button>
+    <button class="cr-tab" data-filter="poster">Posters</button>
+    <button class="cr-tab" data-filter="brand">Brand Identity</button>
+  </div>
+
+  <!-- 5-col 1:1 poster wall — first card is 2-wide -->
+  <div class="poster-wall reveal" id="posterWall">
+    <div class="cc pop wide2 pop" data-cat="poster">
+      <div class="cc-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/19_ATXvF-Ax2MeRb7M5NmGjrZqQaCdPpz')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">01</span>
+      <div class="cc-info"><span class="cc-chip">Event Poster</span><p class="cc-name">Birla Estates — Kolkata Expo</p><p class="cc-sub">Photoshop · Illustrator · Print-Ready</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1fidLtdVEmnxr_knOIytPJ8iOuUmhFMfR')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">02</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Birla Taranya Ad Creative</p><p class="cc-sub">A3 · Brand Aligned</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/12DCHbao4ng5RL9GIWyUR8yb1qjMdzfDd')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">03</span>
+      <div class="cc-info"><span class="cc-chip">Brand Asset</span><p class="cc-name">Godrej Aveline Creative</p><p class="cc-sub">Print-Ready</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/11zwf9R4KnSkmp6o8NyYCVXwluCgl6Hzj')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">04</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Sobha Launch Poster</p><p class="cc-sub">Print + Digital</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1JR1virB2t67kVWsi7SrL_dy2RnjlkhrC')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">05</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Numacity Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1Q4C7Sgodgx8qtcMZg-9CXTM5DcFTrhph')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1xXuPyLS9V8nOSM6gwV2XaicDTUIrvDPk')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/14anZdYa68oGEqsdGDgTNEW7Xx5wZliNS')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div> 
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1oZAg_LY_ru7EJXNFL7wIuQUV1v-yGI-O')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1f4ZGqSpKYilrD6ikFwOGROkJqR_znoMb')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">  
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1bQ8Dwm653rBCve4nf6ZPzFDAw1_Jyf78')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1I-sMecZZgTe8dj-PceZn73g5boeXh6XO')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/11zPPV86cDcLuUyjZoHYNn0fwPmmGkeW5')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/13S2H6EW8O1EfhTN7vBlgL1EhJb0oBG-B')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="poster">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1udjBeZMIexvxEiPGVw-oi4ypTQo70I9l')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">06</span>
+      <div class="cc-info"><span class="cc-chip">Poster</span><p class="cc-name">Social Media Poster</p><p class="cc-sub">Illustrator · Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="brand">
+      <div class="cc-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1p0fBDf-6kPo6Mu4G4ZlVfo90r4QgXjp_')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">07</span>
+      <div class="cc-info"><span class="cc-chip">Brand Identity</span><p class="cc-name">Insync — Logo</p><p class="cc-sub">Stationery · Signage</p></div>
+    </div>
+    <div class="cc pop" data-cat="brand">
+      <div class="cc-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1ae00tdtfBxdTE-7mCFKiUvo7noANoEDS')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">08</span>
+      <div class="cc-info"><span class="cc-chip">Brand Pack</span><p class="cc-name">Green City — Brand Pack</p><p class="cc-sub">Full Identity System</p></div>
+    </div>
+    <div class="cc pop" data-cat="brand">
+      <div class="cc-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1-4BIbqsXaqgWrvNXO1NRXRPtl9LdEgAP')"></div>
+      <div class="cc-ov"></div><span class="cc-idx">09</span>
+      <div class="cc-info"><span class="cc-chip">Brand Identity</span><p class="cc-name">Nasagiri — Logo &amp; Identity</p><p class="cc-sub">Guidelines · Print + Digital</p></div>
+    </div>
+  </div>
+
+  <!-- Social / Ad sub-section -->
+  <div class="sub-label reveal">
+    <span class="sub-label-text">Social &amp; Ad Creatives</span>
+    <span class="sub-label-line"></span>
+  </div>
+
+  <!-- Instagram bar + horizontal scroll feed -->
+  <div class="social-bar reveal">
+    <div class="sb-left">
+      <div class="sb-avatar">ST</div>
+      <span class="sb-handle">@samtheodere</span>
+      <div class="sb-live"></div>
+    </div>
+    <span class="sb-right">07 Creatives · Meta · Instagram · Facebook</span>
+  </div>
+  <div class="social-grid-wrap reveal">
+    <div class="sf-card pop"><div class="sf-card-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1wdBS7j9f_ARwlk50Lh4J3eSDHAq8znLp')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">00</span><div class="sf-card-info"><p class="sf-card-tag">Instagram Feed</p><p class="sf-card-title">Hiring Post</p><p class="sf-card-dim">1080×1350</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1tWhv5v1qHH40L7SeW1fC6eW1v7BFgJh1')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">00</span><div class="sf-card-info"><p class="sf-card-tag">Instagram Feed</p><p class="sf-card-title">Hiring Post</p><p class="sf-card-dim">1080×1350</p></div></div> 
+    <div class="sf-card pop"><div class="sf-card-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1QbL5tQN4Rv2pyF9j0Xpcy6XJ9z7uiysU')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">01</span><div class="sf-card-info"><p class="sf-card-tag">Instagram Feed</p><p class="sf-card-title">Birla Expo Post</p><p class="sf-card-dim">1080×1350</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1rq-yU1pXbNS3-CbuTB_e_aECO1w5dE4G')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">02</span><div class="sf-card-info"><p class="sf-card-tag">Social Post</p><p class="sf-card-title">Campaign Creative</p><p class="sf-card-dim">Meta · Feed</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1cdMVjiRgUX64VL61NPK8dOSaxEbECTCe')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">03</span><div class="sf-card-info"><p class="sf-card-tag">Story Format</p><p class="sf-card-title">Story Ad Set</p><p class="sf-card-dim">1080×1350</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1EpWmvpiZcV18u98fesEc4QJw2J-Snja_')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">04</span><div class="sf-card-info"><p class="sf-card-tag">Ad Creative</p><p class="sf-card-title">Godrej Aveline</p><p class="sf-card-dim">Meta Ads</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1Rd_XpG5A4R_778r4906yT0vebIIVduGY')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">05</span><div class="sf-card-info"><p class="sf-card-tag">Carousel</p><p class="sf-card-title">Sobha Campaign</p><p class="sf-card-dim">10 Slides · IG</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/1ECYs-sNg012YeMV305nQC4KvQJOb-J_3')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">06</span><div class="sf-card-info"><p class="sf-card-tag">Performance Ad</p><p class="sf-card-title">Real Estate Set</p><p class="sf-card-dim">A/B Variants</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1DIEqvmlSNrN2ZSKPx_s5HO9qDCQ6Mbvv')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">07</span><div class="sf-card-info"><p class="sf-card-tag">Digital Ad</p><p class="sf-card-title">Property Launch</p><p class="sf-card-dim">Multi-Size</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1BQeFX0wsTCKyOqfSEpsOPX8M4QGtiaMW')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">08</span><div class="sf-card-info"><p class="sf-card-tag">Ad Creative</p><p class="sf-card-title">Social Media poster</p><p class="sf-card-dim">Meta · Instagram</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1QohDAiqwfLkzDTLnhpmCtRH27Oj_XGqz')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">09</span><div class="sf-card-info"><p class="sf-card-tag">Instagram Feed</p><p class="sf-card-title">Birla Expo Post</p><p class="sf-card-dim">1080×1350</p></div></div>
+    <div class="sf-card pop"><div class="sf-card-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1XWhsYk6J6Kh7jVV3E8hLihhicJYIvu4l')"></div><div class="sf-card-ov"></div><span class="sf-card-idx">10</span><div class="sf-card-info"><p class="sf-card-tag">Social Post</p><p class="sf-card-title">Campaign Creative</p><p class="sf-card-dim">Meta · Feed</p></div>       
+  </div>
+
 </section>
 
-<!-- RESORTS -->
-<section id="resorts">
-<div class="container">
-<div class="resorts-hd reveal">
-<div>
-<p class="label">Our Properties</p>
-<div class="gold-rule"></div>
-<h2 class="headline">Handcrafted <span class="em">Retreats</span></h2>
-</div>
-<a href="/resorts" class="btn-line">View All Resorts</a>
-</div>
-<div class="resorts-grid">
-<div class="rc reveal">
-<div class="rc-img">
-<!-- REPLACE: background-image:url('resort-bangalore.jpg'); background-size:cover; background-position:center; -->
-<div class="rc-ph">🌳<br><span style="font-size:0.56rem;margin-top:6px;display:block;">Upload bangalore.jpg</span></div>
-</div>
-<div class="rc-info">
-<p class="rc-loc">Bangalore</p>
-<h3 class="rc-name">Club Aranyakaa Bangalore</h3>
-<div class="rc-meta"><span>⭐ 4.9</span><span>🌿 Eco-Certified</span><span>👥 Max 120</span></div>
-<a href="/resort-detail" class="rc-cta">Book Now <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-</div>
-</div>
-<div class="rc reveal" style="transition-delay:.1s">
-<div class="rc-img">
-<div class="rc-ph">🏰<br><span style="font-size:0.56rem;margin-top:6px;display:block;">Upload mysore.jpg</span></div>
-</div>
-<div class="rc-info">
-<p class="rc-loc">Mysore</p>
-<h3 class="rc-name">Club Aranyakaa Mysore</h3>
-<div class="rc-meta"><span>⭐ 4.8</span><span>🌿 Heritage</span></div>
-<a href="/resort-detail" class="rc-cta">Book Now <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-</div>
-</div>
-<div class="rc reveal" style="transition-delay:.2s">
-<div class="rc-img">
-<div class="rc-ph">🌊<br><span style="font-size:0.56rem;margin-top:6px;display:block;">Upload chennai.jpg</span></div>
-</div>
-<div class="rc-info">
-<p class="rc-loc">Chennai</p>
-<h3 class="rc-name">Club Aranyakaa Chennai</h3>
-<div class="rc-meta"><span>⭐ 4.7</span><span>🌿 Coastal</span></div>
-<a href="/resort-detail" class="rc-cta">Book Now <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-</div>
-</div>
-<div class="rc reveal" style="transition-delay:.3s">
-<div class="rc-img">
-<div class="rc-ph">🌾<br><span style="font-size:0.56rem;margin-top:6px;display:block;">Upload mandya.jpg</span></div>
-</div>
-<div class="rc-info">
-<p class="rc-loc">Mandya</p>
-<h3 class="rc-name">Club Aranyakaa Mandya</h3>
-<div class="rc-meta"><span>⭐ 4.9</span><span>🌿 Farmland</span></div>
-<a href="/resort-detail" class="rc-cta">Book Now <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-</div>
-</div>
-</div>
-</div>
+<section class="s s-lift" id="brochures">
+  <span class="s-num">03 — Print &amp; Collateral</span>
+
+  <div class="cr-header reveal">
+    <div class="cr-header-left">
+      <span class="cr-section-label">Print &amp; Collateral</span>
+      <h2 class="cr-title-inline" style="margin-bottom:0">Brochures &amp; <span class="elec">Print</span></h2>
+    </div>
+    <span class="cr-count"><span>06</span> Projects</span>
+  </div>
+
+  <div class="cr-tabs reveal" id="brochureTabs">
+    <button class="cr-tab active" data-filter="all">All Print</button>
+    <button class="cr-tab" data-filter="brochure">Brochures</button>
+    <button class="cr-tab" data-filter="flyer">Flyers</button>
+    <button class="cr-tab" data-filter="kit">Sales Kits</button>
+  </div>
+
+  <!-- 3-col 16:9 grid — first card 2-wide = 32:9 aspect -->
+  <div class="bro-grid reveal" id="brochureGrid">
+    <div class="cc pop wide2 pop" data-cat="brochure">
+      <div class="cc-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/15mK3MurVOVer1xNdkv1HSkV0y7J5WcL0')"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">01 / Brochure</span>
+      <div class="cc-info"><span class="cc-chip">Property Brochure</span><p class="cc-name">Tata Housing — Premium Sales Brochure</p><p class="cc-sub">40 Pages · A4 · Illustrator + Photoshop</p></div>
+    </div>
+    <div class="cc pop" data-cat="kit">
+      <div class="cc-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1l-MkTf_Ybm7KrrjDeYIFTMu0sVI8sKta')"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">02 / Sales Kit</span>
+      <div class="cc-info"><span class="cc-chip">Sales Kit</span><p class="cc-name">Birla Estates — Investor Kit</p><p class="cc-sub">Pan-India Launch Pack</p></div>
+    </div>
+    <div class="cc pop" data-cat="brochure">
+      <div class="cc-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1x7qkXohlMGeuecPtpIQ2sdnFk-NmR5GT')"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">03 / Brochure</span>
+      <div class="cc-info"><span class="cc-chip">Property Brochure</span><p class="cc-name">Godrej Properties — Project Brochure</p><p class="cc-sub">32 Pages · Spot UV</p></div>
+    </div>
+    <div class="cc pop" data-cat="flyer">
+      <div class="cc-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1o_iNCI451CD33Ofb-2nDjwN7HITeknGX')"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">04 / Flyer</span>
+      <div class="cc-info"><span class="cc-chip">Event Flyer</span><p class="cc-name">Embassy Group — Site Launch</p><p class="cc-sub">A5 · Double-Sided</p></div>
+    </div>
+    <div class="cc pop" data-cat="kit">
+      <div class="cc-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1YQ-Pkjvj8Hb7oS5i3IR4U7MKKYDt55rG')"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">05 / Sales Kit</span>
+      <div class="cc-info"><span class="cc-chip">Sales Kit</span><p class="cc-name">DAMAC — International Investor Deck</p><p class="cc-sub">Dubai · Luxury Finish</p></div>
+    </div>
+    <div class="cc pop" data-cat="brochure">
+      <div class="cc-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1FIv9gJH1q_ke6Vg8TROyd_LdGmqWApcq')"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">06 / Brochure</span>
+      <div class="cc-info"><span class="cc-chip">Property Brochure</span><p class="cc-name">Brigade Group — Township</p><p class="cc-sub">48 Pages · Full Bleed</p></div>
+    </div>
+    <div class="cc pop" data-cat="flyer"> 
+      <div class="cc-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/1ovDG83wJzG4a5endmIK8Z90YUeNvN2lQ')"></div>
+      <div class="cc-ov"></div>
+      <span class="bro-pg-num">07 / Flyer</span>
+      <div class="cc-info"><span class="cc-chip">Event Flyer</span><p class="cc-name">Sobha — Site Launch</p><p class="cc-sub">A5 · Double-Sided</p></div>
+     </div>
+  </div>
 </section>
 
-<!-- GALLERY STRIP -->
-<section id="gallery">
-<div class="g-track">
-<div class="g-item"><div class="g-ph"><span style="font-size:1.8rem;display:block;margin-bottom:6px;">🏕️</span>Gallery 01<br><span style="font-size:0.56rem;">gallery-1.jpg</span></div><div class="g-label">Pool Deck</div></div>
-<div class="g-item"><div class="g-ph"><span style="font-size:1.8rem;display:block;margin-bottom:6px;">🌿</span>Gallery 02<br><span style="font-size:0.56rem;">gallery-2.jpg</span></div><div class="g-label">Nature Trails</div></div>
-<div class="g-item"><div class="g-ph"><span style="font-size:1.8rem;display:block;margin-bottom:6px;">🍽️</span>Gallery 03<br><span style="font-size:0.56rem;">gallery-3.jpg</span></div><div class="g-label">Farm Dining</div></div>
-<div class="g-item"><div class="g-ph"><span style="font-size:1.8rem;display:block;margin-bottom:6px;">🧖</span>Gallery 04<br><span style="font-size:0.56rem;">gallery-4.jpg</span></div><div class="g-label">Spa & Wellness</div></div>
-<div class="g-item"><div class="g-ph"><span style="font-size:1.8rem;display:block;margin-bottom:6px;">🔥</span>Gallery 05<br><span style="font-size:0.56rem;">gallery-5.jpg</span></div><div class="g-label">Bonfire Evenings</div></div>
-</div>
+<!-- ══ REELS ══ -->
+<section id="reels">
+  <div class="reels-header reveal">
+    <div class="reels-header-row">
+      <div>
+        <span class="s-num" style="margin-bottom:12px">04 — Reels &amp; Short-Form</span>
+        <h2 class="s-title" style="margin-bottom:0">Short-Form<br><span class="elec">Reels</span></h2>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:16px">
+        <p style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--mid);max-width:280px;text-align:right;line-height:1.8">
+          Instagram-native reels, campaign cuts &amp; social videos.<br>
+          <span style="color:var(--elec)">Drag or use arrows to browse</span>
+        </p>
+        <div class="reels-nav-controls">
+          <button class="reel-nav-btn" id="reelPrev">&#8592;</button>
+          <div class="reels-count"><span class="current" id="reelCurrent">01</span>&nbsp;/&nbsp;<span id="reelTotal">09</span></div>
+          <button class="reel-nav-btn" id="reelNext">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="reels-track-wrap">
+    <div class="reels-track" id="reelsTrack">
+      <div class="reel-card active" data-youtube="1ix1_H0Py3g"><div class="reel-card-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1AXj1f9SgvD86iwXk0E6sUcf7eEouEDfs')"></div><div class="reel-card-ov"></div><div class="reel-num">01/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Instagram Reel</p><p class="reel-info-title">Birla Estates — Kolkata Campaign</p><p class="reel-info-sub">Meta Ads · Kolkata Expo</p></div></div>
+      <div class="reel-card" data-youtube="Kn15Glc_OBA"><div class="reel-card-bg bg-e" style="background-image:url('https://lh3.googleusercontent.com/d/1vDlkf8gEulkcsRJA24AFFuPIIUMkJJ_H')"></div><div class="reel-card-ov"></div><div class="reel-num">02/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Campaign Reel</p><p class="reel-info-title">Expo Reel Creative</p><p class="reel-info-sub">2M+ Organic Reach</p></div></div>
+      <div class="reel-card" data-youtube="sBM2hgCH9EQ"><div class="reel-card-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1zQ87mFaDSh-oo51RVJ2-Yoizkh4rMBjG')"></div><div class="reel-card-ov"></div><div class="reel-num">03/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Ad Creative</p><p class="reel-info-title">Reliable Ad Creative</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="w-gNY-73IIw"><div class="reel-card-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1BlWmDAumCoJ5ucGmw2FJxW6LgWipGOLE')"></div><div class="reel-card-ov"></div><div class="reel-num">04/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Testimonial</p><p class="reel-info-title">Client Testimonial</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="4IvPIIxNfzQ"><div class="reel-card-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1IZzY4Lh1yZe2FjuuOscARyuaC82FAhFl')"></div><div class="reel-card-ov"></div><div class="reel-num">05/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Event Invite</p><p class="reel-info-title">Property Expo Invite Reel</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="43YkDrTA2Fw"><div class="reel-card-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1iqvRynKhpJn1H6zUoEjX47xhwGEQLqUH')"></div><div class="reel-card-ov"></div><div class="reel-num">06/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Testimonial</p><p class="reel-info-title">Crafts Client Testimonial</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="otA67Qx44Yc"><div class="reel-card-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1fOiDBUzAYWsf2AGIr1Odp6ynUTd88wlD')"></div><div class="reel-card-ov"></div><div class="reel-num">07/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Brand Reel</p><p class="reel-info-title">Coffea — Testimonial Reel</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="BgaiCN3u-e4"><div class="reel-card-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1p8kaJS3VucTo0zAS-PZ1jLHCoskOt5rZ')"></div><div class="reel-card-ov"></div><div class="reel-num">08/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Campaign Reel</p><p class="reel-info-title">Sobha — Launch Campaign</p><p class="reel-info-sub">Instagram · Facebook Reels</p></div></div>
+      <div class="reel-card" data-youtube="-Mn6zJivHJE"><div class="reel-card-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/1yhMUvcfavZBIs8SYUpqe6G1El3BIFerw')"></div><div class="reel-card-ov"></div><div class="reel-num">09/09</div><div class="reel-play"><div class="reel-play-ring"><div class="reel-play-tri"></div></div></div><div class="reel-info"><p class="reel-info-cat">Ad Creative</p><p class="reel-info-title">Shivalik Hills Ad Creative</p><p class="reel-info-sub">Instagram Stories · Reels</p></div></div>
+    </div>
+  </div>
+
+  <div class="reels-dots" id="reelsDots"></div>
+  <div class="reels-drag-hint" id="reelsDragHint"><span class="drag-arrow">&#8592;</span>&nbsp;Drag to browse&nbsp;<span class="drag-arrow">&#8594;</span></div>
 </section>
 
-<!-- EXPERIENCES -->
-<section id="experiences">
-<div class="container">
-<div class="exp-hd reveal">
-<p class="label">Curated Journeys</p>
-<div class="gold-rule"></div>
-<h2 class="headline">Retreat <span class="em">Experiences</span></h2>
-</div>
-<div class="exp-tabs">
-<button class="etab active" data-tab="stay">Stay</button>
-<button class="etab" data-tab="dining">Dining</button>
-<button class="etab" data-tab="wellness">Wellness</button>
-</div>
-<div class="epanel active" id="tab-stay">
-<div class="ecard reveal"><div class="ecard-img">🏔️</div><div class="ecard-body"><p class="ecard-tag">Mysore · 7 Days</p><h3 class="ecard-title">Mysore Heritage Retreat</h3><p class="ecard-desc">Explore the royal city while staying in our heritage property with curated palace tours, silk market visits, and organic Karnataka cuisine.</p><div class="ecard-footer"><div class="eprice">₹ 1,500 <span>Per Person / Day</span></div><a href="/package-detail" class="ebook">Book Now</a></div></div></div>
-<div class="ecard reveal" style="transition-delay:.1s"><div class="ecard-img">🌊</div><div class="ecard-body"><p class="ecard-tag">Goa · 5 Days</p><h3 class="ecard-title">Coastal Goa Getaway</h3><p class="ecard-desc">Sun, sand, spice markets and sunset cruises — our Goa retreat blends beachside luxury with the warmth of Goan village culture.</p><div class="ecard-footer"><div class="eprice">₹ 2,200 <span>Per Person / Day</span></div><a href="/package-detail" class="ebook">Book Now</a></div></div></div>
-<div class="ecard reveal" style="transition-delay:.2s"><div class="ecard-img">🌾</div><div class="ecard-body"><p class="ecard-tag">Mandya · 3 Days</p><h3 class="ecard-title">Farm & Forest Escape</h3><p class="ecard-desc">A transformative immersion into organic farming, nature trails, and community bonfires in the heart of rural Karnataka.</p><div class="ecard-footer"><div class="eprice">₹ 1,800 <span>Per Person / Day</span></div><a href="/package-detail" class="ebook">Book Now</a></div></div></div>
-</div>
-<div class="epanel" id="tab-dining">
-<div class="ecard reveal"><div class="ecard-img">🍽️</div><div class="ecard-body"><p class="ecard-tag">All Properties</p><h3 class="ecard-title">Farm-to-Table Experience</h3><p class="ecard-desc">Harvest your own ingredients and watch our chefs transform them into extraordinary multi-course meals.</p><div class="ecard-footer"><div class="eprice">₹ 2,500 <span>Per Couple</span></div><a href="/package-detail" class="ebook">Book Now</a></div></div></div>
-<div class="ecard reveal" style="transition-delay:.1s"><div class="ecard-img">🌙</div><div class="ecard-body"><p class="ecard-tag">Romantic · Seasonal</p><h3 class="ecard-title">Starlight Wilderness Dinner</h3><p class="ecard-desc">A candlelit dinner under the stars in the forest clearing — a once-in-a-lifetime dining experience.</p><div class="ecard-footer"><div class="eprice">₹ 4,000 <span>Per Couple</span></div><a href="/package-detail" class="ebook">Book Now</a></div></div></div>
-<div class="ecard reveal" style="transition-delay:.2s"><div class="ecard-img">☕</div><div class="ecard-body"><p class="ecard-tag">Morning Ritual</p><h3 class="ecard-title">Sunrise Breakfast Trail</h3><p class="ecard-desc">Begin your day with a guided nature walk culminating in a freshly prepared organic breakfast at the forest edge.</p><div class="ecard-footer"><div class="eprice">₹ 1,200 <span>Per Person</span></div><a href="/package-detail" class="ebook">Book Now</a></div></div></div>
-</div>
-<div class="epanel" id="tab-wellness">
-<div class="ecard reveal"><div class="ecard-img">🧘</div><div class="ecard-body"><p class="ecard-tag">Wellness · 3 Days</p><h3 class="ecard-title">Soul Reset Program</h3><p class="ecard-desc">Yoga, meditation, breathwork and Ayurvedic spa treatments curated for complete mental and physical renewal.</p><div class="ecard-footer"><div class="eprice">₹ 5,000 <span>Per Person / Day</span></div><a href="/package-detail" class="ebook">Book Now</a></div></div></div>
-<div class="ecard reveal" style="transition-delay:.1s"><div class="ecard-img">🛁</div><div class="ecard-body"><p class="ecard-tag">Spa · Couples</p><h3 class="ecard-title">Couples Spa Sanctuary</h3><p class="ecard-desc">A full-day private spa ritual with herbal baths, synchronized massages, and botanical skin treatments.</p><div class="ecard-footer"><div class="eprice">₹ 8,000 <span>Per Couple</span></div><a href="/package-detail" class="ebook">Book Now</a></div></div></div>
-<div class="ecard reveal" style="transition-delay:.2s"><div class="ecard-img">🌅</div><div class="ecard-body"><p class="ecard-tag">Digital Detox</p><h3 class="ecard-title">Forest Immersion Retreat</h3><p class="ecard-desc">5 days of screen-free living, nature therapy, and community circles that restore your deepest sense of calm.</p><div class="ecard-footer"><div class="eprice">₹ 3,500 <span>Per Person / Day</span></div><a href="/package-detail" class="ebook">Book Now</a></div></div></div>
-</div>
-</div>
+<section class="s" id="videos">
+  <span class="s-num">05 — Video Work</span>
+  <h2 class="s-title reveal">Films &amp;<br><span class="elec">Aerial</span></h2>
+  <div class="section-filter reveal">
+    <button class="filter-btn active" data-section="videos" data-filter="all">All Videos</button>
+    <button class="filter-btn" data-section="videos" data-filter="brand">Brand Films</button>
+    <button class="filter-btn" data-section="videos" data-filter="drone">Drone / Aerial</button>
+    <button class="filter-btn" data-section="videos" data-filter="animation">Animation</button>
+  </div>
+  <div class="video-grid reveal" id="videoGrid">
+    <div class="vi pop" data-cat="brand" data-youtube="iqcHb1rq160">
+      <div class="vi-bg bg-a" style="background-image:url('https://lh3.googleusercontent.com/d/1UHyARL-DRnali43qcnEcX3xxpQrHaDck')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Brand Film</p><p class="vi-title">Aranyakaa Farms Testimonial</p><p class="vi-sub">Sony FX9 · DJI Inspire 3 · DaVinci</p></div>
+    </div>
+    <div class="vi pop" data-cat="drone" data-youtube="zUbFkBYw9yo">
+      <div class="vi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1wmjHqhpL2ig4dvIMMUUDcXa6KwvdtOMV')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Drone / Aerial</p><p class="vi-title">H2O Farms — Aerial Survey Film</p><p class="vi-sub">DJI Mini 4 Pro · Zenmuse X9-8K</p></div>
+    </div>
+    <div class="vi pop" data-cat="animation" data-youtube="kufk4yb5FFo">
+      <div class="vi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1-xrtxUYL-TO_bSknGamGHqJ9yNHOhmuI')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Motion / Animation</p><p class="vi-title">4BHK Interior — Animated Film</p><p class="vi-sub">After Effects · Sketchup · DaVinci</p></div>
+    </div>
+    <div class="vi pop" data-cat="brand" data-youtube="nIFsy7y-Pck">
+      <div class="vi-bg bg-f" style="background-image:url('https://lh3.googleusercontent.com/d/12Db-alOE04LP0V4WIbys4YZI0LhIjhZk')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Brand Film</p><p class="vi-title">Godrej — Lakeside Orchard</p><p class="vi-sub">Sony FX9 · Premiere Pro · DaVinci</p></div>
+    </div>
+    <div class="vi pop" data-cat="drone" data-youtube="aSJwXjpMLHs">
+      <div class="vi-bg bg-g" style="background-image:url('https://lh3.googleusercontent.com/d/1ybPtg5XvotoBg8J9-S-SWfewzjPfeecj')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Drone / Aerial</p><p class="vi-title">Vrindhavan Farms — Aerial Walkthrough</p><p class="vi-sub">DJI Mini 4 Pro · 4K · Colour Graded</p></div>
+    </div>
+    <div class="vi pop" data-cat="animation" data-youtube="vCUZUXZf1Q8">
+      <div class="vi-bg bg-h" style="background-image:url('https://lh3.googleusercontent.com/d/1qVsr4QVHtmaJ6RJXPwu4KmyE7IV-c2Oq')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Animation</p><p class="vi-title">13th Anniversary — Animated Intro</p><p class="vi-sub">After Effects · 2D Animation</p></div>
+    </div>
+    <div class="vi pop" data-cat="brand" data-youtube="6lQlgtrb7mI">
+      <div class="vi-bg bg-b" style="background-image:url('https://lh3.googleusercontent.com/d/1K_X9Izrx91n_eH21lgDGGZ7agYW8EL5e')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Brand Film</p><p class="vi-title">Birla Trimaya — Corporate Film</p><p class="vi-sub">RED KOMODO 6K · DaVinci</p></div>
+    </div>
+    <div class="vi pop" data-cat="brand" data-youtube="eLw_Q7udNxE">
+      <div class="vi-bg bg-c" style="background-image:url('https://lh3.googleusercontent.com/d/1GO75uyHIhIegRyLsdve8-bD0bcba-J3m')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Brand Film</p><p class="vi-title">Project Launch Video</p><p class="vi-sub">DJI Inspire 3 · Cinematic 8K</p></div>
+    </div>
+    <div class="vi pop" data-cat="animation" data-youtube="zU26EokHKHc">
+      <div class="vi-bg bg-d" style="background-image:url('https://lh3.googleusercontent.com/d/1ueWF6LWnyfM7_3hLTmXdYN57_rVz9dDc')"></div>
+      <div class="vi-ov"></div>
+      <div class="vi-play"><div class="vi-ring"><div class="vi-tri"></div></div></div>
+      <div class="vi-info"><p class="vi-cat">Motion Graphics</p><p class="vi-title">Motion Video — Game Server</p><p class="vi-sub">After Effects · Blender · Broadcast</p></div>
+    </div>
+  </div>
 </section>
 
-<!-- MEMBERSHIP -->
-<section id="membership">
-<div class="container">
-<div class="mem-grid">
-<div class="mem-img reveal-l">
-<!-- REPLACE: <img src="membership.jpg" style="object-fit:cover;width:100%;height:100%;position:absolute;inset:0;" /> -->
-<div class="img-ph"><span>🎖️</span>Upload membership image here</div>
-<div class="mem-float">
-<div class="mf-n">2019</div>
-<div class="mf-l">Est. Year</div>
-</div>
-</div>
-<div class="reveal-r">
-<p class="label">Exclusive Access</p>
-<div class="gold-rule"></div>
-<h2 class="headline">The Club <span class="em">Membership</span></h2>
-<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);line-height:1.85;margin:24px 0 32px;">
-Become part of an exclusive community of nature lovers and luxury seekers. Our membership grants you privileged access, priority bookings, and curated experiences simply not available to the public.
-</p>
-<div class="mem-cards">
-<div class="mc"><div class="mc-icon">🏷️</div><h4 class="mc-title">Priority Booking</h4><p class="mc-text">Reserve your preferred dates 60 days before public opening.</p></div>
-<div class="mc"><div class="mc-icon">💎</div><h4 class="mc-title">Exclusive Rates</h4><p class="mc-text">Up to 40% off on stays, dining, and spa packages year-round.</p></div>
-<div class="mc"><div class="mc-icon">🎁</div><h4 class="mc-title">RCI Integration</h4><p class="mc-text">Exchange your RCI points for premium Club Aranyakaa stays.</p></div>
-<div class="mc"><div class="mc-icon">🌐</div><h4 class="mc-title">5 Locations</h4><p class="mc-text">One membership, access to all properties across India.</p></div>
-</div>
-<div class="mem-price">
-<div>
-<h3>₹ 25,000 <span style="font-size:0.9rem;color:var(--ink-soft);font-family:var(--font-ui);">/year</span></h3>
-<p>Limited memberships available · Apply now</p>
-</div>
-<a href="/membership" class="btn-gold">Join The Club</a>
-</div>
-</div>
-</div>
-</div>
+<section class="s s-alt" id="services">
+  <span class="s-num">06 — Services</span>
+  <h2 class="s-title reveal">What I<br><span class="elec">Deliver</span></h2>
+  <div class="services-grid reveal">
+    <div class="svc-card"><span class="svc-num">01 —</span><div class="svc-title">Brand Films & Video Production</div><div class="svc-body">Full-cycle production from concept and storyboard through principal photography, edit, colour grade, and final delivery.</div><div class="svc-tools"><span class="svc-tool">Premiere Pro</span><span class="svc-tool">DaVinci Resolve</span><span class="svc-tool">Sony FX9</span><span class="svc-tool">ARRI</span></div></div>
+    <div class="svc-card"><span class="svc-num">02 —</span><div class="svc-title">Reels & Social Video</div><div class="svc-body">Platform-native video content for Instagram, YouTube, and Meta. Fast-cut reels, property walkthroughs, and event coverage.</div><div class="svc-tools"><span class="svc-tool">Premiere Pro</span><span class="svc-tool">After Effects</span><span class="svc-tool">Instagram Reels</span></div></div>
+    <div class="svc-card"><span class="svc-num">03 —</span><div class="svc-title">Drone & Aerial Cinematography</div><div class="svc-body">Licensed drone pilot operating DJI Inspire 3 (Zenmuse X9-8K) and Mavic 3 Pro. Cinematic aerial perspectives for real estate and events.</div><div class="svc-tools"><span class="svc-tool">DJI Inspire 3</span><span class="svc-tool">8K Aerial</span><span class="svc-tool">Licensed Pilot</span></div></div>
+    <div class="svc-card"><span class="svc-num">04 —</span><div class="svc-title">Motion Graphics & Animation</div><div class="svc-body">Kinetic typography, animated brand systems, logo animations, lower thirds, and broadcast graphics.</div><div class="svc-tools"><span class="svc-tool">After Effects</span><span class="svc-tool">Blender</span><span class="svc-tool">Maya 3D</span><span class="svc-tool">Unreal Engine</span></div></div>
+    <div class="svc-card"><span class="svc-num">05 —</span><div class="svc-title">Static Posters & Creatives</div><div class="svc-body">Scroll-stopping static design for Instagram, Meta ads, Google Display, and print. Posters, banners, story formats, carousel sets.</div><div class="svc-tools"><span class="svc-tool">Photoshop</span><span class="svc-tool">Illustrator</span><span class="svc-tool">Figma</span></div></div>
+    <div class="svc-card"><span class="svc-num">06 —</span><div class="svc-title">Brochures & Print Collateral</div><div class="svc-body">Premium print collateral for real estate and luxury brands. Property brochures, sales kits, event flyers, and investor presentations.</div><div class="svc-tools"><span class="svc-tool">Illustrator</span><span class="svc-tool">Photoshop</span><span class="svc-tool">Print-Ready PDF</span></div></div>
+  </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-<div class="container">
-<div class="testi-hd reveal">
-<p class="label">Guest Stories</p>
-<div class="gold-rule" style="margin:18px auto 28px;"></div>
-<h2 class="headline">Voices of Our <span class="em">Community</span></h2>
-</div>
-<div class="tgrid">
-<div class="tc reveal"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">Club Aranyakaa is our family's new weekend tradition! The kids loved planting saplings while we relaxed by the pool and enjoyed fresh organic meals. Luxury wrapped in nature — truly rejuvenating.</p><div class="tc-author"><div class="tc-av">A</div><div><div class="tc-name">Ananya Sharma</div><div class="tc-role">Family Traveler · Bangalore</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.12s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">We celebrated our anniversary here — candle-lit farm-to-table dinner under the stars, a couples spa session, and quiet morning walks through lush trails. Pure magic.</p><div class="tc-author"><div class="tc-av">R</div><div><div class="tc-name">Rajesh & Priya Mehta</div><div class="tc-role">Anniversary Retreat</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.24s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">The yoga deck overlooking the farmlands and morning meditation sessions were exactly what I needed. I left feeling lighter in body and mind. An extraordinary escape.</p><div class="tc-author"><div class="tc-av">V</div><div><div class="tc-name">Vikram Rao</div><div class="tc-role">Wellness Seeker</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.36s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">Exchanging our RCI points for a stay at Club Aranyakaa was the best decision. The eco-luxe vibe, attentive staff, and sustainable practices made it stand out from anything we've experienced.</p><div class="tc-author"><div class="tc-av">S</div><div><div class="tc-name">Sarah Thomas</div><div class="tc-role">RCI Member · International</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.48s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">Our corporate retreat transformed our team. The bonfire sessions and nature activities created connections that no conference room ever could. Highly recommend for teams.</p><div class="tc-author"><div class="tc-av">K</div><div><div class="tc-name">Kiran Patel</div><div class="tc-role">Corporate Lead · Infosys</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.6s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">We brought three generations together. Grandparents loved the temple garden, kids ran wild in play areas, and we all gathered around the bonfire. Memories made forever.</p><div class="tc-author"><div class="tc-av">M</div><div><div class="tc-name">Meera Iyer</div><div class="tc-role">Multi-Gen Family · Chennai</div></div></div></div>
-</div>
-</div>
+<section class="s s-lift" id="cameras">
+  <span class="s-num">07 — Equipment</span>
+  <h2 class="s-title reveal">Camera &amp;<br><span class="elec">Production</span><br>Arsenal</h2>
+  <div class="cameras-grid reveal">
+    <div class="cam-group"><span class="cam-group-label">Cinema & Broadcast</span>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">ARRI Alexa Mini LF / Mini 4K</span><span class="cam-badge">Cinema</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">RED KOMODO 6K / DSMC2</span><span class="cam-badge">Cinema</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Sony FX9 / FX6 / Venice 2</span><span class="cam-badge">Broadcast</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Blackmagic URSA Mini Pro 12K</span><span class="cam-badge">Cinema</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Canon EOS C70 / C300 Mark III</span><span class="cam-badge">Cinema</span></div>
+    </div>
+    <div class="cam-group"><span class="cam-group-label">Mirrorless & Hybrid</span>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Sony A7S III / A7R V</span><span class="cam-badge">Low-Light Spec</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Sony FX3 / FX30</span><span class="cam-badge">Run & Gun</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Canon EOS R5C / R6 Mark II</span><span class="cam-badge">Hybrid</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Nikon Z8 / Z9</span><span class="cam-badge">Stills + Video</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Fujifilm X-H2S</span><span class="cam-badge">APS-C</span></div>
+    </div>
+    <div class="cam-group"><span class="cam-group-label">Drone & Aerial</span>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">DJI Inspire 3 — Zenmuse X9-8K</span><span class="cam-badge">8K · Licensed</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">DJI Mavic 3 Pro / Cine Premium</span><span class="cam-badge">Aerial</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">DJI Air 3</span><span class="cam-badge">Licensed Pilot</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Autel Evo II Pro 6K</span><span class="cam-badge">6K Aerial</span></div>
+    </div>
+    <div class="cam-group"><span class="cam-group-label">Stabilisation & Support</span>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">DJI RS 3 Pro / Ronin 4D</span><span class="cam-badge">Gimbal</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Tiffen / Steadicam M-1</span><span class="cam-badge">Steadicam</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Dana Dolly & Slider Systems</span><span class="cam-badge">Motion</span></div>
+      <div class="cam-row"><div class="cam-dot"></div><span class="cam-name">Easyrig + Follow Focus Rigs</span><span class="cam-badge">Support</span></div>
+    </div>
+  </div>
 </section>
 
-<!-- CTA -->
-<section id="cta">
-<div class="container">
-<div class="cta-inner reveal">
-<div class="cta-ornament"></div>
-<p class="label" style="justify-content:center;">Begin Your Journey</p>
-<div style="height:16px;"></div>
-<h2 class="headline">Your Next Chapter<br>Starts in <span class="em">Nature</span></h2>
-<div class="gold-rule" style="margin:20px auto;"></div>
-<p class="body">Whether you're seeking solitude, adventure, romance, or celebration — Club Aranyakaa has crafted the perfect retreat for every soul. Let us curate something extraordinary for you.</p>
-<div class="cta-btns">
-<a href="/resorts" class="btn-gold">Explore All Resorts <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-<a href="tel:+918050873002" class="btn-line">📞 Call Us Now</a>
-</div>
-<div class="cta-contact">
-<div class="cc-item"><div class="cc-lbl">CALL US</div><div class="cc-val">+91 8050 873 002</div></div>
-<div class="cc-div"></div>
-<div class="cc-item"><div class="cc-lbl">HOURS</div><div class="cc-val">Mon–Sat: 10 AM – 7 PM</div></div>
-<div class="cc-div"></div>
-<div class="cc-item"><div class="cc-lbl">EMAIL</div><div class="cc-val">hello@clubaranyakaa.com</div></div>
-</div>
-</div>
-</div>
+<section class="s" id="clients">
+  <span class="s-num">08 — Trusted By</span>
+  <h2 class="s-title reveal">India's<br><span class="elec">Leading</span><br>Brands</h2>
+  <div class="clients-marquee-wrap reveal">
+    <div class="clients-marquee">
+      <span class="client-name">Birla Estates</span><span class="client-name">Godrej Properties</span><span class="client-name">Tata Housing</span><span class="client-name">Embassy Group</span><span class="client-name">Puravankara</span><span class="client-name">Sobha Developers</span><span class="client-name">Brigade Group</span><span class="client-name">Assetz Property</span><span class="client-name">DAMAC Properties</span><span class="client-name">Danube Properties</span><span class="client-name">BNW Developers</span><span class="client-name">Binghatti</span><span class="client-name">Birla Estates</span><span class="client-name">Godrej Properties</span><span class="client-name">Tata Housing</span><span class="client-name">Embassy Group</span><span class="client-name">Puravankara</span><span class="client-name">Sobha Developers</span><span class="client-name">Brigade Group</span><span class="client-name">Assetz Property</span><span class="client-name">DAMAC Properties</span><span class="client-name">Danube Properties</span><span class="client-name">BNW Developers</span><span class="client-name">Binghatti</span>
+    </div>
+  </div>
+  <div class="clients-grid reveal" style="margin-top:1px">
+    <div class="client-cell"><div class="client-cell-name">Birla Estates</div></div>
+    <div class="client-cell"><div class="client-cell-name">Godrej Properties</div></div>
+    <div class="client-cell"><div class="client-cell-name">Tata Housing</div></div>
+    <div class="client-cell"><div class="client-cell-name">Embassy Group</div></div>
+    <div class="client-cell"><div class="client-cell-name">Puravankara</div></div>
+    <div class="client-cell"><div class="client-cell-name">Sobha Developers</div></div>
+    <div class="client-cell"><div class="client-cell-name">Brigade Group</div></div>
+    <div class="client-cell"><div class="client-cell-name">Assetz Property</div></div>
+    <div class="client-cell"><div class="client-cell-name">DAMAC Properties</div></div>
+    <div class="client-cell"><div class="client-cell-name">Danube Properties</div></div>
+    <div class="client-cell"><div class="client-cell-name">BNW Developers</div></div>
+    <div class="client-cell"><div class="client-cell-name">Binghatti</div></div>
+  </div>
 </section>
 
-<!-- FOOTER -->
+<section class="s s-lift" id="contact">
+  <span class="s-num">09 — Let's Work</span>
+  <h2 class="s-title reveal">Let's Make<br>Something<br><span class="elec">Stellar</span></h2>
+  <div class="contact-grid reveal">
+    <div class="contact-left">
+      <div class="contact-big">Get<br>In<br><span class="elec">Touch.</span></div>
+      <p class="contact-sub">Available for brand films, reels, aerial shoots, motion graphics, static campaigns, and print collateral. Based in Bengaluru — open to pan-India and international projects.</p>
+      <div class="avail-row"><div class="avail-dot"></div>Available for new projects — 2025</div>
+    </div>
+    <div class="contact-right">
+      <div class="contact-links">
+        <a href="mailto:samtheodere@gmail.com" class="contact-link"><div><div class="cl-type">Email</div><div class="cl-val">samtheodere@gmail.com</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="tel:+918124144127" class="contact-link"><div><div class="cl-type">Phone / WhatsApp</div><div class="cl-val">+91 81241 44127</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="https://www.linkedin.com/in/samtheodere/" target="_blank" class="contact-link"><div><div class="cl-type">LinkedIn</div><div class="cl-val">linkedin.com/in/samtheodere</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="YOUR_BEHANCE_LINK" target="_blank" class="contact-link"><div><div class="cl-type">Behance Portfolio</div><div class="cl-val">behance.net/samtheodere</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="YOUR_YOUTUBE_LINK" target="_blank" class="contact-link"><div><div class="cl-type">YouTube</div><div class="cl-val">youtube.com/@samtheodere</div></div><span class="cl-arrow">&#8599;</span></a>
+        <a href="YOUR_INSTAGRAM_LINK" target="_blank" class="contact-link"><div><div class="cl-type">Instagram</div><div class="cl-val">@samtheodere</div></div><span class="cl-arrow">&#8599;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-<div class="container">
-<div class="ft">
-<div>
-<div class="fb-logo">CLUB ARANYAKAA</div>
-<div class="fb-tag">Eco-Luxe Retreats · Est. 2019</div>
-<p class="fb-desc">Where the wild and the refined converge. Crafting moments of extraordinary connection with nature across Karnataka and beyond.</p>
-<div class="fb-socials">
-<div class="fsoc">in</div><div class="fsoc">f</div><div class="fsoc">ig</div><div class="fsoc">yt</div>
-</div>
-</div>
-<div class="fc">
-<h4>Our Resorts</h4>
-<ul>
-<li><a href="/resorts">Club Aranyakaa Bangalore</a></li>
-<li><a href="/resorts">Club Aranyakaa Chennai</a></li>
-<li><a href="/resorts">Club Aranyakaa Mysore</a></li>
-<li><a href="/resorts">Club Aranyakaa Mandya</a></li>
-<li><a href="/resorts">Club Aranyakaa Goa</a></li>
-</ul>
-</div>
-<div class="fc">
-<h4>Experiences</h4>
-<ul>
-<li><a href="/packages">Stay Packages</a></li>
-<li><a href="/packages">Dining Experiences</a></li>
-<li><a href="/packages">Spa & Wellness</a></li>
-<li><a href="/packages">Corporate Retreats</a></li>
-<li><a href="/membership">Membership</a></li>
-</ul>
-</div>
-<div class="fc">
-<h4>Reach Us</h4>
-<div class="fco">
-<div class="fco-item"><div class="fco-icon">📞</div><div class="fco-text">+91 8050 873 002<br>Mon–Sat, 10 AM – 7 PM</div></div>
-<div class="fco-item"><div class="fco-icon">✉️</div><div class="fco-text">hello@clubaranyakaa.com</div></div>
-<div class="fco-item"><div class="fco-icon">📍</div><div class="fco-text">Registered in Bangalore,<br>Karnataka, India</div></div>
-</div>
-</div>
-</div>
-<div class="fbot">
-<p>© 2025 Club Aranyakaa · Code of Growth. All Rights Reserved.</p>
-<div class="flegal">
-<a href="#">Privacy Policy</a>
-<a href="#">Terms of Use</a>
-<a href="#">Cookie Policy</a>
-</div>
-</div>
-</div>
+  <div>
+    <div class="footer-big">SAM<span>.</span>T</div>
+    <div class="footer-sub">Sam Theodere · Senior Video Editor & Cinematographer · 2025</div>
+  </div>
+  <div class="footer-meta">
+    <div class="footer-meta-line em">@samtheodere</div>
+    <div class="footer-meta-line">Bengaluru · India</div>
+    <div class="footer-meta-line">Film · Design · Drone · Brand</div>
+    <div class="footer-meta-line em">Every frame. Intentional.</div>
+  </div>
 </footer>
 
+<div class="yt-modal-wrap" id="ytModal">
+  <div class="yt-modal-inner">
+    <button class="yt-close" id="ytClose">&#10005; &nbsp;Close</button>
+    <iframe id="ytFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    <div class="yt-modal-title" id="ytModalTitle"></div>
+  </div>
+</div>
+
 <script>
-// Loader
-window.addEventListener('load', () => {
-setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1500);
-});
+(function(){
+  var nav=document.getElementById('mainNav');
+  window.addEventListener('scroll',function(){nav.classList.toggle('scrolled',window.scrollY>60)});
+  var ro=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target)}})},{threshold:.07});
+  document.querySelectorAll('.reveal').forEach(function(r){ro.observe(r)});
 
-// Cursor
-const dot = document.getElementById('cursor-dot');
-const ring = document.getElementById('cursor-ring');
-let mx=0, my=0, rx=0, ry=0;
-document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
-function moveCursor() {
-dot.style.left = mx+'px'; dot.style.top = my+'px';
-rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
-ring.style.left = rx+'px'; ring.style.top = ry+'px';
-requestAnimationFrame(moveCursor);
-}
-moveCursor();
-document.querySelectorAll('a,button,.rc,.ecard,.tc').forEach(el => {
-el.addEventListener('mouseenter',()=>{ ring.style.transform='translate(-50%,-50%) scale(1.7)'; ring.style.opacity='1'; });
-el.addEventListener('mouseleave',()=>{ ring.style.transform='translate(-50%,-50%) scale(1)'; ring.style.opacity='0.6'; });
-});
+  /* ── POSTER TABS filter ── */
+  var posterTabs = document.getElementById('posterTabs');
+  if(posterTabs){
+    posterTabs.addEventListener('click',function(e){
+      var btn=e.target.closest('.cr-tab');
+      if(!btn)return;
+      posterTabs.querySelectorAll('.cr-tab').forEach(function(b){b.classList.remove('active')});
+      btn.classList.add('active');
+      var flt=btn.dataset.filter;
+      document.querySelectorAll('#posterWall .cc').forEach(function(c){
+        if(flt==='all'||c.dataset.cat===flt){c.classList.remove('faded')}
+        else{c.classList.add('faded')}
+      });
+    });
+  }
 
-// Navbar
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+  /* ── BROCHURE TABS filter ── */
+  var brochureTabs = document.getElementById('brochureTabs');
+  if(brochureTabs){
+    brochureTabs.addEventListener('click',function(e){
+      var btn=e.target.closest('.cr-tab');
+      if(!btn)return;
+      brochureTabs.querySelectorAll('.cr-tab').forEach(function(b){b.classList.remove('active')});
+      btn.classList.add('active');
+      var flt=btn.dataset.filter;
+      document.querySelectorAll('#brochureGrid .cc').forEach(function(c){
+        if(flt==='all'||c.dataset.cat===flt){c.classList.remove('faded')}
+        else{c.classList.add('faded')}
+      });
+    });
+  }
 
-// Mobile nav
-document.getElementById('ham').addEventListener('click', () => document.getElementById('mnav').classList.add('open'));
-document.getElementById('mnav-close').addEventListener('click', () => document.getElementById('mnav').classList.remove('open'));
-document.querySelectorAll('#mnav a').forEach(a => a.addEventListener('click', () => document.getElementById('mnav').classList.remove('open')));
+  /* social grid — static, no drag needed */
 
-// Scroll reveal
-const revEls = document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
-const io = new IntersectionObserver(entries => {
-entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.1 });
-revEls.forEach(el => io.observe(el));
+  /* ── VIDEO FILTER ── */
+  document.querySelectorAll('.filter-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var sec=this.dataset.section,flt=this.dataset.filter;
+      document.querySelectorAll('.filter-btn[data-section="'+sec+'"]').forEach(function(b){b.classList.remove('active')});
+      this.classList.add('active');
+      if(sec==='videos'){
+        var g=document.getElementById('videoGrid');
+        if(g)g.querySelectorAll('.vi').forEach(function(i){if(flt==='all'||i.dataset.cat===flt){i.style.opacity='';i.style.pointerEvents=''}else{i.style.opacity='.1';i.style.pointerEvents='none'}});
+      }
+    });
+  });
 
-// Tabs
-document.querySelectorAll('.etab').forEach(tab => {
-tab.addEventListener('click', () => {
-document.querySelectorAll('.etab').forEach(t=>t.classList.remove('active'));
-document.querySelectorAll('.epanel').forEach(p=>p.classList.remove('active'));
-tab.classList.add('active');
-const panel = document.getElementById('tab-'+tab.dataset.tab);
-if(panel){ panel.classList.add('active'); panel.querySelectorAll('.reveal').forEach(el=>{ el.classList.remove('in'); setTimeout(()=>io.observe(el),50); }); }
-});
-});
+  /* yt modal */
+  var modal=document.getElementById('ytModal'),ytFrame=document.getElementById('ytFrame'),ytClose=document.getElementById('ytClose'),ytTitle=document.getElementById('ytModalTitle');
+  function openVideo(id,title){ytFrame.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1';if(ytTitle)ytTitle.textContent=title||'';modal.classList.add('open');document.body.style.overflow='hidden'}
+  function closeVideo(){modal.classList.remove('open');ytFrame.src='';document.body.style.overflow=''}
+  function attachYT(el){if(!el)return;el.addEventListener('click',function(e){var n=e.target;while(n&&n!==el){if(n.classList&&(n.classList.contains('vi')||n.classList.contains('wi'))&&n.dataset.youtube){var t=n.querySelector('.vi-title,.wi-title');openVideo(n.dataset.youtube,t?t.textContent:'');return}n=n.parentElement}})}
+  attachYT(document.getElementById('videoGrid'));
+  if(ytClose)ytClose.addEventListener('click',closeVideo);
+  if(modal)modal.addEventListener('click',function(e){if(e.target===modal)closeVideo()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeVideo()});
 
-// Parallax hero — subtle on video
-window.addEventListener('scroll', () => {
-const vid = document.getElementById('hero-vid');
-if(vid && window.scrollY < window.innerHeight) {
-vid.style.transform = `translate(-50%, calc(-50% + ${window.scrollY * 0.15}px))`;
-}
-});
+  /* ═══ REELS CAROUSEL ═══ */
+  var track=document.getElementById('reelsTrack');
+  var dotsWrap=document.getElementById('reelsDots');
+  var prevBtn=document.getElementById('reelPrev');
+  var nextBtn=document.getElementById('reelNext');
+  var countEl=document.getElementById('reelCurrent');
+  var dragHint=document.getElementById('reelsDragHint');
+  if(!track)return;
+  var cards=Array.from(track.querySelectorAll('.reel-card'));
+  var total=cards.length;
+  var activeIdx=0;
+  function pad(n){return n<10?'0'+n:''+n}
 
-// Mute toggle
-function toggleMute() {
-const vid = document.getElementById('hero-vid');
-if (!vid) return;
-vid.muted = !vid.muted;
-document.getElementById('icon-muted').style.display = vid.muted ? 'block' : 'none';
-document.getElementById('icon-sound').style.display = vid.muted ? 'none' : 'block';
-document.getElementById('mute-label').textContent = vid.muted ? 'Sound Off' : 'Sound On';
-}
+  cards.forEach(function(_,i){
+    var d=document.createElement('div');
+    d.className='reels-dot'+(i===0?' active':'');
+    d.addEventListener('click',function(){goTo(i)});
+    dotsWrap.appendChild(d);
+  });
+  var dots=Array.from(dotsWrap.querySelectorAll('.reels-dot'));
 
-// Ensure video plays on mobile (needs user gesture workaround)
-document.addEventListener('touchstart', () => {
-const vid = document.getElementById('hero-vid');
-if (vid && vid.paused) vid.play();
-}, { once: true });
+  function goTo(idx){
+    idx=Math.max(0,Math.min(total-1,idx));
+    cards[activeIdx].classList.remove('active');
+    dots[activeIdx].classList.remove('active');
+    activeIdx=idx;
+    cards[activeIdx].classList.add('active');
+    dots[activeIdx].classList.add('active');
+    if(countEl)countEl.textContent=pad(activeIdx+1);
+    var offset=cards[activeIdx].offsetLeft-(track.offsetWidth/2)+(cards[activeIdx].offsetWidth/2);
+    track.scrollTo({left:offset,behavior:'smooth'});
+  }
+
+  if(prevBtn)prevBtn.addEventListener('click',function(){goTo(activeIdx-1)});
+  if(nextBtn)nextBtn.addEventListener('click',function(){goTo(activeIdx+1)});
+
+  var isDragging=false;
+  cards.forEach(function(card,i){
+    card.addEventListener('click',function(){
+      if(isDragging)return;
+      if(i!==activeIdx){goTo(i)}
+      else{var vid=card.dataset.youtube;if(vid){var t=card.querySelector('.reel-info-title');openVideo(vid,t?t.textContent:'')}}
+    });
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(modal.classList.contains('open'))return;
+    if(e.key==='ArrowLeft')goTo(activeIdx-1);
+    if(e.key==='ArrowRight')goTo(activeIdx+1);
+  });
+
+  /* drag */
+  var startX,startSL;
+  track.addEventListener('mousedown',function(e){
+    isDragging=false;startX=e.pageX-track.offsetLeft;startSL=track.scrollLeft;
+    track.classList.add('dragging');
+    if(dragHint)dragHint.classList.add('hidden');
+  });
+  track.addEventListener('mousemove',function(e){
+    if(!track.classList.contains('dragging'))return;
+    var x=e.pageX-track.offsetLeft,walk=(x-startX)*1.2;
+    if(Math.abs(walk)>4)isDragging=true;
+    track.scrollLeft=startSL-walk;
+  });
+  function stopDrag(){track.classList.remove('dragging');setTimeout(function(){isDragging=false},10)}
+  track.addEventListener('mouseup',stopDrag);
+  track.addEventListener('mouseleave',stopDrag);
+
+  var tSX,tSL;
+  track.addEventListener('touchstart',function(e){tSX=e.touches[0].pageX;tSL=track.scrollLeft;if(dragHint)dragHint.classList.add('hidden')},{passive:true});
+  track.addEventListener('touchmove',function(e){track.scrollLeft=tSL+(tSX-e.touches[0].pageX)},{passive:true});
+
+  track.addEventListener('scroll',function(){
+    var centre=track.scrollLeft+track.offsetWidth/2,best=0,bestD=Infinity;
+    cards.forEach(function(c,i){var d=Math.abs(c.offsetLeft+c.offsetWidth/2-centre);if(d<bestD){bestD=d;best=i}});
+    if(best!==activeIdx){
+      cards[activeIdx].classList.remove('active');dots[activeIdx].classList.remove('active');
+      activeIdx=best;cards[activeIdx].classList.add('active');dots[activeIdx].classList.add('active');
+      if(countEl)countEl.textContent=pad(activeIdx+1);
+    }
+  });
+
+  setTimeout(function(){goTo(0)},100);
+}());
 </script>
-
 </body>
 </html>
