@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Explore all Club Aranyakaa eco-luxury resorts across India. From Bangalore to Goa — find your perfect nature retreat." />
+<title>Our Resorts — Club Aranyakaa | Eco-Luxe Retreats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared-styles.css" />
+<style>
+/* Resort Cards Grid */
+.resorts-hero { padding: calc(var(--nav-h) + 80px) 0 100px; background: var(--bg-warm); position: relative; overflow: hidden; }
+.resorts-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(184,150,62,0.08) 0%, transparent 60%); }
+.resorts-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; color: var(--ink); line-height: 1.1; margin-bottom: 18px; }
+.resorts-hero h1 .em { color: var(--gold); font-style: italic; }
+.resorts-hero p.sub { font-family: var(--font-body); font-size: 1.1rem; font-weight: 300; color: var(--ink-mid); max-width: 560px; line-height: 1.85; }
+.breadcrumb { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
+.breadcrumb a, .breadcrumb span { font-family: var(--font-ui); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); }
+.breadcrumb a:hover { color: var(--gold); }
+.breadcrumb .sep { color: var(--gold-light); }
+
+/* Filter Bar */
+#filters { padding: 28px 0; background: var(--bg); border-bottom: 1px solid var(--border-light); position: sticky; top: var(--nav-h); z-index: 100; }
+.filter-wrap { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.filter-group { display: flex; align-items: center; gap: 10px; }
+.filter-label { font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); }
+.filter-select { font-family: var(--font-ui); font-size: 0.75rem; color: var(--ink); background: transparent; border: 1px solid var(--border-light); padding: 10px 32px 10px 14px; appearance: none; cursor: pointer; outline: none; transition: border-color 0.3s; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A756C' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
+.filter-select:focus { border-color: var(--gold); }
+.filter-divider { width: 1px; height: 28px; background: var(--border-light); }
+.filter-results { font-family: var(--font-ui); font-size: 0.65rem; color: var(--ink-soft); margin-left: auto; }
+
+/* Resorts Grid */
+#resorts-grid { padding: 80px 0 120px; background: var(--bg); }
+.rg-filter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.rg-card { position: relative; overflow: hidden; cursor: pointer; }
+.rg-card-img { aspect-ratio: 4/3; overflow: hidden; position: relative; }
+.rg-card-img img { transition: transform 0.7s ease; }
+.rg-card:hover .rg-card-img img { transform: scale(1.08); }
+.rg-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,30,26,0.88) 0%, rgba(26,30,26,0.0) 55%); z-index: 1; transition: background 0.4s; }
+.rg-card:hover .rg-card-img::after { background: linear-gradient(to top, rgba(26,30,26,0.95) 0%, rgba(26,30,26,0.15) 100%); }
+.rg-card-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px; z-index: 2; }
+.rg-loc { font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light); display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.rg-loc::before { content: ''; width: 16px; height: 1px; background: var(--gold-light); }
+.rg-name { font-family: var(--font-display); font-size: 1.4rem; color: var(--white); margin-bottom: 10px; }
+.rg-desc { font-family: var(--font-ui); font-size: 0.72rem; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 14px; }
+.rg-meta { display: flex; gap: 14px; flex-wrap: wrap; }
+.rg-meta-item { font-family: var(--font-ui); font-size: 0.62rem; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 5px; }
+.rg-card-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+.rg-badge { font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); background: rgba(184,150,62,0.25); border: 1px solid rgba(184,150,62,0.4); padding: 4px 10px; }
+.rg-badge.gold { background: var(--gold); border-color: var(--gold); }
+.rg-cta { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); opacity: 0; transform: translateY(10px); transition: opacity 0.4s, transform 0.4s; }
+.rg-card:hover .rg-cta { opacity: 1; transform: translateY(0); }
+
+/* Featured Resort */
+.featured-resort { padding: 0 0 120px; background: var(--bg); }
+.fr-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+.fr-img { aspect-ratio: 5/3; overflow: hidden; border: 1px dashed var(--gold-line); }
+.fr-img img { transition: transform 0.7s ease; }
+.fr-img:hover img { transform: scale(1.05); }
+.fr-content h3 { font-family: var(--font-display); font-size: 1.8rem; color: var(--ink); margin-bottom: 14px; }
+.fr-content p { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: var(--ink-mid); line-height: 1.85; margin-bottom: 20px; }
+.fr-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
+.fr-feat { display: flex; align-items: center; gap: 10px; font-family: var(--font-ui); font-size: 0.72rem; color: var(--ink-mid); }
+.fr-feat::before { content: '✓'; color: var(--gold); font-weight: 700; }
+
+/* Testimonials Section */
+#testimonials { padding: 120px 0; background: var(--bg-warm); }
+.testi-hd { text-align: center; margin-bottom: 60px; }
+.testi-hd .label { justify-content: center; }
+.testi-hd .label::before { display: none; }
+.testi-hd .label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--gold); }
+.tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.tc { background: var(--white); border: 1px solid var(--border-light); padding: 34px; position: relative; transition: border-color 0.35s, box-shadow 0.35s; }
+.tc:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(184,150,62,0.08); }
+.tc-qm { font-family: var(--font-display); font-size: 4.5rem; line-height: 0.5; color: var(--gold); opacity: 0.18; position: absolute; top: 26px; right: 26px; }
+.tc-stars { display: flex; gap: 3px; margin-bottom: 18px; color: var(--gold); font-size: 0.75rem; }
+.tc-text { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; font-style: italic; line-height: 1.8; color: var(--ink-mid); margin-bottom: 26px; }
+.tc-author { display: flex; align-items: center; gap: 12px; }
+.tc-av { width: 44px; height: 44px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.1rem; color: var(--white); flex-shrink: 0; }
+.tc-name { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; color: var(--ink); }
+.tc-role { font-family: var(--font-ui); font-size: 0.62rem; color: var(--gold); letter-spacing: 0.1em; margin-top: 2px; }
+
+/* Comparison Table */
+#compare { padding: 120px 0; background: var(--bg); }
+.compare-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
+.compare-table th { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--ink); padding: 16px 20px; text-align: left; border-bottom: 2px solid var(--gold); background: var(--bg-warm); }
+.compare-table th:first-child { width: 180px; }
+.compare-table td { font-family: var(--font-ui); font-size: 0.72rem; color: var(--ink-mid); padding: 14px 20px; border-bottom: 1px solid var(--border-light); }
+.compare-table td:first-child { font-weight: 500; color: var(--ink); }
+.compare-table tr:hover td { background: var(--bg-warm); }
+.check { color: var(--gold); font-weight: 700; }
+.cross { color: var(--ink-faint); }
+.price-highlight { font-family: var(--font-display); font-size: 1.1rem; color: var(--gold); }
+
+/* CTA */
+#resort-cta { padding: 120px 0; background: var(--bg-section); }
+.rcta { text-align: center; max-width: 680px; margin: 0 auto; }
+.rcta h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500; color: var(--ink); margin: 18px 0; }
+.rcta h2 em { color: var(--gold); font-style: italic; }
+.rcta p { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: var(--ink-mid); line-height: 1.85; margin-bottom: 36px; }
+.rcta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+@media(max-width: 1100px) { .rg-filter { grid-template-columns: 1fr 1fr; } .fr-grid { grid-template-columns: 1fr; } .compare-table { display: block; overflow-x: auto; } }
+@media(max-width: 900px) { .tgrid { grid-template-columns: 1fr 1fr; } .filter-wrap { flex-wrap: wrap; } }
+@media(max-width: 600px) { .container { padding: 0 20px; } .rg-filter { grid-template-columns: 1fr; } .tgrid { grid-template-columns: 1fr; } .fr-features { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- Mobile Nav -->
+<div id="mnav">
+<span id="mnav-close">✕</span>
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="resorts.html" class="active">Our Resorts</a>
+<a href="experiences.html">Experiences</a>
+<a href="membership.html">Membership</a>
+<a href="resorts.html#testimonials">Stories</a>
+<a href="membership.html" class="btn-gold" style="margin-top:16px;font-size:0.73rem;padding:14px 36px;">Join the Club</a>
+</div>
+
+<!-- Navigation -->
+<nav id="nav" class="solid">
+<div class="container">
+<div class="nav-inner">
+<a href="index.html" class="nav-logo">
+<div class="nav-logo-mark">
+<svg viewBox="0 0 60 60" fill="none"><path d="M30 8 C30 8, 14 20, 14 36 C14 44.8 21.2 52 30 52 C38.8 52 46 44.8 46 36 C46 20, 30 8, 30 8Z" stroke="#B8963E" stroke-width="1.5" fill="none"/><path d="M30 18 L30 44" stroke="#B8963E" stroke-width="1" stroke-dasharray="2 3"/><path d="M22 28 C22 28, 30 24, 38 28" stroke="#B8963E" stroke-width="1" fill="none"/><path d="M20 36 C20 36, 30 30, 40 36" stroke="#B8963E" stroke-width="1" fill="none"/><circle cx="30" cy="36" r="2" fill="#B8963E"/></svg>
+</div>
+<div class="nav-logo-text-wrap"><span class="n1">CLUB ARANYAKAA</span><span class="n2">Eco-Luxe Retreats</span></div>
+</a>
+<div class="nav-links">
+<a href="about.html">About</a>
+<a href="resorts.html" class="active">Resorts</a>
+<a href="experiences.html">Experiences</a>
+<a href="membership.html">Membership</a>
+<a href="resorts.html#testimonials">Stories</a>
+</div>
+<div class="nav-right">
+<div class="nav-phone">
+<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.09 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.59 2.91.72a2 2 0 011.72 2.03z"/></svg>
++91 8050 873 002
+</div>
+<a href="membership.html" class="btn-gold" style="font-size:0.68rem;padding:10px 22px;">Join the Club</a>
+</div>
+<div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</div>
+</div>
+</nav>
+
+<!-- Hero -->
+<section class="resorts-hero">
+<div class="container">
+<div class="breadcrumb">
+<a href="index.html">Home</a><span class="sep">›</span><span>Our Resorts</span>
+</div>
+<h1 class="reveal">Our <span class="em">Properties</span></h1>
+<p class="sub reveal" style="transition-delay:.1s;">Five distinct retreats, each with its own character, location, and magic — united by one philosophy: luxury that leaves no trace.</p>
+</div>
+</section>
+
+<!-- Filters -->
+<div id="filters">
+<div class="container">
+<div class="filter-wrap">
+<div class="filter-group">
+<span class="filter-label">Location</span>
+<select class="filter-select" id="filter-location">
+<option value="">All Locations</option>
+<option>Karnataka</option>
+<option>Tamil Nadu</option>
+<option>Goa</option>
+<option>Maharashtra</option>
+</select>
+</div>
+<div class="filter-divider"></div>
+<div class="filter-group">
+<span class="filter-label">Experience</span>
+<select class="filter-select" id="filter-exp">
+<option value="">All Experiences</option>
+<option>Family Retreat</option>
+<option>Couples & Romance</option>
+<option>Wellness & Spa</option>
+<option>Adventure</option>
+<option>Heritage & Culture</option>
+<option>Corporate</option>
+</select>
+</div>
+<div class="filter-divider"></div>
+<div class="filter-group">
+<span class="filter-label">Capacity</span>
+<select class="filter-select" id="filter-cap">
+<option value="">Any Size</option>
+<option>Up to 50 Guests</option>
+<option>50-100 Guests</option>
+<option>100+ Guests</option>
+</select>
+</div>
+<span class="filter-results" id="filter-results">Showing 5 resorts</span>
+</div>
+</div>
+</div>
+
+<!-- Resorts Grid -->
+<section id="resorts-grid">
+<div class="container">
+<div class="rg-filter">
+
+<!-- Resort 1 - Bangalore -->
+<div class="rg-card reveal">
+<div class="rg-card-img"><img src="src/resort-bangalore.png" alt="Club Aranyakaa Bangalore" loading="lazy" /></div>
+<div class="rg-card-body">
+<div class="rg-card-badges"><span class="rg-badge gold">🏆 #1 Eco Resort 2024</span><span class="rg-badge">Flagship Property</span></div>
+<p class="rg-loc">📍 Bangalore · 55 km</p>
+<h3 class="rg-name">Club Aranyakaa Bangalore</h3>
+<p class="rg-desc">Our flagship 42-acre eco-retreat in Ramanagara. Rocky hills, organic farms, infinity pool, and award-winning spa.</p>
+<div class="rg-meta">
+<span class="rg-meta-item">⭐ 4.9</span>
+<span class="rg-meta-item">🌿 Eco-Certified</span>
+<span class="rg-meta-item">👥 Max 120</span>
+<span class="rg-meta-item">🛏 18 Rooms</span>
+</div>
+<a href="resort-detail.html?resort=bangalore" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+</div>
+
+<!-- Resort 2 - Mysore -->
+<div class="rg-card reveal" style="transition-delay:.1s">
+<div class="rg-card-img"><img src="src/resort-mysore.png" alt="Club Aranyakaa Mysore" loading="lazy" /></div>
+<div class="rg-card-body">
+<div class="rg-card-badges"><span class="rg-badge">🏛️ Heritage</span><span class="rg-badge">Royal Experience</span></div>
+<p class="rg-loc">📍 Mysore · 140 km</p>
+<h3 class="rg-name">Club Aranyakaa Mysore</h3>
+<p class="rg-desc">Heritage meets wilderness. Near the Palace City with curated palace tours, silk market visits, and royal cuisine experiences.</p>
+<div class="rg-meta">
+<span class="rg-meta-item">⭐ 4.8</span>
+<span class="rg-meta-item">🏛️ Heritage</span>
+<span class="rg-meta-item">👥 Max 80</span>
+<span class="rg-meta-item">🛏 14 Rooms</span>
+</div>
+<a href="resort-detail.html?resort=mysore" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+</div>
+
+<!-- Resort 3 - Chennai -->
+<div class="rg-card reveal" style="transition-delay:.2s">
+<div class="rg-card-img"><img src="src/resort-chennai.png" alt="Club Aranyakaa Chennai" loading="lazy" /></div>
+<div class="rg-card-body">
+<div class="rg-card-badges"><span class="rg-badge">🌊 Coastal</span><span class="rg-badge">Beach Access</span></div>
+<p class="rg-loc">📍 Chennai · 120 km</p>
+<h3 class="rg-name">Club Aranyakaa Chennai</h3>
+<p class="rg-desc">A serene coastal retreat where the Bay of Bengal meets unspoiled mangroves. Perfect blend of beach and backwater.</p>
+<div class="rg-meta">
+<span class="rg-meta-item">⭐ 4.7</span>
+<span class="rg-meta-item">🌊 Coastal</span>
+<span class="rg-meta-item">👥 Max 100</span>
+<span class="rg-meta-item">🛏 16 Rooms</span>
+</div>
+<a href="resort-detail.html?resort=chennai" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+</div>
+
+<!-- Resort 4 - Mandya -->
+<div class="rg-card reveal" style="transition-delay:.3s">
+<div class="rg-card-img"><img src="src/resort-mandya.png" alt="Club Aranyakaa Mandya" loading="lazy" /></div>
+<div class="rg-card-body">
+<div class="rg-card-badges"><span class="rg-badge gold">🌾 Farm Focus</span><span class="rg-badge">Family Favorite</span></div>
+<p class="rg-loc">📍 Mandya · 90 km</p>
+<h3 class="rg-name">Club Aranyakaa Mandya</h3>
+<p class="rg-desc">Immersive organic farm experience in the heart of Karnataka's rice bowl. Harvest-to-table dining, village walks, and rural immersion.</p>
+<div class="rg-meta">
+<span class="rg-meta-item">⭐ 4.9</span>
+<span class="rg-meta-item">🌾 Farm Stay</span>
+<span class="rg-meta-item">👥 Max 60</span>
+<span class="rg-meta-item">🛏 10 Rooms</span>
+</div>
+<a href="resort-detail.html?resort=mandya" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+</div>
+
+<!-- Resort 5 - Goa -->
+<div class="rg-card reveal" style="transition-delay:.4s">
+<div class="rg-card-img"><img src="src/resort-goa.png" alt="Club Aranyakaa Goa" loading="lazy" /></div>
+<div class="rg-card-body">
+<div class="rg-card-badges"><span class="rg-badge">🏖️ Beach</span><span class="rg-badge">New Property</span></div>
+<p class="rg-loc">📍 Goa · South Goa</p>
+<h3 class="rg-name">Club Aranyakaa Goa</h3>
+<p class="rg-desc">Our newest property on the unspoiled south Goa coast. Beachfront luxury with spice garden tours and river cruises.</p>
+<div class="rg-meta">
+<span class="rg-meta-item">⭐ 4.8</span>
+<span class="rg-meta-item">🏖️ Beachfront</span>
+<span class="rg-meta-item">👥 Max 90</span>
+<span class="rg-meta-item">🛏 15 Rooms</span>
+</div>
+<a href="resort-detail.html?resort=goa" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Featured Resort -->
+<section class="featured-resort">
+<div class="container">
+<div class="fr-grid">
+<div class="fr-img reveal-l">
+<img src="src/resort-bangalore.png" alt="Bangalore Featured" loading="lazy" />
+</div>
+<div class="fr-content reveal-r">
+<p class="label">Flagship Property</p>
+<div class="gold-rule"></div>
+<h3 class="fr-name">Club Aranyakaa<br><span class="em">Bangalore</span></h3>
+<p>Our most popular property and the birthplace of the Aranyakaa philosophy. Set across 42 acres of pristine wilderness in Ramanagara — just 55 km from the city, yet worlds away.</p>
+<div class="fr-features">
+<div class="fr-feat">42 Acres of Wilderness</div>
+<div class="fr-feat">100% Solar Powered</div>
+<div class="fr-feat">Organic Farm-to-Table</div>
+<div class="fr-feat">Award-Winning Spa</div>
+<div class="fr-feat">Infinity Pool</div>
+<div class="fr-feat">Stargazing Deck</div>
+<div class="fr-feat">Corporate Event Spaces</div>
+<div class="fr-feat">18 Unique Accommodations</div>
+</div>
+<a href="resort-detail.html?resort=bangalore" class="btn-gold">Explore This Resort</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Comparison Table -->
+<section id="compare">
+<div class="container">
+<div class="reveal">
+<p class="label">Compare Properties</p>
+<div class="gold-rule"></div>
+<h2 class="headline">Find Your <span class="em">Perfect Match</span></h2>
+</div>
+<table class="compare-table reveal" style="transition-delay:.1s;">
+<thead>
+<tr>
+<th>Feature</th>
+<th>Bangalore</th>
+<th>Mysore</th>
+<th>Chennai</th>
+<th>Mandya</th>
+<th>Goa</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Location Type</td><td>Forest & Hills</td><td>Heritage & Rural</td><td>Coastal & Mangrove</td><td>Farmland</td><td>Beachfront</td></tr>
+<tr><td>Distance from City</td><td>55 km</td><td>140 km</td><td>120 km</td><td>90 km</td><td>35 km</td></tr>
+<tr><td>Property Size</td><td>42 Acres</td><td>25 Acres</td><td>30 Acres</td><td>18 Acres</td><td>22 Acres</td></tr>
+<tr><td>Max Capacity</td><td>120 Guests</td><td>80 Guests</td><td>100 Guests</td><td>60 Guests</td><td>90 Guests</td></tr>
+<tr><td>Swimming Pool</td><td class="check">✓ Infinity</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓ Ocean</td></tr>
+<tr><td>Spa & Wellness</td><td class="check">✓ Full Service</td><td class="check">✓</td><td class="cross">Limited</td><td class="check">✓</td><td class="check">✓</td></tr>
+<tr><td>Organic Farm</td><td class="check">✓ 80% Sourced</td><td class="check">✓</td><td class="cross">—</td><td class="check">✓✓ Full Farm</td><td class="check">✓ Spice Garden</td></tr>
+<tr><td>Adventure Activities</td><td class="check">✓✓ Extensive</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓ Water Sports</td></tr>
+<tr><td>Wedding Venue</td><td class="check">✓ 300 Capacity</td><td class="check">✓ 150 Capacity</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓ 200 Capacity</td></tr>
+<tr><td>Starting Price</td><td class="price-highlight">₹3,500</td><td class="price-highlight">₹2,800</td><td class="price-highlight">₹2,500</td><td class="price-highlight">₹2,200</td><td class="price-highlight">₹3,200</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+<div class="container">
+<div class="testi-hd reveal">
+<p class="label">Guest Stories</p>
+<div class="gold-rule" style="margin:18px auto 28px;"></div>
+<h2 class="headline">Voices of Our <span class="em">Community</span></h2>
+</div>
+<div class="tgrid">
+<div class="tc reveal"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">Club Aranyakaa is our family's new weekend tradition! The kids loved planting saplings while we relaxed by the pool and enjoyed fresh organic meals. Luxury wrapped in nature.</p><div class="tc-author"><div class="tc-av">A</div><div><div class="tc-name">Ananya Sharma</div><div class="tc-role">Family Traveler · Bangalore</div></div></div></div>
+<div class="tc reveal" style="transition-delay:.12s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">We celebrated our anniversary here — candle-lit farm-to-table dinner under the stars, a couples spa session, and quiet morning walks through lush trails. Pure magic.</p><div class="tc-author"><div class="tc-av">R</div><div><div class="tc-name">Rajesh & Priya Mehta</div><div class="tc-role">Anniversary Retreat</div></div></div></div>
+<div class="tc reveal" style="transition-delay:.24s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">The yoga deck overlooking the farmlands and morning meditation sessions were exactly what I needed. I left feeling lighter in body and mind. An extraordinary escape.</p><div class="tc-author"><div class="tc-av">V</div><div><div class="tc-name">Vikram Rao</div><div class="tc-role">Wellness Seeker</div></div></div></div>
+<div class="tc reveal" style="transition-delay:.36s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">Exchanging our RCI points for a stay at Club Aranyakaa was the best decision. The eco-luxe vibe, attentive staff, and sustainable practices made it stand out.</p><div class="tc-author"><div class="tc-av">S</div><div><div class="tc-name">Sarah Thomas</div><div class="tc-role">RCI Member · International</div></div></div></div>
+<div class="tc reveal" style="transition-delay:.48s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">Our corporate retreat transformed our team. The bonfire sessions and nature activities created connections that no conference room ever could. Highly recommend.</p><div class="tc-author"><div class="tc-av">K</div><div><div class="tc-name">Kiran Patel</div><div class="tc-role">Corporate Lead · Infosys</div></div></div></div>
+<div class="tc reveal" style="transition-delay:.6s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">We brought three generations together. Grandparents loved the temple garden, kids ran wild in play areas, and we all gathered around the bonfire. Memories made forever.</p><div class="tc-author"><div class="tc-av">M</div><div><div class="tc-name">Meera Iyer</div><div class="tc-role">Multi-Gen Family · Chennai</div></div></div></div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section id="resort-cta">
+<div class="container">
+<div class="rcta reveal">
+<div class="rcta-orn"></div>
+<p class="label" style="justify-content:center;">Need Help Deciding?</p>
+<div style="height:16px;"></div>
+<h2>Can't Choose? <em>Let Us Help.</em></h2>
+<p>Our reservations team knows every property inside out. Share your preferences and we'll curate the perfect retreat for you.</p>
+<div class="rcta-btns">
+<a href="tel:+918050873002" class="btn-gold">📞 Call Our Team</a>
+<a href="mailto:hello@clubaranyakaa.com" class="btn-line">✉️ Send Inquiry</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<div class="container">
+<div class="ft">
+<div><div class="fb-logo">CLUB ARANYAKAA</div><div class="fb-tag">Eco-Luxe Retreats · Est. 2019</div><p class="fb-desc">Where the wild and the refined converge. Crafting moments of extraordinary connection with nature across Karnataka and beyond.</p><div class="fb-socials"><div class="fsoc">in</div><div class="fsoc">f</div><div class="fsoc">ig</div><div class="fsoc">yt</div></div></div>
+<div class="fc"><h4>Our Resorts</h4><ul><li><a href="resort-detail.html?resort=bangalore">Club Aranyakaa Bangalore</a></li><li><a href="resort-detail.html?resort=chennai">Club Aranyakaa Chennai</a></li><li><a href="resort-detail.html?resort=mysore">Club Aranyakaa Mysore</a></li><li><a href="resort-detail.html?resort=mandya">Club Aranyakaa Mandya</a></li><li><a href="resort-detail.html?resort=goa">Club Aranyakaa Goa</a></li></ul></div>
+<div class="fc"><h4>Quick Links</h4><ul><li><a href="about.html">About Us</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="membership.html">Membership</a></li><li><a href="resorts.html">All Resorts</a></li><li><a href="about.html#contact">Contact Us</a></li></ul></div>
+<div class="fc"><h4>Reach Us</h4><div class="fco"><div class="fco-item"><div class="fco-icon">📞</div><div class="fco-text">+91 8050 873 002<br>Mon–Sat, 10 AM – 7 PM</div></div><div class="fco-item"><div class="fco-icon">✉️</div><div class="fco-text">hello@clubaranyakaa.com</div></div></div></div>
+</div>
+<div class="fbot"><p>© 2025 Club Aranyakaa · Code of Growth. All Rights Reserved.</p><div class="flegal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Cookie Policy</a></div></div>
+</div>
+</footer>
+
+<script>
+// Cursor, Nav, Reveal — same as other pages
+const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function mc(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(mc);}mc();
+document.querySelectorAll('a,button,.rg-card,.tc,.mc').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.7)';ring.style.opacity='1';});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.6';});});
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mnav').classList.add('open'));
+document.getElementById('mnav-close').addEventListener('click',()=>document.getElementById('mnav').classList.remove('open'));
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

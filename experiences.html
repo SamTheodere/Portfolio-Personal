@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Discover 50+ curated experiences at Club Aranyakaa — from Ayurvedic wellness to farm harvests, wilderness dinners, and adventure activities." />
+<title>Experiences — Club Aranyakaa | Curated Nature Retreats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared-styles.css" />
+<style>
+/* Hero */
+.exp-hero { padding: calc(var(--nav-h) + 80px) 0 100px; background: var(--bg-warm); position: relative; overflow: hidden; }
+.exp-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(184,150,62,0.08) 0%, transparent 60%); }
+.exp-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; color: var(--ink); line-height: 1.1; margin-bottom: 18px; }
+
+/* Experience Categories */
+#categories { padding: 80px 0; background: var(--bg); }
+.cat-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; margin-top: 48px; }
+.cat-card { position: relative; overflow: hidden; cursor: pointer; }
+.cat-img { aspect-ratio: 3/4; overflow: hidden; position: relative; }
+.cat-img img { transition: transform 0.6s ease; }
+.cat-card:hover .cat-img img { transform: scale(1.1); }
+.cat-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,30,26,0.85) 0%, transparent 60%); }
+.cat-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; z-index: 2; }
+.cat-name { font-family: var(--font-display); font-size: 1rem; color: var(--white); margin-bottom: 4px; }
+.cat-count { font-family: var(--font-ui); font-size: 0.6rem; color: var(--gold-light); }
+
+/* Experience Tabs */
+#exp-tabs { padding: 28px 0; background: var(--bg); border-bottom: 1px solid var(--border-light); position: sticky; top: var(--nav-h); z-index: 100; }
+.tabs-wrap { display: flex; gap: 0; overflow-x: auto; }
+.etab { font-family: var(--font-ui); font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); padding: 14px 24px; cursor: pointer; background: none; border: none; border-bottom: 2px solid transparent; transition: color 0.3s, border-color 0.3s; white-space: nowrap; }
+.etab.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+/* Experience Cards */
+#exp-grid { padding: 80px 0 120px; background: var(--bg); }
+.epanels { display: none; }
+.epanels.active { display: block; }
+.exp-grid-inner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.ecard { background: var(--white); border: 1px solid var(--border-light); overflow: hidden; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+.ecard:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.07); }
+.ecard-img { aspect-ratio: 16/9; overflow: hidden; }
+.ecard-img img { transition: transform 0.6s ease; }
+.ecard:hover .ecard-img img { transform: scale(1.08); }
+.ecard-body { padding: 24px; }
+.ecard-tag { font-family: var(--font-ui); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.ecard-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+.ecard-desc { font-family: var(--font-ui); font-size: 0.75rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 18px; }
+.ecard-details { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border-light); }
+.ed-item { font-family: var(--font-ui); font-size: 0.62rem; color: var(--ink-soft); display: flex; align-items: center; gap: 5px; }
+.ecard-footer { display: flex; justify-content: space-between; align-items: center; }
+.ep-price { font-family: var(--font-display); font-size: 1.2rem; color: var(--gold); }
+.ep-price span { font-family: var(--font-ui); font-size: 0.58rem; color: var(--ink-soft); display: block; }
+.ebook { font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); background: var(--gold); padding: 10px 18px; transition: background 0.3s; }
+.ebook:hover { background: var(--gold-dark); }
+
+/* Featured Experience */
+#featured-exp { padding: 120px 0; background: var(--bg-warm); }
+.fe-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+.fe-img { aspect-ratio: 4/3; overflow: hidden; border: 1px dashed var(--gold-line); }
+.fe-img img { transition: transform 0.7s ease; }
+.fe-img:hover img { transform: scale(1.05); }
+.fe-badge { display: inline-block; font-family: var(--font-ui); font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--white); background: var(--gold); padding: 5px 14px; margin-bottom: 14px; }
+.fe-title { font-family: var(--font-display); font-size: 2rem; color: var(--ink); margin-bottom: 16px; }
+.fe-desc { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: var(--ink-mid); line-height: 1.85; margin-bottom: 24px; }
+.fe-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+.fe-h { display: flex; align-items: center; gap: 8px; font-family: var(--font-ui); font-size: 0.72rem; color: var(--ink-mid); }
+.fe-h::before { content: '✓'; color: var(--gold); font-weight: 700; }
+
+/* Packages */
+#packages { padding: 120px 0; background: var(--bg); }
+.pkg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+.pkg-card { background: var(--white); border: 1px solid var(--border-light); overflow: hidden; transition: border-color 0.35s, transform 0.35s, box-shadow 0.35s; }
+.pkg-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.pkg-img { aspect-ratio: 16/9; overflow: hidden; }
+.pkg-img img { transition: transform 0.6s ease; }
+.pkg-card:hover .pkg-img img { transform: scale(1.08); }
+.pkg-body { padding: 28px; }
+.pkg-tag { font-family: var(--font-ui); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
+.pkg-title { font-family: var(--font-display); font-size: 1.3rem; color: var(--ink); margin-bottom: 12px; }
+.pkg-desc { font-family: var(--font-ui); font-size: 0.75rem; color: var(--ink-soft); line-height: 1.7; margin-bottom: 18px; }
+.pkg-includes { margin-bottom: 20px; }
+.pkg-includes h4 { font-family: var(--font-ui); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 10px; }
+.pkg-list { display: flex; flex-direction: column; gap: 6px; }
+.pkg-list li { font-family: var(--font-ui); font-size: 0.7rem; color: var(--ink-mid); display: flex; align-items: center; gap: 8px; }
+.pkg-list li::before { content: '✓'; color: var(--gold); font-size: 0.7rem; }
+.pkg-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 18px; }
+.pkg-price strong { font-family: var(--font-display); font-size: 1.5rem; color: var(--gold); }
+.pkg-price small { font-family: var(--font-ui); font-size: 0.6rem; color: var(--ink-soft); display: block; }
+.pkg-popular { background: var(--gold); color: var(--white); font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 8px; margin-bottom: 8px; display: inline-block; }
+
+/* Seasonal */
+#seasonal { padding: 120px 0; background: var(--bg-section); }
+.season-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 48px; }
+.season-card { padding: 24px; background: var(--white); border: 1px solid var(--border-light); text-align: center; transition: border-color 0.3s; }
+.season-card:hover { border-color: var(--gold); }
+.season-icon { font-size: 2rem; margin-bottom: 12px; }
+.season-name { font-family: var(--font-display); font-size: 1rem; color: var(--ink); margin-bottom: 6px; }
+.season-desc { font-family: var(--font-ui); font-size: 0.68rem; color: var(--ink-soft); line-height: 1.55; }
+
+/* CTA */
+#exp-cta { padding: 120px 0; background: var(--bg-dark-card); }
+.ecta-inner { text-align: center; max-width: 680px; margin: 0 auto; }
+.ecta-inner h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500; color: var(--white); margin: 18px 0; }
+.ecta-inner h2 em { color: var(--gold-light); font-style: italic; }
+.ecta-inner p { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 36px; }
+.ecta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+
+@media(max-width: 1100px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } .fe-grid { grid-template-columns: 1fr; } .pkg-grid { grid-template-columns: 1fr 1fr; } .season-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 900px) { .exp-grid-inner { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 600px) { .container { padding: 0 20px; } .cat-grid { grid-template-columns: repeat(2, 1fr); } .exp-grid-inner { grid-template-columns: 1fr; } .pkg-grid { grid-template-columns: 1fr; } .fe-highlights { grid-template-columns: 1fr; } .season-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<div id="mnav">
+<span id="mnav-close">✕</span>
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="resorts.html">Our Resorts</a>
+<a href="experiences.html" class="active">Experiences</a>
+<a href="membership.html">Membership</a>
+<a href="membership.html" class="btn-gold" style="margin-top:16px;font-size:0.73rem;padding:14px 36px;">Join the Club</a>
+</div>
+
+<nav id="nav" class="solid">
+<div class="container">
+<div class="nav-inner">
+<a href="index.html" class="nav-logo">
+<div class="nav-logo-mark">
+<svg viewBox="0 0 60 60" fill="none"><path d="M30 8 C30 8, 14 20, 14 36 C14 44.8 21.2 52 30 52 C38.8 52 46 44.8 46 36 C46 20, 30 8, 30 8Z" stroke="#B8963E" stroke-width="1.5" fill="none"/><path d="M30 18 L30 44" stroke="#B8963E" stroke-width="1" stroke-dasharray="2 3"/><path d="M22 28 C22 28, 30 24, 38 28" stroke="#B8963E" stroke-width="1" fill="none"/><path d="M20 36 C20 36, 30 30, 40 36" stroke="#B8963E" stroke-width="1" fill="none"/><circle cx="30" cy="36" r="2" fill="#B8963E"/></svg>
+</div>
+<div class="nav-logo-text-wrap"><span class="n1">CLUB ARANYAKAA</span><span class="n2">Eco-Luxe Retreats</span></div>
+</a>
+<div class="nav-links">
+<a href="about.html">About</a>
+<a href="resorts.html">Resorts</a>
+<a href="experiences.html" class="active">Experiences</a>
+<a href="membership.html">Membership</a>
+</div>
+<div class="nav-right">
+<div class="nav-phone">
+<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.09 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.59 2.91.72a2 2 0 011.72 2.03z"/></svg>
++91 8050 873 002
+</div>
+<a href="membership.html" class="btn-gold" style="font-size:0.68rem;padding:10px 22px;">Join the Club</a>
+</div>
+<div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</div>
+</div>
+</nav>
+
+<!-- Hero -->
+<section class="exp-hero">
+<div class="container">
+<div class="breadcrumb">
+<a href="index.html">Home</a><span class="sep">›</span><span>Experiences</span>
+</div>
+<p class="page-hero-eyebrow">Curated Journeys</p>
+<h1>Every Moment<br>Deserves <span class="em">Magic</span></h1>
+<p class="sub">50+ carefully curated experiences across five properties — from dawn yoga to starlight dinners, forest treks to Ayurvedic rituals. Your perfect retreat awaits.</p>
+</div>
+<span class="page-hero-bg-text" style="right:-40px;">EXPERIENCES</span>
+</section>
+
+<!-- Categories -->
+<section id="categories">
+<div class="container">
+<div class="reveal">
+<p class="label">Browse By</p>
+<div class="gold-rule"></div>
+<h2 class="headline">Experience <span class="em">Categories</span></h2>
+</div>
+<div class="cat-grid">
+<div class="cat-card reveal">
+<div class="cat-img"><img src="src/cat-wellness.jpg" alt="Wellness" loading="lazy" /></div>
+<div class="cat-info"><p class="cat-name">Wellness & Spa</p><p class="cat-count">12 Experiences</p></div>
+</div>
+<div class="cat-card reveal" style="transition-delay:.08s">
+<div class="cat-img"><img src="src/cat-dining.jpg" alt="Dining" loading="lazy" /></div>
+<div class="cat-info"><p class="cat-name">Dining</p><p class="cat-count">8 Experiences</p></div>
+</div>
+<div class="cat-card reveal" style="transition-delay:.16s">
+<div class="cat-img"><img src="src/cat-nature.jpg" alt="Nature" loading="lazy" /></div>
+<div class="cat-info"><p class="cat-name">Nature & Farm</p><p class="cat-count">10 Experiences</p></div>
+</div>
+<div class="cat-card reveal" style="transition-delay:.24s">
+<div class="cat-img"><img src="src/cat-adventure.jpg" alt="Adventure" loading="lazy" /></div>
+<div class="cat-info"><p class="cat-name">Adventure</p><p class="cat-count">8 Experiences</p></div>
+</div>
+<div class="cat-card reveal" style="transition-delay:.32s">
+<div class="cat-img"><img src="src/cat-culture.jpg" alt="Culture" loading="lazy" /></div>
+<div class="cat-info"><p class="cat-name">Culture & Heritage</p><p class="cat-count">6 Experiences</p></div>
+</div>
+<div class="cat-card reveal" style="transition-delay:.4s">
+<div class="cat-img"><img src="src/cat-romance.jpg" alt="Romance" loading="lazy" /></div>
+<div class="cat-info"><p class="cat-name">Romance</p><p class="cat-count">6 Experiences</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Tabs -->
+<div id="exp-tabs">
+<div class="container">
+<div class="tabs-wrap">
+<button class="etab active" data-tab="all">All Experiences</button>
+<button class="etab" data-tab="wellness">Wellness & Spa</button>
+<button class="etab" data-tab="dining">Dining</button>
+<button class="etab" data-tab="nature">Nature & Farm</button>
+<button class="etab" data-tab="adventure">Adventure</button>
+<button class="etab" data-tab="romance">Romance</button>
+<button class="etab" data-tab="culture">Culture</button>
+</div>
+</div>
+</div>
+
+<!-- Experiences Grid -->
+<section id="exp-grid">
+<div class="container">
+<div class="epanels active" id="tab-all">
+<div class="exp-grid-inner">
+<div class="ecard reveal">
+<div class="ecard-img"><img src="src/exp-wellness.jpg" alt="Soul Reset" loading="lazy" /></div>
+<div class="ecard-body">
+<p class="ecard-tag">Wellness · 5 Days</p>
+<h3 class="ecard-title">Soul Reset Retreat</h3>
+<p class="ecard-desc">Complete mental and physical renewal through yoga, meditation, breathwork, and Ayurvedic treatments.</p>
+<div class="ecard-details">
+<span class="ed-item">🧘 Yoga & Meditation</span>
+<span class="ed-item">💆 Ayurvedic Spa</span>
+<span class="ed-item">🌿 Organic Meals</span>
+</div>
+<div class="ecard-footer"><div class="ep-price">₹ 5,000 <span>Per Person / Day</span></div><a href="tel:+918050873002" class="ebook">Book</a></div>
+</div>
+</div>
+<div class="ecard reveal" style="transition-delay:.1s">
+<div class="ecard-img"><img src="src/exp-dining.jpg" alt="Wilderness Dinner" loading="lazy" /></div>
+<div class="ecard-body">
+<p class="ecard-tag">Romantic · Seasonal</p>
+<h3 class="ecard-title">Wilderness Dinner</h3>
+<p class="ecard-desc">Candlelit dinner under the stars in a private forest clearing. Multi-course organic menu prepared on-site.</p>
+<div class="ecard-details">
+<span class="ed-item">🌙 Private Setup</span>
+<span class="ed-item">🍽️ 5-Course Meal</span>
+<span class="ed-item">⏱ 3 Hours</span>
+</div>
+<div class="ecard-footer"><div class="ep-price">₹ 4,000 <span>Per Couple</span></div><a href="tel:+918050873002" class="ebook">Book</a></div>
+</div>
+</div>
+<div class="ecard reveal" style="transition-delay:.2s">
+<div class="ecard-img"><img src="src/exp-farm.jpg" alt="Farm Harvest" loading="lazy" /></div>
+<div class="ecard-body">
+<p class="ecard-tag">Daily · All Guests</p>
+<h3 class="ecard-title">Farm Harvest Morning</h3>
+<p class="ecard-desc">Join our farm team at dawn to pick seasonal produce, learn organic farming, and carry your harvest to breakfast.</p>
+<div class="ecard-details">
+<span class="ed-item">🌾 Organic Farm</span>
+<span class="ed-item">🌅 6:30 AM Start</span>
+<span class="ed-item">👨‍🌾 Expert Guide</span>
+</div>
+<div class="ecard-footer"><div class="ep-price">₹ 800 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div>
+</div>
+</div>
+<div class="ecard reveal" style="transition-delay:.3s">
+<div class="ecard-img"><img src="src/exp-adventure.jpg" alt="Forest Trek" loading="lazy" /></div>
+<div class="ecard-body">
+<p class="ecard-tag">Adventure · Full Day</p>
+<h3 class="ecard-title">Forest Exploration Trek</h3>
+<p class="ecard-desc">Guided trek through ancient forests, rocky hills, and hidden waterfalls. Includes rock climbing and camping.</p>
+<div class="ecard-details">
+<span class="ed-item">🏔️ Guided Trek</span>
+<span class="ed-item">🧗 Rock Climbing</span>
+<span class="ed-item">⛺ Overnight Camp</span>
+</div>
+<div class="ecard-footer"><div class="ep-price">₹ 2,500 <span>Per Person / Day</span></div><a href="tel:+918050873002" class="ebook">Book</a></div>
+</div>
+</div>
+<div class="ecard reveal" style="transition-delay:.4s">
+<div class="ecard-img"><img src="src/exp-stargazing.jpg" alt="Stargazing" loading="lazy" /></div>
+<div class="ecard-body">
+<p class="ecard-tag">Nightly · Clear Skies</p>
+<h3 class="ecard-title">Astronomy & Stargazing</h3>
+<p class="ecard-desc">Guided stargazing session with a professional telescope. Learn constellations, spot planets, and meteor showers.</p>
+<div class="ecard-details">
+<span class="ed-item">🔭 Telescope</span>
+<span class="ed-item">🌌 Expert Guide</span>
+<span class="ed-item">⏱ 2 Hours</span>
+</div>
+<div class="ecard-footer"><div class="ep-price">₹ 1,200 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div>
+</div>
+</div>
+<div class="ecard reveal" style="transition-delay:.5s">
+<div class="ecard-img"><img src="src/exp-yoga.jpg" alt="Sunrise Yoga" loading="lazy" /></div>
+<div class="ecard-body">
+<p class="ecard-tag">Daily · Morning</p>
+<h3 class="ecard-title">Sunrise Yoga & Meditation</h3>
+<p class="ecard-desc">Start your day with an open-air yoga session overlooking the forest. All levels welcome. Certified instructors.</p>
+<div class="ecard-details">
+<span class="ed-item">🌅 6:00 AM</span>
+<span class="ed-item">🧘 All Levels</span>
+<span class="ed-item">👨‍🏫 Certified Teacher</span>
+</div>
+<div class="ecard-footer"><div class="ep-price">₹ 500 <span>Per Person / Session</span></div><a href="tel:+918050873002" class="ebook">Book</a></div>
+</div>
+</div>
+</div>
+<div class="epanels" id="tab-wellness">
+<div class="exp-grid-inner">
+<div class="ecard"><div class="ecard-img"><img src="src/exp-wellness.jpg" alt="Soul Reset" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">5-7 Days</p><h3 class="ecard-title">Soul Reset Program</h3><p class="ecard-desc">Complete renewal — yoga, meditation, Panchakarma detox, and Ayurvedic treatments.</p><div class="ecard-footer"><div class="ep-price">₹ 5,000 <span>Per Person / Day</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-spa.jpg" alt="Spa" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Couples · 2 Hours</p><h3 class="ecard-title">Couples Spa Sanctuary</h3><p class="ecard-desc">Full-day private spa with synchronized massage, herbal bath, and botanical treatments.</p><div class="ecard-footer"><div class="ep-price">₹ 8,000 <span>Per Couple</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-meditation.jpg" alt="Meditation" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Digital Detox · 5 Days</p><h3 class="ecard-title">Forest Immersion Retreat</h3><p class="ecard-desc">Screen-free living, nature therapy, guided meditation, and community circles.</p><div class="ecard-footer"><div class="ep-price">₹ 3,500 <span>Per Person / Day</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+</div>
+</div>
+<div class="epanels" id="tab-dining">
+<div class="exp-grid-inner">
+<div class="ecard"><div class="ecard-img"><img src="src/exp-dining.jpg" alt="Farm Dining" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">All Properties</p><h3 class="ecard-title">Farm-to-Table Experience</h3><p class="ecard-desc">Harvest your own ingredients and watch our chefs create a multi-course meal.</p><div class="ecard-footer"><div class="ep-price">₹ 2,500 <span>Per Couple</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-wilderness.jpg" alt="Wilderness Dinner" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Romantic</p><h3 class="ecard-title">Starlight Wilderness Dinner</h3><p class="ecard-desc">Candlelit dinner under the stars. Private setup in the forest clearing.</p><div class="ecard-footer"><div class="ep-price">₹ 4,000 <span>Per Couple</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-breakfast.jpg" alt="Breakfast" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Morning Ritual</p><h3 class="ecard-title">Sunrise Breakfast Trail</h3><p class="ecard-desc">Nature walk ending in a freshly prepared organic breakfast at the forest edge.</p><div class="ecard-footer"><div class="ep-price">₹ 1,200 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+</div>
+</div>
+<div class="epanels" id="tab-nature">
+<div class="exp-grid-inner">
+<div class="ecard"><div class="ecard-img"><img src="src/exp-farm.jpg" alt="Farm" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Daily</p><h3 class="ecard-title">Farm Harvest Morning</h3><p class="ecard-desc">Join our farmers at dawn. Pick produce, learn organic methods, carry to breakfast.</p><div class="ecard-footer"><div class="ep-price">₹ 800 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-stargazing.jpg" alt="Stargazing" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Nightly</p><h3 class="ecard-title">Astronomy & Stargazing</h3><p class="ecard-desc">Guided stargazing with professional telescope. Constellations, planets, meteor showers.</p><div class="ecard-footer"><div class="ep-price">₹ 1,200 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-birding.jpg" alt="Birding" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Early Morning</p><h3 class="ecard-title">Bird Watching Trail</h3><p class="ecard-desc">Guided early morning walk with our resident ornithologist. 200+ species documented.</p><div class="ecard-footer"><div class="ep-price">₹ 600 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+</div>
+</div>
+<div class="epanels" id="tab-adventure">
+<div class="exp-grid-inner">
+<div class="ecard"><div class="ecard-img"><img src="src/exp-adventure.jpg" alt="Trek" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Full Day</p><h3 class="ecard-title">Forest Exploration Trek</h3><p class="ecard-desc">Guided trek, rock climbing, and overnight camping in the forest.</p><div class="ecard-footer"><div class="ep-price">₹ 2,500 <span>Per Person / Day</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-cycling.jpg" alt="Cycling" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Half Day</p><h3 class="ecard-title">Cycling Trails</h3><p class="ecard-desc">12 km of scenic cycling through the property and adjoining forest.</p><div class="ecard-footer"><div class="ep-price">₹ 800 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-archery.jpg" alt="Archery" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">1 Hour</p><h3 class="ecard-title">Archery Range</h3><p class="ecard-desc">Professional 30m archery range with trained instructors.</p><div class="ecard-footer"><div class="ep-price">₹ 500 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+</div>
+</div>
+<div class="epanels" id="tab-romance">
+<div class="exp-grid-inner">
+<div class="ecard"><div class="ecard-img"><img src="src/exp-wilderness.jpg" alt="Wilderness" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Romantic</p><h3 class="ecard-title">Wilderness Dinner</h3><p class="ecard-desc">Candlelit dinner under the stars. Private forest clearing setup.</p><div class="ecard-footer"><div class="ep-price">₹ 4,000 <span>Per Couple</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-spa.jpg" alt="Couples Spa" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Couples</p><h3 class="ecard-title">Couples Spa Sanctuary</h3><p class="ecard-desc">Full-day private spa ritual with herbal baths and synchronized massage.</p><div class="ecard-footer"><div class="ep-price">₹ 8,000 <span>Per Couple</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-sunset.jpg" alt="Sunset" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Romantic</p><h3 class="ecard-title">Sunset Lake Cruise</h3><p class="ecard-desc">Private boat cruise on the lake at sunset with champagne and cheese board.</p><div class="ecard-footer"><div class="ep-price">₹ 3,000 <span>Per Couple</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+</div>
+</div>
+<div class="epanels" id="tab-culture">
+<div class="exp-grid-inner">
+<div class="ecard"><div class="ecard-img"><img src="src/exp-heritage.jpg" alt="Heritage" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Mysore</p><h3 class="ecard-title">Palace & Silk Tour</h3><p class="ecard-desc">Curated tour of Mysore Palace, silk weaving village, and traditional markets.</p><div class="ecard-footer"><div class="ep-price">₹ 1,800 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-cooking.jpg" alt="Cooking" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">All Properties</p><h3 class="ecard-title">Traditional Cooking Class</h3><p class="ecard-desc">Learn authentic Karnataka recipes from our chef using organic farm ingredients.</p><div class="ecard-footer"><div class="ep-price">₹ 1,500 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+<div class="ecard"><div class="ecard-img"><img src="src/exp-folk.jpg" alt="Folk" loading="lazy" /></div><div class="ecard-body"><p class="ecard-tag">Nightly</p><h3 class="ecard-title">Folk Music & Storytelling</h3><p class="ecard-desc">Evening bonfire with local folk musicians and storytellers from nearby villages.</p><div class="ecard-footer"><div class="ep-price">₹ 400 <span>Per Person</span></div><a href="tel:+918050873002" class="ebook">Book</a></div></div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Featured Experience -->
+<section id="featured-exp">
+<div class="container">
+<div class="fe-grid">
+<div class="fe-img reveal-l">
+<img src="src/exp-wellness.jpg" alt="Featured Experience" loading="lazy" />
+</div>
+<div class="reveal-r">
+<span class="fe-badge">Most Popular</span>
+<h2 class="fe-title">The Aranyakaa <span class="em">Signature Experience</span></h2>
+<p class="fe-desc">The Soul Reset Retreat is our most transformative program — designed for those seeking genuine renewal. 5 to 7 days of daily yoga, guided meditation, Ayurvedic treatments, organic farm meals, and mindful practices led by certified practitioners.</p>
+<div class="fe-highlights">
+<div class="fe-h">Daily Sunrise Yoga & Meditation</div>
+<div class="fe-h">2 Hours Spa Daily</div>
+<div class="fe-h">Farm-to-Table Organic Meals</div>
+<div class="fe-h">Guided Nature Walks</div>
+<div class="fe-h">Ayurvedic Consultation</div>
+<div class="fe-h">Breathwork Sessions</div>
+</div>
+<a href="tel:+918050873002" class="btn-gold">Book Soul Reset Retreat <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Packages -->
+<section id="packages">
+<div class="container">
+<div style="text-align:center;">
+<p class="label" style="justify-content:center;">Curated Packages</p>
+<div class="gold-rule" style="margin:18px auto 0;"></div>
+<h2 class="headline">Complete <span class="em">Retreat Packages</span></h2>
+</div>
+<div class="pkg-grid">
+<div class="pkg-card reveal">
+<div class="pkg-img"><img src="src/pkg-weekend.jpg" alt="Weekend" loading="lazy" /></div>
+<div class="pkg-body">
+<p class="pkg-tag">2 Days / 1 Night</p>
+<h3 class="pkg-title">Weekend Escape</h3>
+<p class="pkg-desc">Perfect for a quick reset. Everything you need for a transformative weekend in nature.</p>
+<div class="pkg-includes">
+<h4>Includes</h4>
+<ul class="pkg-list">
+<li>Deluxe accommodation</li>
+<li>Breakfast & dinner</li>
+<li>Sunrise yoga session</li>
+<li>Farm harvest experience</li>
+<li>Bonfire evening</li>
+<li>Access to all amenities</li>
+</ul>
+</div>
+<div class="pkg-footer">
+<div class="pkg-price"><strong>₹ 8,500</strong><small>Per Person</small></div>
+<a href="tel:+918050873002" class="ebook">Book</a>
+</div>
+</div>
+</div>
+<div class="pkg-card reveal" style="transition-delay:.1s">
+<div class="pkg-img"><img src="src/pkg-wellness.jpg" alt="Wellness" loading="lazy" /></div>
+<div class="pkg-body">
+<span class="pkg-popular">Most Popular</span>
+<p class="pkg-tag">3 Days / 2 Nights</p>
+<h3 class="pkg-title">Wellness Immersion</h3>
+<p class="pkg-desc">Our signature wellness package. A complete reset for body, mind, and spirit.</p>
+<div class="pkg-includes">
+<h4>Includes</h4>
+<ul class="pkg-list">
+<li>Suite accommodation</li>
+<li>All meals included</li>
+<li>Daily yoga & meditation</li>
+<li>2-hour spa treatment daily</li>
+<li>Ayurvedic consultation</li>
+<li>Guided nature walks</li>
+<li>Stargazing session</li>
+<li>Private bonfire setup</li>
+</ul>
+</div>
+<div class="pkg-footer">
+<div class="pkg-price"><strong>₹ 18,500</strong><small>Per Person</small></div>
+<a href="tel:+918050873002" class="ebook">Book</a>
+</div>
+</div>
+</div>
+<div class="pkg-card reveal" style="transition-delay:.2s">
+<div class="pkg-img"><img src="src/pkg-family.jpg" alt="Family" loading="lazy" /></div>
+<div class="pkg-body">
+<p class="pkg-tag">5 Days / 4 Nights</p>
+<h3 class="pkg-title">Family Adventure</h3>
+<p class="pkg-desc">Designed for families seeking quality time in nature. Something for every generation.</p>
+<div class="pkg-includes">
+<h4>Includes</h4>
+<ul class="pkg-list">
+<li>Family bungalow</li>
+<li>All meals included</li>
+<li>Kids activities & workshops</li>
+<li>Animal farm visit</li>
+<li>Family trek</li>
+<li>Bonfire & storytelling</li>
+<li>Kids pool access</li>
+<li>Evening entertainment</li>
+</ul>
+</div>
+<div class="pkg-footer">
+<div class="pkg-price"><strong>₹ 28,000</strong><small>Per Family (up to 4)</small></div>
+<a href="tel:+918050873002" class="ebook">Book</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Seasonal -->
+<section id="seasonal">
+<div class="container">
+<div style="text-align:center;">
+<p class="label" style="justify-content:center;">Seasonal Specials</p>
+<div class="gold-rule" style="margin:18px auto 0;"></div>
+<h2 class="headline">Limited-Time <span class="em">Experiences</span></h2>
+</div>
+<div class="season-grid">
+<div class="season-card reveal"><div class="season-icon">🌸</div><h4 class="season-name">Spring Bloom</h4><p class="season-desc">March–April · Wildflower walks, butterfly watching, bird migration season</p></div>
+<div class="season-card reveal" style="transition-delay:.08s"><div class="season-icon">🌧️</div><h4 class="season-name">Monsoon Renewal</h4><p class="season-desc">June–August · Waterfall treks, leech-free forest trails, indoor wellness</p></div>
+<div class="season-card reveal" style="transition-delay:.16s"><div class="season-icon">🍂</div><h4 class="season-name">Autumn Harvest</h4><p class="season-desc">September–November · Special harvest festivals, grape stomping, pumpkin trails</p></div>
+<div class="season-card reveal" style="transition-delay:.24s"><div class="season-icon">🎄</div><h4 class="season-name">Festive Season</h4><p class="season-desc">December–January · Special menus, New Year celebrations, star-lit nights</p></div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section id="exp-cta">
+<div class="container">
+<div class="ecta-inner reveal">
+<div class="rcta-orn"></div>
+<p class="label" style="justify-content:center;color:var(--gold);">Ready to Begin?</p>
+<h2>Choose Your <em>Perfect Experience</em></h2>
+<p>From a single morning yoga session to a full 7-day wellness transformation — we have experiences for every schedule, budget, and intention.</p>
+<div class="ecta-btns">
+<a href="tel:+918050873002" class="btn-gold">📞 Call to Book</a>
+<a href="mailto:hello@clubaranyakaa.com" class="btn-line" style="color:var(--gold-light);border-color:var(--gold-light);">✉️ Send Inquiry</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<div class="container">
+<div class="ft">
+<div><div class="fb-logo">CLUB ARANYAKAA</div><div class="fb-tag">Eco-Luxe Retreats · Est. 2019</div><p class="fb-desc">Where the wild and the refined converge.</p><div class="fb-socials"><div class="fsoc">in</div><div class="fsoc">f</div><div class="fsoc">ig</div><div class="fsoc">yt</div></div></div>
+<div class="fc"><h4>Our Resorts</h4><ul><li><a href="resort-detail.html?resort=bangalore">Bangalore</a></li><li><a href="resort-detail.html?resort=mysore">Mysore</a></li><li><a href="resort-detail.html?resort=chennai">Chennai</a></li><li><a href="resort-detail.html?resort=mandya">Mandya</a></li><li><a href="resort-detail.html?resort=goa">Goa</a></li></ul></div>
+<div class="fc"><h4>Quick Links</h4><ul><li><a href="about.html">About Us</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="membership.html">Membership</a></li><li><a href="resorts.html">All Resorts</a></li></ul></div>
+<div class="fc"><h4>Reach Us</h4><div class="fco"><div class="fco-item"><div class="fco-icon">📞</div><div class="fco-text">+91 8050 873 002</div></div><div class="fco-item"><div class="fco-icon">✉️</div><div class="fco-text">hello@clubaranyakaa.com</div></div></div></div>
+</div>
+<div class="fbot"><p>© 2025 Club Aranyakaa · All Rights Reserved.</p><div class="flegal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div>
+</div>
+</footer>
+
+<script>
+const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function mc(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(mc);}mc();
+document.querySelectorAll('a,button,.ecard,.pkg-card,.cat-card').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.7)';ring.style.opacity='1';});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.6';});});
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mnav').classList.add('open'));
+document.getElementById('mnav-close').addEventListener('click',()=>document.getElementById('mnav').classList.remove('open'));
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
+document.querySelectorAll('.etab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.etab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.epanels').forEach(p=>p.classList.remove('active'));tab.classList.add('active');const panel=document.getElementById('tab-'+tab.dataset.tab);if(panel)panel.classList.add('active');});});
+</script>
+</body>
+</html>

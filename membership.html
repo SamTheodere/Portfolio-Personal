@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Join Club Aranyakaa's exclusive membership for priority bookings, up to 40% off, RCI integration, and access to experiences simply not available to the public." />
+<title>Membership — Club Aranyakaa | Exclusive Eco-Luxe Access</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared-styles.css" />
+<style>
+/* Hero */
+.mem-hero { padding: calc(var(--nav-h) + 80px) 0 100px; background: var(--bg-warm); position: relative; overflow: hidden; }
+.mem-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(184,150,62,0.08) 0%, transparent 60%); }
+.mem-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; color: var(--ink); line-height: 1.1; margin-bottom: 18px; }
+
+/* Tier Cards */
+#tiers { padding: 120px 0; background: var(--bg); }
+.tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+.tier-card { background: var(--white); border: 2px solid var(--border-light); overflow: hidden; transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s; position: relative; }
+.tier-card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 20px 60px rgba(184,150,62,0.15); }
+.tier-card.featured { border-color: var(--gold); }
+.tier-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: 20px; right: -32px; background: var(--gold); color: var(--white); font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.12em; padding: 5px 40px; transform: rotate(45deg); }
+.tier-img { aspect-ratio: 16/9; overflow: hidden; }
+.tier-img img { transition: transform 0.6s ease; }
+.tier-card:hover .tier-img img { transform: scale(1.08); }
+.tier-body { padding: 32px; }
+.tier-name { font-family: var(--font-display); font-size: 1.4rem; color: var(--ink); margin-bottom: 6px; }
+.tier-subtitle { font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.tier-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border-light); }
+.tier-price strong { font-family: var(--font-display); font-size: 2.2rem; color: var(--gold); }
+.tier-price span { font-family: var(--font-ui); font-size: 0.7rem; color: var(--ink-soft); }
+.tier-features { margin-bottom: 24px; }
+.tf-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border-light); }
+.tf-item:last-child { border-bottom: none; }
+.tf-icon { width: 24px; height: 24px; flex-shrink: 0; background: var(--gold-glow); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--gold); }
+.tf-text { font-family: var(--font-ui); font-size: 0.75rem; color: var(--ink-mid); line-height: 1.5; }
+.tier-cta { display: block; text-align: center; width: 100%; }
+
+/* Benefits Section */
+#benefits { padding: 120px 0; background: var(--bg-section); }
+.ben-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.ben-img { aspect-ratio: 4/5; overflow: hidden; border: 1px dashed var(--gold-line); }
+.ben-img img { transition: transform 0.7s ease; }
+.ben-img:hover img { transform: scale(1.05); }
+.ben-content h3 { font-family: var(--font-display); font-size: 2rem; color: var(--ink); margin-bottom: 16px; }
+.ben-content p { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: var(--ink-mid); line-height: 1.85; margin-bottom: 28px; }
+.ben-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ben-card { padding: 20px; background: var(--white); border: 1px solid var(--border-light); transition: border-color 0.3s; }
+.ben-card:hover { border-color: var(--gold); }
+.ben-icon { font-size: 1.5rem; margin-bottom: 10px; }
+.ben-title { font-family: var(--font-display); font-size: 0.95rem; color: var(--ink); margin-bottom: 6px; }
+.ben-desc { font-family: var(--font-ui); font-size: 0.68rem; color: var(--ink-soft); line-height: 1.55; }
+
+/* RCI Section */
+#rci { padding: 120px 0; background: var(--bg-dark-card); }
+.rci-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.rci-label { font-family: var(--font-ui); font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 14px; }
+.rci-label::before { content: ''; display: block; width: 36px; height: 1px; background: var(--gold); }
+.rci-headline { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500; line-height: 1.12; color: var(--white); margin: 18px 0 24px; }
+.rci-headline em { color: var(--gold-light); font-style: italic; }
+.rci-desc { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: rgba(255,255,255,0.6); line-height: 1.85; margin-bottom: 32px; }
+.rci-steps { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+.rci-step { display: flex; gap: 14px; }
+.rs-num { width: 32px; height: 32px; flex-shrink: 0; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.85rem; color: var(--white); }
+.rs-text h4 { font-family: var(--font-display); font-size: 0.95rem; color: var(--white); margin-bottom: 4px; }
+.rs-text p { font-family: var(--font-ui); font-size: 0.72rem; color: rgba(255,255,255,0.5); }
+.rci-img { aspect-ratio: 4/3; overflow: hidden; }
+.rci-img img { transition: transform 0.6s ease; }
+.rci-img:hover img { transform: scale(1.05); }
+
+/* Testimonials */
+#mem-testimonials { padding: 120px 0; background: var(--bg-warm); }
+.mem-tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 48px; }
+.mem-tc { background: var(--white); border: 1px solid var(--border-light); padding: 28px; transition: border-color 0.35s; }
+.mem-tc:hover { border-color: var(--gold); }
+.mem-tc-qm { font-family: var(--font-display); font-size: 3.5rem; line-height: 0.5; color: var(--gold); opacity: 0.15; position: absolute; top: 16px; right: 20px; }
+.mem-tc { position: relative; }
+.mem-tc-stars { color: var(--gold); font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 14px; }
+.mem-tc-text { font-family: var(--font-body); font-size: 0.98rem; font-weight: 300; font-style: italic; color: var(--ink-mid); line-height: 1.75; margin-bottom: 16px; }
+.mem-tc-author { display: flex; align-items: center; gap: 10px; }
+.mem-tc-av { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 0.9rem; color: var(--white); }
+.mem-tc-name { font-family: var(--font-display); font-size: 0.85rem; color: var(--ink); }
+.mem-tc-tier { font-family: var(--font-ui); font-size: 0.58rem; color: var(--gold); }
+
+/* FAQ */
+#faq { padding: 120px 0; background: var(--bg); }
+.faq-hd { text-align: center; margin-bottom: 48px; }
+.faq-hd .label { justify-content: center; }
+.faq-hd .label::before { display: none; }
+.faq-hd .label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--gold); }
+.faq-grid { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; }
+.faq-item { border-bottom: 1px solid var(--border-light); }
+.faq-q { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; cursor: pointer; }
+.faq-q h4 { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; color: var(--ink); padding-right: 20px; }
+.faq-toggle { width: 28px; height: 28px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--gold); transition: transform 0.3s, background 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-toggle { transform: rotate(45deg); background: var(--gold); color: var(--white); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-a p { font-family: var(--font-ui); font-size: 0.78rem; color: var(--ink-soft); line-height: 1.75; padding-bottom: 22px; }
+
+/* CTA */
+#mem-cta { padding: 120px 0; background: var(--bg-section); }
+.mcta-inner { text-align: center; max-width: 680px; margin: 0 auto; }
+.mcta-inner h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500; color: var(--ink); margin: 18px 0; }
+.mcta-inner h2 em { color: var(--gold); font-style: italic; }
+.mcta-inner p { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: var(--ink-mid); line-height: 1.85; margin-bottom: 36px; }
+.mcta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.mcta-contact { margin-top: 48px; display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.mcc { text-align: center; }
+.mcc-lbl { font-family: var(--font-ui); font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.mcc-val { font-family: var(--font-body); font-size: 1.05rem; color: var(--ink); }
+
+@media(max-width: 1100px) { .tiers-grid { grid-template-columns: 1fr 1fr; } .ben-grid { grid-template-columns: 1fr; } .rci-inner { grid-template-columns: 1fr; } .mem-tgrid { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 600px) { .container { padding: 0 20px; } .tiers-grid { grid-template-columns: 1fr; } .ben-cards { grid-template-columns: 1fr; } .mem-tgrid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<div id="mnav">
+<span id="mnav-close">✕</span>
+<a href="index.html">Home</a>
+<a href="about.html">About Us</a>
+<a href="resorts.html">Our Resorts</a>
+<a href="experiences.html">Experiences</a>
+<a href="membership.html" class="active">Membership</a>
+<a href="membership.html" class="btn-gold" style="margin-top:16px;font-size:0.73rem;padding:14px 36px;">Join the Club</a>
+</div>
+
+<nav id="nav" class="solid">
+<div class="container">
+<div class="nav-inner">
+<a href="index.html" class="nav-logo">
+<div class="nav-logo-mark">
+<svg viewBox="0 0 60 60" fill="none"><path d="M30 8 C30 8, 14 20, 14 36 C14 44.8 21.2 52 30 52 C38.8 52 46 44.8 46 36 C46 20, 30 8, 30 8Z" stroke="#B8963E" stroke-width="1.5" fill="none"/><path d="M30 18 L30 44" stroke="#B8963E" stroke-width="1" stroke-dasharray="2 3"/><path d="M22 28 C22 28, 30 24, 38 28" stroke="#B8963E" stroke-width="1" fill="none"/><path d="M20 36 C20 36, 30 30, 40 36" stroke="#B8963E" stroke-width="1" fill="none"/><circle cx="30" cy="36" r="2" fill="#B8963E"/></svg>
+</div>
+<div class="nav-logo-text-wrap"><span class="n1">CLUB ARANYAKAA</span><span class="n2">Eco-Luxe Retreats</span></div>
+</a>
+<div class="nav-links">
+<a href="about.html">About</a>
+<a href="resorts.html">Resorts</a>
+<a href="experiences.html">Experiences</a>
+<a href="membership.html" class="active">Membership</a>
+</div>
+<div class="nav-right">
+<div class="nav-phone">
+<svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.09 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.59 2.91.72a2 2 0 011.72 2.03z"/></svg>
++91 8050 873 002
+</div>
+<a href="#join" class="btn-gold" style="font-size:0.68rem;padding:10px 22px;">Join Now</a>
+</div>
+<div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</div>
+</div>
+</nav>
+
+<!-- Hero -->
+<section class="mem-hero">
+<div class="container">
+<div class="breadcrumb">
+<a href="index.html">Home</a><span class="sep">›</span><span>Membership</span>
+</div>
+<p class="page-hero-eyebrow">Exclusive Access</p>
+<h1>The Club <span class="em">Membership</span></h1>
+<p class="sub">Become part of an exclusive community of nature lovers and luxury seekers. Priority bookings, privileged access, and curated experiences simply not available to the public.</p>
+</div>
+<span class="page-hero-bg-text" style="right:-20px;">MEMBERSHIP</span>
+</section>
+
+<!-- Tiers -->
+<section id="tiers">
+<div class="container">
+<div style="text-align:center;">
+<p class="label" style="justify-content:center;">Choose Your Tier</p>
+<div class="gold-rule" style="margin:18px auto 0;"></div>
+<h2 class="headline">Membership <span class="em">Tiers</span></h2>
+<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);max-width:560px;margin:16px auto 0;line-height:1.8;">Three tiers of membership designed to match your lifestyle, travel frequency, and desire for exclusivity.</p>
+</div>
+<div class="tiers-grid">
+
+<!-- Silver Tier -->
+<div class="tier-card reveal">
+<div class="tier-img"><img src="src/tier-silver.jpg" alt="Silver Membership" loading="lazy" /></div>
+<div class="tier-body">
+<h3 class="tier-name">Silver Leaf</h3>
+<p class="tier-subtitle">Entry Level · Ideal for Occasional Travelers</p>
+<div class="tier-price">
+<strong>₹ 12,500</strong>
+<span>/ year</span>
+</div>
+<div class="tier-features">
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">30% off on all room bookings</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Priority booking 30 days in advance</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Welcome amenity on arrival</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">10% off on dining & spa</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Access to member-only events (2/year)</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Quarterly newsletter with exclusive offers</div></div>
+</div>
+<a href="#join" class="btn-line tier-cta">Apply for Silver</a>
+</div>
+</div>
+
+<!-- Gold Tier (Featured) -->
+<div class="tier-card featured reveal" style="transition-delay:.1s">
+<div class="tier-img"><img src="src/tier-gold.jpg" alt="Gold Membership" loading="lazy" /></div>
+<div class="tier-body">
+<h3 class="tier-name">Golden Banyan</h3>
+<p class="tier-subtitle">Most Popular · For Frequent Travelers</p>
+<div class="tier-price">
+<strong>₹ 25,000</strong>
+<span>/ year</span>
+</div>
+<div class="tier-features">
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">40% off on all room bookings</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Priority booking 60 days in advance</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Complimentary upgrades (subject to availability)</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">20% off on dining, spa & experiences</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Free access to member-only events (4/year)</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">RCI integration (exchange points for stays)</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Birthday/Anniversary special packages</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Dedicated membership concierge</div></div>
+</div>
+<a href="#join" class="btn-gold tier-cta">Apply for Gold</a>
+</div>
+</div>
+
+<!-- Platinum Tier -->
+<div class="tier-card reveal" style="transition-delay:.2s">
+<div class="tier-img"><img src="src/tier-platinum.jpg" alt="Platinum Membership" loading="lazy" /></div>
+<div class="tier-body">
+<h3 class="tier-name">Presidential Canopy</h3>
+<p class="tier-subtitle">Elite · For the Truly Devoted</p>
+<div class="tier-price">
+<strong>₹ 75,000</strong>
+<span>/ year</span>
+</div>
+<div class="tier-features">
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">50% off on all bookings + complimentary nights</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Priority booking 90 days in advance + guaranteed room</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Complimentary suite upgrades every stay</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">30% off on all services</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Unlimited member-only events access</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Exclusive RCI Platinum status</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Private chef dinner (2/year)</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Free airport transfers, dedicated butler</div></div>
+<div class="tf-item"><div class="tf-icon">✓</div><div class="tf-text">Complimentary experience package every stay</div></div>
+</div>
+<a href="#join" class="btn-line tier-cta">Apply for Platinum</a>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- Benefits -->
+<section id="benefits">
+<div class="container">
+<div class="ben-grid">
+<div class="ben-img reveal-l">
+<img src="src/membership.png" alt="Membership Benefits" loading="lazy" />
+</div>
+<div class="ben-content reveal-r">
+<p class="label">Why Join?</p>
+<div class="gold-rule"></div>
+<h3 class="ben-content">More Than a Card.<br>A <span class="em">Way of Life.</span></h3>
+<p>Club Aranyakaa membership is designed for those who believe that travel should be transformative, that nature deserves respect, and that luxury should be earned through experience — not just spent.</p>
+<div class="ben-cards">
+<div class="ben-card"><div class="ben-icon">🏷️</div><h4 class="ben-title">Priority Access</h4><p class="ben-desc">Book your preferred dates before they open to the public.</p></div>
+<div class="ben-card"><div class="ben-icon">💎</div><h4 class="ben-title">Best Rates</h4><p class="ben-desc">Members-only pricing that beats all public rates.</p></div>
+<div class="ben-card"><div class="ben-icon">🎁</div><h4 class="ben-title">Curated Perks</h4><p class="ben-desc">Complimentary experiences, upgrades, and special moments.</p></div>
+<div class="ben-card"><div class="ben-icon">🌐</div><h4 class="ben-title">5 Locations</h4><p class="ben-desc">One membership grants you access to all five properties.</p></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- RCI Integration -->
+<section id="rci">
+<div class="container">
+<div class="rci-inner">
+<div class="reveal-l">
+<div class="rci-label">RCI Integration</div>
+<h2 class="rci-headline">Travel the World<br><em>With Your Points</em></h2>
+<p class="rci-desc">Club Aranyakaa is an authorized RCI affiliated resort. If you have RCI vacation points, you can now exchange them for stays at any of our five properties — the ultimate way to experience eco-luxury.</p>
+<div class="rci-steps">
+<div class="rci-step"><div class="rs-num">1</div><div class="rs-text"><h4>Check Your Points</h4><p>Log into your RCI account to see your available vacation points.</p></div></div>
+<div class="rci-step"><div class="rs-num">2</div><div class="rs-text"><h4>Contact Our Team</h4><p>Email or call us with your preferred dates and property choice.</p></div></div>
+<div class="rci-step"><div class="rs-num">3</div><div class="rs-text"><h4>Confirm Exchange</h4><p>We'll convert your RCI points into your Aranyakaa stay.</p></div></div>
+<div class="rci-step"><div class="rs-num">4</div><div class="rs-text"><h4>Arrive & Enjoy</h4><p>Show your RCI confirmation at check-in and enjoy your stay.</p></div></div>
+</div>
+<a href="mailto:hello@clubaranyakaa.com?subject=RCI%20Exchange%20Inquiry" class="btn-gold">Inquire About RCI Exchange</a>
+</div>
+<div class="rci-img reveal-r">
+<img src="src/rci.jpg" alt="RCI Integration" loading="lazy" />
+</div>
+</div>
+</div>
+</section>
+
+<!-- Member Testimonials -->
+<section id="mem-testimonials">
+<div class="container">
+<div style="text-align:center;">
+<p class="label" style="justify-content:center;">Member Stories</p>
+<div class="gold-rule" style="margin:18px auto 0;"></div>
+<h2 class="headline">What Members <span class="em">Say</span></h2>
+</div>
+<div class="mem-tgrid">
+<div class="mem-tc reveal"><div class="mem-tc-qm">"</div><div class="mem-tc-stars">★★★★★</div><p class="mem-tc-text">The Golden Banyan membership paid for itself in the first booking. The 40% discount plus priority booking meant we got exactly the room and dates we wanted for our anniversary.</p><div class="mem-tc-author"><div class="mem-tc-av">R</div><div><div class="mem-tc-name">Rajesh & Priya M.</div><div class="mem-tc-tier">Golden Banyan Member</div></div></div></div>
+<div class="mem-tc reveal" style="transition-delay:.12s"><div class="mem-tc-qm">"</div><div class="mem-tc-stars">★★★★★</div><p class="mem-tc-text">As a Platinum member, I get treated like royalty every time. The private chef dinner was extraordinary — my wife and I felt like the only guests in the resort.</p><div class="mem-tc-author"><div class="mem-tc-av">A</div><div><div class="mem-tc-name">Arjun Krishnan</div><div class="mem-tc-tier">Presidential Canopy Member</div></div></div></div>
+<div class="mem-tc reveal" style="transition-delay:.24s"><div class="mem-tc-qm">"</div><div class="mem-tc-stars">★★★★★</div><p class="mem-tc-text">Exchanging my RCI points for an Aranyakaa stay was seamless. Three nights in the Forest Suite — absolutely worth every point. Will be doing this annually.</p><div class="mem-tc-author"><div class="mem-tc-av">S</div><div><div class="mem-tc-name">Sarah Thomas</div><div class="mem-tc-tier">RCI Exchange Member</div></div></div></div>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+<div class="container">
+<div class="faq-hd">
+<p class="label">Common Questions</p>
+<div class="gold-rule" style="margin:18px auto 0;"></div>
+<h2 class="headline">Membership <span class="em">FAQ</span></h2>
+</div>
+<div class="faq-grid">
+<div class="faq-item"><div class="faq-q"><h4>Can I cancel my membership mid-year?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Membership fees are non-refundable, but you can cancel your renewal before the next billing cycle with 30 days notice. Your benefits continue until the end of your paid year.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>Are the discounts applicable on all room types?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Yes. Membership discounts apply to all room categories, dining, spa treatments, and select experiences across all five Club Aranyakaa properties. Blackout dates may apply during peak seasons.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>How does the RCI point exchange work?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Contact our reservations team with your preferred dates and property. We will calculate the RCI point value for your stay and guide you through the exchange process. Typically 1 RCI week converts to 3-5 nights depending on room category.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>Can I gift a membership to someone else?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Yes! Gift memberships are available in all three tiers. Contact our team for a personalized gift certificate that can be redeemed by the recipient.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>Do member-only events have additional charges?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Silver members have access to 2 events per year at no additional charge. Gold members receive 4 free events. Platinum members enjoy unlimited event access. Additional events beyond your allocation are available at a discounted member rate.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>Is there a joining fee in addition to the annual fee?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>No joining fee for any tier. The annual membership fee covers all your member benefits. Platinum members receive a complimentary welcome gift valued at ₹10,000 on their first stay.</p></div></div>
+</div>
+</div>
+</section>
+
+<!-- CTA -->
+<section id="mem-cta">
+<div class="container">
+<div class="mcta-inner reveal">
+<div class="rcta-orn"></div>
+<p class="label" style="justify-content:center;color:var(--gold);">Limited Memberships</p>
+<h2>Ready to Join the <em>Club?</em></h2>
+<p>Memberships are limited per tier to maintain exclusivity. Apply now to secure your spot.</p>
+<div class="mcta-btns" id="join">
+<a href="tel:+918050873002" class="btn-gold">📞 Call to Apply</a>
+<a href="mailto:membership@clubaranyakaa.com?subject=Membership%20Application" class="btn-line" style="color:var(--gold);border-color:var(--gold);">✉️ Email Application</a>
+</div>
+<div class="mcta-contact">
+<div class="mcc"><div class="mcc-lbl">Phone</div><div class="mcc-val">+91 8050 873 002</div></div>
+<div class="mcc"><div class="mcc-lbl">Email</div><div class="mcc-val">membership@clubaranyakaa.com</div></div>
+<div class="mcc"><div class="mcc-lbl">Hours</div><div class="mcc-val">Mon–Sat, 10 AM – 7 PM</div></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<div class="container">
+<div class="ft">
+<div><div class="fb-logo">CLUB ARANYAKAA</div><div class="fb-tag">Eco-Luxe Retreats · Est. 2019</div><p class="fb-desc">Where the wild and the refined converge.</p><div class="fb-socials"><div class="fsoc">in</div><div class="fsoc">f</div><div class="fsoc">ig</div><div class="fsoc">yt</div></div></div>
+<div class="fc"><h4>Our Resorts</h4><ul><li><a href="resort-detail.html?resort=bangalore">Bangalore</a></li><li><a href="resort-detail.html?resort=mysore">Mysore</a></li><li><a href="resort-detail.html?resort=chennai">Chennai</a></li><li><a href="resort-detail.html?resort=mandya">Mandya</a></li><li><a href="resort-detail.html?resort=goa">Goa</a></li></ul></div>
+<div class="fc"><h4>Quick Links</h4><ul><li><a href="about.html">About Us</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="membership.html">Membership</a></li><li><a href="resorts.html">All Resorts</a></li></ul></div>
+<div class="fc"><h4>Reach Us</h4><div class="fco"><div class="fco-item"><div class="fco-icon">📞</div><div class="fco-text">+91 8050 873 002</div></div><div class="fco-item"><div class="fco-icon">✉️</div><div class="fco-text">membership@clubaranyakaa.com</div></div></div></div>
+</div>
+<div class="fbot"><p>© 2025 Club Aranyakaa · All Rights Reserved.</p><div class="flegal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div></div>
+</div>
+</footer>
+
+<script>
+const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function mc(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(mc);}mc();
+document.querySelectorAll('a,button,.tier-card,.mem-tc,.ben-card').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.7)';ring.style.opacity='1';});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.6';});});
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mnav').classList.add('open'));
+document.getElementById('mnav-close').addEventListener('click',()=>document.getElementById('mnav').classList.remove('open'));
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
+document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{const item=q.parentElement;const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(f=>{f.classList.remove('open');f.querySelector('.faq-a').style.maxHeight='0';});if(!isOpen){item.classList.add('open');item.querySelector('.faq-a').style.maxHeight=item.querySelector('.faq-a').scrollHeight+'px';}});});
+</script>
+</body>
+</html>
