@@ -143,5 +143,8 @@ footer { background:var(--bg-dark-card); padding:80px 0 40px; }
 .flegal a { font-family:var(--font-ui); font-size:0.68rem; color:rgba(255,255,255,0.25); transition:color 0.3s; }
 .flegal a:hover { color:var(--gold); }
 
+/* SHARED NAV SVG */
+.logo-svg { width:30px; height:30px; }
+
 @media(max-width:900px) { :root { --nav-h:70px; } .nav-links, .nav-phone { display:none; } .hamburger { display:flex; } }
 @media(max-width:600px) { .container { padding:0 20px; } .ft { grid-template-columns:1fr; gap:36px; } }
