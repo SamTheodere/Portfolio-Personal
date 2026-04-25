@@ -3,133 +3,408 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Explore all Club Aranyakaa eco-luxury resorts across India. From Bangalore to Goa — find your perfect nature retreat." />
-<title>Our Resorts — Club Aranyakaa | Eco-Luxe Retreats</title>
+<title>Club Aranyakaa Bangalore — Resort Detail</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="shared-styles.css" />
 <style>
-/* Resort Cards Grid */
-.resorts-hero { padding: calc(var(--nav-h) + 80px) 0 100px; background: var(--bg-warm); position: relative; overflow: hidden; }
-.resorts-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 80% 50%, rgba(184,150,62,0.08) 0%, transparent 60%); }
-.resorts-hero h1 { font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; color: var(--ink); line-height: 1.1; margin-bottom: 18px; }
-.resorts-hero h1 .em { color: var(--gold); font-style: italic; }
-.resorts-hero p.sub { font-family: var(--font-body); font-size: 1.1rem; font-weight: 300; color: var(--ink-mid); max-width: 560px; line-height: 1.85; }
-.breadcrumb { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
-.breadcrumb a, .breadcrumb span { font-family: var(--font-ui); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); }
-.breadcrumb a:hover { color: var(--gold); }
-.breadcrumb .sep { color: var(--gold-light); }
+:root {
+--gold: #B8963E; --gold-light: #D4AF6A; --gold-dark: #8A6D28;
+--gold-glow: rgba(184,150,62,0.12); --gold-line: rgba(184,150,62,0.25);
+--bg: #FDFAF5; --bg-warm: #F7F2EA; --bg-section: #F2EDE3; --bg-dark-card: #1A1E1A;
+--ink: #1C1C1A; --ink-mid: #4A4840; --ink-soft: #7A756C; --ink-faint: #C5BFB3;
+--white: #FFFFFF; --border: rgba(184,150,62,0.2); --border-light: rgba(184,150,62,0.12);
+--font-display: 'Cinzel', serif; --font-body: 'Cormorant Garamond', serif; --font-ui: 'DM Sans', sans-serif;
+--nav-h: 88px; --transition: 0.45s cubic-bezier(0.25,0.8,0.25,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); overflow-x: hidden; cursor: none; }
+body::before { content: ""; position: fixed; inset:0; background: url('https://grainy-grads.vercel.app/noise.svg'); opacity: 0.04; pointer-events: none; z-index: 9999; }
+a { color: inherit; text-decoration: none; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+ul { list-style: none; }
+#cursor-dot { width:6px; height:6px; background:var(--gold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:10000; transform:translate(-50%,-50%); }
+#cursor-ring { width:32px; height:32px; border:1px solid var(--gold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform 0.15s ease; opacity:0.6; }
+::-webkit-scrollbar { width:4px; } ::-webkit-scrollbar-track { background:var(--bg-warm); } ::-webkit-scrollbar-thumb { background:var(--gold-light); border-radius:2px; }
+.container { max-width:1320px; margin:0 auto; padding:0 48px; }
+.label { font-family:var(--font-ui); font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:14px; }
+.label::before { content:''; display:block; width:36px; height:1px; background:var(--gold); }
+.headline { font-family:var(--font-display); font-size:clamp(2rem,3.8vw,3.4rem); font-weight:500; line-height:1.12; letter-spacing:0.02em; color:var(--ink); }
+.headline .em { color:var(--gold); font-style:italic; }
+.gold-rule { width:56px; height:1px; background:linear-gradient(90deg,var(--gold),transparent); margin:18px 0 28px; }
+.btn-gold { display:inline-flex; align-items:center; gap:10px; font-family:var(--font-ui); font-size:0.73rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); background:var(--gold); padding:14px 36px; border:none; cursor:pointer; transition:background 0.3s,transform 0.3s,box-shadow 0.3s; }
+.btn-gold:hover { background:var(--gold-dark); transform:translateY(-2px); box-shadow:0 10px 20px rgba(184,150,62,0.2); }
+.btn-line { display:inline-flex; align-items:center; gap:10px; font-family:var(--font-ui); font-size:0.73rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); background:transparent; padding:13px 35px; border:1px solid var(--gold); cursor:pointer; transition:background 0.3s,color 0.3s; }
+.btn-line:hover { background:var(--gold); color:var(--white); }
+.reveal { opacity:0; transform:translateY(30px); transition:opacity 0.85s ease,transform 0.85s ease; }
+.reveal.in { opacity:1; transform:translateY(0); }
+.reveal-l { opacity:0; transform:translateX(-40px); transition:opacity 0.85s ease,transform 0.85s ease; }
+.reveal-l.in { opacity:1; transform:translateX(0); }
+.reveal-r { opacity:0; transform:translateX(40px); transition:opacity 0.85s ease,transform 0.85s ease; }
+.reveal-r.in { opacity:1; transform:translateX(0); }
 
-/* Filter Bar */
-#filters { padding: 28px 0; background: var(--bg); border-bottom: 1px solid var(--border-light); position: sticky; top: var(--nav-h); z-index: 100; }
-.filter-wrap { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
-.filter-group { display: flex; align-items: center; gap: 10px; }
-.filter-label { font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-soft); }
-.filter-select { font-family: var(--font-ui); font-size: 0.75rem; color: var(--ink); background: transparent; border: 1px solid var(--border-light); padding: 10px 32px 10px 14px; appearance: none; cursor: pointer; outline: none; transition: border-color 0.3s; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237A756C' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
-.filter-select:focus { border-color: var(--gold); }
-.filter-divider { width: 1px; height: 28px; background: var(--border-light); }
-.filter-results { font-family: var(--font-ui); font-size: 0.65rem; color: var(--ink-soft); margin-left: auto; }
+/* NAV */
+#nav { position:fixed; top:0; left:0; right:0; height:var(--nav-h); z-index:1000; transition:background 0.5s,box-shadow 0.5s,height 0.4s; background:rgba(253,250,245,0.0); }
+#nav.scrolled { background:rgba(253,250,245,0.92); backdrop-filter:blur(15px); height:70px; box-shadow:0 1px 0 var(--border-light); }
+.nav-inner { height:100%; display:flex; align-items:center; justify-content:space-between; }
+.nav-logo { display:flex; align-items:center; gap:12px; }
+.nav-logo-mark { width:56px; height:56px; border:1px solid var(--border); border-radius:50%; background:var(--bg-warm); display:flex; align-items:center; justify-content:center; overflow:hidden; transition:border-color 0.3s; }
+.nav-logo-mark:hover { border-color:var(--gold); }
+.nav-logo-text-wrap { display:flex; flex-direction:column; line-height:1; }
+.nav-logo-text-wrap .n1 { font-family:var(--font-display); font-size:0.95rem; letter-spacing:0.2em; color:var(--gold); }
+.nav-logo-text-wrap .n2 { font-family:var(--font-ui); font-size:0.55rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--ink-soft); margin-top:4px; }
+.nav-links { display:flex; gap:36px; }
+.nav-links a { font-family:var(--font-ui); font-size:0.73rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-mid); position:relative; transition:color 0.3s; }
+.nav-links a::after { content:''; position:absolute; bottom:-4px; left:0; width:0; height:1px; background:var(--gold); transition:width 0.3s; }
+.nav-links a:hover, .nav-links a.active { color:var(--gold); }
+.nav-links a:hover::after, .nav-links a.active::after { width:100%; }
+.nav-right { display:flex; align-items:center; gap:20px; }
+.nav-phone { font-family:var(--font-ui); font-size:0.72rem; color:var(--ink-soft); display:flex; align-items:center; gap:7px; }
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+.hamburger span { display:block; width:24px; height:1.5px; background:var(--ink-mid); }
+#mnav { display:none; position:fixed; inset:0; background:rgba(253,250,245,0.98); backdrop-filter:blur(20px); z-index:999; flex-direction:column; align-items:center; justify-content:center; gap:28px; }
+#mnav.open { display:flex; }
+#mnav a { font-family:var(--font-display); font-size:1.8rem; color:var(--ink-mid); letter-spacing:0.08em; transition:color 0.3s; }
+#mnav a:hover { color:var(--gold); }
+#mnav-close { position:absolute; top:28px; right:36px; font-size:1.8rem; cursor:pointer; color:var(--gold); font-family:var(--font-ui); }
 
-/* Resorts Grid */
-#resorts-grid { padding: 80px 0 120px; background: var(--bg); }
-.rg-filter { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-.rg-card { position: relative; overflow: hidden; cursor: pointer; }
-.rg-card-img { aspect-ratio: 4/3; overflow: hidden; position: relative; }
-.rg-card-img img { transition: transform 0.7s ease; }
-.rg-card:hover .rg-card-img img { transform: scale(1.08); }
-.rg-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,30,26,0.88) 0%, rgba(26,30,26,0.0) 55%); z-index: 1; transition: background 0.4s; }
-.rg-card:hover .rg-card-img::after { background: linear-gradient(to top, rgba(26,30,26,0.95) 0%, rgba(26,30,26,0.15) 100%); }
-.rg-card-body { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px; z-index: 2; }
-.rg-loc { font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light); display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-.rg-loc::before { content: ''; width: 16px; height: 1px; background: var(--gold-light); }
-.rg-name { font-family: var(--font-display); font-size: 1.4rem; color: var(--white); margin-bottom: 10px; }
-.rg-desc { font-family: var(--font-ui); font-size: 0.72rem; color: rgba(255,255,255,0.6); line-height: 1.65; margin-bottom: 14px; }
-.rg-meta { display: flex; gap: 14px; flex-wrap: wrap; }
-.rg-meta-item { font-family: var(--font-ui); font-size: 0.62rem; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 5px; }
-.rg-card-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-.rg-badge { font-family: var(--font-ui); font-size: 0.55rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); background: rgba(184,150,62,0.25); border: 1px solid rgba(184,150,62,0.4); padding: 4px 10px; }
-.rg-badge.gold { background: var(--gold); border-color: var(--gold); }
-.rg-cta { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-ui); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); opacity: 0; transform: translateY(10px); transition: opacity 0.4s, transform 0.4s; }
-.rg-card:hover .rg-cta { opacity: 1; transform: translateY(0); }
+/* ── RESORT HERO ── */
+#resort-hero { position:relative; height:100vh; min-height:600px; overflow:hidden; display:flex; align-items:flex-end; }
+.rh-bg { position:absolute; inset:0; z-index:0; }
+.rh-bg img { width:100%; height:100%; object-fit:cover; transform:scale(1.05); animation:slowZoom 15s ease-in-out infinite alternate; }
+@keyframes slowZoom { from{transform:scale(1.05)} to{transform:scale(1.12)} }
+.rh-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(to top, rgba(20,18,14,0.85) 0%, rgba(20,18,14,0.3) 50%, rgba(20,18,14,0.1) 100%); }
+.rh-content { position:relative; z-index:2; padding:0 0 72px; width:100%; }
+.rh-breadcrumb { display:flex; align-items:center; gap:10px; margin-bottom:24px; }
+.rh-breadcrumb a, .rh-breadcrumb span { font-family:var(--font-ui); font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.55); }
+.rh-breadcrumb a:hover { color:var(--gold-light); }
+.rh-breadcrumb .sep { color:var(--gold-light); }
+.rh-badges { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+.rh-badge { font-family:var(--font-ui); font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); background:rgba(184,150,62,0.25); border:1px solid rgba(184,150,62,0.45); padding:5px 14px; backdrop-filter:blur(8px); }
+.rh-badge.gold { background:var(--gold); border-color:var(--gold); }
+.rh-title { font-family:var(--font-display); font-size:clamp(2.5rem,5vw,4.5rem); font-weight:400; color:var(--white); line-height:1.06; margin-bottom:16px; }
+.rh-title em { font-style:italic; color:var(--gold-light); }
+.rh-meta { display:flex; gap:28px; align-items:center; flex-wrap:wrap; }
+.rh-meta-item { display:flex; align-items:center; gap:8px; font-family:var(--font-ui); font-size:0.72rem; color:rgba(255,255,255,0.7); }
+.rh-meta-item span { color:var(--white); }
+.rh-rating { display:flex; align-items:center; gap:6px; }
+.rh-stars { color:var(--gold-light); font-size:0.75rem; letter-spacing:2px; }
 
-/* Featured Resort */
-.featured-resort { padding: 0 0 120px; background: var(--bg); }
-.fr-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
-.fr-img { aspect-ratio: 5/3; overflow: hidden; border: 1px dashed var(--gold-line); }
-.fr-img img { transition: transform 0.7s ease; }
-.fr-img:hover img { transform: scale(1.05); }
-.fr-content h3 { font-family: var(--font-display); font-size: 1.8rem; color: var(--ink); margin-bottom: 14px; }
-.fr-content p { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: var(--ink-mid); line-height: 1.85; margin-bottom: 20px; }
-.fr-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 28px; }
-.fr-feat { display: flex; align-items: center; gap: 10px; font-family: var(--font-ui); font-size: 0.72rem; color: var(--ink-mid); }
-.fr-feat::before { content: '✓'; color: var(--gold); font-weight: 700; }
+/* ── STICKY BOOKING BAR ── */
+#sticky-book { position:sticky; top:var(--nav-h); z-index:100; background:rgba(255,255,255,0.97); backdrop-filter:blur(20px); border-bottom:1px solid var(--border-light); box-shadow:0 4px 24px rgba(0,0,0,0.06); }
+.sb-inner { display:flex; align-items:center; justify-content:space-between; padding:0; }
+.sb-tabs { display:flex; }
+.sb-tab { font-family:var(--font-ui); font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-soft); padding:20px 24px; cursor:pointer; border-bottom:2px solid transparent; transition:color 0.3s,border-color 0.3s; white-space:nowrap; background:none; border-top:none; border-left:none; border-right:none; }
+.sb-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.sb-actions { display:flex; align-items:center; gap:16px; padding-right:0; }
+.sb-price { text-align:right; }
+.sb-price-from { font-family:var(--font-ui); font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-soft); }
+.sb-price-num { font-family:var(--font-display); font-size:1.5rem; color:var(--gold); }
+.sb-price-unit { font-family:var(--font-ui); font-size:0.58rem; color:var(--ink-soft); }
 
-/* Testimonials Section */
-#testimonials { padding: 120px 0; background: var(--bg-warm); }
-.testi-hd { text-align: center; margin-bottom: 60px; }
-.testi-hd .label { justify-content: center; }
-.testi-hd .label::before { display: none; }
-.testi-hd .label::after { content: ''; display: block; width: 36px; height: 1px; background: var(--gold); }
-.tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.tc { background: var(--white); border: 1px solid var(--border-light); padding: 34px; position: relative; transition: border-color 0.35s, box-shadow 0.35s; }
-.tc:hover { border-color: var(--gold); box-shadow: 0 8px 32px rgba(184,150,62,0.08); }
-.tc-qm { font-family: var(--font-display); font-size: 4.5rem; line-height: 0.5; color: var(--gold); opacity: 0.18; position: absolute; top: 26px; right: 26px; }
-.tc-stars { display: flex; gap: 3px; margin-bottom: 18px; color: var(--gold); font-size: 0.75rem; }
-.tc-text { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; font-style: italic; line-height: 1.8; color: var(--ink-mid); margin-bottom: 26px; }
-.tc-author { display: flex; align-items: center; gap: 12px; }
-.tc-av { width: 44px; height: 44px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.1rem; color: var(--white); flex-shrink: 0; }
-.tc-name { font-family: var(--font-display); font-size: 0.95rem; font-weight: 500; color: var(--ink); }
-.tc-role { font-family: var(--font-ui); font-size: 0.62rem; color: var(--gold); letter-spacing: 0.1em; margin-top: 2px; }
+/* ── OVERVIEW ── */
+#overview { padding:100px 0; }
+.ov-grid { display:grid; grid-template-columns:1fr 420px; gap:80px; align-items:start; }
+.ov-intro p { font-family:var(--font-body); font-size:1.12rem; font-weight:300; line-height:1.9; color:var(--ink-mid); margin-bottom:20px; }
+.ov-highlights { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:36px; }
+.oh { display:flex; gap:14px; align-items:flex-start; padding:18px; background:var(--bg-warm); border:1px solid var(--border-light); transition:border-color 0.3s; }
+.oh:hover { border-color:var(--gold); }
+.oh-icon { width:40px; height:40px; flex-shrink:0; background:var(--white); border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+.oh-text h4 { font-family:var(--font-display); font-size:0.95rem; font-weight:500; color:var(--ink); margin-bottom:3px; }
+.oh-text p { font-family:var(--font-ui); font-size:0.7rem; color:var(--ink-soft); line-height:1.5; }
+/* Sidebar booking card */
+.book-card { position:sticky; top:calc(var(--nav-h) + 80px); background:var(--white); border:1px solid var(--border); box-shadow:0 20px 60px rgba(0,0,0,0.08); }
+.book-card-head { background:var(--bg-dark-card); padding:24px 28px; }
+.book-card-head h3 { font-family:var(--font-display); font-size:1.1rem; color:var(--white); margin-bottom:4px; }
+.book-card-head p { font-family:var(--font-ui); font-size:0.65rem; color:rgba(255,255,255,0.5); }
+.book-card-price { display:flex; align-items:baseline; gap:6px; margin-top:14px; }
+.book-card-price strong { font-family:var(--font-display); font-size:2rem; color:var(--gold); }
+.book-card-price span { font-family:var(--font-ui); font-size:0.65rem; color:rgba(255,255,255,0.45); }
+.book-card-body { padding:24px 28px; }
+.bf { margin-bottom:18px; }
+.bf label { display:block; font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.bf select, .bf input { width:100%; background:transparent; border:none; border-bottom:1px solid var(--ink-faint); font-family:var(--font-body); font-size:1rem; color:var(--ink); padding:8px 0; outline:none; appearance:none; transition:border-color 0.3s; }
+.bf select:focus, .bf input:focus { border-bottom-color:var(--gold); }
+.book-divider { width:100%; height:1px; background:var(--border-light); margin:22px 0; }
+.book-total { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+.book-total span { font-family:var(--font-ui); font-size:0.72rem; color:var(--ink-soft); }
+.book-total strong { font-family:var(--font-display); font-size:1.2rem; color:var(--ink); }
+.book-card-body .btn-gold { width:100%; justify-content:center; margin-bottom:12px; }
+.book-card-note { font-family:var(--font-ui); font-size:0.62rem; color:var(--ink-soft); text-align:center; }
+.book-card-note a { color:var(--gold); }
+.book-card-perks { border-top:1px solid var(--border-light); padding:18px 28px; display:flex; flex-direction:column; gap:10px; }
+.bp { display:flex; align-items:center; gap:10px; font-family:var(--font-ui); font-size:0.68rem; color:var(--ink-soft); }
+.bp::before { content:'✓'; color:var(--gold); font-weight:700; }
 
-/* Comparison Table */
-#compare { padding: 120px 0; background: var(--bg); }
-.compare-table { width: 100%; border-collapse: collapse; margin-top: 48px; }
-.compare-table th { font-family: var(--font-display); font-size: 0.9rem; font-weight: 500; color: var(--ink); padding: 16px 20px; text-align: left; border-bottom: 2px solid var(--gold); background: var(--bg-warm); }
-.compare-table th:first-child { width: 180px; }
-.compare-table td { font-family: var(--font-ui); font-size: 0.72rem; color: var(--ink-mid); padding: 14px 20px; border-bottom: 1px solid var(--border-light); }
-.compare-table td:first-child { font-weight: 500; color: var(--ink); }
-.compare-table tr:hover td { background: var(--bg-warm); }
-.check { color: var(--gold); font-weight: 700; }
-.cross { color: var(--ink-faint); }
-.price-highlight { font-family: var(--font-display); font-size: 1.1rem; color: var(--gold); }
+/* ── GALLERY ── */
+#resort-gallery { padding:0 0 100px; }
+.rg-hd { padding:0 0 40px; display:flex; justify-content:space-between; align-items:flex-end; }
+.rg-grid { display:grid; grid-template-columns:1fr 1fr 1fr; grid-template-rows:280px 280px; gap:8px; }
+.rg-item { overflow:hidden; cursor:pointer; position:relative; }
+.rg-item:first-child { grid-row:1/3; grid-column:1/2; }
+.rg-item img { transition:transform 0.6s ease; }
+.rg-item:hover img { transform:scale(1.08); }
+.rg-count { position:absolute; bottom:16px; right:16px; background:rgba(28,28,26,0.7); backdrop-filter:blur(8px); border:1px solid rgba(184,150,62,0.3); font-family:var(--font-ui); font-size:0.62rem; color:var(--white); padding:8px 14px; letter-spacing:0.12em; }
 
-/* CTA */
-#resort-cta { padding: 120px 0; background: var(--bg-section); }
-.rcta { text-align: center; max-width: 680px; margin: 0 auto; }
-.rcta h2 { font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 500; color: var(--ink); margin: 18px 0; }
-.rcta h2 em { color: var(--gold); font-style: italic; }
-.rcta p { font-family: var(--font-body); font-size: 1.05rem; font-weight: 300; color: var(--ink-mid); line-height: 1.85; margin-bottom: 36px; }
-.rcta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+/* ── ROOMS & SUITES ── */
+#rooms { padding:100px 0; background:var(--bg-warm); }
+.rooms-hd { text-align:center; margin-bottom:60px; }
+.rooms-hd .label { justify-content:center; }
+.rooms-hd .label::before { display:none; }
+.rooms-hd .label::after { content:''; display:block; width:36px; height:1px; background:var(--gold); }
+.rooms-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.room-card { background:var(--white); border:1px solid var(--border-light); overflow:hidden; transition:border-color 0.3s,box-shadow 0.3s,transform 0.3s; }
+.room-card:hover { border-color:var(--gold); box-shadow:0 16px 48px rgba(0,0,0,0.09); transform:translateY(-4px); }
+.room-img { aspect-ratio:4/3; overflow:hidden; position:relative; }
+.room-img img { transition:transform 0.6s ease; }
+.room-card:hover .room-img img { transform:scale(1.08); }
+.room-badge { position:absolute; top:14px; left:14px; font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); background:var(--gold); padding:5px 12px; }
+.room-body { padding:24px; }
+.room-type { font-family:var(--font-ui); font-size:0.6rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.room-name { font-family:var(--font-display); font-size:1.3rem; font-weight:500; color:var(--ink); margin-bottom:12px; }
+.room-desc { font-family:var(--font-ui); font-size:0.74rem; color:var(--ink-soft); line-height:1.7; margin-bottom:18px; }
+.room-specs { display:flex; gap:16px; margin-bottom:18px; flex-wrap:wrap; }
+.rspec { font-family:var(--font-ui); font-size:0.65rem; color:var(--ink-soft); display:flex; align-items:center; gap:5px; }
+.room-amenities { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px; }
+.ram { font-family:var(--font-ui); font-size:0.6rem; color:var(--ink-soft); background:var(--bg-section); padding:4px 10px; border:1px solid var(--border-light); }
+.room-footer { display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-light); padding-top:18px; }
+.room-price strong { font-family:var(--font-display); font-size:1.4rem; color:var(--gold); }
+.room-price small { font-family:var(--font-ui); font-size:0.6rem; color:var(--ink-soft); display:block; }
+.r-book { font-family:var(--font-ui); font-size:0.62rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white); background:var(--gold); padding:10px 18px; transition:background 0.3s; }
+.r-book:hover { background:var(--gold-dark); }
 
-@media(max-width: 1100px) { .rg-filter { grid-template-columns: 1fr 1fr; } .fr-grid { grid-template-columns: 1fr; } .compare-table { display: block; overflow-x: auto; } }
-@media(max-width: 900px) { .tgrid { grid-template-columns: 1fr 1fr; } .filter-wrap { flex-wrap: wrap; } }
-@media(max-width: 600px) { .container { padding: 0 20px; } .rg-filter { grid-template-columns: 1fr; } .tgrid { grid-template-columns: 1fr; } .fr-features { grid-template-columns: 1fr; } }
+/* ── AMENITIES ── */
+#amenities { padding:100px 0; background:var(--bg); }
+.am-hd { margin-bottom:56px; }
+.am-tabs { display:flex; gap:0; border-bottom:1px solid var(--border-light); margin-bottom:48px; flex-wrap:wrap; }
+.am-tab { font-family:var(--font-ui); font-size:0.65rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-soft); padding:14px 24px; cursor:pointer; background:none; border:none; border-bottom:2px solid transparent; transition:color 0.3s,border-color 0.3s; }
+.am-tab.active { color:var(--gold); border-bottom-color:var(--gold); }
+.am-panel { display:none; }
+.am-panel.active { display:block; }
+.am-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+.am-item { padding:24px 20px; background:var(--bg-warm); border:1px solid var(--border-light); text-align:center; transition:border-color 0.3s,box-shadow 0.3s; }
+.am-item:hover { border-color:var(--gold); box-shadow:0 4px 20px rgba(184,150,62,0.08); }
+.am-item .am-icon { font-size:1.8rem; margin-bottom:12px; }
+.am-item h4 { font-family:var(--font-display); font-size:0.95rem; font-weight:500; color:var(--ink); margin-bottom:6px; }
+.am-item p { font-family:var(--font-ui); font-size:0.68rem; color:var(--ink-soft); line-height:1.55; }
+/* Premium amenity */
+.am-item.premium { background:var(--bg-dark-card); border-color:rgba(184,150,62,0.2); }
+.am-item.premium h4 { color:var(--white); }
+.am-item.premium p { color:rgba(255,255,255,0.45); }
+.am-item.premium .am-icon { filter:drop-shadow(0 0 8px rgba(184,150,62,0.4)); }
+
+/* ── EXPERIENCES ── */
+#resort-experiences { padding:100px 0; background:var(--bg-section); }
+.re-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:48px; }
+.re-card { position:relative; overflow:hidden; cursor:pointer; }
+.re-img { aspect-ratio:3/4; overflow:hidden; }
+.re-img img { transition:transform 0.7s ease; }
+.re-card:hover .re-img img { transform:scale(1.1); }
+.re-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to top,rgba(20,18,14,0.88) 0%,rgba(20,18,14,0) 55%); z-index:1; }
+.re-info { position:absolute; bottom:0; left:0; right:0; padding:28px; z-index:2; }
+.re-tag { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold-light); margin-bottom:8px; }
+.re-name { font-family:var(--font-display); font-size:1.2rem; color:var(--white); margin-bottom:10px; }
+.re-desc { font-family:var(--font-ui); font-size:0.68rem; color:rgba(255,255,255,0.6); line-height:1.6; margin-bottom:14px; opacity:0; transform:translateY(10px); transition:opacity 0.4s,transform 0.4s; }
+.re-card:hover .re-desc { opacity:1; transform:translateY(0); }
+.re-cta { font-family:var(--font-ui); font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-light); display:flex; align-items:center; gap:7px; }
+
+/* ── DINING ── */
+#dining { padding:100px 0; background:var(--bg); }
+.din-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+.din-img { aspect-ratio:4/3; overflow:hidden; border:1px dashed var(--gold-line); }
+.din-img img { transition:transform 0.7s ease; }
+.din-img:hover img { transform:scale(1.06); }
+.dining-venues { margin-top:32px; display:flex; flex-direction:column; gap:16px; }
+.dv { display:flex; gap:18px; padding:18px; background:var(--bg-warm); border:1px solid var(--border-light); transition:border-color 0.3s; }
+.dv:hover { border-color:var(--gold); }
+.dv-icon { width:48px; height:48px; flex-shrink:0; background:var(--gold); display:flex; align-items:center; justify-content:center; font-size:1.3rem; }
+.dv-text h4 { font-family:var(--font-display); font-size:1rem; font-weight:500; color:var(--ink); margin-bottom:4px; }
+.dv-text p { font-family:var(--font-ui); font-size:0.7rem; color:var(--ink-soft); line-height:1.6; }
+.dv-tag { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold); margin-top:8px; }
+
+/* ── SPA & WELLNESS ── */
+#spa { padding:100px 0; background:var(--bg-dark-card); }
+.spa-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.spa-label { font-family:var(--font-ui); font-size:0.68rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--gold); display:flex; align-items:center; gap:14px; }
+.spa-label::before { content:''; display:block; width:36px; height:1px; background:var(--gold); }
+.spa-headline { font-family:var(--font-display); font-size:clamp(2rem,3.5vw,3rem); font-weight:500; line-height:1.12; color:var(--white); margin:18px 0 24px; }
+.spa-headline em { color:var(--gold-light); font-style:italic; }
+.spa-desc { font-family:var(--font-body); font-size:1.05rem; font-weight:300; color:rgba(255,255,255,0.6); line-height:1.85; margin-bottom:36px; }
+.spa-list { display:flex; flex-direction:column; gap:12px; margin-bottom:36px; }
+.sl { display:flex; align-items:center; gap:12px; font-family:var(--font-ui); font-size:0.74rem; color:rgba(255,255,255,0.65); }
+.sl::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+.spa-img-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+.spa-img-grid .si { overflow:hidden; }
+.spa-img-grid .si img { aspect-ratio:4/3; transition:transform 0.6s ease; }
+.spa-img-grid .si:hover img { transform:scale(1.08); }
+.spa-img-grid .si:first-child { grid-row:1/3; }
+.spa-img-grid .si:first-child img { aspect-ratio:3/4; }
+
+/* ── EVENTS & CORPORATE ── */
+#events { padding:100px 0; background:var(--bg-warm); }
+.ev-grid { display:grid; grid-template-columns:1.2fr 1fr; gap:72px; align-items:center; }
+.ev-cards { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:32px; }
+.ev-card { padding:22px; border:1px solid var(--border-light); background:var(--white); }
+.ev-card:hover { border-color:var(--gold); }
+.ev-icon { font-size:1.6rem; margin-bottom:12px; }
+.ev-card h4 { font-family:var(--font-display); font-size:1rem; font-weight:500; color:var(--ink); margin-bottom:6px; }
+.ev-card p { font-family:var(--font-ui); font-size:0.7rem; color:var(--ink-soft); line-height:1.6; }
+.ev-stats { display:flex; gap:28px; margin-top:32px; padding-top:28px; border-top:1px solid var(--border-light); }
+.evs { text-align:center; }
+.evs .num { font-family:var(--font-display); font-size:2rem; color:var(--gold); }
+.evs .lbl { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-soft); margin-top:4px; }
+.ev-img { aspect-ratio:4/5; overflow:hidden; border:1px dashed var(--gold-line); position:relative; }
+.ev-img img { transition:transform 0.7s ease; }
+.ev-img:hover img { transform:scale(1.06); }
+.ev-img-badge { position:absolute; bottom:24px; left:-16px; background:var(--gold); color:var(--white); padding:14px 20px; font-family:var(--font-display); font-size:0.9rem; box-shadow:0 8px 24px rgba(184,150,62,0.35); }
+
+/* ── NEARBY ATTRACTIONS ── */
+#nearby { padding:100px 0; background:var(--bg); }
+.na-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:48px; }
+.na-item { padding:24px; background:var(--bg-warm); border:1px solid var(--border-light); transition:border-color 0.3s,transform 0.3s; }
+.na-item:hover { border-color:var(--gold); transform:translateY(-3px); }
+.na-dist { font-family:var(--font-ui); font-size:0.6rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; }
+.na-name { font-family:var(--font-display); font-size:1rem; font-weight:500; color:var(--ink); margin-bottom:6px; }
+.na-desc { font-family:var(--font-ui); font-size:0.7rem; color:var(--ink-soft); line-height:1.55; }
+.na-icon { font-size:1.4rem; margin-bottom:12px; }
+
+/* ── REVIEWS ── */
+#reviews { padding:100px 0; background:var(--bg-warm); }
+.rev-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:48px; }
+.rev-score { display:flex; align-items:center; gap:20px; }
+.rev-num { font-family:var(--font-display); font-size:4rem; color:var(--gold); line-height:1; }
+.rev-detail { display:flex; flex-direction:column; gap:6px; }
+.rev-stars { color:var(--gold); font-size:1rem; letter-spacing:3px; }
+.rev-count { font-family:var(--font-ui); font-size:0.68rem; color:var(--ink-soft); }
+.rev-bars { display:flex; flex-direction:column; gap:8px; margin-top:12px; }
+.rbar { display:flex; align-items:center; gap:10px; }
+.rbar-label { font-family:var(--font-ui); font-size:0.62rem; color:var(--ink-soft); width:80px; }
+.rbar-track { flex:1; height:3px; background:var(--border-light); border-radius:2px; overflow:hidden; }
+.rbar-fill { height:100%; background:var(--gold); border-radius:2px; }
+.rbar-val { font-family:var(--font-ui); font-size:0.62rem; color:var(--gold); width:30px; text-align:right; }
+.rev-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:40px; }
+.rv { background:var(--white); border:1px solid var(--border-light); padding:28px; transition:border-color 0.3s; }
+.rv:hover { border-color:var(--gold); }
+.rv-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px; }
+.rv-author { display:flex; align-items:center; gap:12px; }
+.rv-av { width:40px; height:40px; border-radius:50%; background:var(--gold); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1rem; color:var(--white); flex-shrink:0; }
+.rv-name { font-family:var(--font-display); font-size:0.9rem; font-weight:500; color:var(--ink); }
+.rv-meta { font-family:var(--font-ui); font-size:0.6rem; color:var(--ink-soft); margin-top:2px; }
+.rv-stars { color:var(--gold); font-size:0.7rem; }
+.rv-text { font-family:var(--font-body); font-size:0.98rem; font-weight:300; font-style:italic; color:var(--ink-mid); line-height:1.75; }
+.rv-verified { display:flex; align-items:center; gap:6px; margin-top:14px; font-family:var(--font-ui); font-size:0.6rem; color:var(--ink-soft); }
+.rv-verified::before { content:'✓'; color:var(--gold); }
+
+/* ── POLICIES ── */
+#policies { padding:80px 0; background:var(--bg); }
+.pol-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; margin-top:48px; }
+.pol { padding:24px; background:var(--bg-warm); border:1px solid var(--border-light); }
+.pol-icon { font-size:1.5rem; margin-bottom:14px; }
+.pol h4 { font-family:var(--font-display); font-size:0.95rem; font-weight:500; color:var(--ink); margin-bottom:12px; }
+.pol ul { display:flex; flex-direction:column; gap:7px; }
+.pol ul li { font-family:var(--font-ui); font-size:0.7rem; color:var(--ink-soft); display:flex; align-items:flex-start; gap:8px; line-height:1.5; }
+.pol ul li::before { content:'•'; color:var(--gold); flex-shrink:0; }
+
+/* ── FAQ ── */
+#faq { padding:80px 0; background:var(--bg-warm); }
+.faq-grid { max-width:800px; margin:48px auto 0; display:flex; flex-direction:column; gap:0; }
+.faq-item { border-bottom:1px solid var(--border-light); }
+.faq-q { display:flex; justify-content:space-between; align-items:center; padding:22px 0; cursor:pointer; }
+.faq-q h4 { font-family:var(--font-display); font-size:1.05rem; font-weight:500; color:var(--ink); }
+.faq-toggle { width:28px; height:28px; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; font-size:1.2rem; color:var(--gold); transition:transform 0.3s,background 0.3s; flex-shrink:0; }
+.faq-item.open .faq-toggle { transform:rotate(45deg); background:var(--gold); color:var(--white); }
+.faq-a { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+.faq-a p { font-family:var(--font-ui); font-size:0.78rem; color:var(--ink-soft); line-height:1.75; padding-bottom:22px; }
+
+/* ── CTA BANNER ── */
+#resort-cta { padding:100px 0; background:var(--bg-section); }
+.rcta { text-align:center; max-width:680px; margin:0 auto; }
+.rcta-orn { width:1px; height:56px; background:linear-gradient(to bottom,transparent,var(--gold),transparent); margin:0 auto 28px; }
+.rcta h2 { font-family:var(--font-display); font-size:clamp(2rem,3.5vw,3rem); font-weight:500; color:var(--ink); margin:18px 0; }
+.rcta h2 em { color:var(--gold); font-style:italic; }
+.rcta p { font-family:var(--font-body); font-size:1.05rem; font-weight:300; color:var(--ink-mid); line-height:1.85; margin-bottom:36px; }
+.rcta-btns { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+.rcta-contact { margin-top:48px; background:var(--white); border:1px solid var(--border-light); padding:24px 36px; display:flex; justify-content:center; gap:48px; flex-wrap:wrap; }
+.rcc { text-align:center; }
+.rcc-lbl { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--gold); margin-bottom:5px; }
+.rcc-val { font-family:var(--font-body); font-size:1rem; color:var(--ink); }
+
+/* FOOTER */
+footer { background:var(--bg-dark-card); padding:80px 0 40px; }
+.ft { display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:56px; margin-bottom:56px; }
+.fb-logo { font-family:var(--font-display); font-size:1.2rem; letter-spacing:0.2em; color:var(--gold); margin-bottom:6px; }
+.fb-tag { font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.32em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:18px; }
+.fb-desc { font-family:var(--font-body); font-size:0.95rem; color:rgba(255,255,255,0.5); line-height:1.8; }
+.fb-socials { display:flex; gap:10px; margin-top:22px; }
+.fsoc { width:36px; height:36px; border:1px solid rgba(184,150,62,0.25); display:flex; align-items:center; justify-content:center; font-family:var(--font-ui); font-size:0.75rem; color:var(--gold); cursor:pointer; transition:var(--transition); }
+.fsoc:hover { background:var(--gold); color:var(--bg-dark-card); border-color:var(--gold); }
+.fc h4 { font-family:var(--font-display); font-size:0.95rem; font-weight:500; color:rgba(255,255,255,0.9); margin-bottom:22px; position:relative; padding-bottom:12px; }
+.fc h4::after { content:''; position:absolute; bottom:0; left:0; width:28px; height:1px; background:var(--gold); }
+.fc ul { display:flex; flex-direction:column; gap:10px; }
+.fc ul li a { font-family:var(--font-ui); font-size:0.75rem; color:rgba(255,255,255,0.45); display:flex; align-items:center; gap:8px; transition:color 0.3s; }
+.fc ul li a:hover { color:var(--gold); }
+.fc ul li a::before { content:'—'; color:rgba(184,150,62,0.3); font-size:0.6rem; }
+.fco { display:flex; flex-direction:column; gap:13px; }
+.fco-item { display:flex; gap:12px; }
+.fco-icon { width:32px; height:32px; border:1px solid rgba(184,150,62,0.2); display:flex; align-items:center; justify-content:center; font-size:0.78rem; color:var(--gold); flex-shrink:0; }
+.fco-text { font-family:var(--font-ui); font-size:0.73rem; color:rgba(255,255,255,0.45); line-height:1.6; }
+.fbot { border-top:1px solid rgba(255,255,255,0.06); padding-top:28px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px; }
+.fbot p { font-family:var(--font-ui); font-size:0.68rem; color:rgba(255,255,255,0.25); }
+.flegal { display:flex; gap:22px; }
+.flegal a { font-family:var(--font-ui); font-size:0.68rem; color:rgba(255,255,255,0.25); transition:color 0.3s; }
+.flegal a:hover { color:var(--gold); }
+
+/* LIGHTBOX */
+#lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:10002; align-items:center; justify-content:center; }
+#lightbox.open { display:flex; }
+#lightbox img { max-width:90vw; max-height:88vh; object-fit:contain; border:1px solid rgba(184,150,62,0.2); }
+#lb-close { position:absolute; top:24px; right:32px; font-size:2rem; color:var(--white); cursor:pointer; font-family:var(--font-ui); }
+#lb-prev, #lb-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(184,150,62,0.2); border:1px solid rgba(184,150,62,0.4); color:var(--white); font-size:1.5rem; padding:12px 18px; cursor:pointer; font-family:var(--font-ui); transition:background 0.3s; }
+#lb-prev { left:24px; } #lb-next { right:24px; }
+#lb-prev:hover, #lb-next:hover { background:var(--gold); }
+
+@media(max-width:1100px) { .ov-grid { grid-template-columns:1fr; } .book-card { position:static; } .rooms-grid { grid-template-columns:1fr 1fr; } .am-grid { grid-template-columns:repeat(2,1fr); } .ev-grid { grid-template-columns:1fr; } .din-grid { grid-template-columns:1fr; } .spa-inner { grid-template-columns:1fr; } .na-grid { grid-template-columns:1fr 1fr; } .pol-grid { grid-template-columns:1fr 1fr; } .ft { grid-template-columns:1fr 1fr; } }
+@media(max-width:900px) { :root { --nav-h:70px; } .nav-links, .nav-phone { display:none; } .hamburger { display:flex; } .rg-grid { grid-template-columns:1fr 1fr; } .rg-item:first-child { grid-column:1/3; grid-row:auto; } .re-grid { grid-template-columns:1fr 1fr; } .rev-grid { grid-template-columns:1fr 1fr; } }
+@media(max-width:600px) { .container { padding:0 20px; } .rooms-grid { grid-template-columns:1fr; } .re-grid { grid-template-columns:1fr; } .rev-grid { grid-template-columns:1fr; } .am-grid { grid-template-columns:1fr 1fr; } .na-grid { grid-template-columns:1fr 1fr; } .pol-grid { grid-template-columns:1fr; } .ev-cards { grid-template-columns:1fr; } .ft { grid-template-columns:1fr; gap:36px; } .ov-highlights { grid-template-columns:1fr; } .sb-tabs { overflow-x:auto; } }
 </style>
 </head>
 <body>
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
 
-<!-- Mobile Nav -->
+<!-- LIGHTBOX -->
+<div id="lightbox">
+<span id="lb-close">✕</span>
+<button id="lb-prev">‹</button>
+<img id="lb-img" src="" alt="" />
+<button id="lb-next">›</button>
+</div>
+
+<!-- MOBILE NAV -->
 <div id="mnav">
 <span id="mnav-close">✕</span>
 <a href="index.html">Home</a>
-<a href="about.html">About Us</a>
-<a href="resorts.html" class="active">Our Resorts</a>
+<a href="about.html">About</a>
+<a href="resorts.html">Resorts</a>
 <a href="experiences.html">Experiences</a>
 <a href="membership.html">Membership</a>
-<a href="resorts.html#testimonials">Stories</a>
 <a href="membership.html" class="btn-gold" style="margin-top:16px;font-size:0.73rem;padding:14px 36px;">Join the Club</a>
 </div>
 
-<!-- Navigation -->
-<nav id="nav" class="solid">
+<!-- NAV -->
+<nav id="nav">
 <div class="container">
 <div class="nav-inner">
 <a href="index.html" class="nav-logo">
 <div class="nav-logo-mark">
-<svg viewBox="0 0 60 60" fill="none"><path d="M30 8 C30 8, 14 20, 14 36 C14 44.8 21.2 52 30 52 C38.8 52 46 44.8 46 36 C46 20, 30 8, 30 8Z" stroke="#B8963E" stroke-width="1.5" fill="none"/><path d="M30 18 L30 44" stroke="#B8963E" stroke-width="1" stroke-dasharray="2 3"/><path d="M22 28 C22 28, 30 24, 38 28" stroke="#B8963E" stroke-width="1" fill="none"/><path d="M20 36 C20 36, 30 30, 40 36" stroke="#B8963E" stroke-width="1" fill="none"/><circle cx="30" cy="36" r="2" fill="#B8963E"/></svg>
+<svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px;">
+<path d="M30 8 C30 8, 14 20, 14 36 C14 44.8 21.2 52 30 52 C38.8 52 46 44.8 46 36 C46 20, 30 8, 30 8Z" stroke="#B8963E" stroke-width="1.5" fill="none"/>
+<path d="M30 18 L30 44" stroke="#B8963E" stroke-width="1" stroke-dasharray="2 3"/>
+<path d="M22 28 C22 28, 30 24, 38 28" stroke="#B8963E" stroke-width="1" fill="none"/>
+<path d="M20 36 C20 36, 30 30, 40 36" stroke="#B8963E" stroke-width="1" fill="none"/>
+<circle cx="30" cy="36" r="2" fill="#B8963E"/>
+</svg>
 </div>
 <div class="nav-logo-text-wrap"><span class="n1">CLUB ARANYAKAA</span><span class="n2">Eco-Luxe Retreats</span></div>
 </a>
@@ -138,250 +413,519 @@
 <a href="resorts.html" class="active">Resorts</a>
 <a href="experiences.html">Experiences</a>
 <a href="membership.html">Membership</a>
-<a href="resorts.html#testimonials">Stories</a>
 </div>
 <div class="nav-right">
 <div class="nav-phone">
 <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.09 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.59 2.91.72a2 2 0 011.72 2.03z"/></svg>
 +91 8050 873 002
 </div>
-<a href="membership.html" class="btn-gold" style="font-size:0.68rem;padding:10px 22px;">Join the Club</a>
+<a href="#book-now" class="btn-gold" style="font-size:0.68rem;padding:10px 22px;">Book Now</a>
 </div>
 <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
 </div>
 </div>
 </nav>
 
-<!-- Hero -->
-<section class="resorts-hero">
+<!-- RESORT HERO -->
+<section id="resort-hero">
+<div class="rh-bg">
+<img src="src/resort-bangalore.png" alt="Club Aranyakaa Bangalore" id="hero-img" />
+</div>
+<div class="rh-overlay"></div>
 <div class="container">
-<div class="breadcrumb">
-<a href="index.html">Home</a><span class="sep">›</span><span>Our Resorts</span>
+<div class="rh-content">
+<div class="rh-breadcrumb">
+<a href="index.html">Home</a><span class="sep">›</span>
+<a href="resorts.html">Resorts</a><span class="sep">›</span>
+<span>Club Aranyakaa Bangalore</span>
 </div>
-<h1 class="reveal">Our <span class="em">Properties</span></h1>
-<p class="sub reveal" style="transition-delay:.1s;">Five distinct retreats, each with its own character, location, and magic — united by one philosophy: luxury that leaves no trace.</p>
+<div class="rh-badges">
+<span class="rh-badge gold">🏆 #1 Eco Resort 2024</span>
+<span class="rh-badge">🌿 Eco-Certified</span>
+<span class="rh-badge">♻️ Zero Waste</span>
+<span class="rh-badge">🌾 Organic Farm</span>
 </div>
-</section>
-
-<!-- Filters -->
-<div id="filters">
-<div class="container">
-<div class="filter-wrap">
-<div class="filter-group">
-<span class="filter-label">Location</span>
-<select class="filter-select" id="filter-location">
-<option value="">All Locations</option>
-<option>Karnataka</option>
-<option>Tamil Nadu</option>
-<option>Goa</option>
-<option>Maharashtra</option>
-</select>
-</div>
-<div class="filter-divider"></div>
-<div class="filter-group">
-<span class="filter-label">Experience</span>
-<select class="filter-select" id="filter-exp">
-<option value="">All Experiences</option>
-<option>Family Retreat</option>
-<option>Couples & Romance</option>
-<option>Wellness & Spa</option>
-<option>Adventure</option>
-<option>Heritage & Culture</option>
-<option>Corporate</option>
-</select>
-</div>
-<div class="filter-divider"></div>
-<div class="filter-group">
-<span class="filter-label">Capacity</span>
-<select class="filter-select" id="filter-cap">
-<option value="">Any Size</option>
-<option>Up to 50 Guests</option>
-<option>50-100 Guests</option>
-<option>100+ Guests</option>
-</select>
-</div>
-<span class="filter-results" id="filter-results">Showing 5 resorts</span>
-</div>
-</div>
-</div>
-
-<!-- Resorts Grid -->
-<section id="resorts-grid">
-<div class="container">
-<div class="rg-filter">
-
-<!-- Resort 1 - Bangalore -->
-<div class="rg-card reveal">
-<div class="rg-card-img"><img src="src/resort-bangalore.png" alt="Club Aranyakaa Bangalore" loading="lazy" /></div>
-<div class="rg-card-body">
-<div class="rg-card-badges"><span class="rg-badge gold">🏆 #1 Eco Resort 2024</span><span class="rg-badge">Flagship Property</span></div>
-<p class="rg-loc">📍 Bangalore · 55 km</p>
-<h3 class="rg-name">Club Aranyakaa Bangalore</h3>
-<p class="rg-desc">Our flagship 42-acre eco-retreat in Ramanagara. Rocky hills, organic farms, infinity pool, and award-winning spa.</p>
-<div class="rg-meta">
-<span class="rg-meta-item">⭐ 4.9</span>
-<span class="rg-meta-item">🌿 Eco-Certified</span>
-<span class="rg-meta-item">👥 Max 120</span>
-<span class="rg-meta-item">🛏 18 Rooms</span>
-</div>
-<a href="resort-detail.html?resort=bangalore" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-</div>
-</div>
-
-<!-- Resort 2 - Mysore -->
-<div class="rg-card reveal" style="transition-delay:.1s">
-<div class="rg-card-img"><img src="src/resort-mysore.png" alt="Club Aranyakaa Mysore" loading="lazy" /></div>
-<div class="rg-card-body">
-<div class="rg-card-badges"><span class="rg-badge">🏛️ Heritage</span><span class="rg-badge">Royal Experience</span></div>
-<p class="rg-loc">📍 Mysore · 140 km</p>
-<h3 class="rg-name">Club Aranyakaa Mysore</h3>
-<p class="rg-desc">Heritage meets wilderness. Near the Palace City with curated palace tours, silk market visits, and royal cuisine experiences.</p>
-<div class="rg-meta">
-<span class="rg-meta-item">⭐ 4.8</span>
-<span class="rg-meta-item">🏛️ Heritage</span>
-<span class="rg-meta-item">👥 Max 80</span>
-<span class="rg-meta-item">🛏 14 Rooms</span>
-</div>
-<a href="resort-detail.html?resort=mysore" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-</div>
-</div>
-
-<!-- Resort 3 - Chennai -->
-<div class="rg-card reveal" style="transition-delay:.2s">
-<div class="rg-card-img"><img src="src/resort-chennai.png" alt="Club Aranyakaa Chennai" loading="lazy" /></div>
-<div class="rg-card-body">
-<div class="rg-card-badges"><span class="rg-badge">🌊 Coastal</span><span class="rg-badge">Beach Access</span></div>
-<p class="rg-loc">📍 Chennai · 120 km</p>
-<h3 class="rg-name">Club Aranyakaa Chennai</h3>
-<p class="rg-desc">A serene coastal retreat where the Bay of Bengal meets unspoiled mangroves. Perfect blend of beach and backwater.</p>
-<div class="rg-meta">
-<span class="rg-meta-item">⭐ 4.7</span>
-<span class="rg-meta-item">🌊 Coastal</span>
-<span class="rg-meta-item">👥 Max 100</span>
-<span class="rg-meta-item">🛏 16 Rooms</span>
-</div>
-<a href="resort-detail.html?resort=chennai" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-</div>
-</div>
-
-<!-- Resort 4 - Mandya -->
-<div class="rg-card reveal" style="transition-delay:.3s">
-<div class="rg-card-img"><img src="src/resort-mandya.png" alt="Club Aranyakaa Mandya" loading="lazy" /></div>
-<div class="rg-card-body">
-<div class="rg-card-badges"><span class="rg-badge gold">🌾 Farm Focus</span><span class="rg-badge">Family Favorite</span></div>
-<p class="rg-loc">📍 Mandya · 90 km</p>
-<h3 class="rg-name">Club Aranyakaa Mandya</h3>
-<p class="rg-desc">Immersive organic farm experience in the heart of Karnataka's rice bowl. Harvest-to-table dining, village walks, and rural immersion.</p>
-<div class="rg-meta">
-<span class="rg-meta-item">⭐ 4.9</span>
-<span class="rg-meta-item">🌾 Farm Stay</span>
-<span class="rg-meta-item">👥 Max 60</span>
-<span class="rg-meta-item">🛏 10 Rooms</span>
-</div>
-<a href="resort-detail.html?resort=mandya" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-</div>
-</div>
-
-<!-- Resort 5 - Goa -->
-<div class="rg-card reveal" style="transition-delay:.4s">
-<div class="rg-card-img"><img src="src/resort-goa.png" alt="Club Aranyakaa Goa" loading="lazy" /></div>
-<div class="rg-card-body">
-<div class="rg-card-badges"><span class="rg-badge">🏖️ Beach</span><span class="rg-badge">New Property</span></div>
-<p class="rg-loc">📍 Goa · South Goa</p>
-<h3 class="rg-name">Club Aranyakaa Goa</h3>
-<p class="rg-desc">Our newest property on the unspoiled south Goa coast. Beachfront luxury with spice garden tours and river cruises.</p>
-<div class="rg-meta">
-<span class="rg-meta-item">⭐ 4.8</span>
-<span class="rg-meta-item">🏖️ Beachfront</span>
-<span class="rg-meta-item">👥 Max 90</span>
-<span class="rg-meta-item">🛏 15 Rooms</span>
-</div>
-<a href="resort-detail.html?resort=goa" class="rg-cta">Explore Resort <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-</div>
-</div>
-
-</div>
-</div>
-</section>
-
-<!-- Featured Resort -->
-<section class="featured-resort">
-<div class="container">
-<div class="fr-grid">
-<div class="fr-img reveal-l">
-<img src="src/resort-bangalore.png" alt="Bangalore Featured" loading="lazy" />
-</div>
-<div class="fr-content reveal-r">
-<p class="label">Flagship Property</p>
-<div class="gold-rule"></div>
-<h3 class="fr-name">Club Aranyakaa<br><span class="em">Bangalore</span></h3>
-<p>Our most popular property and the birthplace of the Aranyakaa philosophy. Set across 42 acres of pristine wilderness in Ramanagara — just 55 km from the city, yet worlds away.</p>
-<div class="fr-features">
-<div class="fr-feat">42 Acres of Wilderness</div>
-<div class="fr-feat">100% Solar Powered</div>
-<div class="fr-feat">Organic Farm-to-Table</div>
-<div class="fr-feat">Award-Winning Spa</div>
-<div class="fr-feat">Infinity Pool</div>
-<div class="fr-feat">Stargazing Deck</div>
-<div class="fr-feat">Corporate Event Spaces</div>
-<div class="fr-feat">18 Unique Accommodations</div>
-</div>
-<a href="resort-detail.html?resort=bangalore" class="btn-gold">Explore This Resort</a>
+<h1 class="rh-title">Club Aranyakaa<br><em>Bangalore</em></h1>
+<div class="rh-meta">
+<div class="rh-meta-item rh-rating"><span class="rh-stars">★★★★★</span> <span>4.9</span> <span style="opacity:0.6">(248 reviews)</span></div>
+<div class="rh-meta-item">📍 <span>Ramanagara, 55 km from Bangalore</span></div>
+<div class="rh-meta-item">🏡 <span>42 Acres</span></div>
+<div class="rh-meta-item">👥 <span>Max 120 Guests</span></div>
+<div class="rh-meta-item">🌿 <span>Organic Farm Stay</span></div>
 </div>
 </div>
 </div>
 </section>
 
-<!-- Comparison Table -->
-<section id="compare">
+<!-- STICKY BOOKING BAR -->
+<div id="sticky-book">
 <div class="container">
-<div class="reveal">
-<p class="label">Compare Properties</p>
-<div class="gold-rule"></div>
-<h2 class="headline">Find Your <span class="em">Perfect Match</span></h2>
+<div class="sb-inner">
+<div class="sb-tabs">
+<button class="sb-tab active" onclick="scrollTo('#overview')">Overview</button>
+<button class="sb-tab" onclick="scrollTo('#resort-gallery')">Gallery</button>
+<button class="sb-tab" onclick="scrollTo('#rooms')">Rooms</button>
+<button class="sb-tab" onclick="scrollTo('#amenities')">Amenities</button>
+<button class="sb-tab" onclick="scrollTo('#dining')">Dining</button>
+<button class="sb-tab" onclick="scrollTo('#spa')">Spa</button>
+<button class="sb-tab" onclick="scrollTo('#events')">Events</button>
+<button class="sb-tab" onclick="scrollTo('#reviews')">Reviews</button>
 </div>
-<table class="compare-table reveal" style="transition-delay:.1s;">
-<thead>
-<tr>
-<th>Feature</th>
-<th>Bangalore</th>
-<th>Mysore</th>
-<th>Chennai</th>
-<th>Mandya</th>
-<th>Goa</th>
-</tr>
-</thead>
-<tbody>
-<tr><td>Location Type</td><td>Forest & Hills</td><td>Heritage & Rural</td><td>Coastal & Mangrove</td><td>Farmland</td><td>Beachfront</td></tr>
-<tr><td>Distance from City</td><td>55 km</td><td>140 km</td><td>120 km</td><td>90 km</td><td>35 km</td></tr>
-<tr><td>Property Size</td><td>42 Acres</td><td>25 Acres</td><td>30 Acres</td><td>18 Acres</td><td>22 Acres</td></tr>
-<tr><td>Max Capacity</td><td>120 Guests</td><td>80 Guests</td><td>100 Guests</td><td>60 Guests</td><td>90 Guests</td></tr>
-<tr><td>Swimming Pool</td><td class="check">✓ Infinity</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓ Ocean</td></tr>
-<tr><td>Spa & Wellness</td><td class="check">✓ Full Service</td><td class="check">✓</td><td class="cross">Limited</td><td class="check">✓</td><td class="check">✓</td></tr>
-<tr><td>Organic Farm</td><td class="check">✓ 80% Sourced</td><td class="check">✓</td><td class="cross">—</td><td class="check">✓✓ Full Farm</td><td class="check">✓ Spice Garden</td></tr>
-<tr><td>Adventure Activities</td><td class="check">✓✓ Extensive</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓</td><td class="check">✓ Water Sports</td></tr>
-<tr><td>Wedding Venue</td><td class="check">✓ 300 Capacity</td><td class="check">✓ 150 Capacity</td><td class="cross">—</td><td class="cross">—</td><td class="check">✓ 200 Capacity</td></tr>
-<tr><td>Starting Price</td><td class="price-highlight">₹3,500</td><td class="price-highlight">₹2,800</td><td class="price-highlight">₹2,500</td><td class="price-highlight">₹2,200</td><td class="price-highlight">₹3,200</td></tr>
-</tbody>
-</table>
+<div class="sb-actions">
+<div class="sb-price">
+<div class="sb-price-from">From</div>
+<div><span class="sb-price-num">₹3,500</span> <span class="sb-price-unit">/ person / night</span></div>
+</div>
+<a href="#book-now" class="btn-gold" style="padding:12px 28px;font-size:0.68rem;">Book Now</a>
+</div>
+</div>
+</div>
+</div>
+
+<!-- OVERVIEW -->
+<section id="overview">
+<div class="container">
+<div class="ov-grid">
+<div class="ov-intro reveal-l">
+<p class="label">Our Flagship Property</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 28px;"></div>
+<h2 class="headline">A Living <span class="em">Sanctuary</span><br>in the Wilderness</h2>
+<div style="margin-top:28px;">
+<p style="font-family:var(--font-body);font-size:1.1rem;font-weight:300;color:var(--ink-mid);line-height:1.9;margin-bottom:20px;">Nestled across 42 lush acres in Ramanagara, Club Aranyakaa Bangalore is our flagship eco-luxury retreat. Surrounded by rocky hills, ancient forests, and a sprawling organic farm, this is where the demands of the city dissolve into the whispers of nature.</p>
+<p style="font-family:var(--font-body);font-size:1.1rem;font-weight:300;color:var(--ink-mid);line-height:1.9;margin-bottom:20px;">Every structure here has been built using locally sourced materials with minimal ecological impact. Solar energy powers the entire property, and our farm supplies over 80% of all ingredients used in our kitchen. This is luxury that gives back.</p>
+<p style="font-family:var(--font-body);font-size:1.1rem;font-weight:300;color:var(--ink-mid);line-height:1.9;">From our highest-rated Banyan Suite with its private plunge pool to the community bonfire clearing where strangers become friends — every corner of this resort has been designed with intention, beauty, and deep respect for nature.</p>
+</div>
+<div class="ov-highlights">
+<div class="oh reveal"><div class="oh-icon">🌿</div><div class="oh-text"><h4>42 Acres</h4><p>Of pristine forest, farmland, and manicured eco-retreat zones.</p></div></div>
+<div class="oh reveal" style="transition-delay:.08s"><div class="oh-icon">☀️</div><div class="oh-text"><h4>100% Solar</h4><p>Entire property powered by renewable solar energy.</p></div></div>
+<div class="oh reveal" style="transition-delay:.16s"><div class="oh-icon">🌾</div><div class="oh-text"><h4>Organic Farm</h4><p>80% of kitchen ingredients from our own certified farm.</p></div></div>
+<div class="oh reveal" style="transition-delay:.24s"><div class="oh-icon">💧</div><div class="oh-text"><h4>Rainwater</h4><p>Full rainwater harvesting & natural water filtration.</p></div></div>
+<div class="oh reveal" style="transition-delay:.32s"><div class="oh-icon">🏡</div><div class="oh-text"><h4>18 Suites</h4><p>Private, architect-designed suites and villas.</p></div></div>
+<div class="oh reveal" style="transition-delay:.4s"><div class="oh-icon">👨‍🍳</div><div class="oh-text"><h4>Chef Curated</h4><p>Multi-cuisine restaurant with dedicated farm-to-table menus.</p></div></div>
+</div>
+</div>
+<!-- BOOKING CARD -->
+<div id="book-now">
+<div class="book-card reveal-r">
+<div class="book-card-head">
+<h3>Reserve Your Stay</h3>
+<p>Best rates guaranteed · No hidden charges</p>
+<div class="book-card-price"><strong>₹3,500</strong><span>per person / night onwards</span></div>
+</div>
+<div class="book-card-body">
+<div class="bf"><label>Room Type</label><select><option>Select Room Type</option><option>Jungle Cottage — ₹3,500/night</option><option>Forest Suite — ₹5,500/night</option><option>Banyan Villa — ₹8,500/night</option><option>Presidential Tent — ₹12,000/night</option></select></div>
+<div class="bf"><label>Check In</label><input type="date" /></div>
+<div class="bf"><label>Check Out</label><input type="date" /></div>
+<div class="bf"><label>Guests</label><select><option>1 Guest</option><option>2 Guests</option><option>3 Guests</option><option>4 Guests</option><option>5+ Guests (Group)</option></select></div>
+<div class="book-divider"></div>
+<div class="book-total"><span>Total Estimated</span><strong>₹ —</strong></div>
+<a href="tel:+918050873002" class="btn-gold">Book Now · Call Us</a>
+<p class="book-card-note">Or email us at <a href="mailto:hello@clubaranyakaa.com">hello@clubaranyakaa.com</a></p>
+</div>
+<div class="book-card-perks">
+<div class="bp">Free cancellation up to 72 hours</div>
+<div class="bp">Complimentary breakfast included</div>
+<div class="bp">Priority check-in for members</div>
+<div class="bp">Access to all common amenities</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </section>
 
-<!-- Testimonials -->
-<section id="testimonials">
+<!-- GALLERY -->
+<section id="resort-gallery">
 <div class="container">
-<div class="testi-hd reveal">
-<p class="label">Guest Stories</p>
-<div class="gold-rule" style="margin:18px auto 28px;"></div>
-<h2 class="headline">Voices of Our <span class="em">Community</span></h2>
+<div class="rg-hd reveal">
+<div><p class="label">Photo Gallery</p><div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 0;"></div></div>
+<button class="btn-line" id="view-all-photos">View All 48 Photos</button>
 </div>
-<div class="tgrid">
-<div class="tc reveal"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">Club Aranyakaa is our family's new weekend tradition! The kids loved planting saplings while we relaxed by the pool and enjoyed fresh organic meals. Luxury wrapped in nature.</p><div class="tc-author"><div class="tc-av">A</div><div><div class="tc-name">Ananya Sharma</div><div class="tc-role">Family Traveler · Bangalore</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.12s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">We celebrated our anniversary here — candle-lit farm-to-table dinner under the stars, a couples spa session, and quiet morning walks through lush trails. Pure magic.</p><div class="tc-author"><div class="tc-av">R</div><div><div class="tc-name">Rajesh & Priya Mehta</div><div class="tc-role">Anniversary Retreat</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.24s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">The yoga deck overlooking the farmlands and morning meditation sessions were exactly what I needed. I left feeling lighter in body and mind. An extraordinary escape.</p><div class="tc-author"><div class="tc-av">V</div><div><div class="tc-name">Vikram Rao</div><div class="tc-role">Wellness Seeker</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.36s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">Exchanging our RCI points for a stay at Club Aranyakaa was the best decision. The eco-luxe vibe, attentive staff, and sustainable practices made it stand out.</p><div class="tc-author"><div class="tc-av">S</div><div><div class="tc-name">Sarah Thomas</div><div class="tc-role">RCI Member · International</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.48s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">Our corporate retreat transformed our team. The bonfire sessions and nature activities created connections that no conference room ever could. Highly recommend.</p><div class="tc-author"><div class="tc-av">K</div><div><div class="tc-name">Kiran Patel</div><div class="tc-role">Corporate Lead · Infosys</div></div></div></div>
-<div class="tc reveal" style="transition-delay:.6s"><div class="tc-qm">"</div><div class="tc-stars">★★★★★</div><p class="tc-text">We brought three generations together. Grandparents loved the temple garden, kids ran wild in play areas, and we all gathered around the bonfire. Memories made forever.</p><div class="tc-author"><div class="tc-av">M</div><div><div class="tc-name">Meera Iyer</div><div class="tc-role">Multi-Gen Family · Chennai</div></div></div></div>
+<div class="rg-grid">
+<div class="rg-item" data-src="src/gallery-3.jpg"><img src="src/gallery-3.jpg" alt="Resort View" loading="lazy" /></div>
+<div class="rg-item" data-src="src/gallery-1.jpg"><img src="src/gallery-1.jpg" alt="Pool Deck" loading="lazy" /></div>
+<div class="rg-item" data-src="src/gallery-4.jpg"><img src="src/gallery-4.jpg" alt="Spa" loading="lazy" /></div>
+<div class="rg-item" data-src="src/gallery-2.jpg"><img src="src/gallery-2.jpg" alt="Nature Trails" loading="lazy" /></div>
+<div class="rg-item" data-src="src/gallery-5.jpg"><img src="src/gallery-5.jpg" alt="Bonfire" loading="lazy"><div class="rg-count">+43 Photos</div></div>
+</div>
+</div>
+</section>
+
+<!-- ROOMS & SUITES -->
+<section id="rooms">
+<div class="container">
+<div class="rooms-hd reveal">
+<p class="label" style="justify-content:center;">Accommodations</p>
+<div style="width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);margin:16px auto;"></div>
+<h2 class="headline" style="text-align:center;">Rooms & <span class="em">Suites</span></h2>
+<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);text-align:center;max-width:540px;margin:16px auto 0;line-height:1.8;">Each accommodation is a private world — thoughtfully designed, sustainably built, and crafted for your deepest rest.</p>
+</div>
+<div class="rooms-grid">
+<!-- Room 1 -->
+<div class="room-card reveal">
+<div class="room-img"><img src="src/gallery-1.jpg" alt="Jungle Cottage" loading="lazy" /><span class="room-badge">Most Popular</span></div>
+<div class="room-body">
+<p class="room-type">Cottage · Garden View</p>
+<h3 class="room-name">Jungle Cottage</h3>
+<p class="room-desc">Nestled among bamboo groves, our Jungle Cottages offer a cozy, nature-immersed retreat with modern comforts. Perfect for solo travelers or couples.</p>
+<div class="room-specs"><span class="rspec">🛏 King Bed</span><span class="rspec">📐 450 sq ft</span><span class="rspec">👥 2 Guests</span><span class="rspec">🛁 Rain Shower</span></div>
+<div class="room-amenities"><span class="ram">AC</span><span class="ram">Wi-Fi</span><span class="ram">Mini Bar</span><span class="ram">Safe</span><span class="ram">TV</span><span class="ram">Balcony</span></div>
+<div class="room-footer"><div class="room-price"><strong>₹3,500</strong><small>per night · 2 guests</small></div><a href="tel:+918050873002" class="r-book">Book</a></div>
+</div>
+</div>
+<!-- Room 2 -->
+<div class="room-card reveal" style="transition-delay:.1s">
+<div class="room-img"><img src="src/gallery-2.jpg" alt="Forest Suite" loading="lazy" /><span class="room-badge">Romantic Pick</span></div>
+<div class="room-body">
+<p class="room-type">Suite · Forest View</p>
+<h3 class="room-name">Forest Suite</h3>
+<p class="room-desc">Elevated among the treetops with panoramic forest views. Features a private sit-out, outdoor rain shower, and butler service upon request.</p>
+<div class="room-specs"><span class="rspec">🛏 King Bed</span><span class="rspec">📐 680 sq ft</span><span class="rspec">👥 2-3 Guests</span><span class="rspec">🛁 Bathtub</span></div>
+<div class="room-amenities"><span class="ram">AC</span><span class="ram">Wi-Fi</span><span class="ram">Jacuzzi</span><span class="ram">Butler</span><span class="ram">Mini Kitchen</span></div>
+<div class="room-footer"><div class="room-price"><strong>₹5,500</strong><small>per night · 2 guests</small></div><a href="tel:+918050873002" class="r-book">Book</a></div>
+</div>
+</div>
+<!-- Room 3 -->
+<div class="room-card reveal" style="transition-delay:.2s">
+<div class="room-img"><img src="src/gallery-4.jpg" alt="Banyan Villa" loading="lazy" /><span class="room-badge">Premium</span></div>
+<div class="room-body">
+<p class="room-type">Villa · Private Pool</p>
+<h3 class="room-name">Banyan Villa</h3>
+<p class="room-desc">Our most sought-after accommodation. A private villa with plunge pool, outdoor dining area, and 180° nature views. Complete exclusivity.</p>
+<div class="room-specs"><span class="rspec">🛏 2 King Beds</span><span class="rspec">📐 1,200 sq ft</span><span class="rspec">👥 4 Guests</span><span class="rspec">🏊 Private Pool</span></div>
+<div class="room-amenities"><span class="ram">AC</span><span class="ram">Wi-Fi</span><span class="ram">Private Pool</span><span class="ram">Chef</span><span class="ram">Bonfire</span></div>
+<div class="room-footer"><div class="room-price"><strong>₹8,500</strong><small>per night · up to 4</small></div><a href="tel:+918050873002" class="r-book">Book</a></div>
+</div>
+</div>
+<!-- Room 4 -->
+<div class="room-card reveal" style="transition-delay:.3s">
+<div class="room-img"><img src="src/gallery-5.jpg" alt="Luxury Tent" loading="lazy" /></div>
+<div class="room-body">
+<p class="room-type">Glamping · Stargazing</p>
+<h3 class="room-name">Presidential Tent</h3>
+<p class="room-desc">Luxury glamping redefined. Canvas walls meet heritage wooden floors, walk-in wardrobe, and a private bonfire area under an open sky.</p>
+<div class="room-specs"><span class="rspec">🛏 King Bed</span><span class="rspec">📐 800 sq ft</span><span class="rspec">👥 2 Guests</span><span class="rspec">🔭 Stargazing</span></div>
+<div class="room-amenities"><span class="ram">Heated</span><span class="ram">Wi-Fi</span><span class="ram">Bonfire</span><span class="ram">Telescope</span></div>
+<div class="room-footer"><div class="room-price"><strong>₹12,000</strong><small>per night · 2 guests</small></div><a href="tel:+918050873002" class="r-book">Book</a></div>
+</div>
+</div>
+<!-- Room 5 -->
+<div class="room-card reveal" style="transition-delay:.4s">
+<div class="room-img"><img src="src/gallery-3.jpg" alt="Family Bungalow" loading="lazy" /></div>
+<div class="room-body">
+<p class="room-type">Bungalow · Family</p>
+<h3 class="room-name">Heritage Bungalow</h3>
+<p class="room-desc">Ideal for families, this spacious bungalow features three bedrooms, a common living area, private courtyard, and a dedicated family activity area.</p>
+<div class="room-specs"><span class="rspec">🛏 3 Beds</span><span class="rspec">📐 1,800 sq ft</span><span class="rspec">👥 6-8 Guests</span><span class="rspec">🌺 Courtyard</span></div>
+<div class="room-amenities"><span class="ram">AC</span><span class="ram">Wi-Fi</span><span class="ram">Kitchen</span><span class="ram">Game Room</span></div>
+<div class="room-footer"><div class="room-price"><strong>₹18,000</strong><small>per night · up to 8</small></div><a href="tel:+918050873002" class="r-book">Book</a></div>
+</div>
+</div>
+<!-- Room 6 -->
+<div class="room-card reveal" style="transition-delay:.5s">
+<div class="room-img"><img src="src/gallery-1.jpg" alt="Dormitory" loading="lazy" /></div>
+<div class="room-body">
+<p class="room-type">Dorm · Group / Youth</p>
+<h3 class="room-name">Eco Dormitory</h3>
+<p class="room-desc">Thoughtfully designed shared accommodation for groups, students, and nature enthusiasts on a budget — without compromising on the Aranyakaa experience.</p>
+<div class="room-specs"><span class="rspec">🛏 8 Bunks</span><span class="rspec">📐 600 sq ft</span><span class="rspec">👥 Up to 16</span><span class="rspec">🚿 Shared Bath</span></div>
+<div class="room-amenities"><span class="ram">Fan Cooled</span><span class="ram">Wi-Fi</span><span class="ram">Lockers</span></div>
+<div class="room-footer"><div class="room-price"><strong>₹800</strong><small>per person / night</small></div><a href="tel:+918050873002" class="r-book">Book</a></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- AMENITIES -->
+<section id="amenities">
+<div class="container">
+<div class="am-hd reveal">
+<p class="label">What We Offer</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 28px;"></div>
+<h2 class="headline">Resort <span class="em">Amenities</span></h2>
+</div>
+<div class="am-tabs">
+<button class="am-tab active" data-am="recreation">Recreation</button>
+<button class="am-tab" data-am="wellness">Wellness & Spa</button>
+<button class="am-tab" data-am="nature">Nature & Farm</button>
+<button class="am-tab" data-am="kids">Kids Zone</button>
+<button class="am-tab" data-am="services">Services</button>
+<button class="am-tab" data-am="dining-am">Dining</button>
+</div>
+<div class="am-panel active" id="am-recreation">
+<div class="am-grid">
+<div class="am-item"><div class="am-icon">🏊</div><h4>Infinity Pool</h4><p>Vanishing-edge pool with forest panorama views. Open 7 AM – 8 PM.</p></div>
+<div class="am-item"><div class="am-icon">🧘</div><h4>Yoga Deck</h4><p>Open-air sunrise yoga platform overlooking the organic farm.</p></div>
+<div class="am-item"><div class="am-icon">🚴</div><h4>Cycling Trails</h4><p>12 km of scenic cycling trails through the property and adjoining forest.</p></div>
+<div class="am-item"><div class="am-icon">🏹</div><h4>Archery Range</h4><p>Professional 30m archery range with trained instructors.</p></div>
+<div class="am-item"><div class="am-icon">🏐</div><h4>Sports Court</h4><p>Badminton, volleyball, and cricket pitch on the grounds.</p></div>
+<div class="am-item"><div class="am-icon">🎣</div><h4>Angling Lake</h4><p>Private lake for catch-and-release angling. Equipment provided.</p></div>
+<div class="am-item premium"><div class="am-icon">🌌</div><h4>Stargazing Deck</h4><p>Rooftop observatory with guided astronomy sessions.</p></div>
+<div class="am-item premium"><div class="am-icon">🔥</div><h4>Bonfire Arena</h4><p>Nightly community bonfire with storytelling and music.</p></div>
+</div>
+</div>
+<div class="am-panel" id="am-wellness">
+<div class="am-grid">
+<div class="am-item"><div class="am-icon">💆</div><h4>Ayurvedic Spa</h4><p>6 treatment rooms with certified Ayurvedic therapists.</p></div>
+<div class="am-item"><div class="am-icon">🛁</div><h4>Herbal Bath</h4><p>Outdoor bathing tubs with locally foraged herbal blends.</p></div>
+<div class="am-item"><div class="am-icon">🧖</div><h4>Swedish Massage</h4><p>Full-body Swedish and deep-tissue massage by certified therapists.</p></div>
+<div class="am-item"><div class="am-icon">🌬️</div><h4>Breathwork</h4><p>Guided pranayama and breathwork sessions daily at 6 AM.</p></div>
+<div class="am-item"><div class="am-icon">🏋️</div><h4>Fitness Centre</h4><p>Open-air gym with functional fitness equipment and free weights.</p></div>
+<div class="am-item"><div class="am-icon">🌿</div><h4>Herbal Steam</h4><p>Traditional mud-plaster steam room with forest herb infusions.</p></div>
+<div class="am-item premium"><div class="am-icon">🧬</div><h4>Panchakarma</h4><p>5-7 day full Panchakarma detox programs by resident Vaidya.</p></div>
+<div class="am-item premium"><div class="am-icon">🌙</div><h4>Moonlight Meditation</h4><p>Full moon guided meditation circles on the open terrace.</p></div>
+</div>
+</div>
+<div class="am-panel" id="am-nature">
+<div class="am-grid">
+<div class="am-icon"></div>
+<div class="am-item"><div class="am-icon">🌾</div><h4>Organic Farm</h4><p>42-acre certified organic farm. Guest harvesting sessions daily.</p></div>
+<div class="am-item"><div class="am-icon">🌲</div><h4>Forest Trails</h4><p>8 km guided nature trails with botanist-led walks.</p></div>
+<div class="am-item"><div class="am-icon">🦋</div><h4>Butterfly Garden</h4><p>Curated native butterfly habitat with 40+ species.</p></div>
+<div class="am-item"><div class="am-icon">🐦</div><h4>Bird Watching</h4><p>200+ bird species documented. Early morning guided walks.</p></div>
+<div class="am-item"><div class="am-icon">🌱</div><h4>Plant Nursery</h4><p>Native plant nursery with "Adopt a Sapling" program for guests.</p></div>
+<div class="am-item"><div class="am-icon">💧</div><h4>Natural Stream</h4><p>A seasonal natural stream runs through the southern forest belt.</p></div>
+<div class="am-item premium"><div class="am-icon">🌿</div><h4>Herb Garden</h4><p>600+ varieties of medicinal herbs. Guided walks every afternoon.</p></div>
+</div>
+</div>
+<div class="am-panel" id="am-kids">
+<div class="am-grid">
+<div class="am-item"><div class="am-icon">🎨</div><h4>Art Workshop</h4><p>Daily nature-themed art and craft sessions for children aged 5–14.</p></div>
+<div class="am-item"><div class="am-icon">🌱</div><h4>Sapling Program</h4><p>Kids plant and name their own sapling, taken home at checkout.</p></div>
+<div class="am-item"><div class="am-icon">🐄</div><h4>Animal Farm</h4><p>Friendly petting farm with cows, goats, rabbits, and ducks.</p></div>
+<div class="am-item"><div class="am-icon">🎭</div><h4>Campfire Stories</h4><p>Evening storytelling circles with local folklore and nature tales.</p></div>
+<div class="am-item"><div class="am-icon">🧩</div><h4>Game Lounge</h4><p>Indoor games, board games, and puzzle corner for family time.</p></div>
+<div class="am-item"><div class="am-icon">🏄</div><h4>Kids Pool</h4><p>Dedicated shallow pool with water play zone for children.</p></div>
+<div class="am-item"><div class="am-icon">🎪</div><h4>Nature Camp</h4><p>Weekend eco-camp programs with certificates and activity kits.</p></div>
+<div class="am-item premium"><div class="am-icon">🔬</div><h4>Junior Naturalist</h4><p>Guided sessions where kids discover insects, birds, and plants.</p></div>
+</div>
+</div>
+<div class="am-panel" id="am-services">
+<div class="am-grid">
+<div class="am-item"><div class="am-icon">🚗</div><h4>Airport Transfer</h4><p>Complimentary pickup from Bangalore International Airport. Book 48 hrs ahead.</p></div>
+<div class="am-item"><div class="am-icon">🛎</div><h4>24/7 Concierge</h4><p>Round-the-clock personalized concierge service for all guests.</p></div>
+<div class="am-item"><div class="am-icon">👨‍🍳</div><h4>Private Chef</h4><p>In-villa private chef service for Banyan Villa and Family Bungalow guests.</p></div>
+<div class="am-item"><div class="am-icon">📦</div><h4>Laundry</h4><p>Eco-friendly laundry service with same-day return (by 3 PM).</p></div>
+<div class="am-item"><div class="am-icon">📸</div><h4>Photography</h4><p>Professional resort photographer available for private sessions.</p></div>
+<div class="am-item"><div class="am-icon">🎁</div><h4>Gift Hampers</h4><p>Curated organic hampers and custom welcome baskets for special occasions.</p></div>
+<div class="am-item premium"><div class="am-icon">🩺</div><h4>In-House Doctor</h4><p>Resident naturopath doctor available for consultations daily.</p></div>
+<div class="am-item premium"><div class="am-icon">🌅</div><h4>Sunrise Experiences</h4><p>Pre-dawn nature experiences curated exclusively for premium guests.</p></div>
+</div>
+</div>
+<div class="am-panel" id="am-dining-am">
+<div class="am-grid">
+<div class="am-item"><div class="am-icon">🍽️</div><h4>The Grove Restaurant</h4><p>Main dining, multi-cuisine, open for all three meals. Indoor/outdoor seating.</p></div>
+<div class="am-item"><div class="am-icon">☕</div><h4>Aranya Café</h4><p>All-day café with organic brews, fresh smoothies, and light bites.</p></div>
+<div class="am-item"><div class="am-icon">🍷</div><h4>The Forest Bar</h4><p>Curated wines, craft cocktails, and artisanal mocktails. Open till 11 PM.</p></div>
+<div class="am-item"><div class="am-icon">🔥</div><h4>BBQ Grill Pit</h4><p>Weekend live-fire grill evenings with organic meats and vegetables.</p></div>
+<div class="am-item"><div class="am-icon">🌙</div><h4>Wilderness Dinner</h4><p>Private star-lit dining set up anywhere on the 42-acre property.</p></div>
+<div class="am-item"><div class="am-icon">🍱</div><h4>Room Service</h4><p>Full menu room service available from 7 AM to 10 PM daily.</p></div>
+<div class="am-item premium"><div class="am-icon">🌾</div><h4>Farm Breakfast</h4><p>Early-morning farm breakfast with ingredients harvested that morning.</p></div>
+<div class="am-item premium"><div class="am-icon">👨‍🍳</div><h4>Chef's Table</h4><p>Intimate 6-course tasting menu experience. Bookings required 24 hrs ahead.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- EXPERIENCES -->
+<section id="resort-experiences">
+<div class="container">
+<div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
+<div>
+<p class="label">Curated for You</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 28px;"></div>
+<h2 class="headline">Signature <span class="em">Experiences</span></h2>
+</div>
+<a href="experiences.html" class="btn-line">All Experiences</a>
+</div>
+<div class="re-grid">
+<div class="re-card reveal"><div class="re-img"><img src="src/gallery-3.jpg" alt="Farm Harvest" loading="lazy" /><div class="re-info"><p class="re-tag">🌾 Daily · All Guests</p><h3 class="re-name">Farm Harvest Morning</h3><p class="re-desc">Join our farm team at 6:30 AM to pick seasonal produce, learn organic farming methods, and carry your harvest to the breakfast table.</p><div class="re-cta">Explore <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div></div>
+<div class="re-card reveal" style="transition-delay:.1s"><div class="re-img"><img src="src/gallery-4.jpg" alt="Ayurveda" loading="lazy" /><div class="re-info"><p class="re-tag">💆 Bookable · 2 hrs</p><h3 class="re-name">Ayurvedic Rituals</h3><p class="re-desc">An immersive 2-hour Ayurvedic treatment journey — Shirodhara, Abhyanga, and herbal steam curated by our resident Vaidya.</p><div class="re-cta">Explore <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div></div>
+<div class="re-card reveal" style="transition-delay:.2s"><div class="re-img"><img src="src/gallery-5.jpg" alt="Bonfire" loading="lazy" /><div class="re-info"><p class="re-tag">🔥 Every Evening</p><h3 class="re-name">Bonfire & Folk Music</h3><p class="re-desc">The heart of Aranyakaa. Every evening, guests gather around a roaring bonfire for local folk music, storytelling, and shared meals.</p><div class="re-cta">Explore <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div></div>
+</div>
+</div>
+</section>
+
+<!-- DINING -->
+<section id="dining">
+<div class="container">
+<div class="din-grid">
+<div class="reveal-l">
+<p class="label">Culinary Journey</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 28px;"></div>
+<h2 class="headline">Dining at <span class="em">Aranyakaa</span></h2>
+<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);line-height:1.85;margin:22px 0;">Every meal at Club Aranyakaa is a journey through flavor, season, and origin. Our chefs work directly with our farm team each morning to plan the day's menu based on what is harvested fresh.</p>
+<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);line-height:1.85;margin-bottom:28px;">From South Indian heritage recipes to global farm-cuisine — our kitchen celebrates purity, freshness, and the stories of the soil.</p>
+<div class="dining-venues">
+<div class="dv"><div class="dv-icon">🌿</div><div class="dv-text"><h4>The Grove Restaurant</h4><p>Our main restaurant seats 80 guests under a canopy of trees. Multi-cuisine menu, breakfast, lunch, and dinner. Open-air and air-conditioned sections.</p><div class="dv-tag">Open 7:30 AM – 10:30 PM</div></div></div>
+<div class="dv"><div class="dv-icon">🌙</div><div class="dv-text"><h4>Wilderness Private Dining</h4><p>A candlelit table set anywhere on the 42-acre property — at the lake, in the forest clearing, or on the rocky hilltop. Fully private. For couples and special occasions.</p><div class="dv-tag">By Reservation Only · 48 hrs</div></div></div>
+<div class="dv"><div class="dv-icon">☕</div><div class="dv-text"><h4>Aranya Café & Bar</h4><p>Organic brews, cold-pressed juices, herbal infusions, craft cocktails, and curated wines. The social heart of the resort. Live music on weekends.</p><div class="dv-tag">9 AM – 11 PM Daily</div></div></div>
+</div>
+</div>
+<div class="reveal-r">
+<div class="din-img"><img src="src/gallery-3.jpg" alt="Farm Dining" loading="lazy" /></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;">
+<div style="background:var(--bg-warm);border:1px solid var(--border-light);padding:16px;text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px;">🌾</div><div style="font-family:var(--font-display);font-size:0.9rem;color:var(--ink);margin-bottom:4px;">80% Farm-Sourced</div><div style="font-family:var(--font-ui);font-size:0.65rem;color:var(--ink-soft);">Ingredients from our land</div></div>
+<div style="background:var(--bg-warm);border:1px solid var(--border-light);padding:16px;text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px;">🌱</div><div style="font-family:var(--font-display);font-size:0.9rem;color:var(--ink);margin-bottom:4px;">Zero Chemicals</div><div style="font-family:var(--font-ui);font-size:0.65rem;color:var(--ink-soft);">100% organic, no pesticides</div></div>
+<div style="background:var(--bg-warm);border:1px solid var(--border-light);padding:16px;text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px;">👨‍🍳</div><div style="font-family:var(--font-display);font-size:0.9rem;color:var(--ink);margin-bottom:4px;">Chef Curated</div><div style="font-family:var(--font-ui);font-size:0.65rem;color:var(--ink-soft);">Seasonal daily menus</div></div>
+<div style="background:var(--bg-warm);border:1px solid var(--border-light);padding:16px;text-align:center;"><div style="font-size:1.5rem;margin-bottom:8px;">🥗</div><div style="font-family:var(--font-display);font-size:0.9rem;color:var(--ink);margin-bottom:4px;">Dietary Options</div><div style="font-family:var(--font-ui);font-size:0.65rem;color:var(--ink-soft);">Vegan, Jain, Gluten-Free</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SPA -->
+<section id="spa">
+<div class="container">
+<div class="spa-inner">
+<div class="reveal-l">
+<div class="spa-label">Holistic Wellness</div>
+<h2 class="spa-headline">The Aranyakaa<br><em>Wellness Sanctuary</em></h2>
+<p class="spa-desc">Our spa is not a service — it is a philosophy. Rooted in Ayurveda and the healing power of nature, every treatment is designed to restore balance across body, mind, and spirit.</p>
+<div class="spa-list">
+<div class="sl">6 private treatment suites with natural ventilation</div>
+<div class="sl">Certified Ayurvedic Vaidya in residence</div>
+<div class="sl">Ancient herbal formulations prepared on-site</div>
+<div class="sl">Outdoor herbal bath pods in the garden</div>
+<div class="sl">Couples spa with synchronized treatment</div>
+<div class="sl">5 & 7-day Panchakarma detox programs</div>
+<div class="sl">Post-treatment Ayurvedic diet consultation</div>
+</div>
+<a href="tel:+918050873002" class="btn-gold" style="margin-top:8px;">Book a Spa Session</a>
+</div>
+<div class="spa-img-grid reveal-r">
+<div class="si"><img src="src/gallery-4.jpg" alt="Spa" loading="lazy" /></div>
+<div class="si"><img src="src/gallery-2.jpg" alt="Wellness" loading="lazy" /></div>
+<div class="si"><img src="src/gallery-1.jpg" alt="Treatment" loading="lazy" /></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- EVENTS & CORPORATE -->
+<section id="events">
+<div class="container">
+<div class="ev-grid">
+<div class="reveal-l">
+<p class="label">Group & Corporate</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 28px;"></div>
+<h2 class="headline">Events & <span class="em">Corporate</span><br>Retreats</h2>
+<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);line-height:1.85;margin:22px 0;">Club Aranyakaa Bangalore is one of South India's most sought-after corporate and private event venues. Our dedicated events team handles everything — from planning to execution — so you can be fully present.</p>
+<div class="ev-cards">
+<div class="ev-card"><div class="ev-icon">🎤</div><h4>Corporate Offsites</h4><p>Team building, leadership workshops, and strategy retreats in nature.</p></div>
+<div class="ev-card"><div class="ev-icon">💍</div><h4>Weddings</h4><p>Intimate eco-luxury weddings with a capacity of up to 300 guests.</p></div>
+<div class="ev-card"><div class="ev-icon">🎂</div><h4>Private Celebrations</h4><p>Birthdays, anniversaries, family reunions — curated to perfection.</p></div>
+<div class="ev-card"><div class="ev-icon">📸</div><h4>Photo & Film Shoots</h4><p>42 acres of scenic backdrops for films, ad shoots, and photography.</p></div>
+</div>
+<div class="ev-stats">
+<div class="evs"><div class="num">300+</div><div class="lbl">Event Capacity</div></div>
+<div class="evs"><div class="num">8</div><div class="lbl">Venue Spaces</div></div>
+<div class="evs"><div class="num">50+</div><div class="lbl">Events / Year</div></div>
+</div>
+<a href="tel:+918050873002" class="btn-gold" style="margin-top:24px;">Enquire for Events</a>
+</div>
+<div class="reveal-r">
+<div class="ev-img">
+<img src="src/gallery-5.jpg" alt="Events" loading="lazy" />
+<div class="ev-img-badge">Dedicated Event Manager</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- NEARBY -->
+<section id="nearby">
+<div class="container">
+<div class="reveal" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;">
+<div>
+<p class="label">Explore Beyond</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 28px;"></div>
+<h2 class="headline">Nearby <span class="em">Attractions</span></h2>
+</div>
+</div>
+<div class="na-grid">
+<div class="na-item reveal"><div class="na-icon">🧗</div><div class="na-dist">4 km Away</div><div class="na-name">Ramanagara Silk City</div><p class="na-desc">Famous for its rocky hills and silk weaving tradition. Sholay was filmed here.</p></div>
+<div class="na-item reveal" style="transition-delay:.08s"><div class="na-icon">🌊</div><div class="na-dist">18 km Away</div><div class="na-name">Manchanabele Dam</div><p class="na-desc">Serene reservoir and picnic spot, perfect for morning drives and rowing.</p></div>
+<div class="na-item reveal" style="transition-delay:.16s"><div class="na-icon">🦁</div><div class="na-dist">22 km Away</div><div class="na-name">Savandurga Fort</div><p class="na-desc">One of Asia's largest monoliths with trekking trails and panoramic views.</p></div>
+<div class="na-item reveal" style="transition-delay:.24s"><div class="na-icon">🙏</div><div class="na-dist">8 km Away</div><div class="na-name">Kanakapura Temple Cluster</div><p class="na-desc">Ancient Vishnu and Rama temples dating back to the Hoysala era.</p></div>
+<div class="na-item reveal" style="transition-delay:.32s"><div class="na-icon">🌿</div><div class="na-dist">35 km Away</div><div class="na-name">Bannerghatta Reserve</div><p class="na-desc">Biosphere reserve with safari, butterfly park, and nature center.</p></div>
+<div class="na-item reveal" style="transition-delay:.4s"><div class="na-icon">🏙️</div><div class="na-dist">55 km Away</div><div class="na-name">Bangalore City Center</div><p class="na-desc">Easy day trips to Cubbon Park, Lalbagh, markets, and restaurants.</p></div>
+<div class="na-item reveal" style="transition-delay:.48s"><div class="na-icon">🦒</div><div class="na-dist">12 km Away</div><div class="na-name">Mekedatu Confluence</div><p class="na-desc">Scenic gorge where two rivers meet — one of Karnataka's natural wonders.</p></div>
+<div class="na-item reveal" style="transition-delay:.56s"><div class="na-icon">🐘</div><div class="na-dist">68 km Away</div><div class="na-name">Nagarhole Tiger Reserve</div><p class="na-desc">Day safari to one of India's finest tiger and elephant reserves.</p></div>
+</div>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+<div class="container">
+<div class="rev-header reveal">
+<div>
+<p class="label">Guest Reviews</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 28px;"></div>
+<h2 class="headline">What Our <span class="em">Guests Say</span></h2>
+</div>
+<div class="rev-score">
+<div class="rev-num">4.9</div>
+<div class="rev-detail">
+<div class="rev-stars">★★★★★</div>
+<div class="rev-count">Based on 248 verified reviews</div>
+<div class="rev-bars">
+<div class="rbar"><span class="rbar-label">Cleanliness</span><div class="rbar-track"><div class="rbar-fill" style="width:98%"></div></div><span class="rbar-val">4.9</span></div>
+<div class="rbar"><span class="rbar-label">Service</span><div class="rbar-track"><div class="rbar-fill" style="width:96%"></div></div><span class="rbar-val">4.8</span></div>
+<div class="rbar"><span class="rbar-label">Location</span><div class="rbar-track"><div class="rbar-fill" style="width:100%"></div></div><span class="rbar-val">5.0</span></div>
+<div class="rbar"><span class="rbar-label">Value</span><div class="rbar-track"><div class="rbar-fill" style="width:94%"></div></div><span class="rbar-val">4.7</span></div>
+<div class="rbar"><span class="rbar-label">Food</span><div class="rbar-track"><div class="rbar-fill" style="width:98%"></div></div><span class="rbar-val">4.9</span></div>
+</div>
+</div>
+</div>
+</div>
+<div class="rev-grid">
+<div class="rv reveal"><div class="rv-top"><div class="rv-author"><div class="rv-av">A</div><div><div class="rv-name">Ananya Sharma</div><div class="rv-meta">2 nights · Banyan Villa · Jan 2025</div></div></div><div class="rv-stars">★★★★★</div></div><p class="rv-text">Absolutely transformative. The villa is a dream — woke up to birds and a forest view every morning. The farm breakfast was the most delicious meal I've had in years. Staff anticipated every need.</p><div class="rv-verified">Verified Guest</div></div>
+<div class="rv reveal" style="transition-delay:.1s"><div class="rv-top"><div class="rv-author"><div class="rv-av">R</div><div><div class="rv-name">Rajesh Mehta</div><div class="rv-meta">3 nights · Forest Suite · Dec 2024</div></div></div><div class="rv-stars">★★★★★</div></div><p class="rv-text">Booked for our 10th anniversary. The wilderness dinner under the stars was genuinely the most romantic evening of our lives. Flawlessly organized. The spa was world-class — not just "resort-standard."</p><div class="rv-verified">Verified Guest</div></div>
+<div class="rv reveal" style="transition-delay:.2s"><div class="rv-top"><div class="rv-author"><div class="rv-av">V</div><div><div class="rv-name">Vikram Rao</div><div class="rv-meta">5 nights · Soul Reset Program · Nov 2024</div></div></div><div class="rv-stars">★★★★★</div></div><p class="rv-text">The Panchakarma program changed my relationship with my body. The Vaidya was knowledgeable and genuinely caring. I came stressed and burned out — I left feeling 10 years younger.</p><div class="rv-verified">Verified Guest</div></div>
+<div class="rv reveal" style="transition-delay:.3s"><div class="rv-top"><div class="rv-author"><div class="rv-av">K</div><div><div class="rv-name">Kavitha Nair</div><div class="rv-meta">Family of 6 · Heritage Bungalow · Mar 2025</div></div></div><div class="rv-stars">★★★★★</div></div><p class="rv-text">Three generations, one bungalow, zero complaints. The kids were completely in their element — the animal farm, the cycling, the bonfire. Grandparents loved the peaceful temple garden walk.</p><div class="rv-verified">Verified Guest</div></div>
+<div class="rv reveal" style="transition-delay:.4s"><div class="rv-top"><div class="rv-author"><div class="rv-av">S</div><div><div class="rv-name">Suresh Kumar</div><div class="rv-meta">Corporate Group · 35 Guests · Feb 2025</div></div></div><div class="rv-stars">★★★★★</div></div><p class="rv-text">Our company offsite of 35 people was executed perfectly. The dedicated events manager handled every logistic. The team-building programs were genuinely effective — not the usual cheesy activities.</p><div class="rv-verified">Verified Corporate Guest</div></div>
+<div class="rv reveal" style="transition-delay:.5s"><div class="rv-top"><div class="rv-author"><div class="rv-av">P</div><div><div class="rv-name">Priyanka Iyer</div><div class="rv-meta">Solo Stay · Jungle Cottage · Apr 2025</div></div></div><div class="rv-stars">★★★★★</div></div><p class="rv-text">Solo travel can feel lonely, but Aranyakaa made me feel part of a community from day one. The bonfire evenings are magical — I made friends from across the world. The food alone is worth the trip.</p><div class="rv-verified">Verified Guest</div></div>
+</div>
+</div>
+</section>
+
+<!-- POLICIES -->
+<section id="policies">
+<div class="container">
+<div class="reveal" style="margin-bottom:0;">
+<p class="label">Know Before You Go</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 28px;"></div>
+<h2 class="headline">Resort <span class="em">Policies</span></h2>
+</div>
+<div class="pol-grid">
+<div class="pol reveal"><div class="pol-icon">🕐</div><h4>Check-in & Out</h4><ul><li>Check-in from 2:00 PM</li><li>Check-out by 11:00 AM</li><li>Early check-in subject to availability</li><li>Late check-out: ₹1,000 till 2 PM</li><li>Express checkout available</li></ul></div>
+<div class="pol reveal" style="transition-delay:.08s"><div class="pol-icon">❌</div><h4>Cancellation</h4><ul><li>Free cancellation up to 72 hrs</li><li>50% refund: 24–72 hrs before</li><li>No refund within 24 hrs</li><li>Full refund for Force Majeure</li><li>Rescheduling allowed once free</li></ul></div>
+<div class="pol reveal" style="transition-delay:.16s"><div class="pol-icon">🐾</div><h4>General Rules</h4><ul><li>Pets not allowed in property</li><li>No outside food/beverages</li><li>Smoking only in designated zones</li><li>Plastic-free property</li><li>Noise curfew after 10 PM</li></ul></div>
+<div class="pol reveal" style="transition-delay:.24s"><div class="pol-icon">👨‍👩‍👧</div><h4>Family & Kids</h4><ul><li>Children welcome at all properties</li><li>Kids under 5 stay free</li><li>Cribs available on request</li><li>Babysitting service available</li><li>Kids menu at all restaurants</li></ul></div>
+</div>
+</div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+<div class="container">
+<div class="reveal" style="text-align:center;">
+<p class="label" style="justify-content:center;"><span style="width:36px;height:1px;background:var(--gold);display:block;"></span>Frequently Asked</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px auto 28px;"></div>
+<h2 class="headline">Common <span class="em">Questions</span></h2>
+</div>
+<div class="faq-grid">
+<div class="faq-item"><div class="faq-q"><h4>Is Club Aranyakaa Bangalore suitable for families with young children?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Absolutely. We are one of Karnataka's most family-friendly eco-resorts. We have a dedicated kids zone, animal petting farm, shallow children's pool, nature workshops for kids aged 5–14, and a children's menu at all dining venues. Kids under 5 stay free.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>What is included in the room rate?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>All room rates include complimentary breakfast for the number of guests, access to all common amenities (pool, trails, farm, bonfire, yoga deck), Wi-Fi, and resort activities. Spa treatments, private dining, and specialty experiences are charged separately.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>How far is the property from Bangalore city?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Club Aranyakaa Bangalore is located in Ramanagara, approximately 55 km from Bangalore city center. The drive takes about 60–75 minutes via NICE Road or Mysore Road. We offer complimentary airport and city transfers for guests — please book 48 hours in advance.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>Can I host a wedding or private event at the property?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Yes. We have 8 unique event venues across the 42-acre property, including an outdoor amphitheatre, lakeside lawn, forest clearing, and decorated heritage hall. Our events team handles end-to-end planning. Capacity ranges from 20 to 300 guests depending on the venue.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>Do you accommodate dietary requirements?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Fully. Our kitchen accommodates vegan, vegetarian, Jain, gluten-free, diabetic-friendly, and allergen-specific diets. Please inform us at booking so our chef team can ensure your meals are prepared with complete care and no cross-contamination.</p></div></div>
+<div class="faq-item"><div class="faq-q"><h4>Is Wi-Fi available throughout the property?</h4><div class="faq-toggle">+</div></div><div class="faq-a"><p>Yes, high-speed Wi-Fi is available in all rooms and common areas. However, we gently encourage guests — especially during our Digital Detox packages — to embrace "conscious disconnection" and experience the property without screens for designated hours each day.</p></div></div>
 </div>
 </div>
 </section>
@@ -391,44 +935,65 @@
 <div class="container">
 <div class="rcta reveal">
 <div class="rcta-orn"></div>
-<p class="label" style="justify-content:center;">Need Help Deciding?</p>
+<p class="label" style="justify-content:center;">Begin Your Stay</p>
 <div style="height:16px;"></div>
-<h2>Can't Choose? <em>Let Us Help.</em></h2>
-<p>Our reservations team knows every property inside out. Share your preferences and we'll curate the perfect retreat for you.</p>
+<h2>Ready to Experience<br><em>Club Aranyakaa Bangalore?</em></h2>
+<p>Spaces are limited and weekends fill quickly. Reach out to our reservations team to check availability and curate your perfect stay.</p>
 <div class="rcta-btns">
-<a href="tel:+918050873002" class="btn-gold">📞 Call Our Team</a>
-<a href="mailto:hello@clubaranyakaa.com" class="btn-line">✉️ Send Inquiry</a>
+<a href="tel:+918050873002" class="btn-gold">📞 Call to Book <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+<a href="resorts.html" class="btn-line">View Other Resorts</a>
+</div>
+<div class="rcta-contact">
+<div class="rcc"><div class="rcc-lbl">Call / WhatsApp</div><div class="rcc-val">+91 8050 873 002</div></div>
+<div class="rcc"><div class="rcc-lbl">Email</div><div class="rcc-val">hello@clubaranyakaa.com</div></div>
+<div class="rcc"><div class="rcc-lbl">Hours</div><div class="rcc-val">Mon – Sat, 10 AM – 7 PM</div></div>
 </div>
 </div>
 </div>
 </section>
 
-<!-- Footer -->
 <footer>
 <div class="container">
 <div class="ft">
 <div><div class="fb-logo">CLUB ARANYAKAA</div><div class="fb-tag">Eco-Luxe Retreats · Est. 2019</div><p class="fb-desc">Where the wild and the refined converge. Crafting moments of extraordinary connection with nature across Karnataka and beyond.</p><div class="fb-socials"><div class="fsoc">in</div><div class="fsoc">f</div><div class="fsoc">ig</div><div class="fsoc">yt</div></div></div>
 <div class="fc"><h4>Our Resorts</h4><ul><li><a href="resort-detail.html?resort=bangalore">Club Aranyakaa Bangalore</a></li><li><a href="resort-detail.html?resort=chennai">Club Aranyakaa Chennai</a></li><li><a href="resort-detail.html?resort=mysore">Club Aranyakaa Mysore</a></li><li><a href="resort-detail.html?resort=mandya">Club Aranyakaa Mandya</a></li><li><a href="resort-detail.html?resort=goa">Club Aranyakaa Goa</a></li></ul></div>
-<div class="fc"><h4>Quick Links</h4><ul><li><a href="about.html">About Us</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="membership.html">Membership</a></li><li><a href="resorts.html">All Resorts</a></li><li><a href="about.html#contact">Contact Us</a></li></ul></div>
-<div class="fc"><h4>Reach Us</h4><div class="fco"><div class="fco-item"><div class="fco-icon">📞</div><div class="fco-text">+91 8050 873 002<br>Mon–Sat, 10 AM – 7 PM</div></div><div class="fco-item"><div class="fco-icon">✉️</div><div class="fco-text">hello@clubaranyakaa.com</div></div></div></div>
+<div class="fc"><h4>Quick Links</h4><ul><li><a href="about.html">About Us</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="membership.html">Membership</a></li><li><a href="resorts.html">All Resorts</a></li><li><a href="about.html#contact">Contact</a></li></ul></div>
+<div class="fc"><h4>Reach Us</h4><div class="fco"><div class="fco-item"><div class="fco-icon">📞</div><div class="fco-text">+91 8050 873 002<br>Mon–Sat, 10 AM – 7 PM</div></div><div class="fco-item"><div class="fco-icon">✉️</div><div class="fco-text">hello@clubaranyakaa.com</div></div><div class="fco-item"><div class="fco-icon">📍</div><div class="fco-text">Ramanagara, Karnataka, India</div></div></div></div>
 </div>
 <div class="fbot"><p>© 2025 Club Aranyakaa · Code of Growth. All Rights Reserved.</p><div class="flegal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Cookie Policy</a></div></div>
 </div>
 </footer>
 
 <script>
-// Cursor, Nav, Reveal — same as other pages
+// Cursor
 const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
 function mc(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(mc);}mc();
-document.querySelectorAll('a,button,.rg-card,.tc,.mc').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.7)';ring.style.opacity='1';});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.6';});});
+document.querySelectorAll('a,button,.room-card,.rv,.pol,.na-item').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.7)';ring.style.opacity='1';});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.6';});});
+// Nav
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+// Mobile nav
 document.getElementById('ham').addEventListener('click',()=>document.getElementById('mnav').classList.add('open'));
 document.getElementById('mnav-close').addEventListener('click',()=>document.getElementById('mnav').classList.remove('open'));
+// Reveal
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.08});
 document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
+// Amenity tabs
+document.querySelectorAll('.am-tab').forEach(tab=>{tab.addEventListener('click',()=>{document.querySelectorAll('.am-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.am-panel').forEach(p=>p.classList.remove('active'));tab.classList.add('active');document.getElementById('am-'+tab.dataset.am).classList.add('active');});});
+// FAQ
+document.querySelectorAll('.faq-q').forEach(q=>{q.addEventListener('click',()=>{const item=q.parentElement;const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(f=>{f.classList.remove('open');f.querySelector('.faq-a').style.maxHeight='0';});if(!isOpen){item.classList.add('open');item.querySelector('.faq-a').style.maxHeight=item.querySelector('.faq-a').scrollHeight+'px';}});});
+// Sticky tab scroll
+function scrollTo(id){const el=document.querySelector(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+// Lightbox
+const lbImages=['src/gallery-3.jpg','src/gallery-1.jpg','src/gallery-4.jpg','src/gallery-2.jpg','src/gallery-5.jpg'];
+let lbIdx=0;
+document.querySelectorAll('.rg-item').forEach((item,i)=>{item.addEventListener('click',()=>{lbIdx=i;document.getElementById('lb-img').src=lbImages[i];document.getElementById('lightbox').classList.add('open');});});
+document.getElementById('lb-close').addEventListener('click',()=>document.getElementById('lightbox').classList.remove('open'));
+document.getElementById('lb-prev').addEventListener('click',()=>{lbIdx=(lbIdx-1+lbImages.length)%lbImages.length;document.getElementById('lb-img').src=lbImages[lbIdx];});
+document.getElementById('lb-next').addEventListener('click',()=>{lbIdx=(lbIdx+1)%lbImages.length;document.getElementById('lb-img').src=lbImages[lbIdx];});
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))document.getElementById('lightbox').classList.remove('open');});
 </script>
 </body>
 </html>
