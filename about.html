@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About Us — Club Aranyakaa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+:root{--gold:#B8963E;--gold-light:#D4AF6A;--gold-dark:#8A6D28;--gold-glow:rgba(184,150,62,0.12);--gold-line:rgba(184,150,62,0.25);--bg:#FDFAF5;--bg-warm:#F7F2EA;--bg-section:#F2EDE3;--bg-dark-card:#1A1E1A;--ink:#1C1C1A;--ink-mid:#4A4840;--ink-soft:#7A756C;--ink-faint:#C5BFB3;--white:#FFFFFF;--border:rgba(184,150,62,0.2);--border-light:rgba(184,150,62,0.12);--font-display:'Cinzel',serif;--font-body:'Cormorant Garamond',serif;--font-ui:'DM Sans',sans-serif;--nav-h:88px;--transition:0.45s cubic-bezier(0.25,0.8,0.25,1);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--ink);font-family:var(--font-body);overflow-x:hidden;cursor:none;}
+body::before{content:"";position:fixed;inset:0;background:url('https://grainy-grads.vercel.app/noise.svg');opacity:0.04;pointer-events:none;z-index:9999;}
+a{color:inherit;text-decoration:none;}img{display:block;width:100%;height:100%;object-fit:cover;}ul{list-style:none;}
+#cursor-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:10000;transform:translate(-50%,-50%);}
+#cursor-ring{width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.15s ease;opacity:0.6;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg-warm);}::-webkit-scrollbar-thumb{background:var(--gold-light);border-radius:2px;}
+.container{max-width:1320px;margin:0 auto;padding:0 48px;}
+.label{font-family:var(--font-ui);font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;}
+.label::before{content:'';display:block;width:36px;height:1px;background:var(--gold);}
+.headline{font-family:var(--font-display);font-size:clamp(2rem,3.8vw,3.4rem);font-weight:500;line-height:1.12;letter-spacing:0.02em;color:var(--ink);}
+.headline .em{color:var(--gold);font-style:italic;}
+.gold-rule{width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px 0 28px;}
+.btn-gold{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-ui);font-size:0.73rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--white);background:var(--gold);padding:14px 36px;border:none;cursor:pointer;transition:background 0.3s,transform 0.3s,box-shadow 0.3s;}
+.btn-gold:hover{background:var(--gold-dark);transform:translateY(-2px);box-shadow:0 10px 20px rgba(184,150,62,0.2);}
+.btn-line{display:inline-flex;align-items:center;gap:10px;font-family:var(--font-ui);font-size:0.73rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);background:transparent;padding:13px 35px;border:1px solid var(--gold);cursor:pointer;transition:background 0.3s,color 0.3s;}
+.btn-line:hover{background:var(--gold);color:var(--white);}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+.reveal-l{opacity:0;transform:translateX(-40px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.reveal-l.in{opacity:1;transform:translateX(0);}
+.reveal-r{opacity:0;transform:translateX(40px);transition:opacity 0.85s ease,transform 0.85s ease;}
+.reveal-r.in{opacity:1;transform:translateX(0);}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:1000;background:rgba(253,250,245,0.95);backdrop-filter:blur(15px);box-shadow:0 1px 0 var(--border-light);transition:height 0.4s;}
+#nav.scrolled{height:70px;}
+.nav-inner{height:100%;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:12px;}
+.nav-logo-mark{width:56px;height:56px;border:1px solid var(--border);border-radius:50%;background:var(--bg-warm);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:border-color 0.3s;}
+.nav-logo-mark:hover{border-color:var(--gold);}
+.nav-logo-text-wrap{display:flex;flex-direction:column;line-height:1;}
+.nav-logo-text-wrap .n1{font-family:var(--font-display);font-size:0.95rem;letter-spacing:0.2em;color:var(--gold);}
+.nav-logo-text-wrap .n2{font-family:var(--font-ui);font-size:0.55rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px;}
+.nav-links{display:flex;gap:36px;}
+.nav-links a{font-family:var(--font-ui);font-size:0.73rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-mid);position:relative;transition:color 0.3s;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-right{display:flex;align-items:center;gap:20px;}
+.nav-phone{font-family:var(--font-ui);font-size:0.72rem;color:var(--ink-soft);display:flex;align-items:center;gap:7px;}
+.nav-phone svg{color:var(--gold);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:24px;height:1.5px;background:var(--ink-mid);}
+#mnav{display:none;position:fixed;inset:0;background:rgba(253,250,245,0.98);backdrop-filter:blur(20px);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+#mnav.open{display:flex;}
+#mnav a{font-family:var(--font-display);font-size:1.8rem;color:var(--ink-mid);letter-spacing:0.08em;transition:color 0.3s;}
+#mnav a:hover{color:var(--gold);}
+#mnav-close{position:absolute;top:28px;right:36px;font-size:1.8rem;cursor:pointer;color:var(--gold);font-family:var(--font-ui);}
+
+/* PAGE HERO */
+.page-hero{padding:calc(var(--nav-h) + 72px) 0 88px;background:var(--bg-warm);position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(184,150,62,0.07) 0%,transparent 60%);}
+.page-hero-bg-text{position:absolute;right:-60px;bottom:-30px;font-family:var(--font-display);font-size:clamp(5rem,12vw,11rem);font-weight:600;color:rgba(184,150,62,0.05);pointer-events:none;white-space:nowrap;letter-spacing:0.1em;}
+.ph-eyebrow{font-family:var(--font-ui);font-size:0.68rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+.ph-eyebrow::before{content:'';width:36px;height:1px;background:var(--gold);}
+.ph-title{font-family:var(--font-display);font-size:clamp(2.5rem,5vw,4.5rem);font-weight:400;line-height:1.1;color:var(--ink);margin-bottom:20px;}
+.ph-title em{font-style:italic;color:var(--gold);}
+.ph-sub{font-family:var(--font-body);font-size:1.1rem;font-weight:300;line-height:1.85;color:var(--ink-mid);max-width:560px;}
+.breadcrumb{display:flex;align-items:center;gap:10px;margin-bottom:32px;}
+.breadcrumb a,.breadcrumb span{font-family:var(--font-ui);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--ink-soft);}
+.breadcrumb a:hover{color:var(--gold);}
+.breadcrumb .sep{color:var(--gold-light);}
+.breadcrumb .current{color:var(--gold);}
+
+/* STORY */
+#story{padding:100px 0;background:var(--bg);}
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.story-imgs{position:relative;}
+.story-main{aspect-ratio:3/4;border:1px dashed var(--gold-line);overflow:hidden;}
+.story-main img{transition:transform 0.8s ease;}
+.story-main:hover img{transform:scale(1.05);}
+.story-sec{position:absolute;right:-44px;bottom:-44px;width:50%;aspect-ratio:4/3;border:1px solid var(--border);overflow:hidden;}
+.story-sec img{transition:transform 0.8s ease;}
+.story-sec:hover img{transform:scale(1.05);}
+.story-badge{position:absolute;left:-30px;top:60px;width:100px;height:100px;border-radius:50%;background:var(--gold);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(184,150,62,0.35);z-index:5;}
+.story-badge .b-num{font-family:var(--font-display);font-size:1.6rem;color:var(--white);line-height:1;}
+.story-badge .b-txt{font-family:var(--font-ui);font-size:0.48rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.8);margin-top:4px;text-align:center;padding:0 6px;}
+.story-text p{font-family:var(--font-body);font-size:1.08rem;font-weight:300;color:var(--ink-mid);line-height:1.9;margin-bottom:22px;}
+.story-pull{border-left:3px solid var(--gold);padding:20px 24px;margin:28px 0;background:var(--bg-warm);}
+.story-pull p{font-family:var(--font-display);font-size:1.25rem;font-style:italic;color:var(--ink);line-height:1.6;margin:0;}
+
+/* NUMBERS */
+#numbers{padding:80px 0;background:var(--bg-dark-card);}
+.numbers-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:rgba(184,150,62,0.1);}
+.num-item{padding:40px 20px;text-align:center;background:var(--bg-dark-card);border:none;}
+.num-item .big-num{font-family:var(--font-display);font-size:2.5rem;color:var(--gold);margin-bottom:8px;}
+.num-item .big-lbl{font-family:var(--font-ui);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+
+/* PHILOSOPHY */
+#philosophy{padding:100px 0;background:var(--bg-warm);}
+.phi-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.phi-pillars{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px;}
+.pillar{padding:24px;background:var(--white);border:1px solid var(--border-light);transition:border-color 0.3s,box-shadow 0.3s;}
+.pillar:hover{border-color:var(--gold);box-shadow:0 4px 24px rgba(184,150,62,0.1);}
+.pillar-icon{font-size:1.6rem;margin-bottom:12px;}
+.pillar h4{font-family:var(--font-display);font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:8px;}
+.pillar p{font-family:var(--font-ui);font-size:0.72rem;color:var(--ink-soft);line-height:1.65;}
+.phi-img{aspect-ratio:3/4;border:1px dashed var(--gold-line);overflow:hidden;position:relative;}
+.phi-img img{transition:transform 0.8s ease;}
+.phi-img:hover img{transform:scale(1.05);}
+.phi-float{position:absolute;bottom:28px;right:-24px;background:var(--gold);color:var(--white);padding:18px 24px;box-shadow:0 8px 32px rgba(184,150,62,0.4);}
+.phi-float .pf-n{font-family:var(--font-display);font-size:1.5rem;}
+.phi-float .pf-l{font-family:var(--font-ui);font-size:0.55rem;letter-spacing:0.18em;text-transform:uppercase;opacity:0.8;}
+
+/* TEAM */
+#team{padding:100px 0;background:var(--bg);}
+.team-intro{text-align:center;margin-bottom:60px;}
+.team-intro .label{justify-content:center;}
+.team-intro .label::before{display:none;}
+.team-intro .label::after{content:'';display:block;width:36px;height:1px;background:var(--gold);}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.team-card{text-align:center;}
+.team-img{aspect-ratio:3/4;overflow:hidden;margin-bottom:20px;position:relative;border:1px solid var(--border-light);}
+.team-img img{transition:transform 0.7s ease;}
+.team-card:hover .team-img img{transform:scale(1.06);}
+.team-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(26,30,26,0.5) 0%,transparent 50%);opacity:0;transition:opacity 0.4s;}
+.team-card:hover .team-img::after{opacity:1;}
+.team-socials{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;gap:8px;padding:16px;z-index:2;opacity:0;transform:translateY(8px);transition:opacity 0.4s,transform 0.4s;}
+.team-card:hover .team-socials{opacity:1;transform:translateY(0);}
+.ts{width:32px;height:32px;border:1px solid rgba(184,150,62,0.5);display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-size:0.7rem;color:var(--gold);background:rgba(26,30,26,0.7);}
+.team-name{font-family:var(--font-display);font-size:1.05rem;font-weight:500;color:var(--ink);margin-bottom:5px;}
+.team-title{font-family:var(--font-ui);font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.team-desc{font-family:var(--font-ui);font-size:0.7rem;color:var(--ink-soft);line-height:1.6;}
+
+/* SUSTAINABILITY */
+#sustainability{padding:100px 0;background:var(--bg-dark-card);}
+.sus-headline{font-family:var(--font-display);font-size:clamp(2rem,3.5vw,3rem);font-weight:500;color:var(--white);margin:18px 0 48px;}
+.sus-headline em{color:var(--gold-light);font-style:italic;}
+.sus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(184,150,62,0.1);}
+.sus-item{padding:40px 32px;background:var(--bg-dark-card);transition:background 0.3s;}
+.sus-item:hover{background:rgba(184,150,62,0.05);}
+.sus-icon{font-size:2rem;margin-bottom:20px;}
+.sus-item h4{font-family:var(--font-display);font-size:1.1rem;font-weight:500;color:var(--white);margin-bottom:12px;}
+.sus-item p{font-family:var(--font-ui);font-size:0.73rem;color:rgba(255,255,255,0.5);line-height:1.7;}
+.sus-stat{margin-top:14px;font-family:var(--font-display);font-size:1.5rem;color:var(--gold);}
+.sus-stat span{font-family:var(--font-ui);font-size:0.62rem;color:rgba(255,255,255,0.35);display:block;}
+
+/* TIMELINE */
+#timeline{padding:100px 0;background:var(--bg-section);}
+.tl-track{position:relative;max-width:860px;margin:56px auto 0;}
+.tl-track::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);transform:translateX(-50%);}
+.tl-item{display:grid;grid-template-columns:1fr 60px 1fr;gap:0;margin-bottom:52px;align-items:center;}
+.tl-left{padding-right:36px;text-align:right;}
+.tl-right{padding-left:36px;}
+.tl-dot{width:16px;height:16px;border-radius:50%;background:var(--gold);border:3px solid var(--bg-section);box-shadow:0 0 0 2px var(--gold);margin:0 auto;position:relative;z-index:2;}
+.tl-year{font-family:var(--font-display);font-size:1.6rem;color:var(--gold);margin-bottom:6px;}
+.tl-title{font-family:var(--font-display);font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:6px;}
+.tl-desc{font-family:var(--font-ui);font-size:0.72rem;color:var(--ink-soft);line-height:1.65;}
+.tl-item:nth-child(even) .tl-left{order:3;}
+.tl-item:nth-child(even) .tl-dot{order:2;}
+.tl-item:nth-child(even) .tl-right{order:1;padding-left:0;padding-right:36px;text-align:right;}
+
+/* AWARDS */
+#awards{padding:100px 0;background:var(--bg);}
+.awards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px;}
+.award-item{padding:28px 22px;background:var(--bg-warm);border:1px solid var(--border-light);text-align:center;transition:border-color 0.3s,box-shadow 0.3s;}
+.award-item:hover{border-color:var(--gold);box-shadow:0 8px 32px rgba(184,150,62,0.1);}
+.award-icon{font-size:2rem;margin-bottom:14px;}
+.award-title{font-family:var(--font-display);font-size:1rem;font-weight:500;color:var(--ink);margin-bottom:6px;}
+.award-org{font-family:var(--font-ui);font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.award-year{font-family:var(--font-ui);font-size:0.68rem;color:var(--ink-soft);}
+
+/* CONTACT */
+#contact{padding:100px 0;background:var(--bg-warm);}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.contact-info{display:flex;flex-direction:column;gap:24px;margin-top:36px;}
+.ci{display:flex;gap:18px;padding:22px;background:var(--white);border:1px solid var(--border-light);transition:border-color 0.3s;}
+.ci:hover{border-color:var(--gold);}
+.ci-icon{width:46px;height:46px;flex-shrink:0;background:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.2rem;}
+.ci-text h4{font-family:var(--font-display);font-size:0.95rem;font-weight:500;color:var(--ink);margin-bottom:4px;}
+.ci-text p{font-family:var(--font-ui);font-size:0.72rem;color:var(--ink-soft);line-height:1.65;}
+.ci-text a{color:var(--gold);}
+/* CONTACT FORM */
+.contact-form{background:var(--white);border:1px solid var(--border-light);border-top:3px solid var(--gold);padding:40px;}
+.contact-form h3{font-family:var(--font-display);font-size:1.5rem;color:var(--ink);margin-bottom:8px;}
+.contact-form p{font-family:var(--font-ui);font-size:0.72rem;color:var(--ink-soft);margin-bottom:28px;}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.cf-field{margin-bottom:20px;}
+.cf-field.full{grid-column:1/-1;}
+.cf-field label{display:block;font-family:var(--font-ui);font-size:0.58rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.cf-field input,.cf-field select,.cf-field textarea{width:100%;background:var(--bg-warm);border:1px solid var(--border-light);font-family:var(--font-body);font-size:1rem;color:var(--ink);padding:12px 14px;outline:none;transition:border-color 0.3s;resize:vertical;}
+.cf-field textarea{min-height:120px;}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{border-color:var(--gold);}
+.cf-submit{width:100%;background:var(--gold);color:var(--white);border:none;font-family:var(--font-ui);font-size:0.73rem;letter-spacing:0.2em;text-transform:uppercase;padding:16px;cursor:pointer;transition:background 0.3s;}
+.cf-submit:hover{background:var(--gold-dark);}
+
+/* FOOTER */
+footer{background:var(--bg-dark-card);padding:80px 0 40px;}
+.ft{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:56px;margin-bottom:56px;}
+.fb-logo{font-family:var(--font-display);font-size:1.2rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:6px;}
+.fb-tag{font-family:var(--font-ui);font-size:0.58rem;letter-spacing:0.32em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:18px;}
+.fb-desc{font-family:var(--font-body);font-size:0.95rem;color:rgba(255,255,255,0.5);line-height:1.8;}
+.fb-socials{display:flex;gap:10px;margin-top:22px;}
+.fsoc{width:36px;height:36px;border:1px solid rgba(184,150,62,0.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-size:0.75rem;color:var(--gold);cursor:pointer;transition:var(--transition);}
+.fsoc:hover{background:var(--gold);color:var(--bg-dark-card);border-color:var(--gold);}
+.fc h4{font-family:var(--font-display);font-size:0.95rem;font-weight:500;color:rgba(255,255,255,0.9);margin-bottom:22px;position:relative;padding-bottom:12px;}
+.fc h4::after{content:'';position:absolute;bottom:0;left:0;width:28px;height:1px;background:var(--gold);}
+.fc ul{display:flex;flex-direction:column;gap:10px;}
+.fc ul li a{font-family:var(--font-ui);font-size:0.75rem;color:rgba(255,255,255,0.45);display:flex;align-items:center;gap:8px;transition:color 0.3s;}
+.fc ul li a:hover{color:var(--gold);}
+.fc ul li a::before{content:'—';color:rgba(184,150,62,0.3);font-size:0.6rem;}
+.fco{display:flex;flex-direction:column;gap:13px;}
+.fco-item{display:flex;gap:12px;}
+.fco-icon{width:32px;height:32px;border:1px solid rgba(184,150,62,0.2);display:flex;align-items:center;justify-content:center;font-size:0.78rem;color:var(--gold);flex-shrink:0;}
+.fco-text{font-family:var(--font-ui);font-size:0.73rem;color:rgba(255,255,255,0.45);line-height:1.6;}
+.fbot{border-top:1px solid rgba(255,255,255,0.06);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;}
+.fbot p{font-family:var(--font-ui);font-size:0.68rem;color:rgba(255,255,255,0.25);}
+.flegal{display:flex;gap:22px;}
+.flegal a{font-family:var(--font-ui);font-size:0.68rem;color:rgba(255,255,255,0.25);transition:color 0.3s;}
+.flegal a:hover{color:var(--gold);}
+
+@media(max-width:1100px){.story-grid,.phi-grid,.contact-grid{grid-template-columns:1fr;}.story-sec{display:none;}.phi-float{right:16px;}.team-grid{grid-template-columns:1fr 1fr;}.awards-grid{grid-template-columns:1fr 1fr;}.numbers-grid{grid-template-columns:repeat(3,1fr);}.ft{grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){:root{--nav-h:70px;}.nav-links,.nav-phone{display:none;}.hamburger{display:flex;}.sus-grid{grid-template-columns:1fr 1fr;}.tl-item{grid-template-columns:1fr;}.tl-track::before{left:20px;}.tl-left{text-align:left;padding-right:0;padding-left:48px;}.tl-right{padding-left:48px;}.tl-dot{margin:0;position:absolute;left:12px;}.tl-item{position:relative;}.tl-item:nth-child(even) .tl-left{order:1;}.tl-item:nth-child(even) .tl-dot{order:0;}.tl-item:nth-child(even) .tl-right{order:2;padding-right:0;padding-left:48px;text-align:left;}}
+@media(max-width:600px){.container{padding:0 20px;}.team-grid{grid-template-columns:1fr 1fr;}.awards-grid{grid-template-columns:1fr 1fr;}.numbers-grid{grid-template-columns:repeat(2,1fr);}.sus-grid{grid-template-columns:1fr;}.phi-pillars{grid-template-columns:1fr;}.cf-grid{grid-template-columns:1fr;}.ft{grid-template-columns:1fr;gap:36px;}}
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<div id="mnav">
+<span id="mnav-close">✕</span>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="resorts.html">Resorts</a>
+<a href="experiences.html">Experiences</a>
+<a href="membership.html">Membership</a>
+<a href="membership.html" class="btn-gold" style="margin-top:16px;font-size:0.73rem;padding:14px 36px;">Join the Club</a>
+</div>
+
+<nav id="nav">
+<div class="container">
+<div class="nav-inner">
+<a href="index.html" class="nav-logo">
+<div class="nav-logo-mark">
+<svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:30px;height:30px;">
+<path d="M30 8 C30 8,14 20,14 36 C14 44.8 21.2 52 30 52 C38.8 52 46 44.8 46 36 C46 20,30 8,30 8Z" stroke="#B8963E" stroke-width="1.5" fill="none"/>
+<path d="M30 18 L30 44" stroke="#B8963E" stroke-width="1" stroke-dasharray="2 3"/>
+<path d="M22 28 C22 28,30 24,38 28" stroke="#B8963E" stroke-width="1" fill="none"/>
+<path d="M20 36 C20 36,30 30,40 36" stroke="#B8963E" stroke-width="1" fill="none"/>
+<circle cx="30" cy="36" r="2" fill="#B8963E"/>
+</svg>
+</div>
+<div class="nav-logo-text-wrap"><span class="n1">CLUB ARANYAKAA</span><span class="n2">Eco-Luxe Retreats</span></div>
+</a>
+<div class="nav-links">
+<a href="about.html" class="active">About</a>
+<a href="resorts.html">Resorts</a>
+<a href="experiences.html">Experiences</a>
+<a href="membership.html">Membership</a>
+</div>
+<div class="nav-right">
+<div class="nav-phone"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 11a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.13 1 .36 1.98.72 2.91a2 2 0 01-.45 2.11L6.09 8.09a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.93.36 1.91.59 2.91.72a2 2 0 011.72 2.03z"/></svg>+91 8050 873 002</div>
+<a href="membership.html" class="btn-gold" style="font-size:0.68rem;padding:10px 22px;">Join the Club</a>
+</div>
+<div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</div>
+</div>
+</nav>
+
+<section class="page-hero">
+<div class="container">
+<div class="breadcrumb"><a href="index.html">Home</a><span class="sep">›</span><span class="current">About Us</span></div>
+<p class="ph-eyebrow">Our Story</p>
+<h1 class="ph-title">Born from a <em>Love</em><br>of Wilderness</h1>
+<p class="ph-sub">Club Aranyakaa was founded on a simple belief — that true luxury cannot exist at nature's expense. Every retreat we build is a testament to that conviction.</p>
+</div>
+<div class="page-hero-bg-text">STORY</div>
+</section>
+
+<!-- OUR STORY -->
+<section id="story">
+<div class="container">
+<div class="story-grid">
+<div class="story-imgs reveal-l">
+<div class="story-main"><img src="src/about.png" alt="Founders" loading="lazy" /></div>
+<div class="story-sec"><img src="src/about-sec.png" alt="Resort" loading="lazy" /></div>
+<div class="story-badge"><span class="b-num">2019</span><span class="b-txt">Founded</span></div>
+</div>
+<div class="story-text reveal-r">
+<p class="label">How It Began</p>
+<div class="gold-rule"></div>
+<h2 class="headline">The Aranyakaa <span class="em">Origin</span></h2>
+<p>It began with a single walk through a forest in Ramanagara in 2018. Our founders — a husband-and-wife team with backgrounds in sustainable architecture and culinary arts — were searching for land to build a weekend home. What they found instead was a calling.</p>
+<p>The 42-acre plot of degraded agricultural land near Ramanagara's rocky hills was barren, eroded, and overlooked. But they saw possibility. Over the next 14 months, they worked with local farmers, ecologists, and artisans to revive the land — planting 8,000 native trees, restoring the soil with organic farming, and constructing the first three cottages using mud, stone, and bamboo sourced entirely within a 30 km radius.</p>
+<div class="story-pull"><p>"We didn't want to build a resort on nature. We wanted to restore nature and invite people to witness it."</p></div>
+<p>Club Aranyakaa opened its gates in January 2019 with just 6 rooms and a bonfire pit. Within six months, it was fully booked three months in advance. The concept had struck a chord — people were desperate for a kind of luxury that felt honest, rooted, and alive.</p>
+<p>Today, we manage five properties across South India, with two more in development. But our philosophy remains unchanged: every property we build must give back more to the earth than it takes.</p>
+<div style="margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;">
+<a href="resorts.html" class="btn-gold">Our Resorts</a>
+<a href="#contact" class="btn-line">Get In Touch</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+<div class="container">
+<div class="numbers-grid">
+<div class="num-item reveal"><div class="big-num">5</div><div class="big-lbl">Active Resorts</div></div>
+<div class="num-item reveal" style="transition-delay:.08s"><div class="big-num">182</div><div class="big-lbl">Acres Managed</div></div>
+<div class="num-item reveal" style="transition-delay:.16s"><div class="big-num">10K+</div><div class="big-lbl">Happy Guests</div></div>
+<div class="num-item reveal" style="transition-delay:.24s"><div class="big-num">4.85★</div><div class="big-lbl">Average Rating</div></div>
+<div class="num-item reveal" style="transition-delay:.32s"><div class="big-num">60K+</div><div class="big-lbl">Trees Planted</div></div>
+<div class="num-item reveal" style="transition-delay:.4s"><div class="big-num">100%</div><div class="big-lbl">Eco Certified</div></div>
+</div>
+</div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+<div class="container">
+<div class="phi-grid">
+<div class="reveal-l">
+<p class="label">What We Stand For</p>
+<div class="gold-rule"></div>
+<h2 class="headline">Our <span class="em">Philosophy</span></h2>
+<p style="font-family:var(--font-body);font-size:1.08rem;font-weight:300;color:var(--ink-mid);line-height:1.9;margin:22px 0;">At Club Aranyakaa, we believe that the most luxurious thing in the world is an uninterrupted connection with nature. Every decision we make — from construction materials to kitchen sourcing — is filtered through four core principles that define who we are.</p>
+<div class="phi-pillars">
+<div class="pillar"><div class="pillar-icon">🌿</div><h4>Ecological First</h4><p>Every property is built with minimal ecological disruption. We restore, not impose. Our construction philosophy: if nature didn't put it there, think twice.</p></div>
+<div class="pillar"><div class="pillar-icon">🤝</div><h4>Community Rooted</h4><p>Over 85% of our staff are from within 20 km of each property. We source ingredients locally, buy crafts locally, and return profits locally.</p></div>
+<div class="pillar"><div class="pillar-icon">✨</div><h4>Uncompromised Comfort</h4><p>Sustainability is not an excuse for discomfort. We refuse to choose between ecology and luxury — we insist on both, unapologetically.</p></div>
+<div class="pillar"><div class="pillar-icon">🔄</div><h4>Regenerative Design</h4><p>We aim for each property to be net-positive — generating more energy, growing more food, and sequestering more carbon than it consumes.</p></div>
+</div>
+</div>
+<div class="reveal-r">
+<div class="phi-img">
+<img src="src/about.png" alt="Philosophy" loading="lazy" />
+<div class="phi-float"><div class="pf-n">5★</div><div class="pf-l">Eco-Luxe Certified</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+<div class="container">
+<div class="team-intro reveal">
+<p class="label">The People</p>
+<div style="width:1px;height:40px;background:linear-gradient(to bottom,transparent,var(--gold),transparent);margin:16px auto;"></div>
+<h2 class="headline" style="text-align:center;">The Minds Behind <span class="em">Aranyakaa</span></h2>
+<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);text-align:center;max-width:560px;margin:16px auto 0;line-height:1.8;">Every experience at Club Aranyakaa is crafted by people who genuinely love what they do — and the planet they do it on.</p>
+</div>
+<div class="team-grid">
+<div class="team-card reveal">
+<div class="team-img">
+<img src="src/about.png" alt="Founder" loading="lazy" />
+<div class="team-socials"><div class="ts">in</div><div class="ts">ig</div></div>
+</div>
+<div class="team-name">Rajan Krishnamurthy</div>
+<div class="team-title">Co-Founder & CEO</div>
+<p class="team-desc">Former sustainable architect with 18 years in ecological design. Rajan shapes every property's physical vision.</p>
+</div>
+<div class="team-card reveal" style="transition-delay:.1s">
+<div class="team-img">
+<img src="src/about-sec.png" alt="Co-Founder" loading="lazy" />
+<div class="team-socials"><div class="ts">in</div><div class="ts">ig</div></div>
+</div>
+<div class="team-name">Meera Krishnamurthy</div>
+<div class="team-title">Co-Founder & Chief Experience</div>
+<p class="team-desc">Culinary artist and wellness practitioner. Meera curates every taste, ritual, and sensory experience.</p>
+</div>
+<div class="team-card reveal" style="transition-delay:.2s">
+<div class="team-img">
+<img src="src/gallery-4.jpg" alt="Operations Head" loading="lazy" />
+<div class="team-socials"><div class="ts">in</div></div>
+</div>
+<div class="team-name">Arjun Shetty</div>
+<div class="team-title">Head of Operations</div>
+<p class="team-desc">15 years in luxury hospitality. Arjun ensures that every property runs with seamless, invisible precision.</p>
+</div>
+<div class="team-card reveal" style="transition-delay:.3s">
+<div class="team-img">
+<img src="src/gallery-2.jpg" alt="Head Farmer" loading="lazy" />
+<div class="team-socials"><div class="ts">ig</div></div>
+</div>
+<div class="team-name">Lakshmi Devi</div>
+<div class="team-title">Chief Agricultural Officer</div>
+<p class="team-desc">A certified organic farming expert who turned barren land into our thriving 42-acre farm kitchen.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section id="sustainability">
+<div class="container">
+<div class="reveal">
+<div style="font-family:var(--font-ui);font-size:0.68rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;"><span style="display:block;width:36px;height:1px;background:var(--gold);"></span>Our Commitment</div>
+<h2 class="sus-headline">Sustainability at<br><em>Every Level</em></h2>
+</div>
+<div class="sus-grid">
+<div class="sus-item reveal"><div class="sus-icon">☀️</div><h4>100% Renewable Energy</h4><p>All Club Aranyakaa properties are powered exclusively by on-site solar installations. We generate more power than we consume and contribute surplus to the local grid.</p><div class="sus-stat">580 kWp<span>Solar capacity across all properties</span></div></div>
+<div class="sus-item reveal" style="transition-delay:.1s"><div class="sus-icon">💧</div><h4>Water Stewardship</h4><p>Rainwater harvesting systems, greywater recycling, and natural bioswales ensure we consume 60% less water than a conventional resort of comparable size.</p><div class="sus-stat">60%<span>Water consumption reduction</span></div></div>
+<div class="sus-item reveal" style="transition-delay:.2s"><div class="sus-icon">🌾</div><h4>Zero Food Miles</h4><p>80% of all food served across our restaurants is grown within the property or sourced from farmers within a 15 km radius. No cold chains, no plastic packaging.</p><div class="sus-stat">80%<span>Farm-to-table ingredient sourcing</span></div></div>
+<div class="sus-item reveal" style="transition-delay:.3s"><div class="sus-icon">♻️</div><h4>Zero Waste Operations</h4><p>Composting, biogas digesters, and a circular materials economy ensure that less than 2% of our operational waste reaches a landfill across all properties.</p><div class="sus-stat">&lt;2%<span>Waste to landfill</span></div></div>
+<div class="sus-item reveal" style="transition-delay:.4s"><div class="sus-icon">🌳</div><h4>Forest Regeneration</h4><p>We have planted over 60,000 native trees across our properties and buffer zones since 2019. Each guest stay contributes to the planting of 2 additional native trees.</p><div class="sus-stat">60,000+<span>Native trees planted</span></div></div>
+<div class="sus-item reveal" style="transition-delay:.5s"><div class="sus-icon">🤝</div><h4>Community Employment</h4><p>85% of our 320+ staff members are from villages within 20 km of each property. We pay above-market wages, provide housing assistance, and fund children's education.</p><div class="sus-stat">320+<span>Local community members employed</span></div></div>
+</div>
+</div>
+</section>
+
+<!-- TIMELINE -->
+<section id="timeline">
+<div class="container">
+<div class="reveal" style="text-align:center;">
+<p class="label" style="justify-content:center;"><span style="display:block;width:36px;height:1px;background:var(--gold);"></span>Our Journey</p>
+<div style="width:56px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:18px auto 28px;"></div>
+<h2 class="headline">The <span class="em">Aranyakaa</span> Story</h2>
+</div>
+<div class="tl-track">
+<div class="tl-item reveal"><div class="tl-left"><div class="tl-year">2018</div><div class="tl-title">The Discovery</div><div class="tl-desc">Founders Rajan and Meera discover a 42-acre plot of degraded land in Ramanagara. The vision is born: restore the land, then invite the world to witness it.</div></div><div class="tl-dot"></div><div class="tl-right"></div></div>
+<div class="tl-item reveal" style="transition-delay:.1s"><div class="tl-left"></div><div class="tl-dot"></div><div class="tl-right"><div class="tl-year">2019</div><div class="tl-title">Club Aranyakaa Bangalore Opens</div><div class="tl-desc">After 14 months of construction and ecological restoration, the flagship property opens with 6 cottages. Fully booked within the first month.</div></div></div>
+<div class="tl-item reveal" style="transition-delay:.2s"><div class="tl-left"><div class="tl-year">2020</div><div class="tl-title">Award & Recognition</div><div class="tl-desc">Named Karnataka's Best Eco-Stay by Times of India Travel. Despite the pandemic, the property pivots to private family pods and records its best year for reviews.</div></div><div class="tl-dot"></div><div class="tl-right"></div></div>
+<div class="tl-item reveal" style="transition-delay:.3s"><div class="tl-left"></div><div class="tl-dot"></div><div class="tl-right"><div class="tl-year">2021</div><div class="tl-title">Expansion Begins</div><div class="tl-desc">Club Aranyakaa Mandya opens on a 60-acre sugarcane farm. Simultaneously, construction begins on the Mysore heritage property.</div></div></div>
+<div class="tl-item reveal" style="transition-delay:.4s"><div class="tl-left"><div class="tl-year">2022</div><div class="tl-title">The Membership Launch</div><div class="tl-desc">The Club Aranyakaa Membership program is launched. 200 founding members join within the first 60 days. RCI integration announced.</div></div><div class="tl-dot"></div><div class="tl-right"></div></div>
+<div class="tl-item reveal" style="transition-delay:.5s"><div class="tl-left"></div><div class="tl-dot"></div><div class="tl-right"><div class="tl-year">2023</div><div class="tl-title">Chennai & Goa</div><div class="tl-desc">Two new properties open — our coastal Chennai retreat on ECR and the Goa property in North Goa. Total guest count crosses 5,000.</div></div></div>
+<div class="tl-item reveal" style="transition-delay:.6s"><div class="tl-left"><div class="tl-year">2024</div><div class="tl-title">South India's #1 Eco Resort</div><div class="tl-desc">Awarded South India's Best Eco-Luxury Destination by Condé Nast Traveller India. 10,000+ guests. 60,000 trees planted across all properties.</div></div><div class="tl-dot"></div><div class="tl-right"></div></div>
+<div class="tl-item reveal" style="transition-delay:.7s"><div class="tl-left"></div><div class="tl-dot"></div><div class="tl-right"><div class="tl-year">2026</div><div class="tl-title">Coorg & Chikmagalur (Coming)</div><div class="tl-desc">Two new highland properties in the coffee regions of Karnataka are in development. Pre-registration now open for founding members.</div></div></div>
+</div>
+</div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+<div class="container">
+<div class="reveal">
+<p class="label">Recognition</p>
+<div class="gold-rule"></div>
+<h2 class="headline">Awards & <span class="em">Accolades</span></h2>
+</div>
+<div class="awards-grid">
+<div class="award-item reveal"><div class="award-icon">🏆</div><div class="award-title">Best Eco-Luxury Destination</div><div class="award-org">Condé Nast Traveller India</div><div class="award-year">2024</div></div>
+<div class="award-item reveal" style="transition-delay:.08s"><div class="award-icon">🌿</div><div class="award-title">Green Property of the Year</div><div class="award-org">India Eco Tourism Awards</div><div class="award-year">2023</div></div>
+<div class="award-item reveal" style="transition-delay:.16s"><div class="award-icon">⭐</div><div class="award-title">Top 10 Farm Stays in India</div><div class="award-org">Travel + Leisure India</div><div class="award-year">2023</div></div>
+<div class="award-item reveal" style="transition-delay:.24s"><div class="award-icon">🌾</div><div class="award-title">Best Sustainable Resort</div><div class="award-org">Karnataka Tourism Awards</div><div class="award-year">2022</div></div>
+<div class="award-item reveal" style="transition-delay:.32s"><div class="award-icon">💧</div><div class="award-title">Water Stewardship Award</div><div class="award-org">CII Green Business Council</div><div class="award-year">2022</div></div>
+<div class="award-item reveal" style="transition-delay:.4s"><div class="award-icon">🤝</div><div class="award-title">Community Impact Leader</div><div class="award-org">FICCI Tourism Excellence</div><div class="award-year">2021</div></div>
+<div class="award-item reveal" style="transition-delay:.48s"><div class="award-icon">🌟</div><div class="award-title">Best New Eco Stay</div><div class="award-org">Times Travel Awards</div><div class="award-year">2020</div></div>
+<div class="award-item reveal" style="transition-delay:.56s"><div class="award-icon">🎖️</div><div class="award-title">Outstanding Rural Hospitality</div><div class="award-org">Outlook Traveller</div><div class="award-year">2019</div></div>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<div class="container">
+<div class="contact-grid">
+<div class="reveal-l">
+<p class="label">Reach Out</p>
+<div class="gold-rule"></div>
+<h2 class="headline">Let's <span class="em">Connect</span></h2>
+<p style="font-family:var(--font-body);font-size:1.05rem;font-weight:300;color:var(--ink-mid);line-height:1.85;margin:22px 0;">Whether you want to plan a stay, ask about membership, or explore a partnership — our team is here and delighted to help.</p>
+<div class="contact-info">
+<div class="ci"><div class="ci-icon">📞</div><div class="ci-text"><h4>Call / WhatsApp</h4><p><a href="tel:+918050873002">+91 8050 873 002</a><br>Monday – Saturday, 10 AM – 7 PM IST</p></div></div>
+<div class="ci"><div class="ci-icon">✉️</div><div class="ci-text"><h4>Email Us</h4><p><a href="mailto:hello@clubaranyakaa.com">hello@clubaranyakaa.com</a><br>We respond within 4 business hours</p></div></div>
+<div class="ci"><div class="ci-icon">📍</div><div class="ci-text"><h4>Registered Office</h4><p>Club Aranyakaa Pvt. Ltd.<br>Ramanagara, Karnataka — 562159<br>India</p></div></div>
+<div class="ci"><div class="ci-icon">🤝</div><div class="ci-text"><h4>Partnerships & Press</h4><p><a href="mailto:partners@clubaranyakaa.com">partners@clubaranyakaa.com</a><br>For media, RCI, and B2B enquiries</p></div></div>
+</div>
+</div>
+<div class="reveal-r">
+<div class="contact-form">
+<h3>Send Us a Message</h3>
+<p>Fill in your details and we'll get back to you within 4 hours.</p>
+<div class="cf-grid">
+<div class="cf-field"><label>First Name</label><input type="text" placeholder="Your first name" /></div>
+<div class="cf-field"><label>Last Name</label><input type="text" placeholder="Your last name" /></div>
+<div class="cf-field"><label>Email</label><input type="email" placeholder="your@email.com" /></div>
+<div class="cf-field"><label>Phone</label><input type="tel" placeholder="+91 XXXXX XXXXX" /></div>
+<div class="cf-field"><label>Enquiry Type</label><select><option>Select Type</option><option>Resort Booking</option><option>Membership Enquiry</option><option>Corporate / Event</option><option>Partnership / Press</option><option>General Query</option></select></div>
+<div class="cf-field"><label>Resort of Interest</label><select><option>Select Resort</option><option>Club Aranyakaa Bangalore</option><option>Club Aranyakaa Mysore</option><option>Club Aranyakaa Chennai</option><option>Club Aranyakaa Mandya</option><option>Club Aranyakaa Goa</option><option>Any / All Properties</option></select></div>
+<div class="cf-field full"><label>Your Message</label><textarea placeholder="Tell us how we can help you..."></textarea></div>
+</div>
+<button class="cf-submit">Send Message →</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+<div class="ft">
+<div><div class="fb-logo">CLUB ARANYAKAA</div><div class="fb-tag">Eco-Luxe Retreats · Est. 2019</div><p class="fb-desc">Where the wild and the refined converge. Crafting extraordinary connections with nature across Karnataka and beyond.</p><div class="fb-socials"><div class="fsoc">in</div><div class="fsoc">f</div><div class="fsoc">ig</div><div class="fsoc">yt</div></div></div>
+<div class="fc"><h4>Our Resorts</h4><ul><li><a href="resort-detail.html">Club Aranyakaa Bangalore</a></li><li><a href="resort-detail.html?resort=mysore">Club Aranyakaa Mysore</a></li><li><a href="resort-detail.html?resort=chennai">Club Aranyakaa Chennai</a></li><li><a href="resort-detail.html?resort=mandya">Club Aranyakaa Mandya</a></li><li><a href="resort-detail.html?resort=goa">Club Aranyakaa Goa</a></li></ul></div>
+<div class="fc"><h4>Quick Links</h4><ul><li><a href="about.html">About Us</a></li><li><a href="experiences.html">Experiences</a></li><li><a href="membership.html">Membership</a></li><li><a href="resorts.html">All Resorts</a></li><li><a href="#contact">Contact</a></li></ul></div>
+<div class="fc"><h4>Reach Us</h4><div class="fco"><div class="fco-item"><div class="fco-icon">📞</div><div class="fco-text">+91 8050 873 002<br>Mon–Sat, 10 AM – 7 PM</div></div><div class="fco-item"><div class="fco-icon">✉️</div><div class="fco-text">hello@clubaranyakaa.com</div></div><div class="fco-item"><div class="fco-icon">📍</div><div class="fco-text">Ramanagara, Karnataka, India</div></div></div></div>
+</div>
+<div class="fbot"><p>© 2025 Club Aranyakaa · Code of Growth. All Rights Reserved.</p><div class="flegal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Cookie Policy</a></div></div>
+</div>
+</footer>
+
+<script>
+const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function mc(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(mc);}mc();
+document.querySelectorAll('a,button,.pillar,.ci,.award-item,.team-card').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.transform='translate(-50%,-50%) scale(1.7)';ring.style.opacity='1';});el.addEventListener('mouseleave',()=>{ring.style.transform='translate(-50%,-50%) scale(1)';ring.style.opacity='0.6';});});
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mnav').classList.add('open'));
+document.getElementById('mnav-close').addEventListener('click',()=>document.getElementById('mnav').classList.remove('open'));
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.08});
+document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
+// Counter animation
+function animateCounters(){
+  document.querySelectorAll('.big-num').forEach(el=>{
+    const text=el.textContent;const num=parseFloat(text.replace(/[^0-9.]/g,''));
+    if(!isNaN(num)&&num>0){let start=0;const dur=1800;const step=num/dur*16;
+      const t=setInterval(()=>{start+=step;if(start>=num){el.textContent=text;clearInterval(t);}else{el.textContent=text.replace(/[\d.]+/,Math.floor(start));}},16);}
+  });
+}
+const numSec=document.getElementById('numbers');
+const numObs=new IntersectionObserver(entries=>{if(entries[0].isIntersecting){animateCounters();numObs.disconnect();}},{threshold:0.3});
+numObs.observe(numSec);
+</script>
+</body>
+</html>

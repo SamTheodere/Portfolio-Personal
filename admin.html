@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Panel — Club Aranyakaa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Cinzel:wght@500&display=swap" rel="stylesheet" />
+<style>
+/* ══════════════════════════════════════════
+   RESET & TOKENS
+══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; }
+body { font-family: 'DM Sans', sans-serif; background: #0F1117; color: #E8EAF0; overflow-x: hidden; }
+
+:root {
+  --teal: #1ABC9C;
+  --teal-dark: #159C80;
+  --teal-dim: rgba(26,188,156,0.12);
+  --teal-glow: rgba(26,188,156,0.25);
+  --bg: #0F1117;
+  --bg-2: #161923;
+  --bg-3: #1C2130;
+  --bg-4: #212840;
+  --surface: #1A2035;
+  --surface-2: #212840;
+  --border: rgba(255,255,255,0.07);
+  --border-teal: rgba(26,188,156,0.3);
+  --text: #E8EAF0;
+  --text-2: #9EA6B8;
+  --text-3: #5A6278;
+  --red: #E74C3C;
+  --amber: #F39C12;
+  --blue: #3498DB;
+  --green: #2ECC71;
+  --purple: #9B59B6;
+  --mono: 'DM Mono', monospace;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--teal-dark); border-radius: 2px; }
+
+input, select, textarea, button { font-family: 'DM Sans', sans-serif; }
+
+/* ══════════════════════════════════════════
+   LOGIN SCREEN
+══════════════════════════════════════════ */
+#login-screen {
+  position: fixed; inset: 0; z-index: 1000;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+}
+#login-screen::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(26,188,156,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(52,152,219,0.06) 0%, transparent 50%);
+}
+.login-card {
+  position: relative; z-index: 2;
+  width: 420px;
+  background: var(--surface);
+  border: 1px solid var(--border-teal);
+  padding: 48px 40px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(26,188,156,0.08);
+}
+.login-logo {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 40px;
+}
+.login-logo-icon {
+  width: 44px; height: 44px;
+  background: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem; font-weight: 700;
+  color: white; font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+}
+.login-logo-text h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.9rem; letter-spacing: 0.18em;
+  color: var(--teal); font-weight: 500;
+}
+.login-logo-text p {
+  font-size: 0.68rem; color: var(--text-3);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  margin-top: 2px;
+}
+.login-title {
+  font-size: 1.5rem; font-weight: 600; color: var(--text);
+  margin-bottom: 6px;
+}
+.login-sub { font-size: 0.82rem; color: var(--text-2); margin-bottom: 32px; }
+.lf { margin-bottom: 20px; }
+.lf label {
+  display: block; font-size: 0.7rem; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--text-3); margin-bottom: 8px;
+}
+.lf input {
+  width: 100%; background: var(--bg-3); border: 1px solid var(--border);
+  color: var(--text); padding: 12px 16px; font-size: 0.9rem;
+  outline: none; transition: border-color 0.3s;
+}
+.lf input:focus { border-color: var(--teal); }
+.login-btn {
+  width: 100%; background: var(--teal); color: white; border: none;
+  padding: 14px; font-size: 0.82rem; letter-spacing: 0.18em;
+  text-transform: uppercase; cursor: pointer; font-weight: 600;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 8px;
+}
+.login-btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
+.login-error {
+  background: rgba(231,76,60,0.12); border: 1px solid rgba(231,76,60,0.3);
+  color: #E74C3C; font-size: 0.78rem; padding: 10px 14px;
+  margin-top: 14px; display: none;
+}
+.login-hint {
+  margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border);
+  font-size: 0.72rem; color: var(--text-3); text-align: center;
+}
+.login-hint code { font-family: var(--mono); color: var(--teal); background: var(--teal-dim); padding: 2px 6px; }
+
+/* ══════════════════════════════════════════
+   MAIN ADMIN SHELL (hidden until login)
+══════════════════════════════════════════ */
+#admin-shell { display: none; min-height: 100vh; }
+
+/* SIDEBAR */
+.admin-sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0; width: 240px;
+  background: var(--surface); border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; z-index: 100;
+}
+.sb-header {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.sb-logo { display: flex; align-items: center; gap: 10px; }
+.sb-logo-mark {
+  width: 36px; height: 36px; background: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: 0.9rem; color: white;
+  font-weight: 500; flex-shrink: 0;
+}
+.sb-logo-text { font-size: 0.78rem; font-weight: 600; color: var(--text); letter-spacing: 0.08em; }
+.sb-logo-sub { font-size: 0.6rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 2px; }
+.sb-section { padding: 20px 12px 8px; }
+.sb-section-label {
+  font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--text-3); padding: 0 8px; margin-bottom: 6px;
+}
+.sb-nav { display: flex; flex-direction: column; gap: 2px; }
+.sb-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border-radius: 6px; cursor: pointer;
+  transition: background 0.2s, color 0.2s; color: var(--text-2);
+  font-size: 0.82rem; font-weight: 400; border: none; background: none;
+  text-align: left; width: 100%;
+}
+.sb-item:hover { background: var(--bg-3); color: var(--text); }
+.sb-item.active { background: var(--teal-dim); color: var(--teal); }
+.sb-item .si-icon { font-size: 0.95rem; width: 20px; flex-shrink: 0; }
+.sb-item .si-badge {
+  margin-left: auto; background: var(--teal); color: white;
+  font-size: 0.58rem; padding: 2px 7px; border-radius: 10px;
+  font-weight: 600; letter-spacing: 0.06em;
+}
+.sb-footer {
+  margin-top: auto; padding: 16px 12px;
+  border-top: 1px solid var(--border);
+}
+.sb-user {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px; border-radius: 6px;
+  background: var(--bg-3);
+}
+.sb-user-av {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--teal); display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; color: white; flex-shrink: 0;
+}
+.sb-user-name { font-size: 0.8rem; font-weight: 500; color: var(--text); }
+.sb-user-role { font-size: 0.62rem; color: var(--text-3); }
+.logout-btn {
+  width: 100%; margin-top: 8px; background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.2);
+  color: #E74C3C; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 8px; cursor: pointer; transition: background 0.2s; border-radius: 4px;
+}
+.logout-btn:hover { background: rgba(231,76,60,0.2); }
+
+/* MAIN CONTENT */
+.admin-main {
+  margin-left: 240px;
+  min-height: 100vh;
+  background: var(--bg);
+}
+.admin-topbar {
+  position: sticky; top: 0; z-index: 50;
+  height: 60px; background: rgba(15,17,23,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+}
+.topbar-title { font-size: 1rem; font-weight: 600; color: var(--text); }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.tb-save-btn {
+  background: var(--teal); color: white; border: none;
+  padding: 8px 22px; font-size: 0.75rem; letter-spacing: 0.14em;
+  text-transform: uppercase; cursor: pointer; font-weight: 600;
+  transition: background 0.2s, transform 0.2s;
+}
+.tb-save-btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
+.tb-preview-btn {
+  background: transparent; color: var(--teal); border: 1px solid var(--border-teal);
+  padding: 7px 20px; font-size: 0.75rem; letter-spacing: 0.14em;
+  text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+}
+.tb-preview-btn:hover { background: var(--teal-dim); }
+.save-indicator {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.72rem; color: var(--green); opacity: 0;
+  transition: opacity 0.3s;
+}
+.save-indicator.show { opacity: 1; }
+.save-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+/* CONTENT PANELS */
+.admin-content { padding: 32px 28px; }
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* SECTION CARDS */
+.s-card {
+  background: var(--surface); border: 1px solid var(--border);
+  margin-bottom: 20px; overflow: hidden;
+}
+.s-card-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px; border-bottom: 1px solid var(--border);
+  cursor: pointer; user-select: none;
+}
+.s-card-head-left { display: flex; align-items: center; gap: 12px; }
+.s-card-icon { font-size: 1.1rem; }
+.s-card-title { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.s-card-sub { font-size: 0.72rem; color: var(--text-3); margin-top: 2px; }
+.s-card-toggle {
+  font-size: 0.7rem; color: var(--text-3);
+  transition: transform 0.3s;
+}
+.s-card.open .s-card-toggle { transform: rotate(180deg); }
+.s-card-body { padding: 22px; display: none; }
+.s-card.open .s-card-body { display: block; }
+
+/* FIELD STYLES */
+.field-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.field-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.field-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.field { margin-bottom: 16px; }
+.field label {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-3); margin-bottom: 7px;
+}
+.field label .fl-badge {
+  font-size: 0.55rem; background: var(--teal-dim); color: var(--teal);
+  padding: 1px 6px; border-radius: 3px; letter-spacing: 0.08em;
+}
+.field input, .field select, .field textarea {
+  width: 100%; background: var(--bg-3); border: 1px solid var(--border);
+  color: var(--text); padding: 10px 14px; font-size: 0.85rem;
+  outline: none; transition: border-color 0.25s, box-shadow 0.25s;
+  font-family: 'DM Sans', sans-serif;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-dim);
+}
+.field select { appearance: none; cursor: pointer; }
+.field textarea { resize: vertical; min-height: 80px; }
+.field input[type="range"] {
+  padding: 0; height: 4px; background: var(--bg-4);
+  accent-color: var(--teal); cursor: pointer;
+}
+.field-hint { font-size: 0.68rem; color: var(--text-3); margin-top: 5px; }
+.field-row { display: flex; align-items: center; gap: 10px; }
+.field-row input { flex: 1; }
+.field-unit { font-size: 0.75rem; color: var(--text-3); white-space: nowrap; font-family: var(--mono); }
+
+/* TOGGLE SWITCH */
+.toggle-field { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.toggle-field:last-child { border-bottom: none; }
+.tf-left h4 { font-size: 0.84rem; font-weight: 500; color: var(--text); }
+.tf-left p { font-size: 0.72rem; color: var(--text-3); margin-top: 2px; }
+.toggle {
+  position: relative; width: 44px; height: 24px; flex-shrink: 0;
+  cursor: pointer;
+}
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+  position: absolute; inset: 0; background: var(--bg-4); border-radius: 12px;
+  transition: background 0.3s;
+}
+.toggle-slider::before {
+  content: ''; position: absolute; left: 3px; top: 3px;
+  width: 18px; height: 18px; background: white; border-radius: 50%;
+  transition: transform 0.3s;
+}
+.toggle input:checked + .toggle-slider { background: var(--teal); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+/* STAT CARDS */
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+.stat-card {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 20px 22px; position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+}
+.stat-card.teal::before { background: var(--teal); }
+.stat-card.amber::before { background: var(--amber); }
+.stat-card.blue::before { background: var(--blue); }
+.stat-card.purple::before { background: var(--purple); }
+.stat-icon { font-size: 1.4rem; margin-bottom: 10px; }
+.stat-value { font-size: 1.8rem; font-weight: 700; color: var(--text); line-height: 1; margin-bottom: 4px; }
+.stat-label { font-size: 0.7rem; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.12em; }
+.stat-change { font-size: 0.72rem; margin-top: 8px; color: var(--green); display: flex; align-items: center; gap: 4px; }
+.stat-change.down { color: var(--red); }
+
+/* TABLES */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-3); padding: 10px 14px; text-align: left;
+  border-bottom: 1px solid var(--border); background: var(--bg-2);
+}
+.data-table td {
+  padding: 12px 14px; font-size: 0.82rem; color: var(--text-2);
+  border-bottom: 1px solid var(--border);
+}
+.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+.data-table input {
+  background: transparent; border: 1px solid transparent; color: var(--text);
+  padding: 4px 8px; font-size: 0.82rem; width: 100%; outline: none;
+  transition: border-color 0.2s;
+}
+.data-table input:focus { border-color: var(--teal); background: var(--bg-3); }
+
+/* RESORT CARDS IN ADMIN */
+.resort-admin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.rac {
+  background: var(--bg-3); border: 1px solid var(--border);
+  padding: 16px; transition: border-color 0.2s;
+}
+.rac:hover { border-color: var(--border-teal); }
+.rac-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.rac-name { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.rac-status { font-size: 0.6rem; padding: 3px 8px; border-radius: 10px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; }
+.rac-status.live { background: rgba(46,204,113,0.15); color: var(--green); }
+.rac-status.soon { background: rgba(243,156,18,0.15); color: var(--amber); }
+.rac-field { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.rac-field label { font-size: 0.65rem; color: var(--text-3); width: 80px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.1em; }
+.rac-field input { flex: 1; background: var(--bg-2); border: 1px solid var(--border); color: var(--text); padding: 5px 8px; font-size: 0.78rem; outline: none; transition: border-color 0.2s; }
+.rac-field input:focus { border-color: var(--teal); }
+
+/* PRICING TABLE */
+.pricing-row { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); gap: 0; }
+.pr-head { background: var(--bg-2); padding: 10px 14px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-3); border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+.pr-head:last-child { border-right: none; }
+.pr-cell { padding: 10px 12px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); font-size: 0.82rem; color: var(--text-2); background: var(--surface); }
+.pr-cell:last-child { border-right: none; }
+.pr-cell input { background: transparent; border: 1px solid transparent; color: var(--teal); font-size: 0.82rem; width: 100%; padding: 3px 6px; outline: none; font-family: var(--mono); transition: border-color 0.2s, background 0.2s; }
+.pr-cell input:focus { border-color: var(--teal); background: var(--bg-3); }
+
+/* ACTIVITY LOG */
+.activity-log { display: flex; flex-direction: column; gap: 0; }
+.al-item { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+.al-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.al-dot.green { background: var(--green); }
+.al-dot.teal { background: var(--teal); }
+.al-dot.amber { background: var(--amber); }
+.al-dot.blue { background: var(--blue); }
+.al-text { font-size: 0.8rem; color: var(--text-2); line-height: 1.5; }
+.al-text strong { color: var(--text); }
+.al-time { font-size: 0.65rem; color: var(--text-3); margin-left: auto; white-space: nowrap; font-family: var(--mono); }
+
+/* MEDIA / IMAGES SECTION */
+.image-slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.img-slot {
+  aspect-ratio: 4/3; background: var(--bg-3); border: 2px dashed var(--border);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 8px; cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  position: relative; overflow: hidden;
+}
+.img-slot:hover { border-color: var(--teal); background: var(--teal-dim); }
+.img-slot-icon { font-size: 1.5rem; opacity: 0.5; }
+.img-slot-label { font-size: 0.68rem; color: var(--text-3); text-align: center; }
+.img-slot input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+/* TABS inside panels */
+.panel-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 24px; }
+.ptab {
+  padding: 12px 20px; font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-3); cursor: pointer;
+  border: none; background: none; border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.ptab.active { color: var(--teal); border-bottom-color: var(--teal); }
+.ptab-panel { display: none; }
+.ptab-panel.active { display: block; }
+
+/* COLOR PICKER FIELD */
+.color-field { display: flex; align-items: center; gap: 10px; }
+.color-field input[type="color"] { width: 40px; height: 36px; padding: 2px; border: 1px solid var(--border); background: var(--bg-3); cursor: pointer; border-radius: 0; }
+.color-field input[type="text"] { flex: 1; }
+
+/* BADGE PILL */
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 12px; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
+.badge.green { background: rgba(46,204,113,0.15); color: var(--green); }
+.badge.red { background: rgba(231,76,60,0.15); color: var(--red); }
+.badge.amber { background: rgba(243,156,18,0.15); color: var(--amber); }
+.badge.teal { background: var(--teal-dim); color: var(--teal); }
+.badge.blue { background: rgba(52,152,219,0.15); color: var(--blue); }
+
+/* NOTIFICATIONS */
+.notif {
+  position: fixed; top: 70px; right: 20px; z-index: 999;
+  background: var(--surface); border: 1px solid var(--border-teal);
+  border-left: 3px solid var(--teal);
+  padding: 14px 18px; display: flex; align-items: center; gap: 12px;
+  min-width: 280px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  transform: translateX(calc(100% + 40px)); transition: transform 0.4s cubic-bezier(0.25,0.8,0.25,1);
+}
+.notif.show { transform: translateX(0); }
+.notif-icon { font-size: 1rem; flex-shrink: 0; }
+.notif-text { font-size: 0.82rem; color: var(--text); }
+.notif-text strong { color: var(--teal); }
+
+/* SECTION DIVIDER */
+.s-divider { border: none; border-top: 1px solid var(--border); margin: 22px 0; }
+
+/* TAG INPUTS */
+.tag-input-wrap { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 10px; background: var(--bg-3); border: 1px solid var(--border); min-height: 42px; cursor: text; }
+.tag { display: inline-flex; align-items: center; gap: 5px; background: var(--teal-dim); border: 1px solid var(--border-teal); color: var(--teal); font-size: 0.72rem; padding: 3px 8px; }
+.tag-remove { cursor: pointer; opacity: 0.6; transition: opacity 0.2s; }
+.tag-remove:hover { opacity: 1; }
+.tag-input { border: none; background: transparent; color: var(--text); font-size: 0.82rem; outline: none; min-width: 100px; padding: 2px 4px; }
+
+/* BREADCRUMB */
+.admin-breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.72rem; color: var(--text-3); margin-bottom: 24px; }
+.admin-breadcrumb .sep { opacity: 0.4; }
+.admin-breadcrumb .current { color: var(--text); }
+
+/* RESPONSIVE */
+@media(max-width: 1200px) { .field-grid-4 { grid-template-columns: 1fr 1fr; } }
+@media(max-width: 900px) { .admin-sidebar { width: 200px; } .admin-main { margin-left: 200px; } .stat-row { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NOTIFICATION -->
+<div class="notif" id="notif">
+  <span class="notif-icon">✓</span>
+  <div class="notif-text"><strong>Saved!</strong> Changes applied to front-end.</div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     LOGIN SCREEN
+══════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="login-logo-icon">CA</div>
+      <div class="login-logo-text">
+        <h2>CLUB ARANYAKAA</h2>
+        <p>Admin Control Panel</p>
+      </div>
+    </div>
+    <h1 class="login-title">Sign In</h1>
+    <p class="login-sub">Enter your credentials to access the admin dashboard.</p>
+    <div class="lf">
+      <label>Username / Email</label>
+      <input type="text" id="login-user" placeholder="admin@clubaranyakaa.com" />
+    </div>
+    <div class="lf">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="••••••••••" />
+    </div>
+    <button class="login-btn" onclick="doLogin()">Sign In to Admin Panel</button>
+    <div class="login-error" id="login-error">⚠ Incorrect credentials. Please try again.</div>
+    <div class="login-hint">
+      Demo credentials: <code>admin</code> / <code>aranyakaa2025</code>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     ADMIN SHELL
+══════════════════════════════════════════ -->
+<div id="admin-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar">
+    <div class="sb-header">
+      <div class="sb-logo">
+        <div class="sb-logo-mark">CA</div>
+        <div>
+          <div class="sb-logo-text">ARANYAKAA</div>
+          <div class="sb-logo-sub">Admin Panel</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-section-label">Main</div>
+      <div class="sb-nav">
+        <button class="sb-item active" onclick="showPanel('dashboard',this)">
+          <span class="si-icon">📊</span> Dashboard
+        </button>
+        <button class="sb-item" onclick="showPanel('site-content',this)">
+          <span class="si-icon">🌐</span> Site Content
+        </button>
+        <button class="sb-item" onclick="showPanel('resorts',this)">
+          <span class="si-icon">🏡</span> Resorts
+          <span class="si-badge">5</span>
+        </button>
+        <button class="sb-item" onclick="showPanel('pricing',this)">
+          <span class="si-icon">₹</span> Pricing
+        </button>
+        <button class="sb-item" onclick="showPanel('experiences',this)">
+          <span class="si-icon">✨</span> Experiences
+        </button>
+        <button class="sb-item" onclick="showPanel('membership',this)">
+          <span class="si-icon">💎</span> Membership
+        </button>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-section-label">Media & SEO</div>
+      <div class="sb-nav">
+        <button class="sb-item" onclick="showPanel('media',this)">
+          <span class="si-icon">🖼</span> Images & Media
+        </button>
+        <button class="sb-item" onclick="showPanel('seo',this)">
+          <span class="si-icon">🔍</span> SEO & Meta
+        </button>
+        <button class="sb-item" onclick="showPanel('contact',this)">
+          <span class="si-icon">📞</span> Contact Info
+        </button>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-section-label">Settings</div>
+      <div class="sb-nav">
+        <button class="sb-item" onclick="showPanel('appearance',this)">
+          <span class="si-icon">🎨</span> Appearance
+        </button>
+        <button class="sb-item" onclick="showPanel('settings',this)">
+          <span class="si-icon">⚙️</span> Admin Settings
+        </button>
+      </div>
+    </div>
+
+    <div class="sb-footer">
+      <div class="sb-user">
+        <div class="sb-user-av">A</div>
+        <div>
+          <div class="sb-user-name">Admin</div>
+          <div class="sb-user-role">Super Admin</div>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="topbar-right">
+        <div class="save-indicator" id="save-indicator">
+          <div class="save-dot"></div> All changes saved
+        </div>
+        <button class="tb-preview-btn" onclick="window.open('index.html','_blank')">↗ Preview Site</button>
+        <button class="tb-save-btn" onclick="saveAllData()">💾 Save & Apply</button>
+      </div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- ── DASHBOARD ── -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Dashboard</span></div>
+
+        <div class="stat-row">
+          <div class="stat-card teal">
+            <div class="stat-icon">🏡</div>
+            <div class="stat-value" id="dash-resorts">5</div>
+            <div class="stat-label">Active Resorts</div>
+            <div class="stat-change">↑ 2 coming soon</div>
+          </div>
+          <div class="stat-card amber">
+            <div class="stat-icon">👥</div>
+            <div class="stat-value" id="dash-guests">10K+</div>
+            <div class="stat-label">Total Guests</div>
+            <div class="stat-change">↑ 18% this quarter</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-icon">💎</div>
+            <div class="stat-value" id="dash-members">500+</div>
+            <div class="stat-label">Active Members</div>
+            <div class="stat-change">↑ 12 this month</div>
+          </div>
+          <div class="stat-card purple">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-value" id="dash-rating">4.85</div>
+            <div class="stat-label">Avg. Rating</div>
+            <div class="stat-change">↑ 0.2 from last quarter</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <!-- Quick Edit Stats -->
+          <div class="s-card open">
+            <div class="s-card-head" onclick="toggleCard(this)">
+              <div class="s-card-head-left">
+                <span class="s-card-icon">📈</span>
+                <div>
+                  <div class="s-card-title">Hero Stats (Homepage)</div>
+                  <div class="s-card-sub">Numbers shown on the homepage hero section</div>
+                </div>
+              </div>
+              <span class="s-card-toggle">▼</span>
+            </div>
+            <div class="s-card-body">
+              <div class="field-grid-3">
+                <div class="field">
+                  <label>Locations <span class="fl-badge">Hero</span></label>
+                  <input type="text" id="hero-stat-locations" value="5+" oninput="liveUpdate()" />
+                  <div class="field-hint">e.g. "5+" or "7"</div>
+                </div>
+                <div class="field">
+                  <label>Happy Guests <span class="fl-badge">Hero</span></label>
+                  <input type="text" id="hero-stat-guests" value="10K+" oninput="liveUpdate()" />
+                </div>
+                <div class="field">
+                  <label>Eco Status <span class="fl-badge">Hero</span></label>
+                  <input type="text" id="hero-stat-eco" value="100%" oninput="liveUpdate()" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Log -->
+          <div class="s-card open">
+            <div class="s-card-head" onclick="toggleCard(this)">
+              <div class="s-card-head-left">
+                <span class="s-card-icon">🕐</span>
+                <div>
+                  <div class="s-card-title">Recent Activity</div>
+                  <div class="s-card-sub">Latest changes made in admin</div>
+                </div>
+              </div>
+              <span class="s-card-toggle">▼</span>
+            </div>
+            <div class="s-card-body">
+              <div class="activity-log" id="activity-log">
+                <div class="al-item"><div class="al-dot teal"></div><div class="al-text">Admin panel <strong>initialized</strong></div><div class="al-time">Just now</div></div>
+                <div class="al-item"><div class="al-dot green"></div><div class="al-text">All pages <strong>linked</strong> to shared data store</div><div class="al-time">Just now</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="s-card" style="margin-top:8px;">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">⚡</span>
+              <div><div class="s-card-title">Quick Actions</div><div class="s-card-sub">Jump to common tasks</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+              <button onclick="showPanel('pricing',document.querySelector('.sb-item:nth-child(4)'))" style="padding:14px;background:var(--bg-3);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">₹ Update Pricing</button>
+              <button onclick="showPanel('resorts',document.querySelector('.sb-item:nth-child(3)'))" style="padding:14px;background:var(--bg-3);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">🏡 Edit Resorts</button>
+              <button onclick="showPanel('contact',document.querySelector('.sb-item:nth-child(9)'))" style="padding:14px;background:var(--bg-3);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:0.78rem;transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--teal)'" onmouseout="this.style.borderColor='var(--border)'">📞 Update Contact</button>
+              <button onclick="window.open('index.html','_blank')" style="padding:14px;background:var(--teal-dim);border:1px solid var(--border-teal);color:var(--teal);cursor:pointer;font-size:0.78rem;">↗ View Live Site</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SITE CONTENT ── -->
+      <div class="panel" id="panel-site-content">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Site Content</span></div>
+
+        <!-- Hero Section -->
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">🦸</span>
+              <div><div class="s-card-title">Homepage Hero</div><div class="s-card-sub">Main headline, subtext, and eyebrow text</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field">
+              <label>Eyebrow Text <span class="fl-badge">Hero</span></label>
+              <input type="text" id="hero-eyebrow" value="Eco-Luxe Retreats Since 2019" oninput="liveUpdate()" />
+            </div>
+            <div class="field">
+              <label>Main Headline Line 1 <span class="fl-badge">Hero</span></label>
+              <input type="text" id="hero-h1" value="Discover the Art" oninput="liveUpdate()" />
+            </div>
+            <div class="field">
+              <label>Main Headline Line 2 (Italic/Gold) <span class="fl-badge">Hero</span></label>
+              <input type="text" id="hero-h2" value="Nature & Luxury" oninput="liveUpdate()" />
+            </div>
+            <div class="field">
+              <label>Main Headline Line 3 <span class="fl-badge">Hero</span></label>
+              <input type="text" id="hero-h3" value="In Perfect Harmony" oninput="liveUpdate()" />
+            </div>
+            <div class="field">
+              <label>Hero Description Paragraph <span class="fl-badge">Hero</span></label>
+              <textarea id="hero-desc" oninput="liveUpdate()">Immerse yourself in Club Aranyakaa — where wilderness meets curated opulence across Karnataka's most breathtaking landscapes.</textarea>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label>Primary Button Text</label>
+                <input type="text" id="hero-btn1" value="Explore Retreats" oninput="liveUpdate()" />
+              </div>
+              <div class="field">
+                <label>Secondary Button Text</label>
+                <input type="text" id="hero-btn2" value="Join The Club" oninput="liveUpdate()" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="s-card">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">📖</span>
+              <div><div class="s-card-title">About / Philosophy Section</div><div class="s-card-sub">The "Where Wilderness Becomes Your Sanctuary" block</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field">
+              <label>Section Headline</label>
+              <input type="text" id="about-headline" value="Where Wilderness Becomes Your Sanctuary" oninput="liveUpdate()" />
+            </div>
+            <div class="field">
+              <label>Paragraph 1</label>
+              <textarea id="about-p1" oninput="liveUpdate()">Club Aranyakaa is more than a resort — it's a living philosophy. We believe luxury and ecology are not opposites; they are partners. Each property is crafted to preserve its natural ecosystem while offering you every comfort your soul deserves.</textarea>
+            </div>
+            <div class="field">
+              <label>Paragraph 2</label>
+              <textarea id="about-p2" oninput="liveUpdate()">From organic farm-to-table dining to sunrise yoga decks and candlelit wilderness dinners — every experience is intentionally designed to reconnect you with the earth and with yourself.</textarea>
+            </div>
+            <hr class="s-divider" />
+            <p style="font-size:0.75rem;color:var(--text-3);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.12em;">Feature Highlights</p>
+            <div class="field-grid">
+              <div class="field"><label>Feature 1 Title</label><input type="text" id="feat1" value="100% Organic" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Feature 1 Description</label><input type="text" id="feat1d" value="Farm-to-table dining grown on our certified organic land." oninput="liveUpdate()" /></div>
+              <div class="field"><label>Feature 2 Title</label><input type="text" id="feat2" value="Zero Waste" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Feature 2 Description</label><input type="text" id="feat2d" value="Solar power, rainwater harvesting, sustainable ops." oninput="liveUpdate()" /></div>
+              <div class="field"><label>Feature 3 Title</label><input type="text" id="feat3" value="Wellness First" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Feature 3 Description</label><input type="text" id="feat3d" value="Certified spa therapists and guided meditation daily." oninput="liveUpdate()" /></div>
+              <div class="field"><label>Feature 4 Title</label><input type="text" id="feat4" value="Award Winning" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Feature 4 Description</label><input type="text" id="feat4d" value="South India's top eco-luxury destination 2024." oninput="liveUpdate()" /></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ticker -->
+        <div class="s-card">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">🎯</span>
+              <div><div class="s-card-title">Scrolling Ticker Bar</div><div class="s-card-sub">Location names shown in the animated ticker strip</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field">
+              <label>Ticker Locations (comma-separated)</label>
+              <input type="text" id="ticker-items" value="Bangalore, Chennai, Mysore, Mandya, Goa, Ramanagara, Coorg, Chikmagalur" oninput="liveUpdate()" />
+              <div class="field-hint">Separate each location with a comma. They will repeat automatically.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="s-card">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">📣</span>
+              <div><div class="s-card-title">CTA Banner Section</div><div class="s-card-sub">"Your Next Chapter Starts in Nature" block</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field"><label>CTA Headline Line 1</label><input type="text" id="cta-h1" value="Your Next Chapter" oninput="liveUpdate()" /></div>
+            <div class="field"><label>CTA Headline Line 2 (Gold Italic)</label><input type="text" id="cta-h2" value="Nature" oninput="liveUpdate()" /></div>
+            <div class="field"><label>CTA Description</label><textarea id="cta-desc" oninput="liveUpdate()">Whether you're seeking solitude, adventure, romance, or celebration — Club Aranyakaa has crafted the perfect retreat for every soul. Let us curate something extraordinary for you.</textarea></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RESORTS ── -->
+      <div class="panel" id="panel-resorts">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Resorts</span></div>
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">🏡</span>
+              <div><div class="s-card-title">Resort Properties</div><div class="s-card-sub">Edit name, location, rating, capacity and status for each resort</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="resort-admin-grid" id="resort-admin-grid">
+              <!-- Generated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">🏘️</span>
+              <div><div class="s-card-title">Resort Detail Page — Bangalore</div><div class="s-card-sub">Rooms, stats and key info for the flagship property</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field-grid">
+              <div class="field"><label>Total Acreage</label><div class="field-row"><input type="number" id="blr-acres" value="42" oninput="liveUpdate()" /><span class="field-unit">acres</span></div></div>
+              <div class="field"><label>Total Suites / Rooms</label><div class="field-row"><input type="number" id="blr-suites" value="18" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Maximum Guests</label><div class="field-row"><input type="number" id="blr-maxguests" value="120" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Solar Capacity</label><div class="field-row"><input type="text" id="blr-solar" value="580 kWp" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Trees Planted</label><div class="field-row"><input type="text" id="blr-trees" value="60,000+" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Farm-Sourced %</label><div class="field-row"><input type="number" id="blr-farm" value="80" oninput="liveUpdate()" /><span class="field-unit">%</span></div></div>
+              <div class="field"><label>Staff Count</label><div class="field-row"><input type="number" id="blr-staff" value="320" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Events Capacity</label><div class="field-row"><input type="number" id="blr-events" value="300" oninput="liveUpdate()" /></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── PRICING ── -->
+      <div class="panel" id="panel-pricing">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Pricing</span></div>
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">₹</span>
+              <div><div class="s-card-title">Room Pricing — Bangalore</div><div class="s-card-sub">Per night rates. Changes reflect on resort-detail page.</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div style="border:1px solid var(--border);overflow:hidden;">
+              <div class="pricing-row">
+                <div class="pr-head">Room Type</div>
+                <div class="pr-head">Price / Night</div>
+                <div class="pr-head">Max Guests</div>
+                <div class="pr-head">Status</div>
+                <div class="pr-head">Size</div>
+              </div>
+              <div class="pricing-row">
+                <div class="pr-cell">Jungle Cottage</div>
+                <div class="pr-cell"><input type="text" id="p-cottage" value="₹3,500" oninput="liveUpdate()" /></div>
+                <div class="pr-cell"><input type="number" id="p-cottage-g" value="2" style="width:60px;background:transparent;border:1px solid transparent;color:var(--text-2);padding:3px 6px;outline:none;" /></div>
+                <div class="pr-cell"><span class="badge green">Live</span></div>
+                <div class="pr-cell">450 sq ft</div>
+              </div>
+              <div class="pricing-row">
+                <div class="pr-cell">Forest Suite</div>
+                <div class="pr-cell"><input type="text" id="p-suite" value="₹5,500" oninput="liveUpdate()" /></div>
+                <div class="pr-cell"><input type="number" value="3" style="width:60px;background:transparent;border:1px solid transparent;color:var(--text-2);padding:3px 6px;outline:none;" /></div>
+                <div class="pr-cell"><span class="badge green">Live</span></div>
+                <div class="pr-cell">680 sq ft</div>
+              </div>
+              <div class="pricing-row">
+                <div class="pr-cell">Banyan Villa</div>
+                <div class="pr-cell"><input type="text" id="p-villa" value="₹8,500" oninput="liveUpdate()" /></div>
+                <div class="pr-cell"><input type="number" value="4" style="width:60px;background:transparent;border:1px solid transparent;color:var(--text-2);padding:3px 6px;outline:none;" /></div>
+                <div class="pr-cell"><span class="badge green">Live</span></div>
+                <div class="pr-cell">1,200 sq ft</div>
+              </div>
+              <div class="pricing-row">
+                <div class="pr-cell">Presidential Tent</div>
+                <div class="pr-cell"><input type="text" id="p-tent" value="₹12,000" oninput="liveUpdate()" /></div>
+                <div class="pr-cell"><input type="number" value="2" style="width:60px;background:transparent;border:1px solid transparent;color:var(--text-2);padding:3px 6px;outline:none;" /></div>
+                <div class="pr-cell"><span class="badge green">Live</span></div>
+                <div class="pr-cell">800 sq ft</div>
+              </div>
+              <div class="pricing-row">
+                <div class="pr-cell">Heritage Bungalow</div>
+                <div class="pr-cell"><input type="text" id="p-bungalow" value="₹18,000" oninput="liveUpdate()" /></div>
+                <div class="pr-cell"><input type="number" value="8" style="width:60px;background:transparent;border:1px solid transparent;color:var(--text-2);padding:3px 6px;outline:none;" /></div>
+                <div class="pr-cell"><span class="badge green">Live</span></div>
+                <div class="pr-cell">1,800 sq ft</div>
+              </div>
+              <div class="pricing-row">
+                <div class="pr-cell">Eco Dormitory</div>
+                <div class="pr-cell"><input type="text" id="p-dorm" value="₹800" oninput="liveUpdate()" /></div>
+                <div class="pr-cell"><input type="number" value="16" style="width:60px;background:transparent;border:1px solid transparent;color:var(--text-2);padding:3px 6px;outline:none;" /></div>
+                <div class="pr-cell"><span class="badge green">Live</span></div>
+                <div class="pr-cell">600 sq ft</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">💈</span>
+              <div><div class="s-card-title">Experience Pricing</div><div class="s-card-sub">Packages and per-person experience rates</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field-grid">
+              <div class="field"><label>Mysore Heritage Retreat <span class="fl-badge">Per night</span></label><input type="text" id="ep-mysore" value="₹1,500" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Coastal Goa Getaway <span class="fl-badge">Per night</span></label><input type="text" id="ep-goa" value="₹2,200" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Farm & Forest Escape <span class="fl-badge">Per night</span></label><input type="text" id="ep-farm" value="₹1,800" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Wilderness Dinner <span class="fl-badge">Per couple</span></label><input type="text" id="ep-dinner" value="₹4,000" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Soul Reset Program <span class="fl-badge">Per day</span></label><input type="text" id="ep-reset" value="₹5,000" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Couples Spa Sanctuary <span class="fl-badge">Per couple</span></label><input type="text" id="ep-spa" value="₹8,000" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Farm-to-Table Harvest <span class="fl-badge">Per couple</span></label><input type="text" id="ep-harvest" value="₹2,500" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Sunrise Breakfast Trail <span class="fl-badge">Per person</span></label><input type="text" id="ep-sunrise" value="₹1,200" oninput="liveUpdate()" /></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="s-card">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">💎</span>
+              <div><div class="s-card-title">Membership Pricing</div><div class="s-card-sub">Annual membership tier rates</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field-grid-3">
+              <div class="field"><label>Green Plan <span class="fl-badge">Per year</span></label><input type="text" id="mem-green" value="₹12,000" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Gold Plan <span class="fl-badge">Per year</span></label><input type="text" id="mem-gold" value="₹25,000" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Platinum Plan <span class="fl-badge">Per year</span></label><input type="text" id="mem-platinum" value="₹55,000" oninput="liveUpdate()" /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── EXPERIENCES ── -->
+      <div class="panel" id="panel-experiences">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Experiences</span></div>
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">✨</span>
+              <div><div class="s-card-title">Homepage Experience Cards</div><div class="s-card-sub">The 3 cards shown on the Stay tab of homepage</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="panel-tabs">
+              <button class="ptab active" onclick="switchPtab(this,'exp-stay')">Stay</button>
+              <button class="ptab" onclick="switchPtab(this,'exp-dining')">Dining</button>
+              <button class="ptab" onclick="switchPtab(this,'exp-wellness')">Wellness</button>
+            </div>
+            <div class="ptab-panel active" id="exp-stay">
+              <div class="field-grid-3">
+                <div class="field"><label>Card 1 — Title</label><input type="text" id="exp1-title" value="Mysore Heritage Retreat" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Card 1 — Location / Duration</label><input type="text" id="exp1-tag" value="Mysore · 7 Days" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Card 1 — Price</label><input type="text" id="exp1-price" value="₹ 1,500" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Card 2 — Title</label><input type="text" id="exp2-title" value="Coastal Goa Getaway" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Card 2 — Location / Duration</label><input type="text" id="exp2-tag" value="Goa · 5 Days" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Card 2 — Price</label><input type="text" id="exp2-price" value="₹ 2,200" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Card 3 — Title</label><input type="text" id="exp3-title" value="Farm & Forest Escape" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Card 3 — Location / Duration</label><input type="text" id="exp3-tag" value="Mandya · 3 Days" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Card 3 — Price</label><input type="text" id="exp3-price" value="₹ 1,800" oninput="liveUpdate()" /></div>
+              </div>
+            </div>
+            <div class="ptab-panel" id="exp-dining">
+              <div class="field-grid-3">
+                <div class="field"><label>Dining Card 1 — Title</label><input type="text" value="Farm-to-Table Experience" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Dining Card 1 — Price</label><input type="text" value="₹ 2,500" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Dining Card 1 — Per</label><input type="text" value="Per Couple" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Dining Card 2 — Title</label><input type="text" value="Starlight Wilderness Dinner" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Dining Card 2 — Price</label><input type="text" value="₹ 4,000" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Dining Card 2 — Per</label><input type="text" value="Per Couple" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Dining Card 3 — Title</label><input type="text" value="Sunrise Breakfast Trail" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Dining Card 3 — Price</label><input type="text" value="₹ 1,200" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Dining Card 3 — Per</label><input type="text" value="Per Person" oninput="liveUpdate()" /></div>
+              </div>
+            </div>
+            <div class="ptab-panel" id="exp-wellness">
+              <div class="field-grid-3">
+                <div class="field"><label>Wellness Card 1 — Title</label><input type="text" value="Soul Reset Program" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Wellness Card 1 — Price</label><input type="text" value="₹ 5,000" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Wellness Card 1 — Per</label><input type="text" value="Per Person / Day" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Wellness Card 2 — Title</label><input type="text" value="Couples Spa Sanctuary" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Wellness Card 2 — Price</label><input type="text" value="₹ 8,000" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Wellness Card 2 — Per</label><input type="text" value="Per Couple" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Wellness Card 3 — Title</label><input type="text" value="Forest Immersion Retreat" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Wellness Card 3 — Price</label><input type="text" value="₹ 3,500" oninput="liveUpdate()" /></div>
+                <div class="field"><label>Wellness Card 3 — Per</label><input type="text" value="Per Person / Day" oninput="liveUpdate()" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MEMBERSHIP ── -->
+      <div class="panel" id="panel-membership">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Membership</span></div>
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">💎</span>
+              <div><div class="s-card-title">Membership Section Content</div><div class="s-card-sub">Homepage membership block and membership page text</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field"><label>Section Headline</label><input type="text" id="mem-headline" value="The Club Membership" oninput="liveUpdate()" /></div>
+            <div class="field"><label>Description Paragraph</label><textarea id="mem-desc" oninput="liveUpdate()">Become part of an exclusive community of nature lovers and luxury seekers. Our membership grants you privileged access, priority bookings, and curated experiences simply not available to the public.</textarea></div>
+            <hr class="s-divider" />
+            <p style="font-size:0.75rem;color:var(--text-3);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.12em;">Stats & Numbers</p>
+            <div class="field-grid-4">
+              <div class="field"><label>Active Members</label><input type="text" id="mem-stat-members" value="500+" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Resorts Access</label><input type="text" id="mem-stat-resorts" value="5" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Max Savings</label><input type="text" id="mem-stat-savings" value="40%" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Est. Year</label><input type="text" id="mem-stat-year" value="2019" oninput="liveUpdate()" /></div>
+            </div>
+            <hr class="s-divider" />
+            <p style="font-size:0.75rem;color:var(--text-3);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.12em;">Membership Toggles</p>
+            <div class="toggle-field">
+              <div class="tf-left"><h4>Membership Open for New Applications</h4><p>Shows/hides the Apply Now button and membership form</p></div>
+              <label class="toggle"><input type="checkbox" id="mem-open" checked /><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-field">
+              <div class="tf-left"><h4>Show "Founding Rates Ending" Urgency</h4><p>Displays countdown urgency message on membership page</p></div>
+              <label class="toggle"><input type="checkbox" id="mem-urgency" checked /><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-field">
+              <div class="tf-left"><h4>RCI Integration Active</h4><p>Shows/hides RCI section on membership page</p></div>
+              <label class="toggle"><input type="checkbox" id="rci-active" checked /><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MEDIA ── -->
+      <div class="panel" id="panel-media">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Images & Media</span></div>
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">🖼</span>
+              <div><div class="s-card-title">Image Paths Configuration</div><div class="s-card-sub">Update the src/ paths for each image used across the site</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <p style="font-size:0.8rem;color:var(--text-3);margin-bottom:18px;">All images are loaded from the <code style="font-family:var(--mono);color:var(--teal);background:var(--teal-dim);padding:2px 6px;">src/</code> folder. Update the filenames below if you rename or replace image files.</p>
+            <div class="field-grid">
+              <div class="field"><label>About Main Image</label><input type="text" id="img-about" value="src/about.png" oninput="liveUpdate()" /></div>
+              <div class="field"><label>About Secondary Image</label><input type="text" id="img-about2" value="src/about-sec.png" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Membership Image</label><input type="text" id="img-membership" value="src/membership.png" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Resort — Bangalore</label><input type="text" id="img-blr" value="src/resort-bangalore.png" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Resort — Mysore</label><input type="text" id="img-mys" value="src/resort-mysore.png" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Resort — Chennai</label><input type="text" id="img-chn" value="src/resort-chennai.png" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Resort — Mandya</label><input type="text" id="img-mdy" value="src/resort-mandya.png" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Gallery 1</label><input type="text" id="img-g1" value="src/gallery-1.jpg" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Gallery 2</label><input type="text" id="img-g2" value="src/gallery-2.jpg" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Gallery 3</label><input type="text" id="img-g3" value="src/gallery-3.jpg" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Gallery 4</label><input type="text" id="img-g4" value="src/gallery-4.jpg" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Gallery 5</label><input type="text" id="img-g5" value="src/gallery-5.jpg" oninput="liveUpdate()" /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SEO ── -->
+      <div class="panel" id="panel-seo">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">SEO & Meta</span></div>
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">🔍</span>
+              <div><div class="s-card-title">SEO Meta Information</div><div class="s-card-sub">Page titles, descriptions, and meta tags for each page</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="panel-tabs">
+              <button class="ptab active" onclick="switchPtab(this,'seo-home')">Home</button>
+              <button class="ptab" onclick="switchPtab(this,'seo-resorts')">Resorts</button>
+              <button class="ptab" onclick="switchPtab(this,'seo-about')">About</button>
+              <button class="ptab" onclick="switchPtab(this,'seo-member')">Membership</button>
+            </div>
+            <div class="ptab-panel active" id="seo-home">
+              <div class="field"><label>Page Title</label><input type="text" id="seo-home-title" value="Club Aranyakaa — Eco-Luxe Retreats" /></div>
+              <div class="field"><label>Meta Description</label><textarea id="seo-home-desc">Discover Club Aranyakaa — South India's premier eco-luxury retreat. 5 properties across Karnataka and Goa. Farm-to-table dining, Ayurvedic spa, and sustainable luxury.</textarea></div>
+              <div class="field"><label>Keywords</label><input type="text" value="eco luxury resort, bangalore resort, farm stay karnataka, aranyakaa, eco retreat india" /></div>
+            </div>
+            <div class="ptab-panel" id="seo-resorts">
+              <div class="field"><label>Page Title</label><input type="text" value="Our Resorts — Club Aranyakaa" /></div>
+              <div class="field"><label>Meta Description</label><textarea>Explore 5 eco-luxury resorts across Karnataka and Goa. Each property blends sustainable design with world-class hospitality.</textarea></div>
+            </div>
+            <div class="ptab-panel" id="seo-about">
+              <div class="field"><label>Page Title</label><input type="text" value="About Us — Club Aranyakaa" /></div>
+              <div class="field"><label>Meta Description</label><textarea>Learn about the story, philosophy, and team behind Club Aranyakaa — South India's most awarded eco-luxury retreat brand, founded in 2019.</textarea></div>
+            </div>
+            <div class="ptab-panel" id="seo-member">
+              <div class="field"><label>Page Title</label><input type="text" value="Membership — Club Aranyakaa" /></div>
+              <div class="field"><label>Meta Description</label><textarea>Join the Club Aranyakaa Membership. Three tiers — Green, Gold, Platinum. Priority booking, up to 40% off, RCI integration, and exclusive member events.</textarea></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CONTACT ── -->
+      <div class="panel" id="panel-contact">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Contact Info</span></div>
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">📞</span>
+              <div><div class="s-card-title">Global Contact Details</div><div class="s-card-sub">These appear in navbar, footer, CTA sections across all pages</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field-grid">
+              <div class="field"><label>Primary Phone <span class="fl-badge">All Pages</span></label><input type="text" id="ct-phone" value="+91 8050 873 002" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Primary Email <span class="fl-badge">All Pages</span></label><input type="text" id="ct-email" value="hello@clubaranyakaa.com" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Partnership Email</label><input type="text" id="ct-partners" value="partners@clubaranyakaa.com" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Office Hours <span class="fl-badge">Footer</span></label><input type="text" id="ct-hours" value="Mon–Sat, 10 AM – 7 PM" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Registered Address</label><input type="text" id="ct-address" value="Ramanagara, Karnataka — 562159, India" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Google Maps Embed URL</label><input type="text" id="ct-map" value="https://www.google.com/maps/embed?pb=!1m18..." oninput="liveUpdate()" /></div>
+            </div>
+            <hr class="s-divider" />
+            <p style="font-size:0.75rem;color:var(--text-3);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.12em;">Social Media Links</p>
+            <div class="field-grid">
+              <div class="field"><label>LinkedIn URL</label><input type="text" id="sm-linkedin" value="https://linkedin.com/company/clubaranyakaa" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Facebook URL</label><input type="text" id="sm-facebook" value="https://facebook.com/clubaranyakaa" oninput="liveUpdate()" /></div>
+              <div class="field"><label>Instagram URL</label><input type="text" id="sm-instagram" value="https://instagram.com/clubaranyakaa" oninput="liveUpdate()" /></div>
+              <div class="field"><label>YouTube URL</label><input type="text" id="sm-youtube" value="https://youtube.com/@clubaranyakaa" oninput="liveUpdate()" /></div>
+              <div class="field"><label>WhatsApp Number</label><input type="text" id="sm-whatsapp" value="+918050873002" oninput="liveUpdate()" /></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── APPEARANCE ── -->
+      <div class="panel" id="panel-appearance">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Appearance</span></div>
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">🎨</span>
+              <div><div class="s-card-title">Brand Colors</div><div class="s-card-sub">Core color tokens used across all pages</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field-grid">
+              <div class="field"><label>Primary Gold Color</label><div class="color-field"><input type="color" id="color-gold" value="#B8963E" oninput="liveUpdate()" /><input type="text" value="#B8963E" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Gold Light</label><div class="color-field"><input type="color" value="#D4AF6A" oninput="liveUpdate()" /><input type="text" value="#D4AF6A" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Dark Gold</label><div class="color-field"><input type="color" value="#8A6D28" oninput="liveUpdate()" /><input type="text" value="#8A6D28" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Background</label><div class="color-field"><input type="color" value="#FDFAF5" oninput="liveUpdate()" /><input type="text" value="#FDFAF5" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Dark Card Background</label><div class="color-field"><input type="color" value="#1A1E1A" oninput="liveUpdate()" /><input type="text" value="#1A1E1A" oninput="liveUpdate()" /></div></div>
+              <div class="field"><label>Ink / Text Color</label><div class="color-field"><input type="color" value="#1C1C1A" oninput="liveUpdate()" /><input type="text" value="#1C1C1A" oninput="liveUpdate()" /></div></div>
+            </div>
+            <hr class="s-divider" />
+            <p style="font-size:0.75rem;color:var(--text-3);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.12em;">Site-wide Feature Toggles</p>
+            <div class="toggle-field">
+              <div class="tf-left"><h4>Custom Cursor</h4><p>The gold dot + ring cursor on hover</p></div>
+              <label class="toggle"><input type="checkbox" id="tog-cursor" checked /><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-field">
+              <div class="tf-left"><h4>Film Grain Overlay</h4><p>Subtle noise texture across all pages</p></div>
+              <label class="toggle"><input type="checkbox" id="tog-grain" checked /><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-field">
+              <div class="tf-left"><h4>Hero Video Autoplay</h4><p>Background video plays on homepage load</p></div>
+              <label class="toggle"><input type="checkbox" id="tog-video" checked /><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-field">
+              <div class="tf-left"><h4>Loader Animation</h4><p>Show the branded loading screen on page load</p></div>
+              <label class="toggle"><input type="checkbox" id="tog-loader" checked /><span class="toggle-slider"></span></label>
+            </div>
+            <div class="toggle-field">
+              <div class="tf-left"><h4>Scroll Reveal Animations</h4><p>Elements animate in on scroll</p></div>
+              <label class="toggle"><input type="checkbox" id="tog-reveal" checked /><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="s-card">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">🔤</span>
+              <div><div class="s-card-title">Typography Settings</div><div class="s-card-sub">Font families used across the website</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field-grid-3">
+              <div class="field"><label>Display Font (Headings)</label><select><option>Cinzel</option><option>Playfair Display</option><option>Cormorant Garamond</option><option>EB Garamond</option></select></div>
+              <div class="field"><label>Body Font (Paragraphs)</label><select><option>Cormorant Garamond</option><option>Garamond</option><option>Georgia</option><option>Libre Baskerville</option></select></div>
+              <div class="field"><label>UI Font (Labels, Buttons)</label><select><option>DM Sans</option><option>Inter</option><option>Outfit</option><option>Plus Jakarta Sans</option></select></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SETTINGS ── -->
+      <div class="panel" id="panel-settings">
+        <div class="admin-breadcrumb"><span>Admin</span><span class="sep">›</span><span class="current">Admin Settings</span></div>
+        <div class="s-card open">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">🔐</span>
+              <div><div class="s-card-title">Admin Credentials</div><div class="s-card-sub">Change your admin login username and password</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div class="field-grid">
+              <div class="field"><label>Admin Username</label><input type="text" id="set-username" value="admin" /></div>
+              <div class="field"><label>Admin Email</label><input type="text" id="set-email" value="admin@clubaranyakaa.com" /></div>
+              <div class="field"><label>Current Password</label><input type="password" placeholder="Current password" /></div>
+              <div class="field"><label>New Password</label><input type="password" id="set-newpass" placeholder="New password" /></div>
+              <div class="field"><label>Confirm New Password</label><input type="password" placeholder="Confirm new password" /></div>
+            </div>
+            <button class="tb-save-btn" onclick="updateCredentials()" style="margin-top:8px;">Update Credentials</button>
+          </div>
+        </div>
+        <div class="s-card">
+          <div class="s-card-head" onclick="toggleCard(this)">
+            <div class="s-card-head-left">
+              <span class="s-card-icon">💾</span>
+              <div><div class="s-card-title">Data Management</div><div class="s-card-sub">Export, import, or reset all site data</div></div>
+            </div>
+            <span class="s-card-toggle">▼</span>
+          </div>
+          <div class="s-card-body">
+            <div style="display:flex;gap:12px;flex-wrap:wrap;">
+              <button onclick="exportData()" style="padding:10px 22px;background:var(--bg-3);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;">📤 Export Data (JSON)</button>
+              <button onclick="document.getElementById('import-file').click()" style="padding:10px 22px;background:var(--bg-3);border:1px solid var(--border);color:var(--text);cursor:pointer;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;">📥 Import Data</button>
+              <input type="file" id="import-file" accept=".json" style="display:none;" onchange="importData(this)" />
+              <button onclick="resetData()" style="padding:10px 22px;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);color:var(--red);cursor:pointer;font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;">🗑 Reset to Defaults</button>
+            </div>
+            <div style="margin-top:20px;padding:14px;background:var(--bg-3);border:1px solid var(--border);font-size:0.75rem;color:var(--text-3);">
+              <strong style="color:var(--teal);">How data sync works:</strong><br/><br/>
+              All changes made in this admin panel are saved to <code style="font-family:var(--mono);color:var(--teal);">localStorage</code> under the key <code style="font-family:var(--mono);color:var(--teal);">ca_site_data</code>. The front-end pages read this data on load and apply it automatically. To persist data permanently in production, connect a backend (Node.js/Firebase) and call your API endpoint from <code style="font-family:var(--mono);color:var(--teal);">saveAllData()</code>.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </main>
+</div><!-- /admin-shell -->
+
+<script>
+// ══════════════════════════════════════════
+// AUTH
+// ══════════════════════════════════════════
+const CREDENTIALS = { username: 'admin', password: 'aranyakaa2025' };
+
+function doLogin() {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value;
+  const savedCreds = JSON.parse(localStorage.getItem('ca_admin_creds') || 'null');
+  const creds = savedCreds || CREDENTIALS;
+  if ((u === creds.username || u === 'admin@clubaranyakaa.com') && p === creds.password) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-shell').style.display = 'block';
+    document.getElementById('login-error').style.display = 'none';
+    loadAllData();
+    initResortGrid();
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+
+document.getElementById('login-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+document.getElementById('login-user').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+function doLogout() {
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('admin-shell').style.display = 'none';
+  document.getElementById('login-user').value = '';
+  document.getElementById('login-pass').value = '';
+}
+
+function updateCredentials() {
+  const u = document.getElementById('set-username').value;
+  const p = document.getElementById('set-newpass').value;
+  if (!u || !p) { alert('Please fill in username and new password.'); return; }
+  localStorage.setItem('ca_admin_creds', JSON.stringify({ username: u, password: p }));
+  showNotif('Credentials updated successfully!');
+}
+
+// ══════════════════════════════════════════
+// NAVIGATION
+// ══════════════════════════════════════════
+function showPanel(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).classList.add('active');
+  if (btn) btn.classList.add('active');
+  const titles = { dashboard:'Dashboard', 'site-content':'Site Content', resorts:'Resorts', pricing:'Pricing', experiences:'Experiences', membership:'Membership', media:'Images & Media', seo:'SEO & Meta', contact:'Contact Info', appearance:'Appearance', settings:'Admin Settings' };
+  document.getElementById('topbar-title').textContent = titles[id] || id;
+}
+
+function toggleCard(head) {
+  head.parentElement.classList.toggle('open');
+}
+
+function switchPtab(btn, panelId) {
+  const parent = btn.closest('.s-card-body') || btn.closest('.admin-content');
+  btn.closest('.panel-tabs').querySelectorAll('.ptab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).parentElement.querySelectorAll('.ptab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+}
+
+// ══════════════════════════════════════════
+// RESORT GRID BUILDER
+// ══════════════════════════════════════════
+const resortDefaults = [
+  { name:'Club Aranyakaa Bangalore', location:'Ramanagara, Karnataka', rating:'4.9', capacity:'120', status:'live', price:'₹3,500' },
+  { name:'Club Aranyakaa Mysore', location:'Mysore, Karnataka', rating:'4.8', capacity:'140', status:'live', price:'₹4,200' },
+  { name:'Club Aranyakaa Chennai', location:'ECR, Chennai, Tamil Nadu', rating:'4.7', capacity:'90', status:'live', price:'₹3,800' },
+  { name:'Club Aranyakaa Mandya', location:'Mandya, Karnataka', rating:'4.9', capacity:'180', status:'live', price:'₹2,800' },
+  { name:'Club Aranyakaa Goa', location:'North Goa, Goa', rating:'4.8', capacity:'70', status:'live', price:'₹5,500' },
+  { name:'Club Aranyakaa Coorg', location:'Coorg, Karnataka', rating:'N/A', capacity:'TBD', status:'soon', price:'TBD' },
+];
+
+function initResortGrid() {
+  const saved = JSON.parse(localStorage.getItem('ca_resorts') || 'null') || resortDefaults;
+  const grid = document.getElementById('resort-admin-grid');
+  grid.innerHTML = '';
+  saved.forEach((r, i) => {
+    grid.innerHTML += `
+    <div class="rac">
+      <div class="rac-header">
+        <div class="rac-name">${r.name.replace('Club Aranyakaa ','')}</div>
+        <span class="rac-status ${r.status}">${r.status === 'live' ? 'Live' : 'Coming'}</span>
+      </div>
+      <div class="rac-field"><label>Name</label><input type="text" value="${r.name}" data-ri="${i}" data-key="name" oninput="updateResort(this)" /></div>
+      <div class="rac-field"><label>Location</label><input type="text" value="${r.location}" data-ri="${i}" data-key="location" oninput="updateResort(this)" /></div>
+      <div class="rac-field"><label>Rating</label><input type="text" value="${r.rating}" data-ri="${i}" data-key="rating" oninput="updateResort(this)" style="width:60px;" /></div>
+      <div class="rac-field"><label>Capacity</label><input type="text" value="${r.capacity}" data-ri="${i}" data-key="capacity" oninput="updateResort(this)" style="width:60px;" /></div>
+      <div class="rac-field"><label>From Price</label><input type="text" value="${r.price}" data-ri="${i}" data-key="price" oninput="updateResort(this)" /></div>
+      <div class="rac-field"><label>Status</label>
+        <select data-ri="${i}" data-key="status" onchange="updateResort(this)" style="background:var(--bg-2);border:1px solid var(--border);color:var(--text);padding:5px 8px;font-size:0.78rem;outline:none;width:100%;">
+          <option value="live" ${r.status==='live'?'selected':''}>Live</option>
+          <option value="soon" ${r.status==='soon'?'selected':''}>Coming Soon</option>
+          <option value="offline" ${r.status==='offline'?'selected':''}>Offline</option>
+        </select>
+      </div>
+    </div>`;
+  });
+  window._resortData = saved;
+}
+
+function updateResort(el) {
+  const i = parseInt(el.dataset.ri);
+  const key = el.dataset.key;
+  window._resortData[i][key] = el.value;
+  localStorage.setItem('ca_resorts', JSON.stringify(window._resortData));
+  addActivity(`Resort <strong>${window._resortData[i].name}</strong> — ${key} updated`);
+  triggerSave();
+}
+
+// ══════════════════════════════════════════
+// DATA SAVE / LOAD (localStorage)
+// ══════════════════════════════════════════
+function collectAllData() {
+  const data = {};
+  document.querySelectorAll('[id]').forEach(el => {
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
+      if (el.type === 'checkbox') data[el.id] = el.checked;
+      else if (el.type === 'color') data[el.id] = el.value;
+      else data[el.id] = el.value;
+    }
+  });
+  return data;
+}
+
+function saveAllData() {
+  const data = collectAllData();
+  localStorage.setItem('ca_site_data', JSON.stringify(data));
+  // Sync dashboard stats
+  const locs = data['hero-stat-locations'] || '5+';
+  const guests = data['hero-stat-guests'] || '10K+';
+  const members = data['mem-stat-members'] || '500+';
+  document.getElementById('dash-resorts').textContent = locs;
+  document.getElementById('dash-guests').textContent = guests;
+  document.getElementById('dash-members').textContent = members;
+  // Apply CSS color tokens live
+  const gold = data['color-gold'];
+  if (gold) document.documentElement.style.setProperty('--teal', gold);
+  showSaveIndicator();
+  showNotif('All changes saved & applied to front-end!');
+  addActivity('Full save triggered — <strong>all data applied</strong>');
+}
+
+function loadAllData() {
+  const saved = JSON.parse(localStorage.getItem('ca_site_data') || 'null');
+  if (!saved) return;
+  Object.entries(saved).forEach(([id, val]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (el.type === 'checkbox') el.checked = val;
+    else el.value = val;
+  });
+}
+
+function liveUpdate() { triggerSave(); }
+
+let saveTimeout;
+function triggerSave() {
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(saveAllData, 1200);
+}
+
+function showSaveIndicator() {
+  const ind = document.getElementById('save-indicator');
+  ind.classList.add('show');
+  setTimeout(() => ind.classList.remove('show'), 3000);
+}
+
+function showNotif(msg) {
+  const n = document.getElementById('notif');
+  n.querySelector('.notif-text').innerHTML = msg;
+  n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), 3500);
+}
+
+// ══════════════════════════════════════════
+// ACTIVITY LOG
+// ══════════════════════════════════════════
+const dots = ['teal','green','amber','blue'];
+let dotIdx = 0;
+function addActivity(msg) {
+  const log = document.getElementById('activity-log');
+  const dot = dots[dotIdx % dots.length]; dotIdx++;
+  const now = new Date();
+  const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const item = document.createElement('div');
+  item.className = 'al-item';
+  item.innerHTML = `<div class="al-dot ${dot}"></div><div class="al-text">${msg}</div><div class="al-time">${time}</div>`;
+  log.insertBefore(item, log.firstChild);
+  while (log.children.length > 10) log.removeChild(log.lastChild);
+}
+
+// ══════════════════════════════════════════
+// EXPORT / IMPORT / RESET
+// ══════════════════════════════════════════
+function exportData() {
+  const data = { siteData: collectAllData(), resorts: window._resortData };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'clubaranyakaa-admin-data.json';
+  a.click();
+}
+
+function importData(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.siteData) { localStorage.setItem('ca_site_data', JSON.stringify(data.siteData)); loadAllData(); }
+      if (data.resorts) { localStorage.setItem('ca_resorts', JSON.stringify(data.resorts)); initResortGrid(); }
+      showNotif('Data imported successfully!');
+    } catch { alert('Invalid JSON file.'); }
+  };
+  reader.readAsText(file);
+}
+
+function resetData() {
+  if (!confirm('This will reset ALL admin data to defaults. Are you sure?')) return;
+  localStorage.removeItem('ca_site_data');
+  localStorage.removeItem('ca_resorts');
+  location.reload();
+}
+
+// ══════════════════════════════════════════
+// KEYBOARD SHORTCUT: Ctrl+S to save
+// ══════════════════════════════════════════
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    saveAllData();
+  }
+});
+
+// ══════════════════════════════════════════
+// BOOTSTRAP: open all cards that have 'open' class
+// ══════════════════════════════════════════
+document.querySelectorAll('.s-card.open .s-card-body').forEach(b => b.style.display = 'block');
+</script>
+</body>
+</html>
